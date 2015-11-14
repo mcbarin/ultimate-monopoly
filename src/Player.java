@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Player {
 	public int money,id,row,position,numberOfProperties=0,numberOfCards=0,valueOfProperties=0,
-			numberOfHouses=0,numberOfHotels=0,numberOfSkyscrapers=0;
+			numberOfHouses=0,numberOfHotels=0,numberOfSkyscrapers=0,numberOfCabStand=0,numberOfTransitStation=0;
 	public boolean isPlaying = true;
 	String name = "";
 	public ArrayList<SquareProperty> properties = new ArrayList<SquareProperty>();
@@ -124,27 +124,54 @@ public class Player {
 				for(int i=0;i<housesSameColor;i++){
 					SquareProperty sp = board.getSquareFromBoard(houses[i]);
 					if(sp.getOwner() != null && sp.getOwner().equals(this)){
-						sp.doubleTheRent();
+						sp.doubleRent();
 					}
 				}
 				
 			}
-		}else {
-			
-			if(colorProperties[color] == housesSameColor){
+			else if(colorProperties[color] < housesSameColor-1){
+				int[] houses = new int[housesSameColor];
+				houses = board.getOtherProperties(color);
+				for(int i=0;i<housesSameColor;i++){
+					SquareProperty sp = board.getSquareFromBoard(houses[i]);
+					sp.normalizeRent();
+				}
+			}
+			else if(colorProperties[color] == housesSameColor){
 				int[] houses = new int[housesSameColor];
 				houses = board.getOtherProperties(color);
 				for(int i=0;i<housesSameColor;i++){
 					SquareProperty sp = board.getSquareFromBoard(houses[i]);
 					if(sp.getOwner() != null && sp.getOwner().equals(this)){
-						sp.tripleTheRent();
+						sp.TripleRent();
 					}
 					
 				}
 			}
+					
+	}
+		else{
+			
+			if(colorProperties[color] < housesSameColor){
+				int[] houses = new int[housesSameColor];
+				houses = board.getOtherProperties(color);
+				for(int i=0;i<housesSameColor;i++){
+					SquareProperty sp = board.getSquareFromBoard(houses[i]);
+					sp.normalizeRent();
+				}
+			}
+			else if(colorProperties[color] == housesSameColor){
+				int[] houses = new int[housesSameColor];
+				houses = board.getOtherProperties(color);
+				for(int i=0;i<housesSameColor;i++){
+					SquareProperty sp = board.getSquareFromBoard(houses[i]);
+					if(sp.getOwner() != null && sp.getOwner().equals(this)){
+						sp.TripleRent();
+					}
+					
+				}}
 			
 		}
-		
 	}
 	
 	public void addMoney(int money){

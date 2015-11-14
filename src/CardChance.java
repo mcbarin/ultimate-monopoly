@@ -38,11 +38,30 @@ public class CardChance extends Card {
 		}  else if(number == 2){
 			
 		}  else if(number == 3){
+			int amount = 0;
+			amount += 25*(p.numberOfHouses+p.numberOfCabStand+p.numberOfTransitStation);
+			amount += 100*(p.numberOfHotels+p.numberOfSkyscrapers);
+			
+			if(p.money > amount){
+				
+				p.substract(amount);
+				result[0]="1";
+				result[1]="Player has paid $"+""+amount+" for making general repair for the properties.";
+				result[p.id+2]="-"+""+amount;
+				
+			}
+			else if(p.money+p.valueOfProperties>150){
+				result[0]= "2";
+				result[1] = "Player has to sell a property.";
+			}else{
+				result[0]="-1";
+				result[1]= "Player is broke";
+			}
 			
 		}  else if(number == 4){
 			
 		}  else if(number == 5){
-			
+			""
 		}  else if(number == 6){
 			if(p.money > 150){
 			
