@@ -6,11 +6,10 @@ public class SquareTax extends Square {
 		super(name, id, next, prev, tranNext, positionX, positionY, row);
 		// TODO Auto-generated constructor stub
 	}
-	
 	@Override
-	public void landOn(Player player, Board board) {
+	public String[] landOn(Player player, Board board) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}
-
 }

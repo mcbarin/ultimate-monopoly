@@ -21,7 +21,7 @@ public abstract class Square {
 		this.tranNext = tranNext;
 	}
 	
-	public abstract void landOn(Player player, Board board);
+	public abstract String[] landOn(Player player, Board board, int total);
 
 	
 

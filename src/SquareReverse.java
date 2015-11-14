@@ -7,9 +7,10 @@ public class SquareReverse extends Square {
 		// TODO Auto-generated constructor stub
 	}
 	@Override
-	public void landOn(Player player, Board board) {
+	public String[] landOn(Player player, Board board) {
+		return null;
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }
