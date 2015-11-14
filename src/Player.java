@@ -11,13 +11,13 @@ public class Player {
 	public int[] colorProperties = new int[20];
 	public Board board;
 	
-	public Player(int money, int id, int row, int position, String name,Board board) {
+	public Player(String name,int money, int id, int row, int position,Board board) {
 		super();
+		this.name = name;
 		this.money = money;
 		this.id = id;
 		this.row = row;
 		this.position = position;
-		this.name = name;
 		this.board = board;
 		initialize();
 	}
@@ -61,14 +61,58 @@ public class Player {
 	public void addProperty(SquareProperty sp){
 		properties.add(sp);
 		sp.setOwner(this);
-		colorProperties[sp.getColor()]++;
+		colorProperties[sp.color]++;
 		numberOfProperties++;
-		valueOfProperties+=sp.getPrice();
+		valueOfProperties+=sp.price;
 		//check for majority ownership or monopoly.
-		updateRentPrices(sp.getColor());
+		updateRentPrices(sp.color);
+	}
+	
+	public void deleteProperty(SquareProperty sp){
+		if(sp.getOwner().equals(this)){
+			
+			sp.setOwner(null);
+			colorProperties[sp.color]--;
+			numberOfProperties--;
+			valueOfProperties-=sp.price;
+			for(int i=0;i<properties.size();i++){
+				if(properties.get(i).id == sp.id){
+					properties.remove(i);
+					updateRentPrices(sp.color);
+					break;
+				}
+			}
+			
+		}
 	}
 
+	public String[] getResultArray(){
+		int x = board.getNumberOfPlayers() +2;
+		String[] result = new String[x];
+		for(int i=0;i<x;i++){
+			result[i]= "0";
+		}
+		return result;
+	}
 	
+	public String[] buyProperty(SquareProperty sp){
+		String[] result = getResultArray();
+		if(sp.getOwner()==null){
+		if(this.money > sp.price){
+			this.substract(sp.price);
+			this.addProperty(sp);
+			result[0]="1"; // Success
+			result[1] = name + " has bought the " + ""+sp.name+".";
+			result[this.id+2] = "-"+ ""+sp.price;
+		}
+		else {
+			result[0] = "0";
+			result[1] = "Player does not have enough money.";
+			
+		}
+		}
+		return result;
+	}
 	
 	public void updateRentPrices(int color){
 		int housesSameColor = board.getNumberOfSameColor(color); // total number of the properties in that color.
@@ -103,6 +147,13 @@ public class Player {
 		
 	}
 	
+	public void addMoney(int money){
+		this.money += money;
+	}
+	
+	public void substract(int money){
+		this.money -= money;
+	}
 	
 	
 	
