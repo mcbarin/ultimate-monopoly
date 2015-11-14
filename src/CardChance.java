@@ -4,7 +4,8 @@ public class CardChance extends Card {
 	String description;
 	Board board;
 
-	public CardChance(int number,String description){
+	public CardChance(int number,String description,Board board){
+		super("Chance",number);
 		this.number = number;
 		this.description = description;
 		this.board = board;

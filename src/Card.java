@@ -1,13 +1,22 @@
 
 public class Card {
-	public String type = "";
-	// For chance card, "chance"; for community chest card, "community".
+	private String type = "";
+	public int number;
 
+	// For chance card, "Chance"; for community chest card, "Community".
+
+	public int getNumber() {
+		return number;
+	}
+
+	public Card(String type, int number){
+		this.type = type;
+		this.number = number;		
+	}
+	
 	public String getType() {
 		return type;
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
+
 }
