@@ -8,7 +8,8 @@ public class SquareCabCompany extends Square {
 	}
 
 	@Override
-	public void landOn(Player player, Board board) {
+	public String[] landOn(Player player, Board board, int dice) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

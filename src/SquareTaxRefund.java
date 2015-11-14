@@ -8,7 +8,8 @@ public class SquareTaxRefund extends Square {
 	}
 	
 	@Override
-	public void landOn(Player player, Board board) {
+	public String[] landOn(Player player, Board board) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

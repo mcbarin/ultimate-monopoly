@@ -5,19 +5,32 @@ public class SquareProperty extends Square  {
 	int color;
 	int price;
 	int originalRent;
-
+	int rent;
+	
 	public SquareProperty(String name, int id, Square next, Square prev, Square tranNext, int positionX,
-			int positionY, int row) {
+			int positionY, int row, int color, int price, int originalRent) {
 		super(name, id, next, prev, tranNext, positionX, positionY, row);
-		// TODO Auto-generated constructor stub
+		this.color = color;
+		this.price = price;
+		this.originalRent = originalRent;
 	}
 
 	@Override
-	public void landOn(Player player, Board board) {
+	public String[] landOn(Player player, Board board) {
+		return null;
 		// TODO Auto-generated method stub
-
+		
 	}
 
+	public void doubleRent(){
+		rent = originalRent*2;
+	}
+	public void TripleRent(){
+		rent = originalRent*3;
+	}
+	public void normalizeRent(){
+		rent = originalRent;
+	}
 	public Player getOwner(){
 		return this.owner;
 	}
