@@ -6,12 +6,11 @@ public class SquareProperty extends Square  {
 	int price;
 	int originalRent;
 
-	public SquareProperty(String name, Square next, Square prev, Square tranNext, int positionX, int positionY, int row,int color,int price) {
-		super(name, next, prev, tranNext, positionX, positionY, row);
-		this.color = color;
-		this.price = price;
+	public SquareProperty(String name, int id, Square next, Square prev, Square tranNext, int positionX,
+			int positionY, int row) {
+		super(name, id, next, prev, tranNext, positionX, positionY, row);
+		// TODO Auto-generated constructor stub
 	}
-
 
 	@Override
 	public void landOn(Player player, Board board) {
@@ -19,7 +18,9 @@ public class SquareProperty extends Square  {
 
 	}
 
-
+	public Player getOwner(){
+		return this.owner;
+	}
 	public void setOwner(Player player){
 		this.owner = player; 
 	}

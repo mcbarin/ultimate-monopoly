@@ -1,9 +1,9 @@
 
 public class SquareCabCompany extends Square {
 
-	public SquareCabCompany(String name, Square next, Square prev, Square tranNext, int positionX,
+	public SquareCabCompany(String name, int id, Square next, Square prev, Square tranNext, int positionX,
 			int positionY, int row) {
-		super(name, next, prev, tranNext, positionX, positionY, row);
+		super(name, id, next, prev, tranNext, positionX, positionY, row);
 		// TODO Auto-generated constructor stub
 	}
 

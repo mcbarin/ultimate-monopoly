@@ -1,12 +1,11 @@
 
 public class SquareGoToJail extends Square {
 
-	public SquareGoToJail(String name, Square next, Square prev, Square tranNext, int positionX,
+	public SquareGoToJail(String name, int id, Square next, Square prev, Square tranNext, int positionX,
 			int positionY, int row) {
-		super(name, next, prev, tranNext, positionX, positionY, row);
+		super(name, id, next, prev, tranNext, positionX, positionY, row);
 		// TODO Auto-generated constructor stub
 	}
-
 	
 
 	@Override
