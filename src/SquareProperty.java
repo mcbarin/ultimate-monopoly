@@ -1,4 +1,4 @@
 
-public class Property {
+public class SquareProperty {
 
 }
