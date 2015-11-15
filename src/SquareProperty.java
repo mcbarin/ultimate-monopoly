@@ -6,6 +6,7 @@ public class SquareProperty extends Square  {
 	int price;
 	int originalRent;
 	int rent;
+	boolean isMortgaged;
 	
 	public SquareProperty(String name, int id, int positionX,
 			int positionY, int row, int color, int price, int originalRent) {
