@@ -21,11 +21,11 @@ public class GUI {
 	
 	
 	private JFrame mainFrame;
-	private GUILeftPanel leftPanel = new GUILeftPanel(player,dice);
+	private GUILeftPanel leftPanel;
 	
 	public GUI(Board board){
 		
-		
+		leftPanel = new GUILeftPanel(board,dice);
 		
 		mainFrame = new JFrame("BECB Monopoly");
     	Container contentPane = mainFrame.getContentPane();

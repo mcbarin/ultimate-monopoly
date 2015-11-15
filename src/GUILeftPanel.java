@@ -22,7 +22,17 @@ public class GUILeftPanel extends JPanel {
 	
 	private ArrayList<BufferedImage> playerIcons = new ArrayList();
 	
-	public GUILeftPanel(ArrayList<Player> player, int dice[]){
+	private int GUIPositions[][][]=new int[3][56][2];
+	
+	
+	public GUILeftPanel(Board board, int dice[]){
+		
+		//Position 
+		initSquarePositions();
+		
+		
+		
+		
 		try {
 			this.backGround = ImageIO.read(new File("img/board.png"));
 			
@@ -42,7 +52,84 @@ public class GUILeftPanel extends JPanel {
 
 		g.drawImage(backGround, 0, 0, height, height, null);
 		for(int i=0;i<12;i++){
-			g.drawImage(playerIcons.get(i), 40*i, 40*i, 40, 40, null);}
+			g.drawImage(playerIcons.get(i), GUIPositions[1][i][0], GUIPositions[1][i][1], 40, 40, null);}
+	}
+	
+	private void initSquarePositions(){
+		GUIPositions[0][0][0] = 480;
+		GUIPositions[0][0][1] = 480;
+		GUIPositions[0][1][0] = 416;
+		GUIPositions[0][1][1] = 480;
+		for(int i=2;i<24;i++){
+			if(i<=5){
+				GUIPositions[0][i][0] = 416-(i-1)*40;
+				GUIPositions[0][i][1] = 480;
+			}else if(i==6){
+				GUIPositions[0][i][0] = 196;
+				GUIPositions[0][i][1] = 480;
+			}else if(i==7){
+				GUIPositions[0][i][0] = 196;
+				GUIPositions[0][i][1] = 416;
+			}else if(i<=11){
+				GUIPositions[0][i][0] = 196;
+				GUIPositions[0][i][1] = 416-(i-7)*40;
+			}else if(i<=13){
+				GUIPositions[0][12][0] = 196;
+				GUIPositions[0][12][1] = 198;
+				GUIPositions[0][13][0] = 258;
+				GUIPositions[0][13][1] = 198;
+			}else if(i<=17){
+				GUIPositions[0][i][0] = 258+(i-13)*40;
+				GUIPositions[0][i][1] = 198;
+			}else if(i<=19){
+				GUIPositions[0][18][0] = 480;
+				GUIPositions[0][18][1] = 198;
+				GUIPositions[0][19][0] = 480;
+				GUIPositions[0][19][1] = 258;
+			}else if(i<=23){
+				GUIPositions[0][i][0] = 480;
+				GUIPositions[0][i][1] = 258+(i-19)*40;
+			}
+			
+			
+			
+
+			GUIPositions[1][0][0] = 562;
+			GUIPositions[1][0][1] = 562;
+			GUIPositions[1][1][0] = 500;
+			GUIPositions[1][1][1] = 562;
+			for(i=2;i<24;i++){
+				if(i<=5){
+					GUIPositions[0][i][0] = 416-(i-1)*40;
+					GUIPositions[0][i][1] = 480;
+				}else if(i==6){
+					GUIPositions[0][i][0] = 196;
+					GUIPositions[0][i][1] = 480;
+				}else if(i==7){
+					GUIPositions[0][i][0] = 196;
+					GUIPositions[0][i][1] = 416;
+				}else if(i<=11){
+					GUIPositions[0][i][0] = 196;
+					GUIPositions[0][i][1] = 416-(i-7)*40;
+				}else if(i<=13){
+					GUIPositions[0][12][0] = 196;
+					GUIPositions[0][12][1] = 198;
+					GUIPositions[0][13][0] = 258;
+					GUIPositions[0][13][1] = 198;
+				}else if(i<=17){
+					GUIPositions[0][i][0] = 258+(i-13)*40;
+					GUIPositions[0][i][1] = 198;
+				}else if(i<=19){
+					GUIPositions[0][18][0] = 480;
+					GUIPositions[0][18][1] = 198;
+					GUIPositions[0][19][0] = 480;
+					GUIPositions[0][19][1] = 258;
+				}else if(i<=23){
+					GUIPositions[0][i][0] = 480;
+					GUIPositions[0][i][1] = 258+(i-19)*40;
+				}
+			
+		}
 	}
 
 
