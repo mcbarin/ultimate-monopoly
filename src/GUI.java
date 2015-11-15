@@ -27,7 +27,23 @@ public class GUI {
 		
 		
 		
-		JFrame mainFrame = new JFrame("BECB Monopoly");
+		mainFrame = new JFrame("BECB Monopoly");
+    	Container contentPane = mainFrame.getContentPane();
+		leftPanel.setLayout(null);
+		contentPane.add(leftPanel);
+		
+
+	       
+        //mainFrame.setResizable(false);
+        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setVisible(true);  
+        
+		
+		while(true){
+			leftPanel.repaint();
+		}
     	
     	
 	}
