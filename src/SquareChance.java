@@ -1,16 +1,13 @@
 
 public class SquareChance extends Square {
 
-	public SquareChance(String name, int id, Square next, Square prev, Square tranNext, int positionX,
-			int positionY, int row) {
-		super(name, id, next, prev, tranNext, positionX, positionY, row);
+	public SquareChance(String name, int id, int positionX, int positionY, int row) {
+		super(name, id, positionX, positionY, row);
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
 	@Override
-	public String[] landOn(Player player, Board board) {
+	public String[] landOn(Player player, Board board, int total) {
 		return null;
 		// TODO Auto-generated method stub
 		
