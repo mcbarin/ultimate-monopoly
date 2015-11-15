@@ -58,6 +58,23 @@ public class Player {
 		
 	}
 	
+	/*
+	 * public void initializeAll(){
+	 * 		this.isMortgaged = false;
+	 * 		this.setOwner(null);
+	 * 		this.building=0;
+	 * 		this.hotel = 0;
+	 * 		this.skyscraper = 0;
+	 * 		this.normalizeRent();
+	 * }
+	 * */
+	
+	public void destroy(){
+		for(int i=0;i<properties.size();i++){
+			properties.get(i).initializeAll();
+		}
+	}
+	
 	public void addProperty(SquareProperty sp){
 		properties.add(sp);
 		sp.setOwner(this);
@@ -87,32 +104,14 @@ public class Player {
 	}
 
 	public String[] getResultArray(){
-		int x = board.getNumberOfPlayers() +2;
-		String[] result = new String[x];
-		for(int i=0;i<x;i++){
+		String[] result = new String[14];
+		for(int i=0;i<14;i++){
 			result[i]= "0";
 		}
 		return result;
 	}
 	
-	public String[] buyProperty(SquareProperty sp){
-		String[] result = getResultArray();
-		if(sp.getOwner()==null){
-		if(this.money > sp.price){
-			this.substract(sp.price);
-			this.addProperty(sp);
-			result[0]="1"; // Success
-			result[1] = name + " has bought the " + ""+sp.name+".";
-			result[this.id+2] = "-"+ ""+sp.price;
-		}
-		else {
-			result[0] = "0";
-			result[1] = "Player does not have enough money.";
-			
-		}
-		}
-		return result;
-	}
+
 	
 	public void updateRentPrices(int color){
 		int housesSameColor = board.getNumberOfSameColor(color); // total number of the properties in that color.
@@ -180,6 +179,19 @@ public class Player {
 	
 	public void substract(int money){
 		this.money -= money;
+	}
+	
+	public void setRow(int row){
+		this.row = row;
+	}
+	
+	public void setPosition(int position){
+		this.position = position;
+		checkPosition();
+	}
+	
+	public void checkPosition(){
+		
 	}
 	
 	

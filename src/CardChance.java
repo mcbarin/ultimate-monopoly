@@ -20,9 +20,9 @@ public class CardChance extends Card {
 	}
 	
 	public String[] getResultArray(){
-		int x = board.getNumberOfPlayers() +2;
-		String[] result = new String[x];
-		for(int i=0;i<x;i++){
+		
+		String[] result = new String[14];
+		for(int i=0;i<14;i++){
 			result[i]= "0";
 		}
 		return result;
@@ -50,7 +50,7 @@ public class CardChance extends Card {
 				result[p.id+2]="-"+""+amount;
 				
 			}
-			else if(p.money+p.valueOfProperties>150){
+			else if(p.money+p.valueOfProperties>amount){
 				result[0]= "2";
 				result[1] = "Player has to sell a property.";
 			}else{
@@ -61,7 +61,7 @@ public class CardChance extends Card {
 		}  else if(number == 4){
 			
 		}  else if(number == 5){
-			""
+		
 		}  else if(number == 6){
 			if(p.money > 150){
 			
@@ -80,8 +80,35 @@ public class CardChance extends Card {
 		}  else if(number == 7){
 			
 		}  else if(number == 8){
+			p.addMoney(150);
+			result[0]= "1";
+			result[1] = "Loan Matures, Player won $150 from the bank.";
+			result[p.id+2] = "150";
+			
+			
 			
 		}  else if(number == 9){
+			int amount = (board.getNumberOfPlayers()-1)*50;
+			
+			if(p.money > amount){
+				for(int i=0;i<board.getNumberOfPlayers();i++){
+					if(board.getPlayers().get(i).id != p.id){
+						board.getPlayers().get(i).addMoney(50);
+						p.substract(50);
+						result[board.getPlayers().get(i).id+2] = "50";
+					}
+				}
+				result[p.id+2] = "-"+""+amount;
+				result[0]="1";
+				result[1]="Player paid $50 to each player.";
+			}else if(p.money+p.valueOfProperties>amount){
+				result[0]="2";
+				result[1]="Player must sell property.";
+			}else {
+				result[0]="-1";
+				result[1]="Player is broke.";
+				
+			}
 			
 		}  else if(number == 10){
 			
@@ -94,14 +121,68 @@ public class CardChance extends Card {
 		}  else if(number == 14){
 			
 		}  else if(number == 15){
+			int amount = 0;
+			for(int i=0;i<p.properties.size();i++){
+				if(!p.properties.get(i).isMortgaged){
+					amount++;
+				}
+			}
+			amount*=25;
+			
+			if(p.money > amount){
+				p.substract(amount);
+				result[0] = "1";
+				result[1] = "Property Taxes, Player paid $25 for each unmortgaged property of its own.";
+				result[p.id+2] = "-"+""+amount;
+			}else if(p.money+p.valueOfProperties>amount){
+				result[0]="2";
+				result[1]="Player must sell property.";
+				
+			}else {
+				result[0]="-1";
+				result[1]="Player is broke.";
+				
+			}
 			
 		}  else if(number == 16){
 			
 		}  else if(number == 17){
+int amount = (board.getNumberOfPlayers()-1)*50;
 			
+			if(p.money > amount){
+				for(int i=0;i<board.getNumberOfPlayers();i++){
+					if(board.getPlayers().get(i).id != p.id){
+						board.getPlayers().get(i).addMoney(50);
+						p.substract(50);
+						result[board.getPlayers().get(i).id+2] = "50";
+					}
+				}
+				result[p.id+2] = "-"+""+amount;
+				result[0]="1";
+				result[1]="Player paid $50 to each player.";
+			}else if(p.money+p.valueOfProperties>amount){
+				result[0]="2";
+				result[1]="Player must sell property.";
+			}else {
+				result[0]="-1";
+				result[1]="Player is broke.";
+				
+			}
 		}  else if(number == 18){
 			
 		}  else if(number == 19){
+			result[0]="1";
+			result[1]="Win the marathon, Player took a victory lap and collected the pay corner income.";
+			if(p.row == 0){
+				p.addMoney(250);
+				result[p.id+2]="250";
+			}else if(p.row == 1){
+				p.addMoney(200);
+				result[p.id+2]="200";
+			}else if(p.row==2){
+				p.addMoney(400);
+				result[p.id+2]="400";
+			}
 			
 		}  else if(number == 20){
 			
@@ -110,6 +191,9 @@ public class CardChance extends Card {
 		}  else if(number == 22){
 			
 		}  else if(number == 23){
+			p.addCard(this);
+			result[0]="1";
+			result[1]="Player pulled the Comped Room card.";
 			
 		}  else if(number == 24){
 			

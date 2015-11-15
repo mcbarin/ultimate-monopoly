@@ -6,17 +6,18 @@ public class SquareProperty extends Square  {
 	int price;
 	int originalRent;
 	int rent;
+	boolean isMortgaged;
 	
-	public SquareProperty(String name, int id, Square next, Square prev, Square tranNext, int positionX,
+	public SquareProperty(String name, int id, int positionX,
 			int positionY, int row, int color, int price, int originalRent) {
-		super(name, id, next, prev, tranNext, positionX, positionY, row);
+		super(name, id, positionX, positionY, row);
 		this.color = color;
 		this.price = price;
 		this.originalRent = originalRent;
 	}
 
 	@Override
-	public String[] landOn(Player player, Board board) {
+	public String[] landOn(Player player, Board board , int total) {
 		return null;
 		// TODO Auto-generated method stub
 		
