@@ -9,10 +9,11 @@ public class SquareProperty extends Square  {
 	boolean isMortgaged;
 	int house;
 	int housePrice;
-	boolean hotel;
+	int hotel;
 	int hotelPrice;
-	boolean skyscraper;
+	int skyscraper;
 	int skyscraperPrice;
+	int level=0; //1 majority 2 monopoly
 
 	public SquareProperty(String name, int id, int positionX,
 			int positionY, int row, int color, int price, int originalRent) {
@@ -32,18 +33,38 @@ public class SquareProperty extends Square  {
 			if (player.money >= this.price){
 				result[0]="3";
 				result[1] = "Do you want to buy "+this.name+" ?";
-			}else{
+			}else{  //if player has not enough money
 				result[0]="1";
 				result[1] = "";	
 			}
+			
 		}else if(owner == player){
 			String keyword = "house";
 			if(house==4) keyword="hotel";
-			if(hotel) keyword="skyscraper";
+			if(hotel==1) keyword="skyscraper";
+			int pr = 0;
+			int ids[] = board.getOtherProperties(this.color); //get ids of properties of specific color
+			for (int i = 0; i < ids.length; i++) {
+				SquareProperty ss = board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
+				if(ss.owner == player){
+					if (ss.house == 4) pr += ss.hotelPrice;
+					else if (ss.hotel == 1) pr += ss.skyscraperPrice;
+					else pr  += ss.housePrice;
+				}
+			}
 			
-			result[0]="4";
-			result[1] = "Do you want to build "+keyword+" to "+this.name+" ?";
-			
+			int props = board.getNumberOfSameColor(this.color); 
+			if (props <= 2){ //if 2 properties of same color can't build house
+				result[0]="1";
+				result[1]="";
+			}else if(level!= 0 && player.money>=pr){ //if player has more than 2 properties of same color
+				result[0]="4";
+				result[1] = "Do you want to build "+keyword+" to "+this.name+" ?";
+			}else{ //player has less than 2 properties of same color, can't build
+				result[0]="1";
+				result[1]="";
+			}
+
 		}else if(owner != player){	
 			if (player.money < this.rent){
 				result[0]="-1";
@@ -66,6 +87,14 @@ public class SquareProperty extends Square  {
 
 
 
+	public void initializeAll(){
+		this.isMortgaged = false;
+		this.setOwner(null);
+		this.house=0;
+		this.hotel = 0;
+		this.skyscraper = 0;
+		this.normalizeRent();
+	}
 
 	public void doubleRent(){
 		rent = originalRent*2;
