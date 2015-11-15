@@ -1,12 +1,15 @@
 
+
 public class CardCommunity extends Card {
 	int number;
+	String title;
 	String description;
 	Board board;
 
-	public CardCommunity(int number,String description,Board board){
+	public CardCommunity(int number,String title,String description,Board board){
 		super("Community",number);
 		this.number = number;
+		this.title = title;
 		this.description = description;
 		this.board = board;
 	}

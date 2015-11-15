@@ -124,6 +124,7 @@ public class Player {
 					SquareProperty sp = board.getSquareFromBoard(houses[i]);
 					if(sp.getOwner() != null && sp.getOwner().equals(this)){
 						sp.doubleRent();
+						sp.level=1;
 					}
 				}
 				
@@ -134,6 +135,7 @@ public class Player {
 				for(int i=0;i<housesSameColor;i++){
 					SquareProperty sp = board.getSquareFromBoard(houses[i]);
 					sp.normalizeRent();
+					sp.level=0;
 				}
 			}
 			else if(colorProperties[color] == housesSameColor){
@@ -143,6 +145,7 @@ public class Player {
 					SquareProperty sp = board.getSquareFromBoard(houses[i]);
 					if(sp.getOwner() != null && sp.getOwner().equals(this)){
 						sp.TripleRent();
+						sp.level=2;
 					}
 					
 				}
@@ -204,6 +207,7 @@ public class Player {
 		}else if(row==2){
 			if(position>55){
 				position = position%56;
+				addMoney(400);
 			}
 			
 		}

@@ -1,4 +1,5 @@
 
+
 public class Card {
 	private String type = "";
 	public int number;

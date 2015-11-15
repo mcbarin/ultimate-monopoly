@@ -1,12 +1,14 @@
 
+
 public class CardChance extends Card {
 	int number;
-	String description;
+	String title,description;
 	Board board;
 
-	public CardChance(int number,String description,Board board){
+	public CardChance(int number,String title,String description,Board board){
 		super("Chance",number);
 		this.number = number;
+		this.title = title; 
 		this.description = description;
 		this.board = board;
 	}
@@ -61,6 +63,9 @@ public class CardChance extends Card {
 		}  else if(number == 4){
 			
 		}  else if(number == 5){
+			
+			p.setPosition(p.position-3);
+			
 		
 		}  else if(number == 6){
 			if(p.money > 150){
