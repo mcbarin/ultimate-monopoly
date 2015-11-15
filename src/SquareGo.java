@@ -16,6 +16,7 @@ public class SquareGo extends Square {
 		if(this.name.equals("GO")){
 			player.addMoney(amount);
 		}else if(this.name.equals("BONUS")){
+			amount=50;
 			player.addMoney(amount);
 		}else if(this.name.equals("PAY DAY")){
 			if(total % 2 == 1){
