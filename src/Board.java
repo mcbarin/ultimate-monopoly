@@ -4,6 +4,8 @@ public class Board {
 
 	ArrayList<Player> players;
 	Square[][] squares = new Square[3][56];
+	int[][] colors = new int[3][56];
+	
 	int pool = 0;
 
 	public ArrayList<Player> getPlayers(){
@@ -37,12 +39,12 @@ public class Board {
 				{"GO","MEDITERRANEAN AVENUE","COMMUNITY CHEST","BALTIC AVENUE","INCOME TAX","READING RAILROAD","ORIENTAL AVENUE","CHANCE","VERMONT AVENUE","CONNECTICUT AVENUE","IN JAIL","ST. CHARLES PLACE","ELECTRIC COMPANY","STATES AVENUE","VIRGINIA AVENUE","PENNSYLVANIA RAILROAD","ST. JAMES PLACE","COMMUNITY CHEST","TENNESSE AVENUE","NEW YORK AVENUE","FREE PARKING","KENTUCKY AVENUE","CHANCE","INDIANA AVENUE","ILLINOIS AVENUE","B&O RAILROAD","ATLANTIC AVENUE","VENTNOR AVENUE","WATER WORKS","MARVIN GARDENS","ROLL ONCE","PACIFIC AVENUE","NORTH CAROLINA AVENUE","COMMUNITY CHEST","PENNSYLVANIA AVENUE","SHORT LINE","CHANCE","PARK PLACE","LUXURY TAX","BOARDWALK"},
 				{"SUBWAY","LAKE STREET","COMMUNITY CHEST", "NICOLLET AVENUE","HENNEPIN AVENUE", "BUS TICKET","CHECKER CAB CO.", "READING RAILROAD","ESPLANADE AVENUE","CANAL STREET","CHANCE","CABLE COMPANY","MAGAZINE STREET","BOURBON STREET","HOLLAND TUNNEL","AUCTION","KATY FREEWAY","WESTHEIMER ROAD","INTERNET SERVICE PROVIDER","KIRBY DRIVE","CULLEN BOULEVARD","CHANCE","BLACK & WHITE CAB CO.","DEKALB AVENUE","COMMUNITY CHEST","ANDREW YOUNG INTL BOULEVARD","DECATUR STREET","PEACHTREE STREET","PAY DAY","RANDOLPH STREET","CHANCE","LAKE SHORE DRIVE","WACKER DRIVE","MICHIGAN AVENUE","YELLOW CAB CO.","B&O RAILROAD","COMMUNITY CHEST","SOUTH TEMPLE","WEST TAMPLE","TRASH COLLECTOR","NORTH TEMPLE","TEMPLE SQUARE","GO TO JAIL","SOUTH STREET","BROAD STREET","WALNUT STREET","COMMUNITY CHEST","MARKET STREET","BUS TICKET","SEWAGE SYSTEM","UTE CAB CO.","BIRTHDAY GIFT","MULHOLLAND DRIVE","VENTURA BOULEVARD","CHANCE","RODEO DRIVE"}};
 
-		int [][] colors = {{64,0,0,64,64,1,64,1,1,64,2,2,64,2,64,64,64,3,64,3,3,64,64,0},
+		  colors[3][56] = {{64,0,0,64,64,1,64,1,1,64,2,2,64,2,64,64,64,3,64,3,3,64,64,0},
 				{64,4,64,4,64,64,5,64,5,5,64,6,64,6,6,64,7,64,7,7,64,8,64,8,8,64,9,9,64,9,64,10,10,64,10,64,64,11,64,11},
 				{64,12,64,12,12,64,64,64,13,13,64,64,13,13,64,64,14,14,64,14,14,64,64,15,64,15,15,15,64,16,64,16,16,16,64,64,64,17,17,64,17,17,64,18,18,18,64,18,64,64,64,64,19,19,64,19}};
 
 
-		int [][] price = {{-64,210,250,150,-64,330,-64,330,380,200,430,430,-64,500,-64,150,-64,130,-64,130,150,200,-64,210},
+		  price[][] = {{-64,210,250,150,-64,330,-64,330,380,200,430,430,-64,500,-64,150,-64,130,-64,130,150,200,-64,210},
 				{-64,60,-64,60,-64,200,100,-64,100,120,-64,140,150,140,160,200,180,-64,180,200,-64,220,-64,220,240,200,260,260,150,280,-64,300,300,-64,320,200,-64,350,-64,400},
 				{-64,30,-64,30,60,-64,300,200,90,90,-64,150,120,120,-64,-64,150,150,150,180,180,-64,300,210,-64,210,240,240,-64,270,-64,270,300,300,300,200,-64,330,330,150,360,360,-64,390,390,420,-64,420,-64,150,300,-64,450,480,-64,510}};
 
@@ -151,8 +153,50 @@ public class Board {
 						// go to jail	
 					}else{
 						squares[i][j] = new SquareProperty(names[i][j],j+64,0,0,i,colors[i][j],price[i][j],rent[i][j]);
-						//Propriety
+						//Property
 					}}}}
+	}
+
+	public int[] getOtherProperties(int color) {
+		// TODO Auto-generated method stub
+		int length = getNumberOfSameColor(color);
+		int[] result = new int[length];
+		int x=0;
+		for(int i=0;i<3;i++){
+			for(int j=0;j<56;j++){
+				if(colors[i][j]==color){
+					result[x] = squares[i][j].id;
+					x++;
+				}
+			}
+		}
+		return result;
+		
+	}
+
+	public SquareProperty getSquareFromBoard(int id) {
+		// TODO Auto-generated method stub
+		for(int i=0;i<3;i++){
+			for(int j=0;j<56;j++){
+				if(squares[i][j]!=null && squares[i][j].id==id){
+					return ((SquareProperty)squares[i][j]);
+				}
+			}
+		}
+		return null;
+	}
+
+	public int getNumberOfSameColor(int color) {
+		// TODO Auto-generated method stub
+		int result=0;
+		for(int i=0;i<3;i++){
+			for(int j=0;j<56;j++){
+				if(colors[i][j]==color){
+					result++;
+				}
+			}
+		}
+		return result;
 	}
 
 
