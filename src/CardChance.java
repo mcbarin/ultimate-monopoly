@@ -65,6 +65,8 @@ public class CardChance extends Card {
 		}  else if(number == 5){
 			
 			p.setPosition(p.position-3);
+			result[0]="5"; // Must call the landOn method.
+			result[1]="Go Back Three Spaces.";
 			
 		
 		}  else if(number == 6){
@@ -83,6 +85,20 @@ public class CardChance extends Card {
 				result[1]= "Player is broke";
 			}
 		}  else if(number == 7){
+			//Advance to stock exchange square. row0 pos12
+			// 8-27 row2
+			if(p.row==2 && p.position>7 && p.position<29){
+				p.addMoney(300);
+				result[0]="5";
+				result[1]="Player advanced to Stock Exchange and collected $300.";
+				result[p.id+2]="300";
+			}else{
+				result[0]="5";
+				result[1]="Player advanced to Stock Exchange";	
+			}
+			p.row=0;        // Advancing to Stock Exchange.
+			p.position=12;
+			
 			
 		}  else if(number == 8){
 			p.addMoney(150);
@@ -120,8 +136,24 @@ public class CardChance extends Card {
 		}  else if(number == 11){
 			
 		}  else if(number == 12){
+			//board.getAllPool(p);
+			//tax refund row0 pos14
+			
+			//########## Do not change the money change after calling landOn Tax Refund.
+			p.row = 0;
+			p.position = 14;
+			result[0]="5";
+			result[1]="Player advanced to Tax Refund and Collected the pool.";
+			result[p.id+2] = ""+board.pool;
+			board.getAllPool(p);
 			
 		}  else if(number == 13){
+			//Advance to roll one.
+			// row1 pos30
+			p.row=1;
+			p.position= 30;
+			result[0]="5";
+			result[1]="Player advanced to Roll One.";
 			
 		}  else if(number == 14){
 			
@@ -150,6 +182,10 @@ public class CardChance extends Card {
 			}
 			
 		}  else if(number == 16){
+			result[0]="5";
+			result[1]="Player advanced to Black & White Cab Co.";
+			p.row=2;
+			p.position=22;
 			
 		}  else if(number == 17){
 int amount = (board.getNumberOfPlayers()-1)*50;
@@ -190,10 +226,22 @@ int amount = (board.getNumberOfPlayers()-1)*50;
 			}
 			
 		}  else if(number == 20){
+			// All players are moving to Canal Street
+			// row2 pos9
+			for(int i=0;i<board.getNumberOfPlayers();i++){
+				Player x =board.getPlayers().get(i);
+				x.row = 2;
+				x.position = 9;
+			}
+			result[0]="5";
+			result[1]="All players moved to Canal Street.";
 			
 		}  else if(number == 21){
 			
 		}  else if(number == 22){
+			p.addCard(this);
+			result[0]="1";
+			result[1]="Build 1 free house on any property in a monopoly you own.";
 			
 		}  else if(number == 23){
 			p.addCard(this);

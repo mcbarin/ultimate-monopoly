@@ -199,15 +199,22 @@ public class Player {
 			position = position%24;
 			addMoney(250);
 			}
+			else if(position<0){
+				position+=24;
+			}
 		}else  if(row == 1){
 			if (position>39){
 				position = position%40;
 				addMoney(200);
+			}			else if(position<0){
+				position+=40;
 			}
 		}else if(row==2){
 			if(position>55){
 				position = position%56;
 				addMoney(400);
+			}else if(position<0){
+				position+=56;
 			}
 			
 		}
