@@ -30,6 +30,30 @@ public abstract class Square {
 		
 	}
 	
+	public String[] buyProperty(SquareProperty s,Player p){
+		String[] result = new String[14];
+		initializeResult(result);
+			p.substract(s.price);
+			p.addProperty(s);
+			result[0]="1"; // Success
+			result[1] = name + " has bought the " + ""+s.name+".";
+			result[this.id+2] = "-"+ ""+s.price;
+		return result;
+	}
+	
+	
+	public String[] build(SquareProperty s,Player p){
+		String[] result = new String[14];
+		initializeResult(result);
+		
+		if(s.house<4){
+			
+		}
+		
+		
+		return result;
+	}
+	
 
 
 }
