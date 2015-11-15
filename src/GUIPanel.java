@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -6,6 +8,9 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+
+
 public class GUIPanel extends JPanel {
 	
 	int height = 715;
@@ -25,7 +30,7 @@ public class GUIPanel extends JPanel {
 	private int GUIPositions[][][]=new int[3][56][2];
 	
 	
-	public GUIPanel(Board board, int dice[]){
+	public GUIPanel(Board board, int dice[]) throws Exception{
 		
 		//Position 
 		initSquarePositions();
@@ -44,6 +49,8 @@ public class GUIPanel extends JPanel {
 		} catch (IOException ex) {}
 	}
 	
+	
+	
 	public void paint(Graphics g) {
 
 		super.paint(g);
@@ -52,7 +59,7 @@ public class GUIPanel extends JPanel {
 
 		g.drawImage(backGround, 0, 0, height, height, null);
 		for(int i=0;i<12;i++){
-			g.drawImage(playerIcons.get(i), GUIPositions[2][i+44][0], GUIPositions[2][i+44][1], 40, 40, null);}
+			g.drawImage(playerIcons.get(i), GUIPositions[2][44][0], GUIPositions[2][44][1], 40, 40, null);}
 	}
 	
 	private void initSquarePositions(){
@@ -168,8 +175,28 @@ public class GUIPanel extends JPanel {
 				GUIPositions[2][i][1] = 382+(i-50)*41;
 			}
 		
-	}
+		}
 	}
 
 	
+
+
+
+public void movePlayerTimer() throws Exception{
+        ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                //...Perform a task...
+
+            	GUIPositions[2][44][0]=0;
+            	GUIPositions[2][44][1]=0;
+            }
+        };
+        Timer timer = new Timer(1000 ,taskPerformer);
+        timer.setRepeats(false);
+        timer.start();
+
+        Thread.sleep(500);
+    }
+
+
 }
