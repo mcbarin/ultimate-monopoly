@@ -59,7 +59,7 @@ public class SquareSqueezePlay extends Square {
 		}
 		result[0]="1";
 		result[1]=msg;
-		result[player.id] = Integer.toString(amount);
+		result[player.id+2] = Integer.toString(amount);
 		for (int i = 2; i < numPlayers+2; i++) {
 			if(i != player.id)
 				result[i] = Integer.toString(-1 *loseAmount);

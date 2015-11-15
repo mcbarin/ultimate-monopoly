@@ -36,7 +36,7 @@ public class SquareGo extends Square {
 
 		result[0]="1";
 		result[1]=msg;
-		result[player.id] = Integer.toString(amount);
+		result[player.id+2] = Integer.toString(amount);
 
 		return result;
 
