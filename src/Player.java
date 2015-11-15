@@ -191,7 +191,22 @@ public class Player {
 	}
 	
 	public void checkPosition(){
-		
+		if(row==0){
+			if(position>23){
+			position = position%24;
+			addMoney(250);
+			}
+		}else  if(row == 1){
+			if (position>39){
+				position = position%40;
+				addMoney(200);
+			}
+		}else if(row==2){
+			if(position>55){
+				position = position%56;
+			}
+			
+		}
 	}
 	
 	
