@@ -21,16 +21,17 @@ public class GUI {
 	
 	
 	private JFrame mainFrame;
-	private GUILeftPanel leftPanel;
+	private GUIPanel panel;
 	
 	public GUI(Board board){
 		
-		leftPanel = new GUILeftPanel(board,dice);
+		panel = new GUIPanel(board,dice);
+		panel.setBackground(Color.DARK_GRAY);
 		
 		mainFrame = new JFrame("BECB Monopoly");
     	Container contentPane = mainFrame.getContentPane();
-		leftPanel.setLayout(null);
-		contentPane.add(leftPanel);
+		panel.setLayout(null);
+		contentPane.add(panel);
 		
 
 	       
@@ -42,7 +43,7 @@ public class GUI {
         
 		
 		while(true){
-			leftPanel.repaint();
+			panel.repaint();
 		}
     	
     	
