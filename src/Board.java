@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Board {
@@ -32,6 +34,42 @@ public class Board {
 
 	Queue<CardCommunity> communityDeck = new LinkedList<CardCommunity>();
 	Queue<CardChance> chanceDeck = new LinkedList<CardChance>();
+	
+	public void initializeCards(){
+		for(int i=0;i<42;i++){
+			if(i<26){//ChanceCards
+				CardChance c = new CardChance(i,cardDescriptions[i][0],cardDescriptions[i][1],this);
+				chanceDeck.add(c);	
+				Collections.shuffle((List<?>) chanceDeck);
+			}else{//CommunityChestCards
+				CardCommunity c = new CardCommunity(i,cardDescriptions[i][0],cardDescriptions[i][1],this);
+				communityDeck.add(c);
+				Collections.shuffle((List<?>) communityDeck);
+			}
+		}
+	}
+	
+	public CardChance peekChance(){
+
+		CardChance c = chanceDeck.peek();
+		return c;
+	}
+	
+	public CardCommunity peekCommunity(){
+
+		CardCommunity c = communityDeck.peek();
+		return c;
+	}
+	
+	public void pullPushChance(){
+		CardChance c = chanceDeck.poll();
+		chanceDeck.add(c);
+	}
+	
+	public void pullPushCommunity(){
+		CardCommunity c = communityDeck.poll();
+		communityDeck.add(c);
+	}
 	
 	
 	public int[] getOtherProperties(int color) {
@@ -100,7 +138,9 @@ public class Board {
 
 	public Board(int totalPlayer) {
 
-		players = new ArrayList<>(totalPlayer);
+		// players = new ArrayList<>(totalPlayer); 
+		
+		initializeCards(); // Chance and Community Chest cards are initialized.
 
 		for (int j = 25; j < 56; j++) {
 			names[0][j] = ""; colors[0][j] = 64; price[0][j] = -64; rent [0][j] = -64; squares[0][j] = null;
