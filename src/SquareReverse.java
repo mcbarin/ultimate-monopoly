@@ -1,8 +1,8 @@
 
 public class SquareReverse extends Square {
 
-	public SquareReverse(String name, int id, int positionX, int positionY, int row) {
-		super(name, id, positionX, positionY, row);
+	public SquareReverse(String type,String name, int id, int position, int row) {
+		super(type,name, id, position, row);
 		// TODO Auto-generated constructor stub
 	}
 	

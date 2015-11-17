@@ -15,9 +15,8 @@ public class SquareProperty extends Square  {
 	int skyscraperPrice;
 	int level=0; //1 majority 2 monopoly
 
-	public SquareProperty(String name, int id, int positionX,
-			int positionY, int row, int color, int price, int originalRent) {
-		super(name, id, positionX, positionY, row);
+	public SquareProperty(String type,String name, int id, int position, int row, int color, int price, int originalRent) {
+		super(type,name, id, position, row);
 		this.color = color;
 		this.price = price;
 		this.originalRent = originalRent;
@@ -45,7 +44,7 @@ public class SquareProperty extends Square  {
 			int pr = 0;
 			int ids[] = board.getOtherProperties(this.color); //get ids of properties of specific color
 			for (int i = 0; i < ids.length; i++) {
-				SquareProperty ss = board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
+				SquareProperty ss = (SquareProperty)board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
 				if(ss.owner == player){
 					if (ss.house == 4) pr += ss.hotelPrice;
 					else if (ss.hotel == 1) pr += ss.skyscraperPrice;

@@ -35,6 +35,16 @@ public class Board {
 	Queue<CardCommunity> communityDeck = new LinkedList<CardCommunity>();
 	Queue<CardChance> chanceDeck = new LinkedList<CardChance>();
 	
+	String[] playerNames = {"Alpha","Beta","Gamma","Delta","Epsilon","Zeta","Eta","Theta","Iota","Kappa","Lambda","Pi"};
+	
+	
+	public void initializePlayers(int totalPlayer){
+		for(int i=0;i<totalPlayer;i++){
+			Player p = new Player(playerNames[i],3200,i,1,0,this);
+			players.add(p);
+		}
+	}
+	
 	public void initializeCards(){
 		for(int i=0;i<42;i++){
 			if(i<26){//ChanceCards
@@ -89,12 +99,12 @@ public class Board {
 
 	}
 
-	public SquareProperty getSquareFromBoard(int id) {
+	public Square getSquareFromBoard(int id) {
 		// TODO Auto-generated method stub
 		for(int i=0;i<3;i++){
 			for(int j=0;j<56;j++){
 				if(squares[i][j]!=null && squares[i][j].id==id){
-					return ((SquareProperty)squares[i][j]);
+					return (squares[i][j]);
 				}
 			}
 		}
@@ -138,8 +148,8 @@ public class Board {
 
 	public Board(int totalPlayer) {
 
-		// players = new ArrayList<>(totalPlayer); 
-		
+		// Initialization Processes
+		initializePlayers(totalPlayer);
 		initializeCards(); // Chance and Community Chest cards are initialized.
 
 		for (int j = 25; j < 56; j++) {
@@ -153,101 +163,101 @@ public class Board {
 			for (int j = 0; j <56 ; j++) {
 				if(i == 0){
 					if (j== 0){
-						squares[i][j] = new SquareSqueezePlay(names[i][j],j,0,0,i);
+						squares[i][j] = new SquareSqueezePlay("SqueezePlay",names[i][j],j,j,i);
 						//sqeeze play
 					}else if(j == 9 || j== 21 ){
-						squares[i][j] = new SquareTransit(names[i][j],j,0,0,i);
+						squares[i][j] = new SquareTransit("Transit",names[i][j],j,j,i);
 						//transit
 					}else if( j == 4){
-						squares[i][j] = new SquareCommunity(names[i][j],j,0,0,i);
+						squares[i][j] = new SquareCommunity("Community",names[i][j],j,j,i);
 						//community chest	
 					}else if(j == 16 ){
-						squares[i][j] = new SquareChance(names[i][j],j,0,0,i);
+						squares[i][j] = new SquareChance("Chance",names[i][j],j,j,i);
 						//chance	
 					}else if(j == 3 || j== 15  ){
-						squares[i][j] = new SquareUtility(names[i][j],j,0,0,i);
+						squares[i][j] = new SquareUtility("Utility",names[i][j],j,j,i);
 						//	utility				
 					}else if(j == 6){
-						squares[i][j] = new SquareGo(names[i][j],j,0,0,i);
+						squares[i][j] = new SquareGo("Go",names[i][j],j,j,i);
 						//go	
 					}else if(j == 12){
-						squares[i][j] = new SquareFree(names[i][j],j,0,0,i);
+						squares[i][j] = new SquareFree("Free",names[i][j],j,j,i);
 						//free
 					}else if(j == 14 ){
-						squares[i][j] = new SquareTaxRefund(names[i][j],j,0,0,i);
+						squares[i][j] = new SquareTaxRefund("TaxRefund",names[i][j],j,j,i);
 						//tax refund	
 					}else if(j == 18 ){
-						squares[i][j] = new SquareTunnel(names[i][j],j,0,0,i);
+						squares[i][j] = new SquareTunnel("Tunnel",names[i][j],j,j,i);
 						//tunnel	
 					}else if(j == 22){
-						squares[i][j] = new SquareReverse(names[i][j],j,0,0,i);
+						squares[i][j] = new SquareReverse("Reverse",names[i][j],j,j,i);
 						//reverse
 					}else{
-						squares[i][j] = new SquareProperty(names[i][j],j,0,0,i,colors[i][j],price[i][j],rent[i][j]);
+						squares[i][j] = new SquareProperty("Property",names[i][j],j,j,i,colors[i][j],price[i][j],rent[i][j]);
 						//Property
 					}
 				}else if(i == 1){
 					if (j== 0){
-						squares[i][j] = new SquareGo(names[i][j],j + 24,0,0,i);
+						squares[i][j] = new SquareGo("Go",names[i][j],j + 24,j,i);
 						//go
 					}else if(j == 5 || j== 15 || j == 25 || j == 35 ){
-						squares[i][j] = new SquareCommunity(names[i][j],j + 24,0,0,i);
+						squares[i][j] = new SquareCommunity("Community",names[i][j],j + 24,j,i);
 						//transit
 					}else if( j == 2 || j == 17 || j == 33){
-						squares[i][j] = new SquareCommunity(names[i][j],j + 24,0,0,i);
+						squares[i][j] = new SquareCommunity("Community",names[i][j],j + 24,j,i);
 						//community chest	
 					}else if(j == 7 || j == 22 || j == 36){
-						squares[i][j] = new SquareChance(names[i][j],j + 24,0,0,i);
+						squares[i][j] = new SquareChance("Chance",names[i][j],j + 24,j,i);
 						//chance	
 					}else if(j == 12 || j== 28  ){
-						squares[i][j] = new SquareUtility(names[i][j],j + 24,0,0,i);
+						squares[i][j] = new SquareUtility("Utility",names[i][j],j + 24,j,i);
 						//	utility				
 					}else if(j == 4 || j == 38){
-						squares[i][j] = new SquareTax(names[i][j],j + 24,0,0,i);
+						squares[i][j] = new SquareTax("Tax",names[i][j],j + 24,j,i);
 						//tax	
 					}else if(j == 20 ){
-						squares[i][j] = new SquareFree(names[i][j],j + 24,0,0,i);
+						squares[i][j] = new SquareFree("Free",names[i][j],j + 24,j,i);
 						//free
 					}else if(j == 30 ){
-						squares[i][j] = new SquareRollOnce(names[i][j],j + 24,0,0,i);
+						squares[i][j] = new SquareRollOnce("RollOnce",names[i][j],j + 24,j,i);
 						//roll once	
 					}else if(j == 10){
-						squares[i][j] = new SquareInJail(names[i][j],j + 24,0,0,i);
+						squares[i][j] = new SquareInJail("InJail",names[i][j],j + 24,j,i);
 						//in jail
 					}else{
-						squares[i][j] = new SquareProperty(names[i][j],j+24,0,0,i,colors[i][j],price[i][j],rent[i][j]);
+						squares[i][j] = new SquareProperty("Property",names[i][j],j+24,j,i,colors[i][j],price[i][j],rent[i][j]);
 						//Propriety
 					}
 				}else if(i == 2){
 					if (j== 0 || j == 5 || j == 15 || j == 48){
-						squares[i][j] = new SquareSqueezePlay(names[i][j],j + 64 ,0,0,i);
+						squares[i][j] = new SquareSqueezePlay("SqueezePlay",names[i][j],j + 64 ,j,i);
 						//free and 0 = subway
 					}else if(j == 7 || j== 35 ){
-						squares[i][j] = new SquareCommunity(names[i][j],j + 64,0,0,i);
+						squares[i][j] = new SquareCommunity("Community",names[i][j],j + 64,j,i);
 						//transit
 					}else if( j == 2 || j== 24 || j == 36 || j == 46){
-						squares[i][j] = new SquareCommunity(names[i][j],j + 64,0,0,i);
+						squares[i][j] = new SquareCommunity("Community",names[i][j],j + 64,j,i);
 						//community chest	
 					}else if(j == 10 || j == 21 || j == 30 || j == 54){
-						squares[i][j] = new SquareChance(names[i][j],j + 64,0,0,i);
+						squares[i][j] = new SquareChance("Chance",names[i][j],j + 64,j,i);
 						//chance	
 					}else if(j == 11 || j== 18 || j == 39 || j== 49  ){
-						squares[i][j] = new SquareUtility(names[i][j],j + 64,0,0,i);
+						squares[i][j] = new SquareUtility("Utility",names[i][j],j + 64,j,i);
 						//	utility				
 					}else if(j == 28 || j== 51 ){
-						squares[i][j] = new SquareGo(names[i][j],j + 64,0,0,i);
+						squares[i][j] = new SquareGo("Go",names[i][j],j + 64,j,i);
 						//go and birthday
 					}else if(j == 14 ){
-						squares[i][j] = new SquareTunnel(names[i][j],j + 64,0,0,i);
+						squares[i][j] = new SquareTunnel("Tunnel",names[i][j],j + 64,j,i);
 						//tunnel	
 					}else if(j == 6 || j == 22 || j == 34 || j == 50){
-						squares[i][j] = new SquareCabCompany(names[i][j],j + 64,0,0,i);
+						squares[i][j] = new SquareCabCompany("CabCompany",names[i][j],j + 64,j,i);
 						//CAB CO.
 					}else if(j == 42 ){
-						squares[i][j] = new SquareGoToJail(names[i][j],j + 64,0,0,i);
+						squares[i][j] = new SquareGoToJail("GoToJail",names[i][j],j + 64,j,i);
 						// go to jail	
 					}else{
-						squares[i][j] = new SquareProperty(names[i][j],j+64,0,0,i,colors[i][j],price[i][j],rent[i][j]);
+						squares[i][j] = new SquareProperty("Property",names[i][j],j+64,j,i,colors[i][j],price[i][j],rent[i][j]);
 						//Property
 					}}}}
 	}

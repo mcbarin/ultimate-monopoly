@@ -121,7 +121,7 @@ public class Player {
 				int[] houses = new int[housesSameColor];
 				houses = board.getOtherProperties(color);
 				for(int i=0;i<housesSameColor;i++){
-					SquareProperty sp = board.getSquareFromBoard(houses[i]);
+					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
 					if(sp.getOwner() != null && sp.getOwner().equals(this)){
 						sp.doubleRent();
 						sp.level=1;
@@ -133,7 +133,7 @@ public class Player {
 				int[] houses = new int[housesSameColor];
 				houses = board.getOtherProperties(color);
 				for(int i=0;i<housesSameColor;i++){
-					SquareProperty sp = board.getSquareFromBoard(houses[i]);
+					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
 					sp.normalizeRent();
 					sp.level=0;
 				}
@@ -142,7 +142,7 @@ public class Player {
 				int[] houses = new int[housesSameColor];
 				houses = board.getOtherProperties(color);
 				for(int i=0;i<housesSameColor;i++){
-					SquareProperty sp = board.getSquareFromBoard(houses[i]);
+					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
 					if(sp.getOwner() != null && sp.getOwner().equals(this)){
 						sp.TripleRent();
 						sp.level=2;
@@ -158,7 +158,7 @@ public class Player {
 				int[] houses = new int[housesSameColor];
 				houses = board.getOtherProperties(color);
 				for(int i=0;i<housesSameColor;i++){
-					SquareProperty sp = board.getSquareFromBoard(houses[i]);
+					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
 					sp.normalizeRent();
 				}
 			}
@@ -166,7 +166,7 @@ public class Player {
 				int[] houses = new int[housesSameColor];
 				houses = board.getOtherProperties(color);
 				for(int i=0;i<housesSameColor;i++){
-					SquareProperty sp = board.getSquareFromBoard(houses[i]);
+					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
 					if(sp.getOwner() != null && sp.getOwner().equals(this)){
 						sp.TripleRent();
 					}

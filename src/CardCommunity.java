@@ -63,14 +63,71 @@ if(number == 26){
 		}  else if(number == 30){
 			
 		}  else if(number == 31){
+			//Move directly to the space that 1 track below this one. If row==2 do nothing
+			int pRow=p.row;
+			int pPos=p.position;
+			int squareId = pPos;
+			if(pRow==0){
+			}else if(pRow==1){
+				squareId+=24;
+			}else if(pRow==2){
+				squareId+=64;
+			}
+			
+			if(pRow==2){
+				result[0]="1";
+				result[1]="Player is on the Outer Track, do nothing.";
+			}else if(pRow==1){
+				p.row=2;
+				p.position=((SquareCommunity)board.getSquareFromBoard(squareId)).downPos;
+				result[0]="5";
+				result[1]="Player moved to  1 track below.";
+			}else if(pRow==0){
+				p.row=1;
+				p.position=((SquareCommunity)board.getSquareFromBoard(squareId)).downPos;
+				result[0]="5";
+				result[1]="Player moved to  1 track below.";
+			}
 		
 		}  else if(number == 32){
+			//Move directly to the space that 1 track above this one. If row==0 do nothing
+			int pRow=p.row;
+			int pPos=p.position;
+			int squareId = pPos;
+			if(pRow==0){
+				
+			}else if(pRow==1){
+				squareId+=24;
+			}else if(pRow==2){
+				squareId+=64;
+			}
+			
+			if(pRow==0){
+				result[0]="1";
+				result[1]="Player is on the Inner Track, do nothing.";
+			}else if(pRow==1){
+				p.row=0;
+				p.position=((SquareCommunity)board.getSquareFromBoard(squareId)).upPos;
+				result[0]="5";
+				result[1]="Player moved to  1 track above.";
+			}else if(pRow==2){
+				p.row=1;
+				p.position=((SquareCommunity)board.getSquareFromBoard(squareId)).upPos;
+				result[0]="5";
+				result[1]="Player moved to  1 track above.";
+			}
 	
 		}  else if(number == 33){
 			
 		}  else if(number == 34){
+			p.addCard(this);
+			result[0]="1";
+			result[1]=title+" "+description;
 			
 		}  else if(number == 35){
+			p.addCard(this);
+			result[0]="1";
+			result[1]=title+" "+description;
 			
 		}  else if(number == 36){
 			
@@ -97,6 +154,9 @@ if(number == 26){
 			}
 			
 		}  else if(number == 37){
+			p.addCard(this);
+			result[0]="1";
+			result[1]=title+" "+description;
 			
 		}  else if(number == 38){
 			
@@ -105,7 +165,9 @@ if(number == 26){
 		}  else if(number == 40){
 			
 		}  else if(number == 41){
-			
+			p.addCard(this);
+			result[0]="1";
+			result[1]=title+" "+description;
 		} 
 		return result;
 	}

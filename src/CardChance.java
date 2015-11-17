@@ -61,6 +61,9 @@ public class CardChance extends Card {
 			}
 			
 		}  else if(number == 4){
+			p.addCard(this);
+			result[0]="1";
+			result[1]=title+" "+description;
 			
 		}  else if(number == 5){
 			
@@ -134,18 +137,26 @@ public class CardChance extends Card {
 		}  else if(number == 10){
 			
 		}  else if(number == 11){
+			p.addCard(this);
+			result[0]="1";
+			result[1]=title+" "+description;
 			
 		}  else if(number == 12){
 			//board.getAllPool(p);
 			//tax refund row0 pos14
 			
 			//########## Do not change the money change after calling landOn Tax Refund.
+			/*
 			p.row = 0;
 			p.position = 14;
 			result[0]="5";
 			result[1]="Player advanced to Tax Refund and Collected the pool.";
 			result[p.id+2] = ""+board.pool;
 			board.getAllPool(p);
+			*/
+			p.addCard(this);
+			result[0]="1";
+			result[1]=title+" "+description;
 			
 		}  else if(number == 13){
 			//Advance to roll one.
@@ -249,8 +260,59 @@ int amount = (board.getNumberOfPlayers()-1)*50;
 			result[1]="Player pulled the Comped Room card.";
 			
 		}  else if(number == 24){
+			//Move directly to the space that 1 track below this one. If row==2 do nothing
+			int pRow=p.row;
+			int pPos=p.position;
+			int squareId = pPos;
+			if(pRow==0){
+			}else if(pRow==1){
+				squareId+=24;
+			}else if(pRow==2){
+				squareId+=64;
+			}
+			
+			if(pRow==2){
+				result[0]="1";
+				result[1]="Player is on the Outer Track, do nothing.";
+			}else if(pRow==1){
+				p.row=2;
+				p.position=((SquareChance)board.getSquareFromBoard(squareId)).downPos;
+				result[0]="5";
+				result[1]="Player moved to  1 track below.";
+			}else if(pRow==0){
+				p.row=1;
+				p.position=((SquareChance)board.getSquareFromBoard(squareId)).downPos;
+				result[0]="5";
+				result[1]="Player moved to  1 track below.";
+			}
 			
 		}  else if(number == 25){
+			//Move directly to the space that 1 track above this one. If row==0 do nothing
+			int pRow=p.row;
+			int pPos=p.position;
+			int squareId = pPos;
+			if(pRow==0){
+				
+			}else if(pRow==1){
+				squareId+=24;
+			}else if(pRow==2){
+				squareId+=64;
+			}
+			
+			if(pRow==0){
+				result[0]="1";
+				result[1]="Player is on the Inner Track, do nothing.";
+			}else if(pRow==1){
+				p.row=0;
+				p.position=((SquareChance)board.getSquareFromBoard(squareId)).upPos;
+				result[0]="5";
+				result[1]="Player moved to  1 track above.";
+			}else if(pRow==2){
+				p.row=1;
+				p.position=((SquareChance)board.getSquareFromBoard(squareId)).upPos;
+				result[0]="5";
+				result[1]="Player moved to  1 track above.";
+			}
 			
 		} 
 		

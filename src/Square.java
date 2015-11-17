@@ -1,20 +1,19 @@
 
 public abstract class Square {
-	String name;
+	String name,type;
 	int id;
-	int positionX;
-	int positionY;
+	int position;
 	int row;
 	Square next;
 	Square prev;
 	Square tranNext;
 
 
-	public Square(String name,int id, int positionX, int positionY, int row) {
+	public Square(String type,String name,int id, int position, int row) {
+		this.type=type;
 		this.name = name;
 		this.id = id;
-		this.positionX = positionX;
-		this.positionY = positionY;
+		this.position = position;
 		this.row = row;
 		//this.next = next;
 		//this.prev = prev;
@@ -54,7 +53,7 @@ public abstract class Square {
 			result[1]="'"+p.name+"' built house to ";
 			int ids[] = p.board.getOtherProperties(s.color); //get ids of properties of specific color
 			for (int i = 0; i < ids.length; i++) {
-				SquareProperty ss = p.board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
+				SquareProperty ss = (SquareProperty)p.board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
 				if(ss.owner == p){
 					ss.house = ss.house + 1; //build house to all owned properties
 					pr = pr + ss.housePrice;
