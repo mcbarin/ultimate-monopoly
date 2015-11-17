@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Board {
 
@@ -28,6 +30,10 @@ public class Board {
 			{"Doctor's Fee","Pay $50 to the Pool."},{"April 15, Taxes Due!","Move directly to Income Tax, (do not pass any Pay Corner, do not collect any money), and pay the fine -OR- go to directly to Jail."},{"A Moving Experience","Move to Any Transportation Property(Railroad or Cab Co.). If unowned, you may purchase it. If owned, pay rent."},{"Changing Lanes","Move directly to the space that is 1 Track below this one. If you are on the Outer Track, do nothing."},{"Changing Lanes","Move directly to the space that is 1 Track below this one. If you are on the Inner Track, do nothing."},{"House Condemned","The city condemns one of your houses. Sell one house back to the Bank at 1/2 the price you paid for it. (Houses only. If you donnot own any houses, do nothing.)"},{"Special Online Pricing","The next time you land on anyone else's railroad, only pay 1/2 the rent."},{"REVERSE RENT!","Collect the rent due when you land on another player's property."},
 			{"Assessed for Street Repairs","$25 per Cab Stand & Transit Station, $40 per House, $115 per Hotel, and $100 per Skyscraper."},{"Get Out of Jail Free!",""},{"Go to Jail!","Go directly to Jail. Do not pass any Pay Corner. Do not collect any money."},{"Advance to the Stock Exchange","If you pass Pay Day collect $300."},{"Tornado Hits!","Remove one House from each property in any 1 of your color groups. (Downgrade Skyscrapers to Hotels; Hotels to 4 houses.)"},{"Roll 3!",""}};
 
+	Queue<CardCommunity> communityDeck = new LinkedList<CardCommunity>();
+	Queue<CardChance> chanceDeck = new LinkedList<CardChance>();
+	
+	
 	public int[] getOtherProperties(int color) {
 		// TODO Auto-generated method stub
 		int length = getNumberOfSameColor(color);
@@ -96,10 +102,10 @@ public class Board {
 
 		players = new ArrayList<>(totalPlayer);
 
-		for (int j = 25; j < 57; j++) {
+		for (int j = 25; j < 56; j++) {
 			names[0][j] = ""; colors[0][j] = 64; price[0][j] = -64; rent [0][j] = -64; squares[0][j] = null;
 		}
-		for (int j = 41; j < 57; j++) {
+		for (int j = 41; j < 56; j++) {
 			names[1][j] = ""; colors[1][j] = 64; price[1][j] = -64; rent [1][j] = -64; squares[1][j] = null;
 		}
 
