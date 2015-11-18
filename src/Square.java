@@ -1,4 +1,6 @@
-
+//status=1 just continue
+//status=3 ask user msg, if says yes, then call buyProperty(SquareProperty s,Player p)
+//status=4 ask user msg, if says yes, then call buildToProperty(SquareProperty s,Player p)
 public abstract class Square {
 	String name,type;
 	int id;
@@ -30,8 +32,6 @@ public abstract class Square {
 	}
 
 
-
-
 	public String[] buyProperty(SquareProperty s,Player p){
 		String[] result = new String[14];
 		initializeResult(result);
@@ -44,20 +44,21 @@ public abstract class Square {
 	}
 
 
-	public String[] build(SquareProperty s,Player p){
+	public String[] buildToProperty(SquareProperty s,Player p){
 		String[] result = new String[14];
 		initializeResult(result);
 		int pr = 0;
-		
-		if(s.house<4){
+		boolean flag = true;
+
+		if(s.level == 1){ //majority ownership, build only one house 
 			result[1]="'"+p.name+"' built house to ";
 			int ids[] = p.board.getOtherProperties(s.color); //get ids of properties of specific color
 			for (int i = 0; i < ids.length; i++) {
 				SquareProperty ss = (SquareProperty)p.board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
 				if(ss.owner == p){
-					ss.house = ss.house + 1; //build house to all owned properties
-					pr = pr + ss.housePrice;
-					updateRentAccordingToHouse(ss,ss.house);
+					ss.house = 1; //build house to all owned properties
+					pr = pr + ss.buildingPrice;
+					ss.rent = ss.originalRent * 5;
 					result[1] = result[1] + ss.name + ", ";
 				}
 			}
@@ -65,20 +66,65 @@ public abstract class Square {
 			result[1] = result[1] + "and lost $" +pr;
 			result[p.id+2] = Integer.toString(pr);
 
-		}else if(s.house==4){
-			
-		}
+		}else if (s.level == 2) {//monopoly
 
+			result[1]="'"+p.name+"' built house to ";
+			int ids[] = p.board.getOtherProperties(s.color); //get ids of properties of specific color
+			for (int i = 0; i < ids.length; i++) {
+				SquareProperty ss = (SquareProperty)p.board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
+				if(ss.house == 0){
+					ss.rent = ss.originalRent*5;
+					ss.house = 1; 
+					pr = ss.buildingPrice;
+					result[1] = result[1] + ss.name + " ";
+					flag = false;
+				}
+			}
+
+			if (flag){
+				for (int i = 0; i < ids.length; i++) {
+					SquareProperty ss = (SquareProperty)p.board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
+					pr = pr + ss.buildingPrice;
+					updateRentAccordingToHouse(ss);
+					result[1] = result[1] + ss.name + ", ";
+				}
+			}
+			result[0]="1";
+			result[1] = result[1] + "and lost $" +pr;
+			result[p.id+2] = Integer.toString(pr);
+
+		}
 
 		return result;
 	}
 
 
-	
-	public void updateRentAccordingToHouse(SquareProperty ss, int house){
-		
-		
-		
+	public void updateRentAccordingToHouse(SquareProperty ss){
+		//		assuming with 1 house rent will be x5
+		//						2 house x15
+		//						3 house x30
+		//						4 house x40
+		//						hotel x50
+		//						sky x85
+		if(ss.house == 0){
+			ss.rent = ss.originalRent*5;
+			ss.house = ss.house + 1; //build house to all owned properties
+		}else if(ss.house == 1){
+			ss.rent = ss.originalRent*15;
+			ss.house = ss.house + 1; //build house to all owned properties
+		}else if(ss.house == 2){
+			ss.rent = ss.originalRent*30;
+			ss.house = ss.house + 1;
+		}else if(ss.house == 3){
+			ss.rent = ss.originalRent*40;
+			ss.house = ss.house + 1;
+		}else if(ss.house == 4 && ss.hotel==0){
+			ss.rent = ss.originalRent*50;
+			ss.hotel = 1;
+		}else if(ss.house == 4 && ss.hotel==1){
+			ss.rent = ss.originalRent*85;
+			ss.skyscraper = 1;
+		}
 	}
 }
 
