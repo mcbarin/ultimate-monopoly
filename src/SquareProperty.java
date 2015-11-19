@@ -52,6 +52,7 @@ public class SquareProperty extends Square  {
 	public String[] landOn(Player player, Board board , int total) {
 		String[] result = new String[14];
 		initializeResult(result);
+		SquareProperty ss = null;
 
 		if(owner == null){
 			if (player.money >= this.price){
@@ -76,7 +77,7 @@ public class SquareProperty extends Square  {
 			int pr = 0;
 			int ids[] = board.getOtherProperties(this.color); //get ids of properties of specific color
 			for (int i = 0; i < ids.length; i++) {
-				SquareProperty ss = (SquareProperty)board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
+				ss = (SquareProperty)board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
 				if(ss.owner == player){
 					pr  += ss.buildingPrice;
 				}
@@ -97,13 +98,14 @@ public class SquareProperty extends Square  {
 		}else if(owner != player){	
 			if (player.money < this.rent){
 				result[0]="-1";
-				result[1] = "'"+player.name+"' is not able to pay rent. BANKRUPTCY!";
+				result[1] = player.name+" is not able to pay rent. BANKRUPTCY!";
 			}else{
 				player.substract(this.rent);
 				owner.addMoney(this.rent);
 				result[0]="1";
-				result[1] = "'"+player.name+"' paid rent.";
+				result[1] = player.name+" paid rent to "+owner.name;
 				result[player.id+2]=Integer.toString(-1*rent);
+				result[owner.id+2]=Integer.toString(rent);
 			}	
 		}
 
