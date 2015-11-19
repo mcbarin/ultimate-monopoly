@@ -34,17 +34,17 @@ public class Board {
 
 	Queue<CardCommunity> communityDeck = new LinkedList<CardCommunity>();
 	Queue<CardChance> chanceDeck = new LinkedList<CardChance>();
-	
+
 	String[] playerNames = {"Alpha","Beta","Gamma","Delta","Epsilon","Zeta","Eta","Theta","Iota","Kappa","Lambda","Pi"};
-	
-	
+
+
 	public void initializePlayers(int totalPlayer){
 		for(int i=0;i<totalPlayer;i++){
 			Player p = new Player(playerNames[i],3200,i,1,0,this);
 			players.add(p);
 		}
 	}
-	
+
 	public void initializeCards(){
 		for(int i=0;i<42;i++){
 			if(i<26){//ChanceCards
@@ -58,30 +58,30 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public CardChance peekChance(){
 
 		CardChance c = chanceDeck.peek();
 		return c;
 	}
-	
+
 	public CardCommunity peekCommunity(){
 
 		CardCommunity c = communityDeck.peek();
 		return c;
 	}
-	
+
 	public void pullPushChance(){
 		CardChance c = chanceDeck.poll();
 		chanceDeck.add(c);
 	}
-	
+
 	public void pullPushCommunity(){
 		CardCommunity c = communityDeck.poll();
 		communityDeck.add(c);
 	}
-	
-	
+
+
 	public int[] getOtherProperties(int color) {
 		// TODO Auto-generated method stub
 		int length = getNumberOfSameColor(color);
@@ -123,7 +123,7 @@ public class Board {
 		}
 		return result;
 	}
-	
+
 	public Square nextSquare(int id){
 		int x = id + 1;
 		if(id==23){
@@ -135,7 +135,7 @@ public class Board {
 		}
 		return getSquareFromBoard(x);
 	}
-	
+
 	public ArrayList<Player> getPlayers(){
 		return players;
 	}
@@ -212,6 +212,9 @@ public class Board {
 					if (j== 0){
 						squares[i][j] = new SquareGo("Go",names[i][j],j + 24,j,i);
 						//go
+					}else if(j == 5 || j== 15 ||j == 25 || j== 35 ){
+						squares[i][j] = new SquareTransit("Transit",names[i][j],j+24,j,i);
+						//transit
 					}else if(j == 5 || j== 15 || j == 25 || j == 35 ){
 						squares[i][j] = new SquareCommunity("Community",names[i][j],j + 24,j,i);
 						//transit
@@ -244,6 +247,9 @@ public class Board {
 					if (j== 0 || j == 5 || j == 15 || j == 48){
 						squares[i][j] = new SquareSqueezePlay("SqueezePlay",names[i][j],j + 64 ,j,i);
 						//free and 0 = subway
+					}else if(j == 7 || j== 35 ){
+						squares[i][j] = new SquareTransit("Transit",names[i][j],j+64,j,i);
+						//transit
 					}else if(j == 7 || j== 35 ){
 						squares[i][j] = new SquareCommunity("Community",names[i][j],j + 64,j,i);
 						//transit
