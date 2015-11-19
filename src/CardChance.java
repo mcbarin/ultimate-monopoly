@@ -190,6 +190,42 @@ public class CardChance extends Card {
 			}
 			
 		}  else if(number == 10){
+			int posId = p.position;
+			int border = 24;
+			if(p.row==1){
+				posId+=24;
+				border=40;}
+			else if(p.row==2){
+				posId+=64;
+				border=56;
+			}
+			
+			SquareProperty first = (SquareProperty)board.getSquareFromBoard(17);
+			boolean isFound=false;
+			int k=0;
+
+			for(int i=0;i<border;i++){
+				Square sq = board.nextSquare(posId);
+				posId++;
+				if(sq.type.equals("Property")){
+					if(k==0){
+						first = (SquareProperty)sq;
+					}
+					if(((SquareProperty)sq).owner==null){
+						p.setPosition(sq.position);
+						k++;
+						isFound = true;
+					}
+				}
+			}
+			
+			if(!isFound){
+				p.setPosition(first.position);
+			}
+			
+			result[0]="5";
+			result[1]="Player advanced to the nearest Square Property.";	
+		
 			
 			
 		}  else if(number == 11){
@@ -223,6 +259,7 @@ public class CardChance extends Card {
 			result[1]="Player advanced to Roll One.";
 			
 		}  else if(number == 14){
+			
 			
 		}  else if(number == 15){
 			int amount = 0;
