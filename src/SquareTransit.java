@@ -36,40 +36,42 @@ public class SquareTransit extends Square {
 		}else if (owner != player){
 			owner.addMoney(rent);
 			player.substract(rent);
-			result[0]="1";
+			result[0]="5";
 			result[1] = player.name+" paid rent to "+owner.name+".";
 			result[player.id+2]=Integer.toString(-1*rent);
 			result[owner.id+2]=Integer.toString(rent);
+			
+			//if total is odd change the track.
+			if(total%2 == 0){
+				if(player.position == 9){
+					player.row=1;
+					player.position=39-24;
+				}else if(player.position == 21){
+					player.row=1;
+					player.position=59-24;
+				}else if(player.position == 35 && player.row==2){
+					player.row=1;
+					player.position=49-24;
+				}else if(player.position == 7){
+					player.row=1;
+					player.position=29-34;
+				}else if(player.position == 15){
+					player.row=0;
+					player.position=9;
+				}else if(player.position == 35){
+					player.row=0;
+					player.position=21;
+				}else if(player.position == 5){
+					player.row=2;
+					player.position=71-64;
+				}else if(player.position == 25){
+					player.row=2;
+					player.position=99-64;
+				}
 		}
 
 
-		//if total is odd change the track.
-		if(total%2 == 0){
-			if(player.position == 9){
-				player.row=1;
-				player.position=39-24;
-			}else if(player.position == 21){
-				player.row=1;
-				player.position=59-24;
-			}else if(player.position == 35 && player.row==2){
-				player.row=1;
-				player.position=49-24;
-			}else if(player.position == 7){
-				player.row=1;
-				player.position=29-34;
-			}else if(player.position == 15){
-				player.row=0;
-				player.position=9;
-			}else if(player.position == 35){
-				player.row=0;
-				player.position=21;
-			}else if(player.position == 5){
-				player.row=2;
-				player.position=71-64;
-			}else if(player.position == 25){
-				player.row=2;
-				player.position=99-64;
-			}
+		
 
 		}
 		return result;

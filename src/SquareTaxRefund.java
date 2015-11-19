@@ -8,6 +8,11 @@ public class SquareTaxRefund extends Square {
 	
 	@Override
 	public String[] landOn(Player player, Board board, int total) {
+		String[] result = new String[14];
+		initializeResult(result);
+		result[0]="1";
+		result[1] = "Collect %50 from pool";	
+		
 		return null;
 		// TODO Auto-generated method stub
 		

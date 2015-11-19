@@ -1,7 +1,7 @@
 //status=1 just continue
-//status=3 ask user msg, if says yes, then call buy(Square s,Player p)
-//status=4 ask user msg, if says yes, then call build(Square s,Player p)
-
+//status=3 ask user msg, if says yes, then call buy(Square s,Player p, int total)
+//status=4 ask user msg, if says yes, then call build(Square s,Player p, int total)
+//status=5 display msg and update player position on screen
 public abstract class Square {
 	String name,type;
 	int id;
@@ -33,35 +33,64 @@ public abstract class Square {
 	}
 
 
-	public String[] buy(Square s,Player p){
+	public String[] buy(Square s,Player p, int total){
 		if(s.type.equals("Property")){
 			return buyProperty((SquareProperty)s, p);
 		}else if(s.type.equals("Utility")){
 			return buyUtility((SquareUtility)s, p);
 		}else{
-			return buyTransit((SquareTransit)s, p);
+			return buyTransit((SquareTransit)s, p,total);
 		}
 
 	}
 
-	public String[] build(Square s,Player p){
+	public String[] build(Square s,Player p,int total){
 		if(s.type.equals("Property")){
 			return buildToProperty((SquareProperty)s, p);
 		}else{
-			return buildTrainDepot((SquareTransit)s, p);
+			return buildTrainDepot((SquareTransit)s, p,total);
 		}
 
 	}
 
-	public String[] buyTransit(SquareTransit s,Player p){
+	public String[] buyTransit(SquareTransit s,Player player,int total){
 		String[] result = new String[14];
 		initializeResult(result);
-		p.substract(s.price);
-		s.owner = p;
+		player.substract(s.price);
+		s.owner = player;
 
 		result[0]="1"; // Success
-		result[1] = p.name + " has bought the " + ""+s.name+".";
-		result[p.id+2] = "-"+ ""+s.price;
+		result[1] = player.name + " has bought the " + ""+s.name+".";
+		result[player.id+2] = "-"+ ""+s.price;
+
+		if(total%2 == 0){
+			result[0]="5";
+			if(player.position == 9){
+				player.row=1;
+				player.position=39-24;
+			}else if(player.position == 21){
+				player.row=1;
+				player.position=59-24;
+			}else if(player.position == 35 && player.row==2){
+				player.row=1;
+				player.position=49-24;
+			}else if(player.position == 7){
+				player.row=1;
+				player.position=29-34;
+			}else if(player.position == 15){
+				player.row=0;
+				player.position=9;
+			}else if(player.position == 35){
+				player.row=0;
+				player.position=21;
+			}else if(player.position == 5){
+				player.row=2;
+				player.position=71-64;
+			}else if(player.position == 25){
+				player.row=2;
+				player.position=99-64;
+			}
+		}
 		return result;
 	}
 
@@ -90,15 +119,44 @@ public abstract class Square {
 		return result;
 	}
 
-	public String[] buildTrainDepot(SquareTransit s,Player p){
+	public String[] buildTrainDepot(SquareTransit s,Player player, int total){
 		String[] result = new String[14];
 		initializeResult(result);
 		s.trainDepot=1;
 		s.rent=s.originalRent*2;
-		p.substract(s.trainDepotPrice);
+		player.substract(s.trainDepotPrice);
 		result[0]="1"; // Success
-		result[1] = p.name + " built Train Depot to " + ""+s.name+".";
-		result[p.id+2] = "-"+ ""+s.price;
+		result[1] = player.name + " built Train Depot to " + ""+s.name+".";
+		result[player.id+2] = "-"+ ""+s.price;
+
+		if(total%2 == 0){
+			result[0]="5";
+			if(player.position == 9){
+				player.row=1;
+				player.position=39-24;
+			}else if(player.position == 21){
+				player.row=1;
+				player.position=59-24;
+			}else if(player.position == 35 && player.row==2){
+				player.row=1;
+				player.position=49-24;
+			}else if(player.position == 7){
+				player.row=1;
+				player.position=29-34;
+			}else if(player.position == 15){
+				player.row=0;
+				player.position=9;
+			}else if(player.position == 35){
+				player.row=0;
+				player.position=21;
+			}else if(player.position == 5){
+				player.row=2;
+				player.position=71-64;
+			}else if(player.position == 25){
+				player.row=2;
+				player.position=99-64;
+			}
+		}
 		return result;
 	}
 
