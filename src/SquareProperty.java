@@ -65,7 +65,7 @@ public class SquareProperty extends Square  {
 
 		}else if(owner == player){
 			int props = board.getNumberOfSameColor(this.color); 
-			if (props <= 2){ //if 2 properties of same color can't build house
+			if (props <= 2 || skyscraper==1){ //if 2 properties of same color can't build house
 				result[0]="1";
 				result[1]="";
 				return result;
@@ -90,30 +90,45 @@ public class SquareProperty extends Square  {
 			}else if(level != 0 && player.money>=pr){ //if player has more than 2 properties of same color
 				result[0]="4";
 				result[1] = "Do you want to build "+keyword+" to "+this.name+" ?";
-			}else{ //player has less than 2 properties of same color, can't build
+			}else{ //no majority, no monopoly, can't build
 				result[0]="1";
 				result[1]="";
 			}
 
 		}else if(owner != player){	
-			if(isMortgaged && player.hasCardWithId(11)){
-				return applyCard(player, 11);
-			}else if(player.hasCardWithId(34)){
-				return applyCard(player, 34);
-			}else if(player.hasCardWithId(35)){
-				return applyCard(player, 35);
-			}
-			
-			if (player.money < this.rent){
-				result[0]="-1";
-				result[1] = player.name+" is not able to pay rent. BANKRUPTCY!";
-			}else{
+
+			int unmortgagePrice = (price/2)*(11/10);
+			//player can unmortgage this square with his card
+			if(isMortgaged && player.hasCardWithId(11) && player.money>unmortgagePrice){
+				result[0]="11";
+				result[1] = "Do you want to use your '"+board.cardDescriptions[11][0]+"' card ?";
+				//player excused from paying rent
+			}else if(player.hasCardWithId(23)) {
+				player.deleteCard(23);
+				result[0]="1";
+				result[1] = "You have '"+board.cardDescriptions[23][0]+"' card and you are excused from paying rent.";
+				//player can reverse rent
+			}else if(player.hasCardWithId(35)) {
+				result[0]="35";
+				result[1] = "Do you want to use your '"+board.cardDescriptions[35][0]+"' card ?";
+				//regular pay rent process
+			}else if (player.money>=rent){
 				player.substract(this.rent);
 				owner.addMoney(this.rent);
 				result[0]="1";
 				result[1] = player.name+" paid rent to "+owner.name;
 				result[player.id+2]=Integer.toString(-1*rent);
-				result[owner.id+2]=Integer.toString(rent);
+				result[owner.id+2]=Integer.toString(rent);	
+
+			}else if(player.money+player.valueOfProperties>=rent){
+				result[0]="2";
+				result[1]="Player can't pay rent. Player should sell property.";
+				return result;
+			}else {
+				result[0]="-1";
+				result[1]="Player can't pay the rent and broke.";
+				return result;
+
 			}	
 		}
 
@@ -123,7 +138,7 @@ public class SquareProperty extends Square  {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	public String[] mortgageProperty(Player p){
 		this.isMortgaged=true;
 		String[] result = new String[14];
@@ -134,7 +149,7 @@ public class SquareProperty extends Square  {
 		result[p.id+2]=""+(price/2);
 		return result;
 	}
-	
+
 	public String[] unmortgageProperty(Player p){
 		int unmortgagePrice = (price/2)*(11/10);
 		String[] result = new String[14];
@@ -152,58 +167,7 @@ public class SquareProperty extends Square  {
 			return result;
 		}
 	}
-	
-	public String[] applyCard(Player p,int cardId){
-		String[] result = new String[14];
-		initializeResult(result);
-		
-		if(cardId==11){  // buy mortgaged pro
-			int unmortgagePrice = (price/2)*(11/10);
-			if(p.money>unmortgagePrice){
-				p.substract(unmortgagePrice);
-				owner.deleteProperty(this);
-				p.addProperty(this);
-				this.isMortgaged=false;
-				p.deleteCard(cardId);
-				result[0]="1";
-				result[1]="Player used Foreclosed Property Sale card and bought this property.";
-				result[p.id+2]="-"+""+unmortgagePrice;
-				return result;
-			}else{
-				result[0]="1";
-				result[1]="Player can not use the card. Game moves on.";
-				return result;
-			}
-		}else if(cardId==34){ // 1/2
-			if(p.money>rent/2){
-				p.substract(rent/2);
-				p.deleteCard(cardId);
-				result[0]="1";
-				result[1]="Player used the card and payed only half of the rent.";
-				result[p.id+2]="-"+""+(rent/2);
-				return result;
-			}else if(p.money+p.valueOfProperties>rent/2){
-				result[0]="2";
-				result[1]="Player can't pay rent. Player should sell property.";
-				return result;
-			}else {
-				result[0]="-1";
-				result[1]="Player can't pay the rent and broke.";
-				return result;
-			}
-			
-		}else if(cardId==35){ // reverse
-			p.addMoney(rent);
-			owner.substract(rent);
-			result[0]="1";
-			result[1]="Reverse rent, owner pays the rent to the guest.";
-			result[p.id+2]=""+rent;
-			result[owner.id+2]="-"+""+rent;
-			return result;
-		}
-		return result;
-	}
-	
+
 
 
 

@@ -10,16 +10,17 @@ public class SquareRollOnce extends Square {
 
 	@Override
 	public String[] landOn(Player player, Board board, int total) {
-		
+		String[] result = new String[14];
+		initializeResult(result);
+		result[0]="10";
+		result[1] = "";
+
 		Dice dice = new Dice();
 		int face = dice.getFace();
 		
-		
-		
-		
-		return null;
-		// TODO Auto-generated method stub
-		
+		result[2]=Integer.toString(face);
+
+		return result;
 	}
 
 }

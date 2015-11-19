@@ -5,17 +5,22 @@ public class SquareTaxRefund extends Square {
 		super(type,name, id, position, row);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public String[] landOn(Player player, Board board, int total) {
 		String[] result = new String[14];
 		initializeResult(result);
 		result[0]="1";
-		result[1] = "Collect %50 from pool";	
-		
-		return null;
-		// TODO Auto-generated method stub
-		
+		result[1] = "Collect %50 from Pool";
+
+		int amount = board.pool - (board.pool/2);
+		player.addMoney(amount);
+		board.pool = board.pool - amount;
+
+		result[player.id+2]=Integer.toString(amount);
+
+		return result;
+
 	}
 
 }
