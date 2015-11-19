@@ -123,7 +123,19 @@ public class Board {
 		}
 		return result;
 	}
-
+	
+	public Square nextSquare(int id){
+		int x = id + 1;
+		if(id==23){
+			x=0;
+		}else if(id==63){
+			x=24;
+		}else if(id==119){
+			x=64;
+		}
+		return getSquareFromBoard(x);
+	}
+	
 	public ArrayList<Player> getPlayers(){
 		return players;
 	}

@@ -38,9 +38,15 @@ public class SquareCommunity extends Square {
 	
 	@Override
 	public String[] landOn(Player player, Board board, int dice) {
-		return null;
 		// TODO Auto-generated method stub
+		CardCommunity c = board.peekCommunity();
 		
+		String[] result = c.doAction(player);
+		
+		if(result[0].equals("1")){
+			board.pullPushCommunity();
+		}
+		return result;
 	}
 
 }

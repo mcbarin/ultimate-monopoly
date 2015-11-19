@@ -37,9 +37,16 @@ public class SquareChance extends Square {
 	}
 	@Override
 	public String[] landOn(Player player, Board board, int total) {
-		return null;
 		// TODO Auto-generated method stub
+		CardChance c = board.peekChance();
 		
+		String[] result = c.doAction(player);
+		
+		if(result[0].equals("1")){
+			board.pullPushChance();
+		}
+		return result;
+
 	}
 
 }

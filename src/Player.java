@@ -10,7 +10,8 @@ public class Player {
 	public ArrayList<Card> cards = new ArrayList<Card>();
 	public int[] colorProperties = new int[20];
 	public Board board;
-	
+	public ArrayList<SquareUtility> utilities = new ArrayList<SquareUtility>();
+
 	public Player(String name,int money, int id, int row, int position,Board board) {
 		super();
 		this.name = name;

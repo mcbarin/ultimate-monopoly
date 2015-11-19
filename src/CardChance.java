@@ -32,12 +32,67 @@ public class CardChance extends Card {
 	
 	public String[] doAction(Player p){
 		String[] result= getResultArray();
-		
+				
 		if(number == 0){
+			// Advance to the nearest utility.
+			if(p.row==0){
+				p.position=3;
+				
+			}else if(p.row==1){
+				if(p.position==7 || p.position==36){
+					if(p.position==36)
+						p.addMoney(200);
+					p.position=12;
+				}else if(p.position==22){
+					p.position=28;
+				}
+			}else if(p.row==2){
+				if(p.position==10 || p.position==54){
+					p.position=11;
+				}else if(p.position==21 || p.position==30){
+					if(p.position==21)
+						p.addMoney(300);
+					p.position=39;
+				}
+			}
+			
+			result[0]="5";
+			result[1]="Player advanced to the nearest utility.";
+			
 			
 		} else if(number == 1){
+			p.row = 1;
+			p.position = 10;
+			result[0]="5";
+			result[1]="Player went directly to jail.";
 			
 		}  else if(number == 2){
+			
+			if(p.row==0){
+					p.position = 21;				
+			}else if(p.row==1){
+				if(p.position==7){
+					p.position=15;
+				}else if(p.position==22){
+					p.position=25;
+				}else if(p.position==36){
+					p.position=5;
+					p.addMoney(200);
+				}
+			}else if(p.row==2){
+				if(p.position==10 || p.position==21){
+					p.position=35;
+					p.addMoney(300);
+				}else if( p.position==30){
+					p.position=35;
+				}else if(p.position==54){
+					p.position=7;
+				}
+			}
+			
+			result[0]="5";
+			result[1]="Player went directly to nearest railroad.";
+			
 			
 		}  else if(number == 3){
 			int amount = 0;
@@ -135,6 +190,7 @@ public class CardChance extends Card {
 			}
 			
 		}  else if(number == 10){
+			
 			
 		}  else if(number == 11){
 			p.addCard(this);
@@ -248,6 +304,7 @@ int amount = (board.getNumberOfPlayers()-1)*50;
 			result[1]="All players moved to Canal Street.";
 			
 		}  else if(number == 21){
+			
 			
 		}  else if(number == 22){
 			p.addCard(this);
