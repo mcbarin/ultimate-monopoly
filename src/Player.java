@@ -8,6 +8,7 @@ public class Player {
 	String name = "";
 	public ArrayList<SquareProperty> properties = new ArrayList<SquareProperty>();
 	public ArrayList<Card> cards = new ArrayList<Card>();
+	public ArrayList<SquareTransit> trains = new ArrayList<SquareTransit>();
 	public int[] colorProperties = new int[20];
 	public Board board;
 	public ArrayList<SquareUtility> utilities = new ArrayList<SquareUtility>();

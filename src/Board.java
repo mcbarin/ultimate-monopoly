@@ -248,7 +248,7 @@ public class Board {
 						squares[i][j] = new SquareSqueezePlay("SqueezePlay",names[i][j],j + 64 ,j,i);
 						//free and 0 = subway
 					}else if(j == 7 || j== 35 ){
-						squares[i][j] = new SquareTransit("Transit",names[i][j],j+64,j,i,this);
+						//squares[i][j] = new SquareTransit("Transit",names[i][j],j+64,j,i,this);
 						//transit
 					}else if(j == 7 || j== 35 ){
 						squares[i][j] = new SquareCommunity("Community",names[i][j],j + 64,j,i);
