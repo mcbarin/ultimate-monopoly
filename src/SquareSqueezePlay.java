@@ -6,7 +6,7 @@ public class SquareSqueezePlay extends Square {
 		// TODO Auto-generated constructor stub
 	}
 
-	
+
 	@Override
 	public String[] landOn(Player player, Board board,int total) {
 		int numPlayers = board.players.size(); // Number of active players
@@ -16,12 +16,12 @@ public class SquareSqueezePlay extends Square {
 		Player loser; 
 		int amount = 0;
 		int loseAmount = 0;
-		
+
 		Dice dice = new Dice();
 		int die1 = dice.getFace();
 		int die2 = dice.getFace();
 		int die = die1 + die2;	
-		
+
 		switch (die) {
 		case 5: case 6: case 7: case 8: case 9:
 			loseAmount=50;
@@ -60,13 +60,13 @@ public class SquareSqueezePlay extends Square {
 		result[0]="1";
 		result[1]=msg;
 		result[player.id+2] = Integer.toString(amount);
-		for (int i = 2; i < numPlayers+2; i++) {
+		for (int i = 0; i < numPlayers; i++) {
 			if(i != player.id)
-				result[i] = Integer.toString(-1 *loseAmount);
+				result[board.players.get(i).id + 2] = Integer.toString(-1 *loseAmount);
 		}
 		return result;
 	}
-		
+
 }
 
 

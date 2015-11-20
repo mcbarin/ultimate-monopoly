@@ -7,9 +7,26 @@ public class SquareTransit extends Square {
 	int originalRent=20;
 	int trainDepot = 0;
 	int trainDepotPrice =100;
-	public SquareTransit(String type,String name, int id, int position, int row) {
+	SquareTransit twin; //when selling you must initialize twin too.
+	
+	public SquareTransit(String type,String name, int id, int position, int row, Board board) {
 		super(type,name, id, position, row);
-		// TODO Auto-generated constructor stub
+		if (this.id == 29)
+			twin=(SquareTransit) board.getSquareFromBoard(71);
+		if (this.id == 71)
+			twin=(SquareTransit) board.getSquareFromBoard(29);
+		if (this.id == 49)
+			twin=(SquareTransit) board.getSquareFromBoard(99);
+		if (this.id == 99)
+			twin=(SquareTransit) board.getSquareFromBoard(99);
+		if (this.id == 9)
+			twin=(SquareTransit) board.getSquareFromBoard(39);
+		if (this.id == 39)
+			twin=(SquareTransit) board.getSquareFromBoard(9);
+		if (this.id == 59)
+			twin=(SquareTransit) board.getSquareFromBoard(21);
+		if (this.id == 21)
+			twin=(SquareTransit) board.getSquareFromBoard(59);
 	}
 
 	@Override
@@ -28,7 +45,7 @@ public class SquareTransit extends Square {
 
 
 			}
-		}else if (owner==player && trainDepot==0){
+		}else if (owner==player && trainDepot==0){ //else trainDepot==1 do nothing
 			result[0]="4";
 			result[1] = "Do you want to build Train Depot to "+this.name+" ?";
 			return result;
@@ -63,7 +80,6 @@ public class SquareTransit extends Square {
 				result[player.id+2]=Integer.toString(-1*rent);
 				result[owner.id+2]=Integer.toString(rent);
 			}else if(player.money+player.valueOfProperties>rent){
-				///// yer değiştirmeyi kaçırıyosun
 				result[0]="2";
 				result[1]="Player can't pay rent. Player should sell property.";
 				return result;
@@ -75,38 +91,80 @@ public class SquareTransit extends Square {
 		}
 
 
-		//if total is odd change the track.
-		if(total%2 == 0){
-			result[0]="5";
-			if(player.position == 9){
-				player.row=1;
-				player.position=39-24;
-			}else if(player.position == 21){
-				player.row=1;
-				player.position=59-24;
-			}else if(player.position == 35 && player.row==2){
-				player.row=1;
-				player.position=49-24;
-			}else if(player.position == 7){
-				player.row=1;
-				player.position=29-34;
-			}else if(player.position == 15){
-				player.row=0;
-				player.position=9;
-			}else if(player.position == 35){
-				player.row=0;
-				player.position=21;
-			}else if(player.position == 5){
-				player.row=2;
-				player.position=71-64;
-			}else if(player.position == 25){
-				player.row=2;
-				player.position=99-64;
-			}
-		}
+		result[0]=checkEven(player, total);
 
 		return result;
 
 	}
 
+	public String checkEven(Player player, int total){
+		//if total is even change the track.
+		if(total%2 == 0){
+			if(this.id == 9){
+				player.row=1;
+				player.position=39-24;
+			}else if(this.id == 21){
+				player.row=1;
+				player.position=59-24;
+			}else if(this.id == 99){
+				player.row=1;
+				player.position=49-24;
+			}else if(this.id == 71){
+				player.row=1;
+				player.position=29-34;
+			}else if(this.id == 39){
+				player.row=0;
+				player.position=9;
+			}else if(this.id == 59){
+				player.row=0;
+				player.position=21;
+			}else if(this.id == 29){
+				player.row=2;
+				player.position=71-64;
+			}else if(this.id== 49){
+				player.row=2;
+				player.position=99-64;
+			}
+			return "5";
+		}
+		return "1";
+	}
+
+
+
+	public String[] buyTransit(Player player,int total){
+		String[] result = new String[14];
+		initializeResult(result);
+		player.substract(price);
+		owner = player;
+		twin.owner = player;
+		player.valueOfProperties +=price/2;
+		player.trains.add(this);
+		player.trains.add(this.twin);
+		result[0]="1"; // Success
+		result[1] = player.name + " has bought the " + ""+name+".";
+		result[player.id+2] = "-"+ ""+price;
+
+		result[0]=checkEven(player, total);
+		return result;
+	}
+
+
+	public String[] buildTrainDepot(Player player, int total){
+		String[] result = new String[14];
+		initializeResult(result);
+		trainDepot=1;
+		twin.trainDepot=1;
+		rent=originalRent*2;
+		twin.rent=rent;
+		player.substract(trainDepotPrice);
+		player.valueOfProperties+=trainDepotPrice/2;
+		result[0]="1"; // Success
+		result[1] = player.name + " built Train Depot to " + ""+name+".";
+		result[player.id+2] = "-"+ ""+price;
+
+		result[0]=checkEven(player, total);
+
+		return result;
+	}
 }

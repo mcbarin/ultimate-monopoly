@@ -61,4 +61,19 @@ public class SquareUtility extends Square {
 
 	}
 
+	public String[] buyUtility(Player p){
+		String[] result = new String[14];
+		initializeResult(result);
+		p.utilities.add(this);
+		p.substract(this.price);
+		this.owner = p;
+		p.valueOfProperties += this.price/2;
+
+		result[0]="1"; // Success
+		result[1] = p.name + " has bought the " + ""+this.name+".";
+		result[p.id+2] = "-"+ ""+this.price;
+		return result;
+	}
+
+
 }

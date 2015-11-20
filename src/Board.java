@@ -178,7 +178,7 @@ public class Board {
 						squares[i][j] = new SquareSqueezePlay("SqueezePlay",names[i][j],j,j,i);
 						//sqeeze play
 					}else if(j == 9 || j== 21 ){
-						squares[i][j] = new SquareTransit("Transit",names[i][j],j,j,i);
+						squares[i][j] = new SquareTransit("Transit",names[i][j],j,j,i,this);
 						//transit
 					}else if( j == 4){
 						squares[i][j] = new SquareCommunity("Community",names[i][j],j,j,i);
@@ -213,7 +213,7 @@ public class Board {
 						squares[i][j] = new SquareGo("Go",names[i][j],j + 24,j,i);
 						//go
 					}else if(j == 5 || j== 15 ||j == 25 || j== 35 ){
-						squares[i][j] = new SquareTransit("Transit",names[i][j],j+24,j,i);
+						squares[i][j] = new SquareTransit("Transit",names[i][j],j+24,j,i,this);
 						//transit
 					}else if(j == 5 || j== 15 || j == 25 || j == 35 ){
 						squares[i][j] = new SquareCommunity("Community",names[i][j],j + 24,j,i);
@@ -248,7 +248,7 @@ public class Board {
 						squares[i][j] = new SquareSqueezePlay("SqueezePlay",names[i][j],j + 64 ,j,i);
 						//free and 0 = subway
 					}else if(j == 7 || j== 35 ){
-						squares[i][j] = new SquareTransit("Transit",names[i][j],j+64,j,i);
+						squares[i][j] = new SquareTransit("Transit",names[i][j],j+64,j,i,this);
 						//transit
 					}else if(j == 7 || j== 35 ){
 						squares[i][j] = new SquareCommunity("Community",names[i][j],j + 64,j,i);

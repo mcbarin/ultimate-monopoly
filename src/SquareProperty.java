@@ -64,6 +64,13 @@ public class SquareProperty extends Square  {
 			}
 
 		}else if(owner == player){
+
+			if(isMortgaged){
+				result[0]="1";
+				result[1] = "This property is mortgaged, can't build .";
+				return result;
+			}
+
 			int props = board.getNumberOfSameColor(this.color); 
 			if (props <= 2 || skyscraper==1){ //if 2 properties of same color can't build house
 				result[0]="1";
@@ -75,6 +82,7 @@ public class SquareProperty extends Square  {
 			if(house==4) keyword="hotel";
 			if(hotel==1) keyword="skyscraper";
 			int pr = 0;
+			//in case of majority, calculate price of properties
 			int ids[] = board.getOtherProperties(this.color); //get ids of properties of specific color
 			for (int i = 0; i < ids.length; i++) {
 				ss = (SquareProperty)board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
@@ -111,7 +119,11 @@ public class SquareProperty extends Square  {
 			}else if(player.hasCardWithId(35)) {
 				result[0]="35";
 				result[1] = "Do you want to use your '"+board.cardDescriptions[35][0]+"' card ?";
-				//regular pay rent process
+
+				//regular pay rent process	
+			}else if (isMortgaged){
+				result[0]="1";
+				result[1] = "This property is mortgaged, don't pay rent.";
 			}else if (player.money>=rent){
 				player.substract(this.rent);
 				owner.addMoney(this.rent);
@@ -123,12 +135,9 @@ public class SquareProperty extends Square  {
 			}else if(player.money+player.valueOfProperties>=rent){
 				result[0]="2";
 				result[1]="Player can't pay rent. Player should sell property.";
-				return result;
 			}else {
 				result[0]="-1";
 				result[1]="Player can't pay the rent and broke.";
-				return result;
-
 			}	
 		}
 
@@ -138,6 +147,110 @@ public class SquareProperty extends Square  {
 		// TODO Auto-generated method stub
 
 	}
+
+	public String[] buyProperty(Player p){
+		String[] result = new String[14];
+		initializeResult(result);
+		p.substract(price);
+		p.addProperty(this);
+		result[0]="1"; // Success
+		result[1] = p.name + " has bought the " + ""+name+".";
+		result[p.id+2] = "-"+ ""+price;
+		return result;
+	}
+
+
+
+	public String[] buildToProperty(Player p){
+		String[] result = new String[14];
+		initializeResult(result);
+		int pr = 0;
+		boolean flag = true;
+		SquareProperty ss = null;
+
+		if(level == 1){ //majority ownership, build only one house 
+			result[1]="'"+p.name+"' built house to ";
+			int ids[] = p.board.getOtherProperties(color); //get ids of properties of specific color
+			for (int i = 0; i < ids.length; i++) {
+				ss = (SquareProperty)p.board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
+				if(ss.owner == p){
+					ss.house = 1; //build house to all owned properties
+					pr = pr + ss.buildingPrice;
+					ss.rent = ss.originalRent * 5;
+					p.valueOfProperties+=ss.buildingPrice/2;
+					result[1] = result[1] + ss.name + ", ";
+				}
+			}
+			result[0]="1";
+			result[1] = result[1] + "and lost $" +pr;
+			result[p.id+2] = Integer.toString(pr);
+
+		}else if (level == 2) {//monopoly
+
+			result[1]="'"+p.name+"' built house to ";
+			int ids[] = p.board.getOtherProperties(color); //get ids of properties of specific color
+			for (int i = 0; i < ids.length; i++) {
+				ss = (SquareProperty)p.board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
+				if(ss.house == 0){
+					ss.rent = ss.originalRent*5;
+					ss.house = 1; 
+					pr = ss.buildingPrice;
+					p.valueOfProperties+=ss.buildingPrice/2;
+					result[1] = result[1] + ss.name + " ";
+					flag = false;
+				}
+			}
+
+			if (flag){
+				for (int i = 0; i < ids.length; i++) {
+					ss = (SquareProperty)p.board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
+					pr = pr + ss.buildingPrice;
+					updateRentAccordingToHouse(ss);
+					p.valueOfProperties+=ss.buildingPrice/2;
+					result[1] = result[1] + ss.name + ", ";
+				}
+			}
+			result[0]="1";
+			result[1] = result[1] + "and lost $" +pr;
+			result[p.id+2] = Integer.toString(pr);
+
+		}
+
+		return result;
+	}
+
+	public void updateRentAccordingToHouse(SquareProperty ss){
+		//		assuming with 1 house rent will be x5
+		//						2 house x15
+		//						3 house x30
+		//						4 house x40
+		//						hotel x50
+		//						sky x85
+
+		if(ss.hotel==1){
+			ss.rent = ss.originalRent*85;
+			ss.hotel=0;
+			ss.skyscraper = 1;
+		}else if(ss.house == 0){
+			ss.rent = ss.originalRent*5;
+			ss.house = ss.house + 1; //build house to all owned properties
+		}else if(ss.house == 1){
+			ss.rent = ss.originalRent*15;
+			ss.house = ss.house + 1; //build house to all owned properties
+		}else if(ss.house == 2){
+			ss.rent = ss.originalRent*30;
+			ss.house = ss.house + 1;
+		}else if(ss.house == 3){
+			ss.rent = ss.originalRent*40;
+			ss.house = ss.house + 1;
+		}else if(ss.house == 4){
+			ss.rent = ss.originalRent*50;
+			ss.house=0;
+			ss.hotel = 1;
+		}
+	}
+
+
 
 	public String[] mortgageProperty(Player p){
 		this.isMortgaged=true;
@@ -171,6 +284,7 @@ public class SquareProperty extends Square  {
 
 
 
+
 	public void initializeAll(){
 		this.isMortgaged = false;
 		this.setOwner(null);
@@ -178,6 +292,7 @@ public class SquareProperty extends Square  {
 		this.hotel = 0;
 		this.skyscraper = 0;
 		this.normalizeRent();
+		this.level=0;
 	}
 
 	public void doubleRent(){

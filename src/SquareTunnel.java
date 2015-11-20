@@ -13,10 +13,10 @@ public class SquareTunnel extends Square {
 		result[0]="5";
 		result[1] = "Go to other side of the Tunnel";	
 
-		if(player.position == 18){
+		if(id == 18){
 			player.row=2;
 			player.position=14;
-		}else if(player.position == 14){
+		}else if(id == 78){
 			player.row=0;
 			player.position=18;
 		}
