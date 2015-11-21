@@ -13,7 +13,7 @@ public class SquareGoToJail extends Square {
 		initializeResult(result);
 		result[0]="5";
 		result[1] = "Go to Jail";	
-
+		player.countJail = 3;
 		player.row=1;
 		player.position=0;
 

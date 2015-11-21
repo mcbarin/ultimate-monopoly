@@ -13,6 +13,7 @@ public class Player {
 	public int[] colorProperties = new int[20];
 	public Board board;
 	public ArrayList<SquareUtility> utilities = new ArrayList<SquareUtility>();
+	public int countJail=4; //not in jail
 
 	public Player(String name,int money, int id, int row, int position,Board board) {
 		super();
