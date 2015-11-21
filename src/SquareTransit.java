@@ -49,7 +49,7 @@ public class SquareTransit extends Square {
 
 
 			}
-		}else if (owner==player && trainDepot==0){ //else trainDepot==1 do nothing
+		}else if (owner==player && trainDepot==0 && owner.money>=trainDepotPrice){ //else trainDepot==1 do nothing
 			result[0]="4";
 			result[1] = "Do you want to build Train Depot to "+this.name+" ?";
 			return result;
@@ -165,7 +165,7 @@ public class SquareTransit extends Square {
 		player.valueOfProperties+=trainDepotPrice/2;
 		result[0]="1"; // Success
 		result[1] = player.name + " built Train Depot to " + ""+name+".";
-		result[player.id+2] = "-"+ ""+price;
+		result[player.id+2] = "-"+ ""+trainDepotPrice;
 
 		result[0]=checkEven(player, total);
 

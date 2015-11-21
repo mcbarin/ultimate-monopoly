@@ -12,16 +12,16 @@ public class SquareTax extends Square {
 		result[0]="1";
 		int amount=0;
 
-		if (player.position == 4){ //INCOME TAX
-			if((player.money/10) < 200) 
-				amount = player.money/10;//pay % 10
+		if (id == 28){ //INCOME TAX
+			if((player.valueOfProperties + player.money)/10 < 200) 
+				amount = (player.valueOfProperties + player.money)/10;//pay % 10 of assets
 			amount=200; //or $200
 
 			player.substract(amount);
 			board.pool +=amount;
 			result[1] =player.name+" paid $"+amount+" as Income Tax.";
 
-		}else if (player.position == 38){ //LUXUARY TAX
+		}else if (this.id == 62){ //LUXUARY TAX
 			amount=750;
 			player.substract(amount);
 			board.pool +=amount;

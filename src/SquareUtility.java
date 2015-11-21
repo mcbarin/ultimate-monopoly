@@ -30,6 +30,7 @@ public class SquareUtility extends Square {
 			result[1] = "";	
 
 		}else if (owner != player){
+
 			if(owner.utilities.size() == 1)
 				rent = total*4;
 			if(owner.utilities.size() == 2)
@@ -47,13 +48,20 @@ public class SquareUtility extends Square {
 			if(owner.utilities.size() == 8)
 				rent = total*150;
 
-			owner.addMoney(rent);
-			player.substract(rent);
-			result[0]="1";
-			result[1] = player.name+" paid rent to "+owner.name+".";
-			result[player.id+2]=Integer.toString(-1*rent);
-			result[owner.id+2]=Integer.toString(rent);
-
+			if(player.money>=rent){
+				owner.addMoney(rent);
+				player.substract(rent);
+				result[0]="1";
+				result[1] = player.name+" paid rent to "+owner.name+".";
+				result[player.id+2]=Integer.toString(-1*rent);
+				result[owner.id+2]=Integer.toString(rent);
+			}else if(player.money+player.valueOfProperties>rent){
+				result[0]="2";
+				result[1]="Player can't pay rent. Player should sell property.";
+			}else{
+				result[0]="-1";
+				result[1]="Player can't pay the rent and broke.";
+			}
 		}
 
 		return result;
