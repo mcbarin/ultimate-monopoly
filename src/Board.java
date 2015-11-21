@@ -164,120 +164,101 @@ public class Board {
 		initializePlayers(totalPlayer);
 		initializeCards(); // Chance and Community Chest cards are initialized.
 
-		for (int j = 25; j < 56; j++) {
-			names[0][j] = ""; colors[0][j] = 64; price[0][j] = -64; rent [0][j] = -64; squares[0][j] = null;
-		}
-		for (int j = 41; j < 56; j++) {
-			names[1][j] = ""; colors[1][j] = 64; price[1][j] = -64; rent [1][j] = -64; squares[1][j] = null;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 56; j++) {
+				squares[i][j]=null;
+			}
 		}
 
-		for(int i = 0;i < 3;i++){
-			for (int j = 0; j <56 ; j++) {
-				if(i == 0){
-					if (j== 0){
-						squares[i][j] = new SquareSqueezePlay("SqueezePlay",names[i][j],j,j,i);
-						//sqeeze play
-					}else if(j == 9 || j== 21 ){
-						squares[i][j] = new SquareTransit("Transit",names[i][j],j,j,i,this);
-						//transit
-					}else if( j == 4){
-						squares[i][j] = new SquareCommunity("Community",names[i][j],j,j,i);
-						//community chest	
-					}else if(j == 16 ){
-						squares[i][j] = new SquareChance("Chance",names[i][j],j,j,i);
-						//chance	
-					}else if(j == 3 || j== 15  ){
-						squares[i][j] = new SquareUtility("Utility",names[i][j],j,j,i);
-						//	utility				
-					}else if(j == 6){
-						squares[i][j] = new SquareGo("Go",names[i][j],j,j,i);
-						//go	
-					}else if(j == 12){
-						squares[i][j] = new SquareFree("Free",names[i][j],j,j,i);
-						//free
-					}else if(j == 14 ){
-						squares[i][j] = new SquareTaxRefund("TaxRefund",names[i][j],j,j,i);
-						//tax refund	
-					}else if(j == 18 ){
-						squares[i][j] = new SquareTunnel("Tunnel",names[i][j],j,j,i);
-						//tunnel	
-					}else if(j == 22){
-						squares[i][j] = new SquareReverse("Reverse",names[i][j],j,j,i);
-						//reverse
-					}else{
-						squares[i][j] = new SquareProperty("Property",names[i][j],j,j,i,colors[i][j],price[i][j],rent[i][j]);
-						//Property
-					}
-				}else if(i == 1){
-					if (j== 0){
-						squares[i][j] = new SquareGo("Go",names[i][j],j + 24,j,i);
-						//go
-					}else if(j == 5 || j== 15 ||j == 25 || j== 35 ){
-						squares[i][j] = new SquareTransit("Transit",names[i][j],j+24,j,i,this);
-						//transit
-					}else if(j == 5 || j== 15 || j == 25 || j == 35 ){
-						squares[i][j] = new SquareCommunity("Community",names[i][j],j + 24,j,i);
-						//transit
-					}else if( j == 2 || j == 17 || j == 33){
-						squares[i][j] = new SquareCommunity("Community",names[i][j],j + 24,j,i);
-						//community chest	
-					}else if(j == 7 || j == 22 || j == 36){
-						squares[i][j] = new SquareChance("Chance",names[i][j],j + 24,j,i);
-						//chance	
-					}else if(j == 12 || j== 28  ){
-						squares[i][j] = new SquareUtility("Utility",names[i][j],j + 24,j,i);
-						//	utility				
-					}else if(j == 4 || j == 38){
-						squares[i][j] = new SquareTax("Tax",names[i][j],j + 24,j,i);
-						//tax	
-					}else if(j == 20 ){
-						squares[i][j] = new SquareFree("Free",names[i][j],j + 24,j,i);
-						//free
-					}else if(j == 30 ){
-						squares[i][j] = new SquareRollOnce("RollOnce",names[i][j],j + 24,j,i);
-						//roll once	
-					}else if(j == 10){
-						squares[i][j] = new SquareInJail("InJail",names[i][j],j + 24,j,i);
-						//in jail
-					}else{
-						squares[i][j] = new SquareProperty("Property",names[i][j],j+24,j,i,colors[i][j],price[i][j],rent[i][j]);
-						//Propriety
-					}
-				}else if(i == 2){
-					if (j== 0 || j == 5 || j == 15 || j == 48){
-						squares[i][j] = new SquareSqueezePlay("SqueezePlay",names[i][j],j + 64 ,j,i);
-						//free and 0 = subway
-					}else if(j == 7 || j== 35 ){
-						//squares[i][j] = new SquareTransit("Transit",names[i][j],j+64,j,i,this);
-						//transit
-					}else if(j == 7 || j== 35 ){
-						squares[i][j] = new SquareCommunity("Community",names[i][j],j + 64,j,i);
-						//transit
-					}else if( j == 2 || j== 24 || j == 36 || j == 46){
-						squares[i][j] = new SquareCommunity("Community",names[i][j],j + 64,j,i);
-						//community chest	
-					}else if(j == 10 || j == 21 || j == 30 || j == 54){
-						squares[i][j] = new SquareChance("Chance",names[i][j],j + 64,j,i);
-						//chance	
-					}else if(j == 11 || j== 18 || j == 39 || j== 49  ){
-						squares[i][j] = new SquareUtility("Utility",names[i][j],j + 64,j,i);
-						//	utility				
-					}else if(j == 28 || j== 51 ){
-						squares[i][j] = new SquareGo("Go",names[i][j],j + 64,j,i);
-						//go and birthday
-					}else if(j == 14 ){
-						squares[i][j] = new SquareTunnel("Tunnel",names[i][j],j + 64,j,i);
-						//tunnel	
-					}else if(j == 6 || j == 22 || j == 34 || j == 50){
-						squares[i][j] = new SquareCabCompany("CabCompany",names[i][j],j + 64,j,i);
-						//CAB CO.
-					}else if(j == 42 ){
-						squares[i][j] = new SquareGoToJail("GoToJail",names[i][j],j + 64,j,i);
-						// go to jail	
-					}else{
-						squares[i][j] = new SquareProperty("Property",names[i][j],j+64,j,i,colors[i][j],price[i][j],rent[i][j]);
-						//Property
-					}}}}
+		//Square(String type,String name,int id, int position, int row) 
+		for (int j = 0; j <24 ; j++) {
+			if (j== 0){
+				squares[0][j] = new SquareSqueezePlay("SqueezePlay",names[0][j],j,j,0);
+			}else if(j == 9 || j== 21 ){
+				squares[0][j] = new SquareTransit("Transit",names[0][j],j,j,0);
+			}else if( j == 4){
+				squares[0][j] = new SquareCommunity("Community",names[0][j],j,j,0);	
+			}else if(j == 16 ){
+				squares[0][j] = new SquareChance("Chance",names[0][j],j,j,0);
+			}else if(j == 3 || j== 15  ){
+				squares[0][j] = new SquareUtility("Utility",names[0][j],j,j,0);			
+			}else if(j == 6){
+				squares[0][j] = new SquareGo("Go",names[0][j],j,j,0);
+				//bonus
+			}else if(j == 12){
+				squares[0][j] = new SquareFree("Free",names[0][j],j,j,0);
+				//stock exchange
+			}else if(j == 14 ){
+				squares[0][j] = new SquareTaxRefund("TaxRefund",names[0][j],j,j,0);
+			}else if(j == 18 ){
+				squares[0][j] = new SquareTunnel("Tunnel",names[0][j],j,j,0);
+			}else if(j == 22){
+				squares[0][j] = new SquareReverse("Reverse",names[0][j],j,j,0);
+			}else{
+				squares[0][j] = new SquareProperty("Property",names[0][j],j,j,0,colors[0][j],price[0][j],rent[0][j]);
+			}
+		}
+
+		for (int j = 0; j <40 ; j++) {
+			if (j== 0){
+				squares[1][j] = new SquareGo("Go",names[1][j],j + 24,j,1);
+				//go
+			}else if(j == 5 || j== 15 ||j == 25 || j== 35 ){
+				squares[1][j] = new SquareTransit("Transit",names[1][j],j+24,j,1);
+			}else if( j == 2 || j == 17 || j == 33){
+				squares[1][j] = new SquareCommunity("Community",names[1][j],j + 24,j,1);
+			}else if(j == 7 || j == 22 || j == 36){
+				squares[1][j] = new SquareChance("Chance",names[1][j],j + 24,j,1);	
+			}else if(j == 12 || j== 28){
+				squares[1][j] = new SquareUtility("Utility",names[1][j],j + 24,j,1);			
+			}else if(j == 4 || j == 38){
+				squares[1][j] = new SquareTax("Tax",names[1][j],j + 24,j,1);
+			}else if(j == 20 ){
+				squares[1][j] = new SquareFree("Free",names[1][j],j + 24,j,1);
+				//free parking
+			}else if(j == 30 ){
+				squares[1][j] = new SquareRollOnce("RollOnce",names[1][j],j + 24,j,1);
+			}else if(j == 10){
+				squares[1][j] = new SquareInJail("InJail",names[1][j],j + 24,j,1);
+			}else{
+				squares[1][j] = new SquareProperty("Property",names[1][j],j+24,j,1,colors[1][j],price[1][j],rent[1][j]);
+			}
+		}
+
+		((SquareTransit) squares[0][9]).SquareTransitTwin(9,this);
+		((SquareTransit) squares[0][21]).SquareTransitTwin(21,this);
+		((SquareTransit) squares[1][15]).SquareTransitTwin(39,this);
+		((SquareTransit) squares[1][35]).SquareTransitTwin(59,this);
+
+		for (int j = 0; j <56 ; j++) {
+			if (j==0 || j == 5 || j == 15 || j == 48){
+				squares[2][j] = new SquareFree("Free",names[2][j],j + 64 ,j,2);
+				//subway(0), bus ticket(5 48), auction(15),
+			}else if(j == 7 || j== 35 ){
+				squares[2][j] = new SquareTransit("Transit",names[2][j],j+64,j,2);
+				((SquareTransit) squares[2][j]).SquareTransitTwin(j+64,this);
+			}else if( j == 2 || j== 24 || j == 36 || j == 46){
+				squares[2][j] = new SquareCommunity("Community",names[2][j],j + 64,j,2);
+			}else if(j == 10 || j == 21 || j == 30 || j == 54){
+				squares[2][j] = new SquareChance("Chance",names[2][j],j + 64,j,2);
+			}else if(j == 11 || j== 18 || j == 39 || j== 49  ){
+				squares[2][j] = new SquareUtility("Utility",names[2][j],j + 64,j,2);
+			}else if(j == 28 || j== 51 ){
+				squares[2][j] = new SquareGo("Go",names[2][j],j + 64,j,2);
+				//pay day(28) birthday(51)
+			}else if(j == 14 ){
+				squares[2][j] = new SquareTunnel("Tunnel",names[2][j],j + 64,j,2);	
+			}else if(j == 6 || j == 22 || j == 34 || j == 50){
+				squares[2][j] = new SquareCabCompany("CabCompany",names[2][j],j + 64,j,2);
+			}else if(j == 42 ){
+				squares[2][j] = new SquareGoToJail("GoToJail",names[2][j],j + 64,j,2);
+			}else{
+				squares[2][j] = new SquareProperty("Property",names[2][j],j+64,j,2,colors[2][j],price[2][j],rent[2][j]);
+			}
+		}
+
+		((SquareTransit) squares[1][5]).SquareTransitTwin(29,this);
+		((SquareTransit) squares[1][25]).SquareTransitTwin(49,this);
 	}
 
 }

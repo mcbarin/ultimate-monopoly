@@ -8,9 +8,12 @@ public class SquareTransit extends Square {
 	int trainDepot = 0;
 	int trainDepotPrice =100;
 	SquareTransit twin; //when selling you must initialize twin too.
-	
-	public SquareTransit(String type,String name, int id, int position, int row, Board board) {
+
+	public SquareTransit(String type,String name, int id, int position, int row) {
 		super(type,name, id, position, row);
+	}
+
+	public void SquareTransitTwin(int id, Board board ){
 		if (this.id == 29)
 			twin=(SquareTransit) board.getSquareFromBoard(71);
 		if (this.id == 71)
@@ -18,7 +21,7 @@ public class SquareTransit extends Square {
 		if (this.id == 49)
 			twin=(SquareTransit) board.getSquareFromBoard(99);
 		if (this.id == 99)
-			twin=(SquareTransit) board.getSquareFromBoard(99);
+			twin=(SquareTransit) board.getSquareFromBoard(49);
 		if (this.id == 9)
 			twin=(SquareTransit) board.getSquareFromBoard(39);
 		if (this.id == 39)
@@ -27,6 +30,7 @@ public class SquareTransit extends Square {
 			twin=(SquareTransit) board.getSquareFromBoard(21);
 		if (this.id == 21)
 			twin=(SquareTransit) board.getSquareFromBoard(59);
+
 	}
 
 	@Override
