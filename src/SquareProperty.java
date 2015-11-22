@@ -1,6 +1,7 @@
-//suanki kural: majority ownership ise o renkten sahip oldukarına sadece 1 ev dikebilir.aynı anda hepsine diker.
-//monopoly olduktan sonra, o renkten herhangi bi yere gelince ev olmayan yere de bi ev diker. Sonra her geldiğinde aynı anda hepsine birer ev daha diker.
-//bunu sonra oyuncuya kac ev dikmek istersin diye sorup değiştirebiliriz.
+//suanki kural: kareye gelince sadece o kareye ev diker. evenly ev dikmesini kontrol eder.
+//majority ownership : 4 eve kadar dikebilir.
+//monopoly olduktan sonra evenly hale getirmeli sonra hotel dikebilir.
+
 public class SquareProperty extends Square  {
 
 	Player owner=null;
@@ -53,14 +54,16 @@ public class SquareProperty extends Square  {
 		String[] result = new String[14];
 		initializeResult(result);
 		SquareProperty ss = null;
+		result[0]="1";
+		result[1] = "";	
+
 
 		if(owner == null){
 			if (player.money >= this.price){
 				result[0]="3";
 				result[1] = "Do you want to buy "+this.name+" ?";
 			}else{  //if player has not enough money
-				result[0]="1";
-				result[1] = "";	
+
 			}
 
 		}else if(owner == player){
@@ -72,32 +75,34 @@ public class SquareProperty extends Square  {
 			}
 
 			int props = board.getNumberOfSameColor(this.color); 
-			if (props <= 2 || skyscraper==1){ //if 2 properties of same color can't build house
-				result[0]="1";
-				result[1]="";
+			if (props <= 2 || skyscraper==1 || level == 0){ 
 				return result;
 			}
 
-			String keyword = "house";
-			if(house==4) keyword="hotel";
-			if(hotel==1) keyword="skyscraper";
-			int pr = 0;
-			//in case of majority, calculate price of properties
-			int ids[] = board.getOtherProperties(this.color); //get ids of properties of specific color
-			for (int i = 0; i < ids.length; i++) {
-				ss = (SquareProperty)board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
-				if(ss.owner == player){
-					pr  += ss.buildingPrice;
+			if(level== 1 && this.house<4 && player.money> buildingPrice){ //if player has more than 2 properties of same color	
+				if(checkEvenly(player, board)){
+					result[0]="4";
+					result[1] = "Do you want to build house to "+this.name+" ?";
+				}else{
+					result[0]="1";
+					result[1] = "Building can be done evenly.";
 				}
-			}
+			}else if(level == 2){ 
+				if(checkEvenly(player, board)){
+					result[0]="4";
+					if(house<4 && player.money>buildingPrice){
+						result[1] = "Do you want to build house to "+this.name+" ?";
+					}else if(house==4 && player.money>buildingPrice){
+						result[1] = "Do you want to build hotel to "+this.name+" ?";
+					}else if(hotel==1 && player.money>buildingPrice){
+						result[1] = "Do you want to build skyscraper to "+this.name+" ?";
+					}
 
+				}else{
+					result[0]="1";
+					result[1] = "Building can be done evenly.";
+				}
 
-			if(level== 1 && this.house==1){ //if player has more than 2 properties of same color
-				result[0]="1";
-				result[1] = "Majority ownership, you must own missing property to build more.";					
-			}else if(level != 0 && player.money>=pr){ //if player has more than 2 properties of same color
-				result[0]="4";
-				result[1] = "Do you want to build "+keyword+" to "+this.name+" ?";
 			}else{ //no majority, no monopoly, can't build
 				result[0]="1";
 				result[1]="";
@@ -148,6 +153,18 @@ public class SquareProperty extends Square  {
 
 	}
 
+	public boolean checkEvenly(Player player, Board board){
+		SquareProperty ss = null;
+		int ids[] = board.getOtherProperties(this.color); 
+		for (int i = 0; i < ids.length; i++) {
+			ss = (SquareProperty)board.getSquareFromBoard(ids[i]);
+			if(ss.owner == player && ss.house>this.house){
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public String[] buyProperty(Player p){
 		String[] result = new String[14];
 		initializeResult(result);
@@ -164,55 +181,28 @@ public class SquareProperty extends Square  {
 	public String[] buildToProperty(Player p){
 		String[] result = new String[14];
 		initializeResult(result);
-		int pr = 0;
-		boolean flag = true;
-		SquareProperty ss = null;
 
-		if(level == 1){ //majority ownership, build only one house 
-			result[1]="'"+p.name+"' built house to ";
-			int ids[] = p.board.getOtherProperties(color); //get ids of properties of specific color
-			for (int i = 0; i < ids.length; i++) {
-				ss = (SquareProperty)p.board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
-				if(ss.owner == p){
-					ss.house = 1; //build house to all owned properties
-					pr = pr + ss.buildingPrice;
-					ss.rent = ss.originalRent * 5;
-					p.valueOfProperties+=ss.buildingPrice/2;
-					result[1] = result[1] + ss.name + ", ";
-				}
-			}
+		if(level == 1){
+			updateRentAccordingToHouse(this);
+			p.substract(buildingPrice);
+			p.valueOfProperties+=buildingPrice/2;
+
 			result[0]="1";
-			result[1] = result[1] + "and lost $" +pr;
-			result[p.id+2] = Integer.toString(pr);
+			result[1]= p.name+" built house to "+this.name+" and lost $"+buildingPrice;
+			result[p.id+2] = Integer.toString(-1*buildingPrice);
 
 		}else if (level == 2) {//monopoly
 
-			result[1]="'"+p.name+"' built house to ";
-			int ids[] = p.board.getOtherProperties(color); //get ids of properties of specific color
-			for (int i = 0; i < ids.length; i++) {
-				ss = (SquareProperty)p.board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
-				if(ss.house == 0){
-					ss.rent = ss.originalRent*5;
-					ss.house = 1; 
-					pr = ss.buildingPrice;
-					p.valueOfProperties+=ss.buildingPrice/2;
-					result[1] = result[1] + ss.name + " ";
-					flag = false;
-				}
-			}
+			updateRentAccordingToHouse(this);
+			p.substract(buildingPrice);
+			p.valueOfProperties+=buildingPrice/2;
 
-			if (flag){
-				for (int i = 0; i < ids.length; i++) {
-					ss = (SquareProperty)p.board.getSquareFromBoard(ids[i]); //get SquareProperty object by id
-					pr = pr + ss.buildingPrice;
-					updateRentAccordingToHouse(ss);
-					p.valueOfProperties+=ss.buildingPrice/2;
-					result[1] = result[1] + ss.name + ", ";
-				}
-			}
+			String keyword="house";
+			if(hotel==1) keyword="hotel";
+			if(skyscraper==1) keyword="skyscraper";
 			result[0]="1";
-			result[1] = result[1] + "and lost $" +pr;
-			result[p.id+2] = Integer.toString(pr);
+			result[1]= p.name+" built "+keyword+" to "+this.name+" and lost $"+buildingPrice;
+			result[p.id+2] = Integer.toString(-1*buildingPrice);
 
 		}
 

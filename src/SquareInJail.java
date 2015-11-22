@@ -1,4 +1,3 @@
-import com.sun.beans.editors.IntegerEditor;
 
 public class SquareInJail extends Square {
 
@@ -32,25 +31,26 @@ public class SquareInJail extends Square {
 		initializeResult(result);
 		result[0]="1";
 		result[1]="";
-		
+
 		if(choice == 1){
 			Dice dice = new Dice();
 			int die1 = dice.getFace();
 			int die2 = dice.getFace();
 			int total=die1+die2;
-			
+
 			if(die1==die2){
 				p.countJail=4;
 				result[0]="0";
-				result[1]=p.name+" throw double. Move according to dice.";
+				result[1]=p.name+" threw double. Move according to dice.";
 				result[2]=Integer.toString(total);
-				
+
 			}else{
 				p.countJail -=1;
+				if(p.countJail==0) p.countJail=4; 
 				result[0]="1";
 				result[1]=p.name+ " failed to throw double.";
 			}
-			
+
 		}else if(choice == 2){
 			p.substract(50);
 			p.countJail=4;
@@ -61,7 +61,7 @@ public class SquareInJail extends Square {
 			p.deleteCard(4);
 			p.countJail=4;
 		}
-		
+
 		return result;
 	}
 }

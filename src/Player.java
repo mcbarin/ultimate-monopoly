@@ -14,6 +14,7 @@ public class Player {
 	public Board board;
 	public ArrayList<SquareUtility> utilities = new ArrayList<SquareUtility>();
 	public int countJail=4; //not in jail
+	public boolean reverse = false;
 
 	public Player(String name,int money, int id, int row, int position,Board board) {
 		super();
@@ -147,7 +148,7 @@ public class Player {
 				houses = board.getOtherProperties(color);
 				for(int i=0;i<housesSameColor;i++){
 					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
-					if(sp.getOwner() != null && sp.getOwner().equals(this)){
+					if(sp.getOwner() != null && sp.getOwner().equals(this) && sp.house==0){
 						sp.TripleRent();
 						sp.level=2;
 					}
