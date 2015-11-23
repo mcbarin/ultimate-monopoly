@@ -59,7 +59,8 @@ public class GUIPanel extends JPanel {
 
 		g.drawImage(backGround, 0, 0, height, height, null);
 		for(int i=0;i<12;i++){
-			g.drawImage(playerIcons.get(i), GUIPositions[2][44][0], GUIPositions[2][44][1], 40, 40, null);}
+			g.drawImage(playerIcons.get(i), GUIPositions[0][0][0], GUIPositions[0][0][1], 40, 40, null);
+			}
 	}
 	
 	private void initSquarePositions(){
