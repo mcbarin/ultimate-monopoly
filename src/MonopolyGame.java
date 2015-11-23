@@ -5,8 +5,10 @@ import javax.swing.*;
 public class MonopolyGame {
 	
 	GUI gui;
+	Board board;
 	private JButton buttons[] = new JButton[26];
 	public JComboBox<String> cpProperties = new JComboBox<String>();
+	private int initialNumberofPlayers;
 	//buttons = rollDice,buy,buyChance,sell,no,rollOnce,pullChance,pullCommunity,mortgage,unMortgage,yes,start,load,save
 
 	public static void main(String[] args) throws Exception {
@@ -24,14 +26,54 @@ public class MonopolyGame {
 			buttons[i] = new JButton();}
 		
 		
-		gui = new GUI(new Board(0),buttons,cpProperties);
+		if(Board.gameStatus==-1){
+			JTextField nump = new JTextField();
+			gui = new GUI(buttons, nump); 
+			Board.gameStatus = 0;
+			}
+		else if(Board.gameStatus==0){
+			int numP;
+			
+			
+			
+		}
 		
+		
+
 		//RollDice
 		buttons[0].addActionListener(new ActionListener()
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  System.out.println(Integer.toString(cpProperties.getItemCount()));
+		      }
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//Start Game
+		buttons[11].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  initialNumberofPlayers = gui.getInitialNumberofPlayers();
+		    	  
+		    	  board = new Board(initialNumberofPlayers);
+		    	  try {
+		    		  gui = null;
+					gui = new GUI(board,buttons);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		    	  
+		    	  System.out.println("cont "+initialNumberofPlayers);
 		      }
 		});
 	

@@ -29,9 +29,10 @@ public class GUI {
 	private int dice[] = {dieOne, dieTwo, dieSpeed};
 	
 	
-	private JFrame mainFrame;
-	private GUIPanel panel;
-	
+	private JFrame mainFrame = new JFrame("BECB Monopoly");
+	private JPanel panel;
+
+	private JTextField initalNumberofPlayers;
 	private JTextArea movements,currentMessage;
 	private JLabel currentPlayer;
 	private JLabel piName,piProps,piMoney,  alfaName,alfaProps,alfaMoney, betaName,betaProps,betaMoney, gamaName,gamaProps,gamaMoney;
@@ -45,11 +46,47 @@ public class GUI {
 	private int propertiesHeight = -10;
 	
 	
+	
+	
 	Font font = new Font("Verdana", Font.PLAIN, 12);
 	
+	public GUI(JButton b[], JTextField nump) throws Exception{
+
+		initalNumberofPlayers = new JTextField();
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.DARK_GRAY);
+		
+		
+    	Container contentPane = mainFrame.getContentPane();
+		panel.setLayout(null);
+		contentPane.add(panel);
+		
+		initalNumberofPlayers.setSize(300, 40);
+		initalNumberofPlayers.setLocation(450, 60);
+		initalNumberofPlayers.setBackground(Color.GRAY);
+		initalNumberofPlayers.setHorizontalAlignment(JTextField.CENTER);
+		initalNumberofPlayers.setFont(new Font("Verdana", Font.BOLD, 18));
+		initalNumberofPlayers.setText("Enter number of Players...");
+		
+
+		
+		b[11].setText("Start Game");
+		b[11].setLocation(450, 120);
+		b[11].setSize(300, 40);
+		b[11].setVisible(true);
+		panel.add(b[11]);
+        panel.add(initalNumberofPlayers);
+        
+
+        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setVisible(true);  
+	}
 	
-	public GUI(Board board,JButton b[], JComboBox<String> cpP) throws Exception{
-		cpProperties = cpP;
+	
+	public GUI(Board board,JButton b[]) throws Exception{
+		
 	
 		
 		panel = new GUIPanel(board,dice);
@@ -207,6 +244,20 @@ public class GUI {
 		button.setSize(width, height);
 		button.setVisible(visibility);
 		panel.add(button);
+	}
+	
+	
+	public int getInitialNumberofPlayers(){
+		int a = 2;
+		if (initalNumberofPlayers.getText().contains("[a-zA-Z]+") == false && initalNumberofPlayers.getText().length() > 2) {
+		    a = 2; 
+		}else{
+			a = Integer.parseInt(initalNumberofPlayers.getText()); 
+		
+			if(a<2){a=2;}else if(a>12){a = 12;}
+		}
+		return a;
+		
 	}
 	
 	public void setGUI(Player cp, String cm, String bs){
