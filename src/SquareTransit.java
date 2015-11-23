@@ -60,9 +60,9 @@ public class SquareTransit extends Square {
 				if(player.money>rent/2){
 					player.substract(rent/2);
 					player.deleteCard(34);
-					result[0]="1";
 					result[1] = "You have '"+board.cardDescriptions[34][0]+"' card and you are using half rent.";
 					result[player.id+2]="-"+""+(rent/2);
+					result[0]=checkEven(player, total);
 					return result;
 				}else if(player.money+player.valueOfProperties>rent/2){
 					result[0]="2";

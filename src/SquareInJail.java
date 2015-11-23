@@ -40,7 +40,7 @@ public class SquareInJail extends Square {
 
 			if(die1==die2){
 				p.countJail=4;
-				result[0]="0";
+				result[0]="23";
 				result[1]=p.name+" threw double. Move according to dice.";
 				result[2]=Integer.toString(total);
 
