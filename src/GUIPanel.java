@@ -21,22 +21,27 @@ public class GUIPanel extends JPanel {
 	private BufferedImage backGround;
 	private BufferedImage p;
 	
-	private BufferedImage diceOneImg;
+	
+	private int dieOne, dieTwo, dieSpeed;
+	private BufferedImage dieOneImg;
 	private BufferedImage dieTwoImg;
 	private BufferedImage dieSpeedImg;
+	
+	private ArrayList<Player> players;
+	private Board board;
 	
 	private ArrayList<BufferedImage> playerIcons = new ArrayList();
 	
 	private int GUIPositions[][][]=new int[3][56][2];
 	
 	
-	public GUIPanel(Board board, int dice[]) throws Exception{
+	public GUIPanel(Board b, int dice[]) throws Exception{
 		
 		//Position 
 		initSquarePositions();
-		
-		
-		
+
+		board = b;
+		players = board.getPlayers();
 		
 		try {
 			this.backGround = ImageIO.read(new File("img/board.png"));
@@ -45,6 +50,10 @@ public class GUIPanel extends JPanel {
 				this.p = ImageIO.read(new File("img/p"+Integer.toString(i+1)+".png"));
 				playerIcons.add(this.p);
 			}
+
+			this.dieOneImg = ImageIO.read(new File("img/"+dieOne+".png"));
+			this.dieTwoImg = ImageIO.read(new File("img/"+dieTwo+".png"));
+			this.dieSpeedImg = ImageIO.read(new File("img/"+dieSpeed+".png"));
 		
 		} catch (IOException ex) {}
 	}
@@ -58,9 +67,11 @@ public class GUIPanel extends JPanel {
 	
 
 		g.drawImage(backGround, 0, 0, height, height, null);
-		for(int i=0;i<12;i++){
-			g.drawImage(playerIcons.get(i), GUIPositions[0][0][0], GUIPositions[0][0][1], 40, 40, null);
+		for(int i=0;i<board.getNumberOfPlayers();i++){
+			g.drawImage(playerIcons.get(i), GUIPositions[players.get(i).row][players.get(i).position][0], GUIPositions[players.get(i).row][players.get(i).position][1], 40, 40, null);
 			}
+		
+		
 	}
 	
 	private void initSquarePositions(){

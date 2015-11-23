@@ -1,11 +1,13 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 public class MonopolyGame {
 	
 	GUI gui;
 	Board board;
+	ArrayList<Player> players;
 	private JButton buttons[] = new JButton[26];
 	public JComboBox<String> cpProperties = new JComboBox<String>();
 	private int initialNumberofPlayers;
@@ -31,12 +33,7 @@ public class MonopolyGame {
 			gui = new GUI(buttons, nump); 
 			Board.gameStatus = 0;
 			}
-		else if(Board.gameStatus==0){
-			int numP;
-			
-			
-			
-		}
+		
 		
 		
 
@@ -45,6 +42,8 @@ public class MonopolyGame {
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
+		    	  players.get(0).row = 2;
+		    	  
 		    	  System.out.println(Integer.toString(cpProperties.getItemCount()));
 		      }
 		});
@@ -65,9 +64,11 @@ public class MonopolyGame {
 		    	  initialNumberofPlayers = gui.getInitialNumberofPlayers();
 		    	  
 		    	  board = new Board(initialNumberofPlayers);
+		    	  players = board.getPlayers();
 		    	  try {
-		    		  gui = null;
+		    		gui = null;
 					gui = new GUI(board,buttons);
+					gui.setPlayers(board.getPlayers());
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

@@ -115,10 +115,6 @@ public class GUI {
         panel.add(currentMessage);
         
 		
-        
-        
-		
-	  if(start){
 
 		placeButton(b[0],"Roll Dice!",735, 160, 270, 40,true);
 		placeButton(b[5],MonopolyGame.rollOnceListener,"Roll Once",735, 120, 270, 40,true);
@@ -198,13 +194,7 @@ public class GUI {
 		
 		placeButton(b[9],MonopolyGame.unMortgageListener,"UnMortgage",1025, propertiesHeight, 240, 25,true);
 		
-	}else{
-		placeButton(b[11],MonopolyGame.startListener,"Start",875, 200, 130, 25,true);
-		placeButton(b[12],MonopolyGame.loadListener,"Load",795, 200, 130, 25,true);
-		placeButton(b[13],MonopolyGame.saveListener,"Save",795, 260, 130, 25,true);
-		
-	}
-	       
+	
         //mainFrame.setResizable(false);
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -219,7 +209,7 @@ public class GUI {
 				panel.repaint();
             }
         };
-        Timer timer = new Timer(500 ,taskPerformer);
+        Timer timer = new Timer(100 ,taskPerformer);
         timer.setRepeats(true);
         timer.start();
 
@@ -266,6 +256,10 @@ public class GUI {
 		
 	}
 	
+	
+	public void setPlayers(ArrayList<Player> p){
+		this.players = p;
+	}
 	
 	
 
