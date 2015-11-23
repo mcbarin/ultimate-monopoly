@@ -25,6 +25,7 @@ public class GUI {
 	
 	//Players
 	private ArrayList<Player> players;
+	private Board board;
 	
 	private int dice[] = {dieOne, dieTwo, dieSpeed};
 	
@@ -86,8 +87,8 @@ public class GUI {
 	
 	
 	public GUI(Board board,JButton b[]) throws Exception{
-		
-	
+		this.board = board;
+		players = board.getPlayers();
 		
 		panel = new GUIPanel(board,dice);
 		panel.setBackground(Color.DARK_GRAY);

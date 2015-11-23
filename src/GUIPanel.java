@@ -22,7 +22,7 @@ public class GUIPanel extends JPanel {
 	private BufferedImage p;
 	
 	
-	private int dieOne, dieTwo, dieSpeed;
+	private int dieOne=1, dieTwo=1, dieSpeed=1;
 	private BufferedImage dieOneImg;
 	private BufferedImage dieTwoImg;
 	private BufferedImage dieSpeedImg;
@@ -51,9 +51,9 @@ public class GUIPanel extends JPanel {
 				playerIcons.add(this.p);
 			}
 
-			this.dieOneImg = ImageIO.read(new File("img/"+dieOne+".png"));
-			this.dieTwoImg = ImageIO.read(new File("img/"+dieTwo+".png"));
-			this.dieSpeedImg = ImageIO.read(new File("img/"+dieSpeed+".png"));
+			this.dieOneImg = ImageIO.read(new File("img/die"+dieOne+".png"));
+			this.dieTwoImg = ImageIO.read(new File("img/die"+dieTwo+".png"));
+			this.dieSpeedImg = ImageIO.read(new File("img/die"+dieSpeed+".png"));
 		
 		} catch (IOException ex) {}
 	}
@@ -70,6 +70,11 @@ public class GUIPanel extends JPanel {
 		for(int i=0;i<board.getNumberOfPlayers();i++){
 			g.drawImage(playerIcons.get(i), GUIPositions[players.get(i).row][players.get(i).position][0], GUIPositions[players.get(i).row][players.get(i).position][1], 40, 40, null);
 			}
+		
+
+		g.drawImage(dieOneImg, 269, 269, 50, 50, null);
+		g.drawImage(dieTwoImg, 332, 332, 50, 50, null);
+		g.drawImage(dieSpeedImg, 395, 395, 50, 50, null);
 		
 		
 	}
