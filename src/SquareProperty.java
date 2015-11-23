@@ -81,8 +81,12 @@ public class SquareProperty extends Square  {
 
 			if(level== 1 && this.house<4 && player.money> buildingPrice){ //if player has more than 2 properties of same color	
 				if(checkEvenly(player, board)){
+					if(house<4 && player.money>buildingPrice){
+						result[1] = "Do you want to build house to "+this.name+" ?";
+					}else if(house==4 && player.money>buildingPrice){
+						result[1] = "Do you want to build hotel to "+this.name+" ?";
+					}
 					result[0]="4";
-					result[1] = "Do you want to build house to "+this.name+" ?";
 				}else{
 					result[0]="1";
 					result[1] = "Building can be done evenly.";
@@ -183,16 +187,26 @@ public class SquareProperty extends Square  {
 		initializeResult(result);
 
 		if(level == 1){
+
+			if(house==4){ house=0; hotel=1;}
+			else if(house<4){house+=1;}
 			updateRentAccordingToHouse(this);
 			p.substract(buildingPrice);
 			p.valueOfProperties+=buildingPrice/2;
 
+			String keyword="house";
+			if(hotel==1) keyword="hotel";
+
 			result[0]="1";
-			result[1]= p.name+" built house to "+this.name+" and lost $"+buildingPrice;
+			result[1]= p.name+" built "+keyword+" to "+this.name+" and lost $"+buildingPrice;
 			result[p.id+2] = Integer.toString(-1*buildingPrice);
 
 		}else if (level == 2) {//monopoly
 
+
+			if(hotel==1){hotel=0; skyscraper=1;}
+			else if(house==4){ house=0; hotel=1;}
+			else if(house<4){house+=1;}
 			updateRentAccordingToHouse(this);
 			p.substract(buildingPrice);
 			p.valueOfProperties+=buildingPrice/2;
@@ -217,26 +231,19 @@ public class SquareProperty extends Square  {
 		//						hotel x50
 		//						sky x85
 
-		if(ss.hotel==1){
+		if(ss.skyscraper==1){
 			ss.rent = ss.originalRent*85;
-			ss.hotel=0;
-			ss.skyscraper = 1;
-		}else if(ss.house == 0){
-			ss.rent = ss.originalRent*5;
-			ss.house = ss.house + 1; //build house to all owned properties
-		}else if(ss.house == 1){
-			ss.rent = ss.originalRent*15;
-			ss.house = ss.house + 1; //build house to all owned properties
-		}else if(ss.house == 2){
-			ss.rent = ss.originalRent*30;
-			ss.house = ss.house + 1;
-		}else if(ss.house == 3){
-			ss.rent = ss.originalRent*40;
-			ss.house = ss.house + 1;
-		}else if(ss.house == 4){
+		}else if(ss.hotel == 1){
 			ss.rent = ss.originalRent*50;
-			ss.house=0;
-			ss.hotel = 1;
+		}else if(ss.house == 1){
+			ss.rent = ss.originalRent*5;
+		}else if(ss.house == 2){
+			ss.rent = ss.originalRent*15;
+		}else if(ss.house == 3){
+			ss.rent = ss.originalRent*30;
+		}else if(ss.house == 4){
+			ss.rent = ss.originalRent*40;
+
 		}
 	}
 
@@ -272,9 +279,60 @@ public class SquareProperty extends Square  {
 	}
 
 
+	public String[] sellBuilding(Player p){
+		String[] result = new String[14];
+		initializeResult(result);
+		result[0]="0";
 
+		if(owner != p){
+			result[1]="This property doesn't belong to you!";
+			return result;
+		}else if (isMortgaged){
+			result[1]="This property is mortgaged already";
+			return result;
+		}else if(skyscraper==1){
+			skyscraper=0;
+			hotel=1;
+			result[1]=p.name+" sold skyscraper for $"+buildingPrice/2;
+		}else if(hotel==1){
+			hotel=0;
+			house=4;
+			result[1]=p.name+" sold hotel for $"+buildingPrice/2;
+		}else if(house==0){
+			result[1]="You don't have any building here.";
+			return result;
+		}else if (house<4){
+			house-=1;
+			result[1]=p.name+" sold house for $"+buildingPrice/2;
+		}
 
+		p.addMoney(buildingPrice/2);
+		updateRentAccordingToHouse(this);
+		result[p.id+2]=Integer.toString(buildingPrice/2);
 
+		return result;
+	}
+
+	public String[] sellProperty(Player p){
+		String[] result = new String[14];
+		initializeResult(result);
+		result[0]="0";
+		if(owner != p){
+			result[1]="This property doesn't belong to you!";
+			return result;
+		}else if (isMortgaged){
+			result[1]="This property is mortgaged already";
+			return result;
+		}else if(house==0 && hotel==0 && skyscraper==0){
+			initializeAll();
+			p.addMoney(price/2);
+			result[1]=p.name+" sold "+ this.name+" for $"+price/2;
+			result[p.id+2]=Integer.toString(buildingPrice/2);
+			p.properties.remove(this);
+		}
+
+		return result;
+	}
 	public void initializeAll(){
 		this.isMortgaged = false;
 		this.setOwner(null);
@@ -285,6 +343,21 @@ public class SquareProperty extends Square  {
 		this.level=0;
 	}
 
+	public void hurricane(){
+		if(skyscraper==1){
+			skyscraper=0;
+			hotel=1;
+		}else if(hotel==1){
+			hotel=0;
+			house=4;
+		}else if(house==0){
+			return;
+		}else if (house<4){
+			house-=1;
+		}
+		updateRentAccordingToHouse(this);
+	}
+	
 	public void doubleRent(){
 		rent = originalRent*2;
 	}
@@ -306,5 +379,7 @@ public class SquareProperty extends Square  {
 	public int getPrice(Square s){
 		return this.price;
 	}
+
+
 }
 
