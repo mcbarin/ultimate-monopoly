@@ -7,6 +7,7 @@ import java.util.Queue;
 public class Board {
 
 	public int pool = 0;
+	public int totalPlayer;
 	public static int gameStatus = -1;
 	public ArrayList<Player> players = new ArrayList<Player>();
 	public Player currentPlayer;
@@ -164,6 +165,8 @@ public class Board {
 
 		// Initialization Processes
 		initializePlayers(totalPlayer);
+		this.totalPlayer = totalPlayer;
+		currentPlayer = players.get(0);
 		initializeCards(); // Chance and Community Chest cards are initialized.
 
 		for (int i = 0; i < 3; i++) {
@@ -261,6 +264,25 @@ public class Board {
 
 		((SquareTransit) squares[1][5]).SquareTransitTwin(29,this);
 		((SquareTransit) squares[1][25]).SquareTransitTwin(49,this);
+	}
+	
+	public void setCurrentPlayer(Player p){
+		this.currentPlayer = p;
+	}
+	
+	public Player getCurrentPlayer(){
+		return this.currentPlayer;
+	}
+	
+	public Player nextPlayer(){
+		int npID = (this.currentPlayer.id+1)%totalPlayer;
+		Player np = players.get(npID);
+		while(np.isPlaying==false){
+			npID = (npID+1)%totalPlayer;
+			np = players.get(npID);
+		}
+		
+		return np;
 	}
 
 }
