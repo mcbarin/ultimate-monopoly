@@ -62,6 +62,16 @@ public class SquareCabCompany extends Square {
 		return result;
 	}
 
+	public void initializeAll(){
+		this.owner = null;
+		this.price=300;
+		this.rent=30;
+		this.originalRent=15;
+		this.cabStand = 0;
+		this.cabStandPrice =150;
+	}
+
+	
 	public String[] buyCabCompany(Player p){
 		String[] result = new String[14];
 		initializeResult(result);

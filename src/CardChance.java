@@ -63,6 +63,7 @@ public class CardChance extends Card {
 		} else if(number == 1){
 			p.row = 1;
 			p.position = 10;
+			p.countJail = 3;
 			result[0]="5";
 			result[1]="Player went directly to jail.";
 			
@@ -189,7 +190,7 @@ public class CardChance extends Card {
 				
 			}
 			
-		}  else if(number == 10){
+		}  else if(number == 24){
 			int posId = p.position;
 			int border = 24;
 			if(p.row==1){
@@ -259,7 +260,8 @@ public class CardChance extends Card {
 			result[1]="Player advanced to Roll One.";
 			
 		}  else if(number == 14){
-			
+			result[0]="8"; // For asking player id and color group.
+			result[1]="Player should choose a player and color group to make a hurricane.";
 			
 		}  else if(number == 15){
 			int amount = 0;
@@ -292,7 +294,7 @@ public class CardChance extends Card {
 			p.position=22;
 			
 		}  else if(number == 17){
-int amount = (board.getNumberOfPlayers()-1)*50;
+			int amount = (board.getNumberOfPlayers()-1)*50;
 			
 			if(p.money > amount){
 				for(int i=0;i<board.getNumberOfPlayers();i++){
@@ -409,6 +411,33 @@ int amount = (board.getNumberOfPlayers()-1)*50;
 			}
 			
 		} 
+		
+		return result;
+	}
+	
+	public String[] applyCard14(int id,int color){
+		String[] result= getResultArray();
+		
+		int length = board.getNumberOfSameColor(color);
+		int[] otherHouses = new int[length];
+		otherHouses = board.getOtherProperties(color);
+		
+		Player p;
+		for(int i=0;i<board.getPlayers().size();i++){
+			if(board.getPlayers().get(i).id == id){
+				p = board.getPlayers().get(i);
+				break;
+			}
+		}
+		
+		for(int i=0;i<length;i++){
+			if(((SquareProperty)board.getSquareFromBoard(otherHouses[i])).getOwner() != null &&((SquareProperty)board.getSquareFromBoard(otherHouses[i])).getOwner().id == p.id){
+				((SquareProperty)board.getSquareFromBoard(otherHouses[i])).hurricane();
+			}
+		}
+		
+		result[0]="1";
+		result[1]="Hurricane makes a landfall!!";
 		
 		return result;
 	}

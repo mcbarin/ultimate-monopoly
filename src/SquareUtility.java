@@ -82,6 +82,12 @@ public class SquareUtility extends Square {
 		result[p.id+2] = "-"+ ""+this.price;
 		return result;
 	}
+	
+
+	public void initializeAll(){
+		this.price=150;
+		this.rent = 0;
+	}
 
 
 }

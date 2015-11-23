@@ -78,6 +78,18 @@ public class Player {
 		for(int i=0;i<properties.size();i++){
 			properties.get(i).initializeAll();
 		}
+		
+		for(int i=0;i<utilities.size();i++){
+			utilities.get(i).initializeAll();
+		}
+		
+		for(int i=0;i<cabs.size();i++){
+			cabs.get(i).initializeAll();
+		}
+		for(int i=0;i<trains.size();i++){
+			trains.get(i).initializeAll();
+		}
+		
 	}
 	
 	public void addProperty(SquareProperty sp){
