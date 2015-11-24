@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 
 public class CardChance extends Card {
 	int number;
@@ -190,7 +190,7 @@ public class CardChance extends Card {
 				
 			}
 			
-		}  else if(number == 24){
+		}  else if(number == 10){
 			int posId = p.position;
 			int border = 24;
 			if(p.row==1){
@@ -316,6 +316,37 @@ public class CardChance extends Card {
 				
 			}
 		}  else if(number == 18){
+			if(p.numberOfProperties==0){
+				p.row = 1;
+				p.position = 10;
+				p.countJail = 3;
+				result[0]="5";
+				result[1]="Player went directly to jail.";
+			}else{
+				ArrayList<SquareProperty> pr = p.properties;
+				
+				for(int i=0;i<pr.size();i++){
+					if(pr.get(i).isMortgaged){
+						pr.remove(i);
+					}
+				}
+				
+				if(pr.size()==0){
+					p.row = 1;
+					p.position = 10;
+					p.countJail = 3;
+					result[0]="5";
+					result[1]="All of player's properties are mortgaged. Player directly went to the jail.";
+				}
+				else{
+					result[0]="24"; // Player should choose from its unmortgaged properties. Than in controller class,
+					result[1]="Player should choose from its unmortgaged properties to surrender to the bank.";				
+					// applyCard18 should be called.
+				}
+				
+				
+			}
+			
 			
 		}  else if(number == 19){
 			result[0]="1";
@@ -343,7 +374,9 @@ public class CardChance extends Card {
 			result[1]="All players moved to Canal Street.";
 			
 		}  else if(number == 21){
-			
+			result[0]="25"; // Player should choose a cab company.
+			result[1]="Player should choose a Cab Company. If it has an owner,player takes it. IF it is not owned,player will buy it.";
+			// applyCard21 should be called in controller class.
 			
 		}  else if(number == 22){
 			p.addCard(this);
@@ -431,14 +464,66 @@ public class CardChance extends Card {
 			}
 		}
 		
+		Player in = board.getCurrentPlayer();
+		for(int i=0;i<board.players.size();i++){
+			if(id == board.players.get(i).id){
+				in = board.players.get(i);
+			}
+		}
+		
 		for(int i=0;i<length;i++){
 			if(((SquareProperty)board.getSquareFromBoard(otherHouses[i])).getOwner() != null && p!=null &&((SquareProperty)board.getSquareFromBoard(otherHouses[i])).getOwner().id == p.id){
-				((SquareProperty)board.getSquareFromBoard(otherHouses[i])).hurricane();
+				((SquareProperty)board.getSquareFromBoard(otherHouses[i])).hurricane(in);
 			}
 		}
 		
 		result[0]="1";
 		result[1]="Hurricane makes a landfall!!";
+		
+		return result;
+	}
+	
+	public String[] applyCard18(SquareProperty p){
+		String[] result= getResultArray();
+		
+		if(p.house==0 && p.hotel==0 && p.skyscraper==0){
+			p.owner.deleteProperty(p);
+			result[0]="1";
+			result[1]="Player surrendered one of the property to the bank.";
+		}else {
+			p.hurricane();
+			result[0]="1";
+			result[1]="Player's one of the property is downgraded.";
+		}
+		
+		return result;
+	}
+	
+	public String[] applyCard21(SquareCabCompany sc,Player p){
+		String[] result= getResultArray();
+		
+		if(sc.owner == null){
+			p.row = sc.row;
+			p.position = sc.position;
+			result = sc.buyCabCompany(p);
+			result[0] = "5";
+		}else {
+			p.row = sc.row;
+			p.position = sc.position;
+			if(sc.cabStand!=0){
+				sc.owner.numberOfCabStand -= sc.cabStand;
+				for(int i=0;i<sc.owner.cabs.size();i++){
+					if(sc.owner.cabs.get(i).id == sc.id){
+						sc.owner.cabs.remove(i);
+						p.cabs.add(sc);
+					}
+				}
+			sc.owner = p;
+			p.numberOfCabStand+=sc.cabStand;
+			}
+			result[0]="5";
+			result[1]="Player took the Cab Company from its owner.";
+		}
 		
 		return result;
 	}

@@ -32,14 +32,31 @@ public class CardCommunity extends Card {
 	public String[] doAction(Player p){
 		String[] result= getResultArray();
 		
-if(number == 26){
+		if(number == 26){
 			
-	p.addMoney(100);
-	result[0]= "1";
-	result[1] = "Player inherit $100. Player collected $100 from the bank.";
-	result[p.id+2] = "100";
+			p.addMoney(100);
+			result[0]= "1";
+			result[1] = "Player inherit $100. Player collected $100 from the bank.";
+			result[p.id+2] = "100";
 	
-		} else if(number == 27){
+		} 
+		else if(number == 27){
+			for(int i=0;i<board.players.size();i++){
+				if(p.id != board.players.get(i).id){
+					p.addMoney(10);
+					board.players.get(i).substract(10);
+					result[board.players.get(i).id+2]="-10";
+				}
+			}
+			int amount = board.players.size()-1;
+			amount*=10;
+			result[p.id+2]=""+amount;
+			p.row=2;
+			p.position=51;
+			result[0]="5";
+			result[1]="Player collected 10$ from each player and moved to the birthdat gift space.";
+			
+			
 			
 		}  else if(number == 28){
 			
@@ -59,8 +76,13 @@ if(number == 26){
 			}
 			
 		}  else if(number == 29){
+			result[0]="26"; // Player should choose that 1. player goes to the income tax or player goes to jail.
+							// only two options. than applyCard29 should be called.
+							// argument boolean, if true income tax, if false jail.
+			result[1]="Player should move to income tax or jail.";
 			
 		}  else if(number == 30){
+			
 			
 		}  else if(number == 31){
 			//Move directly to the space that 1 track below this one. If row==2 do nothing
@@ -119,6 +141,22 @@ if(number == 26){
 	
 		}  else if(number == 33){
 			
+			if(p.numberOfHouses == 0){
+				result[0]="1";
+				result[1]="Player has no house.";
+			}else {
+				for(int i=0;i<p.properties.size();i++){
+					if(p.properties.get(i).house != 0){
+						p.properties.get(i).sellBuilding(p);
+						p.properties.get(i).updateRentAccordingToHouse(p.properties.get(i));
+						break;
+					}
+				}
+				result[0]="1";
+				result[1]="City condemned one house of the player.";
+			}
+			
+			
 		}  else if(number == 34){
 			p.addCard(this);
 			result[0]="1";
@@ -169,6 +207,25 @@ if(number == 26){
 			result[0]="1";
 			result[1]=title+" "+description;
 		} 
+		return result;
+	}
+	
+	public String[] applyCard29(boolean choice,Player p){
+		String[] result= getResultArray();
+		
+		if(choice){
+			p.row = 1;
+			p.position = 4;
+			result[0]="5";
+			result[1]="PLayer went to the income tax.";
+		}else{
+			p.row = 1;
+			p.position = 10;
+			p.countJail = 3;
+			result[0]="5";
+			result[1]="Player went directly to jail.";
+		}
+		
 		return result;
 	}
 	
