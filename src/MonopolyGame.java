@@ -5,12 +5,20 @@ import java.util.ArrayList;
 import javax.swing.*;
 public class MonopolyGame {
 	
-	GUI gui;
-	Board board;
-	ArrayList<Player> players;
+	private GUI gui;
+	private Board board;
+	
+	private int dieOne, dieTwo, dieSpeed;
+	
+	private ArrayList<Player> players;
+	private Player cP;
+	
 	private JButton buttons[] = new JButton[26];
 	public JComboBox<String> cpProperties = new JComboBox<String>();
 	private int initialNumberofPlayers;
+	
+	private Dice die = new Dice();
+	
 	//buttons = rollDice,buy,buyChance,sell,no,rollOnce,pullChance,pullCommunity,mortgage,unMortgage,yes,start,load,save
 
 	public static void main(String[] args) throws Exception {
@@ -42,9 +50,14 @@ public class MonopolyGame {
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
-		    	  players.get(0).row = 2;
+		    	  dieOne = die.getFace();
+		    	  dieTwo = die.getFace();
+		    	  dieSpeed = die.getFace();
+		    	  gui.setDice(dieOne, dieTwo, dieSpeed);
 		    	  
-		    	  System.out.println(Integer.toString(cpProperties.getItemCount()));
+		    	  
+		    	  board.nextPlayer();
+		    	  
 		      }
 		});
 		
@@ -74,6 +87,7 @@ public class MonopolyGame {
 						e1.printStackTrace();
 					}
 		    	  
+		    	  gui.setGUI("Buğra", "10010",buttons);
 		    	  System.out.println("cont "+initialNumberofPlayers);
 		      }
 		});

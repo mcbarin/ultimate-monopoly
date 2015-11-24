@@ -282,6 +282,8 @@ public class Board {
 			np = players.get(npID);
 		}
 		
+		this.currentPlayer = np;
+		
 		return np;
 	}
 

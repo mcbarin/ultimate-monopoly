@@ -22,10 +22,15 @@ public class GUIPanel extends JPanel {
 	private BufferedImage p;
 	
 	
-	private int dieOne=1, dieTwo=1, dieSpeed=1;
+	public int dieOne=1, dieTwo=1, dieSpeed=1;
 	private BufferedImage dieOneImg;
 	private BufferedImage dieTwoImg;
 	private BufferedImage dieSpeedImg;
+	
+
+	private BufferedImage cardImg;
+	public int cardType=0;
+	
 	
 	private ArrayList<Player> players;
 	private Board board;
@@ -51,9 +56,7 @@ public class GUIPanel extends JPanel {
 				playerIcons.add(this.p);
 			}
 
-			this.dieOneImg = ImageIO.read(new File("img/die"+dieOne+".png"));
-			this.dieTwoImg = ImageIO.read(new File("img/die"+dieTwo+".png"));
-			this.dieSpeedImg = ImageIO.read(new File("img/die"+dieSpeed+".png"));
+
 		
 		} catch (IOException ex) {}
 	}
@@ -71,10 +74,32 @@ public class GUIPanel extends JPanel {
 			g.drawImage(playerIcons.get(i), GUIPositions[players.get(i).row][players.get(i).position][0], GUIPositions[players.get(i).row][players.get(i).position][1], 40, 40, null);
 			}
 		
-
+		try {
+			
+			if(cardType==0){
+				this.cardImg = ImageIO.read(new File("img/cards.png"));
+			}else if (cardType==1){
+				this.cardImg = ImageIO.read(new File("img/chancecard.png"));
+			}else if (cardType==2){
+				this.cardImg = ImageIO.read(new File("img/comminitychest.png"));
+				}
+			
+			this.dieOneImg = ImageIO.read(new File("img/die"+dieOne+".png"));
+			this.dieTwoImg = ImageIO.read(new File("img/die"+dieTwo+".png"));
+			this.dieSpeedImg = ImageIO.read(new File("img/die"+dieSpeed+".png"));
+			if(dieSpeed==4){this.dieSpeedImg = ImageIO.read(new File("img/bus.png"));}else if(dieSpeed>4){
+				this.dieSpeedImg = ImageIO.read(new File("img/monopoly.png"));
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		g.drawImage(dieOneImg, 269, 269, 50, 50, null);
 		g.drawImage(dieTwoImg, 332, 332, 50, 50, null);
 		g.drawImage(dieSpeedImg, 395, 395, 50, 50, null);
+		g.drawImage(cardImg, 725, 230, 290, 160, null);
 		
 		
 	}
@@ -214,6 +239,12 @@ public void movePlayerTimer() throws Exception{
 
         Thread.sleep(500);
     }
+
+public void setDice(int i, int j, int k){
+	dieOne = i;
+	dieTwo = j;
+	dieSpeed = k;
+}
 
 
 }

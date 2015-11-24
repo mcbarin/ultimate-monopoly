@@ -25,34 +25,41 @@ public class GUI {
 	
 	//Players
 	private ArrayList<Player> players;
+	private Player cP;
 	private Board board;
 	
 	private int dice[] = {dieOne, dieTwo, dieSpeed};
 	
 	
 	private JFrame mainFrame = new JFrame("BECB Monopoly");
-	private JPanel panel;
+	private GUIPanel panel;
 
 	private JTextField initalNumberofPlayers;
-	private JTextArea movements,currentMessage;
+	private JTextArea currentMessage;
 	private JLabel currentPlayer;
-	private JLabel piName,piProps,piMoney,  alfaName,alfaProps,alfaMoney, betaName,betaProps,betaMoney, gamaName,gamaProps,gamaMoney;
-	public JComboBox<String> cpProperties;
+	
+	private JComboBox<String> cpPropertiesNames = new JComboBox<String>();
+
+
+	public JComboBox<String> cpMortgagedPropertiesNames = new JComboBox<String>();
+	public ArrayList<Square> cpFreeProperties = new ArrayList<Square>();
+	public ArrayList<Square> cpMortgagedProperties = new ArrayList<Square>();
+	public int cPSelectedPI=0;
+	public Square cpSelectedProperty;
+	public Square cpSelectedMortgagedProperty;
 	
 	private final static int MAX_PROPERTIES = 13;
-	private JRadioButton[] userProperties = new JRadioButton[MAX_PROPERTIES];
-	private JRadioButton[] userMortgages = new JRadioButton[MAX_PROPERTIES];
-	private ButtonGroup propertiesButtonGroup;
-	private ButtonGroup mortgagesButtonGroup;
+
 	private int propertiesHeight = -10;
 	
+	private JButton buttons[] = new JButton[26];
 	
 	
 	
 	Font font = new Font("Verdana", Font.PLAIN, 12);
 	
 	public GUI(JButton b[], JTextField nump) throws Exception{
-
+		buttons = b;
 		initalNumberofPlayers = new JTextField();
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.DARK_GRAY);
@@ -89,8 +96,9 @@ public class GUI {
 	public GUI(Board board,JButton b[]) throws Exception{
 		this.board = board;
 		players = board.getPlayers();
+		cP = board.getCurrentPlayer();
 		
-		panel = new GUIPanel(board,dice);
+		 panel = new GUIPanel(board,dice);
 		panel.setBackground(Color.DARK_GRAY);
 		
 		mainFrame = new JFrame("BECB Monopoly");
@@ -98,8 +106,7 @@ public class GUI {
 		panel.setLayout(null);
 		contentPane.add(panel);
 		
-		
-		
+
 		currentMessage = new JTextArea();
 	    currentMessage.setLineWrap( true );
 	    currentMessage.setWrapStyleWord( true );
@@ -110,91 +117,74 @@ public class GUI {
         currentMessage.setFont(new Font("Verdana", Font.PLAIN, 16));
         currentMessage.setSize(290, 160);
         currentMessage.setLocation(725, 10);
-        
-        currentMessage.setText("Still, you don't have enough money to pay rent. You have to sell one more of your properties.");
-
+        currentMessage.setText(cP.name);
         panel.add(currentMessage);
         
+        
+
+        
+
+        currentPlayer = new JLabel("");
+        currentPlayer.setFont(new Font("Verdana", Font.BOLD, 25));
+        currentPlayer.setSize(240, 40);
+        currentPlayer.setLocation(1025, 10);
+        currentPlayer.setForeground(new Color(255,155,155));
+        panel.add(currentPlayer);
 		
 
-		placeButton(b[0],"Roll Dice!",735, 160, 270, 40,true);
-		placeButton(b[5],MonopolyGame.rollOnceListener,"Roll Once",735, 120, 270, 40,true);
-		placeButton(b[1],MonopolyGame.buyListener,"Buy",735, 200, 130, 25,true);
-		placeButton(b[10],MonopolyGame.yesListener,"Yes",735, 200, 130, 25,true);
-		placeButton(b[4],MonopolyGame.noListener,"No",875, 200, 130, 25,true);
-		placeButton(b[2],MonopolyGame.buyChanceListener,"Buy with Cance Card",735, 20, 270, 25,true);
+		placeButton(b[0],"Roll Dice!",735, 180, 270, 40,false);
+		placeButton(b[5],"Roll Once",735, 180, 270, 40,false);
+		placeButton(b[1],"Buy",735, 188, 130, 25,false);
+		placeButton(b[10],"Yes",735, 188, 130, 25,false);
+		placeButton(b[4],"No",875, 188, 130, 25,false);
+		placeButton(b[2],"Buy with Cance Card",735, 188, 270, 25,false);
 		
 
-		placeButton(b[6],MonopolyGame.pullChanceListener,"Pull Chance Card",735,520, 270, 40,true);
-		placeButton(b[7],MonopolyGame.pullCommunityListener,"Pull Community Chest Card",735,480, 270, 40,true);
+		placeButton(b[6],"Pull Chance Card",735, 180, 270, 40,false);
+		b[6].setBackground(new Color(208,200,0));
+		placeButton(b[7],"Pull Community Chest Card",735, 180, 270, 40,false);
+		b[7].setBackground(new Color(208,200,0));
 		
 
-		JComboBox<String> cpProperties = new JComboBox<String>();
 		
+		if(cpFreeProperties.size()>0){
+			cpPropertiesNames.addItem("Select a property to sell or mortgage.");
+		    cpPropertiesNames.setEditable(true);
+		    cpPropertiesNames.setSelectedIndex(0);
+		    cpPropertiesNames.setSize(240, 30);
+		    cpPropertiesNames.setAutoscrolls(true);
+		    cpPropertiesNames.setLocation(1025, 55);
+			cpPropertiesNames.setBackground(new Color(102,150,0));
+		    panel.add(cpPropertiesNames);
+		    cpPropertiesNames.addActionListener(new ActionListener() {
+		        public void actionPerformed(ActionEvent e) {
+		        	if(cpPropertiesNames.getSelectedIndex()>0)
+		        		cpSelectedProperty = cpFreeProperties.get(cpPropertiesNames.getSelectedIndex()-1);
+		          }
+		        });
+			placeButton(b[3],"Sell",1025, 95, 115, 25,false);
+			placeButton(b[8],"Mortgage",1150, 95, 115, 25,false);
+			
+		}else{b[3].setVisible(false);b[8].setVisible(false);}
 		
-		propertiesButtonGroup = new ButtonGroup();
-	    for(int i=0; i<MAX_PROPERTIES; i++){
-	    	
-	    	cpProperties.addItem("asdasd");
-	    	
-	    	userProperties[i] = new JRadioButton("asdasd");
-	    	userProperties[i].setActionCommand(Integer.toString(i));
-	    	userProperties[i].setLocation(1025, propertiesHeight+20);
-	    	userProperties[i].setSize(240, 20);
-	    	userProperties[i].setVisible(true);
-    		userProperties[i].setBackground(new Color(84,84,84));
-	    	if(i%2==1)
-	    		userProperties[i].setBackground(Color.DARK_GRAY);
-	    	userProperties[i].setForeground(Color.WHITE);
-	    	
-	    	propertiesHeight+=20;
-	    	
-	    	propertiesButtonGroup.add(userProperties[i]);
-	    	//panel.add(userProperties[i]);
-
-	    }
-	    cpProperties.setEditable(true);
-	    cpProperties.setSelectedIndex(0);
-	    cpProperties.setSize(240, 40);
-	    cpProperties.setAutoscrolls(true);
-	    cpProperties.setLocation(1025, 10);
-	    panel.add(cpProperties);
-	    
-	    userProperties[0].setSelected(true);
-	    
-	    propertiesHeight+=30;
-	    
-		placeButton(b[3],MonopolyGame.sellListener,"Sell",1025, propertiesHeight, 115, 25,true);
-		placeButton(b[8],MonopolyGame.mortgageListener,"Mortgage",1150, propertiesHeight, 115, 25,true);
-		
-		propertiesHeight+=30;
-		
-		mortgagesButtonGroup = new ButtonGroup();
-	    for(int i=0; i<MAX_PROPERTIES; i++){
-	    	
-	    	
-	    	userMortgages[i] = new JRadioButton("asdasd");
-	    	userMortgages[i].setActionCommand(Integer.toString(i));
-	    	userMortgages[i].setLocation(1025, propertiesHeight+20);
-	    	userMortgages[i].setSize(240, 20);
-	    	userMortgages[i].setVisible(true);
-	    	userMortgages[i].setBackground(new Color(84,84,84));
-	    	if(i%2==1)
-	    		userMortgages[i].setBackground(Color.DARK_GRAY);
-	    	userMortgages[i].setForeground(Color.WHITE);
-	    	
-	    	propertiesHeight+=20;
-	    	
-	    	mortgagesButtonGroup.add(userMortgages[i]);
-	    	panel.add(userMortgages[i]);
-
-	    }
-	    userMortgages[0].setSelected(true);
-	    
-	    propertiesHeight+=30;
-		
-		placeButton(b[9],MonopolyGame.unMortgageListener,"UnMortgage",1025, propertiesHeight, 240, 25,true);
-		
+		if(cpMortgagedProperties.size()>0){
+			cpMortgagedPropertiesNames.addItem("Select a property to UNmortgage.");
+			cpMortgagedPropertiesNames.setEditable(true);
+			cpMortgagedPropertiesNames.setSelectedIndex(0);
+			cpMortgagedPropertiesNames.setSize(240, 30);
+			cpMortgagedPropertiesNames.setAutoscrolls(true);
+			cpMortgagedPropertiesNames.setLocation(1025, 130);
+			cpMortgagedPropertiesNames.setBackground(new Color(185,0,0));
+		    panel.add(cpMortgagedPropertiesNames);
+		    cpMortgagedPropertiesNames.addActionListener(new ActionListener() {
+		        public void actionPerformed(ActionEvent e) {
+		        	if(cpMortgagedPropertiesNames.getSelectedIndex()>0)
+		        		cpSelectedMortgagedProperty = cpMortgagedProperties.get(cpMortgagedPropertiesNames.getSelectedIndex()-1);
+		          }
+		        });
+		    placeButton(b[9],"UnMortgage",1025, 170, 240, 25,false);
+		}else{b[9].setVisible(false);}
+			
 	
         //mainFrame.setResizable(false);
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -208,6 +198,47 @@ public class GUI {
             public void actionPerformed(ActionEvent evt) {
             	//System.out.println("Repaints Continuously");
 				panel.repaint();
+
+				players = board.getPlayers();
+				cP = board.getCurrentPlayer();
+				currentPlayer.setText(cP.name);
+				for(int i=0; i<cP.properties.size();i++){
+					if(cP.properties.get(i).isMortgaged==false){
+						cpFreeProperties.add(cP.properties.get(i));
+					}else{
+						cpMortgagedProperties.add(cP.properties.get(i));
+					}
+				}/*
+				for(int i=0; i<cP.trains.size();i++){
+					if(cP.trains.get(i).isMortgaged==false){
+						cpFreeProperties.add(cP.trains.get(i));
+					}else{
+						cpMortgagedProperties.add(cP.trains.get(i));
+					}
+				}
+				for(int i=0; i<cP.cabs.size();i++){
+					if(cP.cabs.get(i).isMortgaged==false){
+						cpFreeProperties.add(cP.cabs.get(i));
+					}else{
+						cpMortgagedProperties.add(cP.cabs.get(i));
+					}
+				}
+				for(int i=0; i<cP.utilities.size();i++){
+					if(cP.utilities.get(i).isMortgaged==false){
+						cpFreeProperties.add(cP.utilities.get(i));
+					}else{
+						cpMortgagedProperties.add(cP.utilities.get(i));
+					}
+				}*/
+				for(int i=0; i<cpFreeProperties.size(); i++){
+					cpPropertiesNames.addItem(cpFreeProperties.get(i).name);
+				}
+				for(int i=0; i<cpMortgagedProperties.size(); i++){
+					cpMortgagedPropertiesNames.addItem(cpMortgagedProperties.get(i).name);
+				}
+				
+				
+				
             }
         };
         Timer timer = new Timer(100 ,taskPerformer);
@@ -220,15 +251,7 @@ public class GUI {
     	
 	}
 	
-	
-	private void placeButton(JButton button, ActionListener listener, String title, int x, int y, int width, int height, boolean visibility){
-		button = new JButton(title);
-		button.setLocation(x, y);
-		button.setSize(width, height);
-		button.setVisible(visibility);
-		button.addActionListener(listener);
-		panel.add(button);
-	}	
+
 	private void placeButton(JButton button, String title, int x, int y, int width, int height, boolean visibility){
 		button.setText(title);
 		button.setLocation(x, y);
@@ -251,8 +274,24 @@ public class GUI {
 		
 	}
 	
-	public void setGUI(Player cp, String cm, String bs){
-		
+	public void setGUI(String cm, String bs, JButton b[]){
+		this.currentMessage.setText(cm);
+		int l = bs.length();
+		if(l>26)
+			l = 26;
+		for(int i=0; i<l; i++){
+				if(bs.charAt(i)=='1' || i==11){
+					b[i].setVisible(true);}
+				else if(bs.charAt(i)=='1'){
+					b[i].setVisible(false);
+				}
+
+		}
+
+		for(int i=l; i<26; i++){
+			if(i!=11)
+					b[i].setVisible(false);
+		}
 		
 		
 	}
@@ -262,6 +301,13 @@ public class GUI {
 		this.players = p;
 	}
 	
+	public void setDice(int i, int j, int k){
+		dieOne = i;
+		dieOne = i;
+		dieTwo = j;
+		dieSpeed = k;
+		panel.setDice(i, j, k);
+	}
 	
 
 }
