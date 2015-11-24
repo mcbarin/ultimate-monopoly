@@ -8,7 +8,7 @@ public class MonopolyGame {
 	private GUI gui;
 	private Board board;
 	
-	private int dieOne, dieTwo, dieSpeed;
+	public static int dieOne, dieTwo, dieSpeed;
 	
 	private ArrayList<Player> players;
 	private Player cP;
@@ -19,8 +19,8 @@ public class MonopolyGame {
 	
 	private Dice die = new Dice();
 	
-	//buttons = rollDice,buy,buyChance,sell,no,rollOnce,pullChance,pullCommunity,mortgage,unMortgage,yes,start,load,save
-
+	//buttons = rollDice,buy,buyChance,sell,no,rollOnce,pullChance,pullCommunity,mortgage,unMortgage,
+	//			yes,start,load,save, dieOne, dieTwo, dieTotal
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -55,16 +55,33 @@ public class MonopolyGame {
 		    	  dieSpeed = die.getFace();
 		    	  gui.setDice(dieOne, dieTwo, dieSpeed);
 		    	  
+		    	  if(dieSpeed == 4){
+		    		  gui.setGUI("You have got 'Bus'! Choose one of the numbers in order to move:", "00000000000000111", buttons);
+		    		  buttons[14].setText(Integer.toString(dieOne));
+		    		  buttons[15].setText(Integer.toString(dieTwo));
+		    		  buttons[16].setText(Integer.toString((dieOne+dieTwo)));
+		    	  }else if(dieSpeed>4){
+		    		  
+		    	  }else{
+		    		  
+		    	  }
 		    	  
-		    	  board.nextPlayer();
+		    	  
+		    	  
+		    	  
+		    	  //board.nextPlayer();
 		    	  
 		      }
 		});
 		
 		
 		
-		
-		
+		//dieOne
+		buttons[11].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+		      {
+		    	  cP.setPosition(dieOne);
+		      }
+		});
 		
 		
 		

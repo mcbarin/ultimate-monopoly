@@ -146,6 +146,10 @@ public class GUI {
 		b[7].setBackground(new Color(208,200,0));
 		
 
+		placeButton(b[14],"",735, 188, 80, 25,false);
+		placeButton(b[15],"",830, 188, 80, 25,false);
+		placeButton(b[16],"",925, 188, 80, 25,false);
+		
 		
 		if(cpFreeProperties.size()>0){
 			cpPropertiesNames.addItem("Select a property to sell or mortgage.");
@@ -256,7 +260,6 @@ public class GUI {
 		button.setText(title);
 		button.setLocation(x, y);
 		button.setSize(width, height);
-		button.setVisible(visibility);
 		panel.add(button);
 	}
 	
@@ -282,7 +285,7 @@ public class GUI {
 		for(int i=0; i<l; i++){
 				if(bs.charAt(i)=='1' || i==11){
 					b[i].setVisible(true);}
-				else if(bs.charAt(i)=='1'){
+				else if(bs.charAt(i)=='0'){
 					b[i].setVisible(false);
 				}
 
