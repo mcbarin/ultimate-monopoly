@@ -17,7 +17,7 @@ public class MonopolyGame {
 	private int initialNumberofPlayers;
 	
 	private Dice die = new Dice();
-	
+	private  int totalDice;
 	//buttons = rollDice,buy,buyChance,sell,no,rollOnce,pullChance,pullCommunity,mortgage,unMortgage,
 	//			yes,start,load,save, dieOne, dieTwo, dieTotal
 	public static void main(String[] args) throws Exception {
@@ -52,6 +52,8 @@ public class MonopolyGame {
 		    	  dieOne = die.getFace();
 		    	  dieTwo = die.getFace();
 		    	  dieSpeed = die.getFace();
+		    	  totalDice = dieOne+dieTwo;
+		  			if(dieSpeed<4) totalDice+=dieSpeed;	
 		    	  gui.setDice(dieOne, dieTwo, dieSpeed);
 		    	  
 		    	  if(dieSpeed == 4){
@@ -67,6 +69,24 @@ public class MonopolyGame {
 		    	  }
 		    	  
 		    	  play();
+		    	  
+		      }
+		});
+
+		//BuyButton
+		buttons[1].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).buy(cP, totalDice);
+		    	  if(result[0].equals("1")){
+		    		  board.nextPlayer();
+		    		  gui.setGUI(result[1]+" Next player!","1",buttons);
+		    	  }else if(result[0].equals("9")){
+
+		    		  board.nextPlayer();
+		    		  gui.setGUI(result[1],"1",buttons);
+		    	  }
 		    	  
 		      }
 		});
@@ -117,8 +137,7 @@ public class MonopolyGame {
 	private void playMonopolyGuy(){play();}
 	
 	private void play(){
-		int totalDice = dieOne+dieTwo;
-		if(dieSpeed<4) totalDice+=dieSpeed;
+		
 		
 		int resultStatus;
 		
@@ -127,13 +146,16 @@ public class MonopolyGame {
 		resultStatus = Integer.parseInt(result[0]);
 		
 		switch(resultStatus){
+			case 3:
+				gui.setGUI(result[1], "01001", buttons);
+			break;
 			default:
-				gui.setGUI(result[1], "1001000011", buttons);
+				gui.setGUI(result[1], "", buttons);
 				if(cP.monopolyGuyFlag==true){
 					cP.monopolyGuy();
-					playMonopolyGuy();
 				}else{
-					board.nextPlayer();}
+					board.nextPlayer();
+					gui.setGUI("Next player!", "1", buttons);}
 				break;
 				
 		}
