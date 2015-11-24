@@ -8,6 +8,7 @@ public class SquareTransit extends Square {
 	int trainDepot = 0;
 	int trainDepotPrice =100;
 	SquareTransit twin; //when selling you must initialize twin too.
+	boolean isMortgaged=false;
 
 	public SquareTransit(String type,String name, int id, int position, int row) {
 		super(type,name, id, position, row);

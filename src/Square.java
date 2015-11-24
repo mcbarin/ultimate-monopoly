@@ -40,6 +40,7 @@ public abstract class Square {
 
 	}
 
+	
 
 	public String[] applyCard(Square s, Player p,int cardId){
 		String[] result = new String[14];

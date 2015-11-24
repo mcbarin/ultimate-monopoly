@@ -4,6 +4,7 @@ public class SquareUtility extends Square {
 	Player owner=null;
 	int price=150;
 	int rent;
+	boolean isMortgaged=false;
 
 	public SquareUtility(String type,String name, int id, int position, int row) {
 		super(type,name, id, position, row);

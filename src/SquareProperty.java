@@ -9,7 +9,7 @@ public class SquareProperty extends Square  {
 	int price;
 	int originalRent;
 	int rent;
-	boolean isMortgaged;
+	boolean isMortgaged=false;
 	int house=0;
 	int buildingPrice;
 	int hotel=0;
@@ -53,7 +53,6 @@ public class SquareProperty extends Square  {
 	public String[] landOn(Player player, Board board , int total) {
 		String[] result = new String[14];
 		initializeResult(result);
-		SquareProperty ss = null;
 		result[0]="1";
 		result[1] = "";	
 
@@ -249,34 +248,7 @@ public class SquareProperty extends Square  {
 
 
 
-	public String[] mortgageProperty(Player p){
-		this.isMortgaged=true;
-		String[] result = new String[14];
-		initializeResult(result);
-		p.addMoney(price/2);
-		result[0]="1";
-		result[1]="Player mortgaged the property.";
-		result[p.id+2]=""+(price/2);
-		return result;
-	}
-
-	public String[] unmortgageProperty(Player p){
-		int unmortgagePrice = (price/2)*(11/10);
-		String[] result = new String[14];
-		initializeResult(result);
-		if(p.money>unmortgagePrice){
-			p.substract(unmortgagePrice);
-			isMortgaged=false;
-			result[0]="1";
-			result[1]="Player unmortgaged the property.";
-			result[p.id+2]="-"+""+unmortgagePrice;
-			return result;
-		}else {
-			result[0]="5";
-			result[1]="Player can not unmortgage this property. Money is not enough.";
-			return result;
-		}
-	}
+	
 
 
 	public String[] sellBuilding(Player p){
@@ -317,10 +289,11 @@ public class SquareProperty extends Square  {
 		String[] result = new String[14];
 		initializeResult(result);
 		result[0]="0";
+		
 		if(owner != p){
 			result[1]="This property doesn't belong to you!";
 			return result;
-		}else if (isMortgaged){
+		}else if(isMortgaged){
 			result[1]="This property is mortgaged already";
 			return result;
 		}else if(house==0 && hotel==0 && skyscraper==0){
@@ -332,6 +305,35 @@ public class SquareProperty extends Square  {
 		}
 
 		return result;
+	}
+		
+	public String[] mortgageProperty(Player p){
+		this.isMortgaged=true;
+		String[] result = new String[14];
+		initializeResult(result);
+		p.addMoney(price/2);
+		result[0]="0";
+		result[1]="Player mortgaged the property.";
+		result[p.id+2]=""+(price/2);
+		return result;
+	}
+
+	public String[] unmortgageProperty(Player p){
+		int unmortgagePrice = (price/2)*(11/10);
+		String[] result = new String[14];
+		initializeResult(result);
+		if(p.money>unmortgagePrice){
+			p.substract(unmortgagePrice);
+			isMortgaged=false;
+			result[0]="0";
+			result[1]="Player unmortgaged the property.";
+			result[p.id+2]="-"+""+unmortgagePrice;
+			return result;
+		}else {
+			result[0]="0";
+			result[1]="Player can not unmortgage this property. Money is not enough.";
+			return result;
+		}
 	}
 	public void initializeAll(){
 		this.isMortgaged = false;
