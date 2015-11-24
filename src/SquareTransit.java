@@ -171,4 +171,14 @@ public class SquareTransit extends Square {
 
 		return result;
 	}
+
+	public void initializeAll() {
+		// TODO Auto-generated method stub
+		this.owner=null;
+		this.price=200;
+		this.rent=20;
+		this.originalRent=20;
+		this.trainDepot = 0;
+		this.trainDepotPrice =100;
+	}
 }

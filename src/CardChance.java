@@ -422,7 +422,8 @@ public class CardChance extends Card {
 		int[] otherHouses = new int[length];
 		otherHouses = board.getOtherProperties(color);
 		
-		Player p;
+		Player p = board.getCurrentPlayer();
+		
 		for(int i=0;i<board.getPlayers().size();i++){
 			if(board.getPlayers().get(i).id == id){
 				p = board.getPlayers().get(i);
@@ -431,7 +432,7 @@ public class CardChance extends Card {
 		}
 		
 		for(int i=0;i<length;i++){
-			if(((SquareProperty)board.getSquareFromBoard(otherHouses[i])).getOwner() != null &&((SquareProperty)board.getSquareFromBoard(otherHouses[i])).getOwner().id == p.id){
+			if(((SquareProperty)board.getSquareFromBoard(otherHouses[i])).getOwner() != null && p!=null &&((SquareProperty)board.getSquareFromBoard(otherHouses[i])).getOwner().id == p.id){
 				((SquareProperty)board.getSquareFromBoard(otherHouses[i])).hurricane();
 			}
 		}
