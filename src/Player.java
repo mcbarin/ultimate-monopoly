@@ -251,6 +251,17 @@ public class Player {
 	}
 	
 	public void monopolyGuy(){
+		int posId = position;
+		int border = 24;
+		if(row==1){
+			posId+=24;
+			border=40;}
+		else if(row==2){
+			posId+=64;
+			border=56;
+		}
+		
+		
 		
 	}
 	
