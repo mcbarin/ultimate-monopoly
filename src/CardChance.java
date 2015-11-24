@@ -197,6 +197,7 @@ public class CardChance extends Card {
 				posId+=24;
 				border=40;}
 			else if(p.row==2){
+				
 				posId+=64;
 				border=56;
 			}
@@ -218,11 +219,12 @@ public class CardChance extends Card {
 				
 				if(sq.type.equals("Property")){
 					if(k==0){
+						if(((SquareProperty)sq).owner != null && ((SquareProperty)sq).owner.id != p.id){
 						first = (SquareProperty)sq;
-					}
+						k++;
+					}}
 					if(((SquareProperty)sq).owner==null){
 						p.position = (sq.position);
-						k++;
 						isFound = true;
 						break;
 					}

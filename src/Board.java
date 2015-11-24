@@ -137,6 +137,14 @@ public class Board {
 		return result;
 	}
 
+public String[] getResultArray(){
+		
+		String[] result = new String[14];
+		for(int i=0;i<14;i++){
+			result[i]= "0";
+		}
+		return result;
+	}
 	public Square nextSquare(int id){
 		int x = id;
 		if(id==23){
