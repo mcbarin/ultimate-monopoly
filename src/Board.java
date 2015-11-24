@@ -113,6 +113,16 @@ public class Board {
 		}
 		return null;
 	}
+	
+	public Square getSquareWithRowAndPosition(int row,int position){
+		int x = position;
+		if(row==1)
+			x+=24;
+		if(row==2)
+			x+=64;
+		
+		return getSquareFromBoard(x);
+	}
 
 	public int getNumberOfSameColor(int color) {
 		// TODO Auto-generated method stub

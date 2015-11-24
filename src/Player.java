@@ -205,16 +205,19 @@ public class Player {
 		this.row = row;
 	}
 	
-	public void setPosition(int position){
+	public void setPosition(int dice){
+		checkPosition(this.position,position);
 		this.position = position;
-		checkPosition();
+		//MonopolyGame.die
 	}
 	
-	public void checkPosition(){
+	public void checkPosition(int old,int newp){
 		if(row==0){
+			if(newp>6){
+				
+			}
 			if(position>23){
 			position = position%24;
-			addMoney(250);
 			}
 			else if(position<0){
 				position+=24;
@@ -227,6 +230,14 @@ public class Player {
 				position+=40;
 			}
 		}else if(row==2){
+			if(newp>28 && old<28){
+				// get paid.
+				if((newp-old)%2 == 0){
+					addMoney(400);
+				}else{
+					addMoney(300);
+				}
+			}
 			if(position>55){
 				position = position%56;
 				addMoney(400);
