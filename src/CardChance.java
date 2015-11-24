@@ -207,15 +207,24 @@ public class CardChance extends Card {
 
 			for(int i=0;i<border;i++){
 				Square sq = board.nextSquare(posId);
-				posId++;
+				if(posId==23)
+					posId=0;
+				else if(posId==63)
+					posId=24;
+				else if(posId==119)
+					posId=64;
+				else
+					posId++;
+				
 				if(sq.type.equals("Property")){
 					if(k==0){
 						first = (SquareProperty)sq;
 					}
 					if(((SquareProperty)sq).owner==null){
-						p.setPosition(sq.position);
+						p.position = (sq.position);
 						k++;
 						isFound = true;
+						break;
 					}
 				}
 			}

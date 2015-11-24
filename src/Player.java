@@ -206,44 +206,96 @@ public class Player {
 	}
 	
 	public void setPosition(int dice){
-		checkPosition(this.position,position);
-		this.position = position;
-		//MonopolyGame.die
+		int old = position;
+		
+		if(dice%2 == 1){
+			this.position = position + dice;
+		}else {
+			///////////////////
+			int posId = position;
+			int border = 24;
+			if(row==1){
+				posId+=24;
+				border=40;}
+			else if(row==2){
+				posId+=64;
+				border=56;
+			}
+			// posId : bulundugu square'in id'si
+			// border: bulundugu row'un square sayisi
+			Square s = board.getSquareFromBoard(posId);;
+			
+			for(int i=0;i<dice;i++){
+				s = board.getSquareFromBoard(posId);
+				if(s.type.equals("Transit")){
+					posId = ((SquareTransit)s).twin.id+1;
+					s = board.getSquareFromBoard(posId);
+				}else{
+					s = board.nextSquare(posId);
+					posId = s.id;
+				}
+				}
+				
+			
+			
+			this.position = s.position;
+			this.row = s.row;
+			
+			
+		///////////////////
+		}
+
+		
+		checkPosition(dice,old);
 	}
 	
-	public void checkPosition(int old,int newp){
+	public void monopolyGuy(){
+		
+	}
+	
+	public void checkPosition(int dice,int old){
+		
 		if(row==0){
-			if(newp>6){
-				
-			}
 			if(position>23){
-			position = position%24;
+				position = position%24;
+				}
+				else if(position<0){
+					position+=24;
+				}
+			boolean passedzero = old-position>0;
+			
+			if(position>=6 && passedzero){
+				addMoney(250);
 			}
-			else if(position<0){
-				position+=24;
+			if(position>=6 && old < 6){
+				addMoney(250);
 			}
+			
 		}else  if(row == 1){
+			
 			if (position>39){
 				position = position%40;
 				addMoney(200);
-			}			else if(position<0){
+			}	else if(position<0){
 				position+=40;
 			}
+
 		}else if(row==2){
-			if(newp>28 && old<28){
-				// get paid.
-				if((newp-old)%2 == 0){
-					addMoney(400);
-				}else{
-					addMoney(300);
-				}
-			}
 			if(position>55){
 				position = position%56;
 				addMoney(400);
 			}else if(position<0){
 				position+=56;
 			}
+			if(position>28 && (position-dice)<28){
+				// get paid.
+				if(dice%2 == 0){
+					addMoney(400);
+				}else{
+					addMoney(300);
+				}
+			}
+			
 			
 		}
 	}

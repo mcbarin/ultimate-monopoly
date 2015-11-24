@@ -138,13 +138,15 @@ public class Board {
 	}
 
 	public Square nextSquare(int id){
-		int x = id + 1;
+		int x = id;
 		if(id==23){
 			x=0;
 		}else if(id==63){
 			x=24;
 		}else if(id==119){
 			x=64;
+		}else{
+			x++;
 		}
 		return getSquareFromBoard(x);
 	}
