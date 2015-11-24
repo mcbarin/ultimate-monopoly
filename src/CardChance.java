@@ -491,7 +491,7 @@ public class CardChance extends Card {
 			result[0]="1";
 			result[1]="Player surrendered one of the property to the bank.";
 		}else {
-			p.hurricane();
+			p.hurricane(p.owner);
 			result[0]="1";
 			result[1]="Player's one of the property is downgraded.";
 		}
