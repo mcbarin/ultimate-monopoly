@@ -276,7 +276,29 @@ public class GUI {
 		return a;
 		
 	}
-	
+
+	public void setGUI(String cm[], String bs, JButton b[]){
+		this.currentMessage.setText(cm[1]);
+		int l = bs.length();
+		if(l>26)
+			l = 26;
+		for(int i=0; i<l; i++){
+				if(bs.charAt(i)=='1' || i==11){
+					b[i].setVisible(true);}
+				else if(bs.charAt(i)=='0'){
+					b[i].setVisible(false);
+				}
+
+		}
+
+		for(int i=l; i<26; i++){
+			if(i!=11)
+					b[i].setVisible(false);
+		}
+		
+		
+	}
+
 	public void setGUI(String cm, String bs, JButton b[]){
 		this.currentMessage.setText(cm);
 		int l = bs.length();

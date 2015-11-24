@@ -14,7 +14,6 @@ public class MonopolyGame {
 	private Player cP;
 	
 	private JButton buttons[] = new JButton[26];
-	public JComboBox<String> cpProperties = new JComboBox<String>();
 	private int initialNumberofPlayers;
 	
 	private Dice die = new Dice();
@@ -61,15 +60,13 @@ public class MonopolyGame {
 		    		  buttons[15].setText(Integer.toString(dieTwo));
 		    		  buttons[16].setText(Integer.toString((dieOne+dieTwo)));
 		    	  }else if(dieSpeed>4){
-		    		  
+		    		  cP.setPosition(dieOne+dieTwo);		
+		    		  cP.monopolyGuyFlag = true;
 		    	  }else{
-		    		  
+		    		  cP.setPosition(dieOne+dieTwo+dieSpeed);
 		    	  }
 		    	  
-		    	  
-		    	  
-		    	  
-		    	  //board.nextPlayer();
+		    	  play();
 		    	  
 		      }
 		});
@@ -77,11 +74,9 @@ public class MonopolyGame {
 		
 		
 		//dieOne
-		buttons[11].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
-		      {
-		    	  cP.setPosition(dieOne);
-		      }
-		});
+		buttons[14].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){cP.setPosition(dieOne); gui.setGUI("", "", buttons); play();}});
+		buttons[15].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){cP.setPosition(dieTwo); gui.setGUI("", "", buttons); play();}});
+		buttons[16].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){cP.setPosition(dieOne+dieTwo); gui.setGUI("", "", buttons); play();}});
 		
 		
 		
@@ -104,13 +99,50 @@ public class MonopolyGame {
 						e1.printStackTrace();
 					}
 		    	  
-		    	  gui.setGUI("Buğra", "10010",buttons);
+		    	  gui.setGUI("Let's play!", "1",buttons);
 		    	  System.out.println("cont "+initialNumberofPlayers);
 		      }
 		});
-	
+		
+		
+		while(true){
+			if(board!=null && board.currentPlayer!=null){
+				cP = board.currentPlayer;
+				players = board.players;
+			}
+		}
+			
 	}
-
+	
+	private void playMonopolyGuy(){play();}
+	
+	private void play(){
+		int totalDice = dieOne+dieTwo;
+		if(dieSpeed<4) totalDice+=dieSpeed;
+		
+		int resultStatus;
+		
+		String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
+		
+		resultStatus = Integer.parseInt(result[0]);
+		
+		switch(resultStatus){
+			default:
+				gui.setGUI(result[1], "1001000011", buttons);
+				if(cP.monopolyGuyFlag==true){
+					cP.monopolyGuy();
+					playMonopolyGuy();
+				}else{
+					board.nextPlayer();}
+				break;
+				
+		}
+		
+		
+		
+		
+		
+	}
 
 
 	public static ActionListener rollDiceListener = new ActionListener()
@@ -225,5 +257,8 @@ public class MonopolyGame {
 	    	  System.out.println("Un Mortgage");
 	      }
 	};
+	
+	
+	
 
 }

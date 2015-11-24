@@ -5,6 +5,7 @@ public class Player {
 	public int money,id,row,position,numberOfProperties=0,numberOfCards=0,valueOfProperties=0,
 			numberOfHouses=0,numberOfHotels=0,numberOfSkyscrapers=0,numberOfCabStand=0,numberOfTransitStation=0;
 	public boolean isPlaying = true;
+	public boolean monopolyGuyFlag=false;
 	String name = "";
 	public ArrayList<SquareProperty> properties = new ArrayList<SquareProperty>();
 	public ArrayList<Card> cards = new ArrayList<Card>();
