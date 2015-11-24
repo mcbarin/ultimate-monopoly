@@ -50,14 +50,17 @@ public class SquareTransit extends Square {
 
 
 			}
-		}else if (owner==player && trainDepot==0 && owner.money>=trainDepotPrice){ //else trainDepot==1 do nothing
+		}else if (owner==player && trainDepot==0 && owner.money>=trainDepotPrice && !isMortgaged){ //else trainDepot==1 do nothing or mortgaged  
 			result[0]="4";
 			result[1] = "Do you want to build Train Depot to "+this.name+" ?";
 			return result;
 
 		}else if (owner != player){
+			if (isMortgaged){
+				result[0]="1";
+				result[1] = "This transit station is mortgaged, don't pay rent.";
 
-			if(player.hasCardWithId(34)) {
+			}else if(player.hasCardWithId(34)) {
 				if(player.money>rent/2){
 					player.substract(rent/2);
 					player.deleteCard(34);
@@ -74,10 +77,7 @@ public class SquareTransit extends Square {
 					result[1]="Player can't pay the rent and broke.";
 					return result;
 				}
-			}
-
-
-			if(player.money>=rent){
+			}else if(player.money>=rent){
 				owner.addMoney(rent);
 				player.substract(rent);
 				result[0]="1";
@@ -181,5 +181,59 @@ public class SquareTransit extends Square {
 		this.originalRent=20;
 		this.trainDepot = 0;
 		this.trainDepotPrice =100;
+		this.isMortgaged=false;
+		this.twin.initializeAll();
+	}
+	
+	
+	
+	public String[] sellTrainDepot(Player p){
+		String[] result = new String[14];
+		initializeResult(result);
+		result[0]="0";
+
+		if(owner != p){
+			result[1]="This train station doesn't belong to you!";
+			return result;
+		}else if (isMortgaged){
+			result[1]="This train station is mortgaged already";
+			return result;
+		}else if(trainDepot==1){
+			trainDepot=0;
+			twin.trainDepot=0;
+			result[1]=p.name+" sold Train Depot for $50";
+			p.addMoney(50);
+			rent=originalRent;
+			twin.rent=originalRent;
+			result[p.id+2]="50";
+		}else if (trainDepot==0){
+			result[1]="You don't have any Train Depot here";
+		}
+
+		return result;
+	}
+
+	public String[] sellTrainStation(Player p){
+		String[] result = new String[14];
+		initializeResult(result);
+		result[0]="0";
+		if(owner != p){
+			result[1]="This train station doesn't belong to you!";
+			return result;
+		}else if (isMortgaged){
+			result[1]="This train station is mortgaged already";
+			return result;
+		}else if(trainDepot==1){
+			result[1]="You should sell Cab Stand first.";
+			return result;
+		}else if(trainDepot==0){
+			initializeAll();
+			p.addMoney(price/2);
+			result[1]=p.name+" sold "+ this.name+" for $"+price/2;
+			result[p.id+2]=Integer.toString(price/2);
+			p.trains.remove(this);
+			p.trains.remove(this.twin);
+		}
+		return result;
 	}
 }

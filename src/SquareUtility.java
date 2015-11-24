@@ -31,6 +31,11 @@ public class SquareUtility extends Square {
 			result[1] = "";	
 
 		}else if (owner != player){
+			if (isMortgaged){
+				result[0]="1";
+				result[1] = "This utility is mortgaged, don't pay rent.";
+				return result;
+			}
 
 			if(owner.utilities.size() == 1)
 				rent = total*4;
@@ -83,12 +88,35 @@ public class SquareUtility extends Square {
 		result[p.id+2] = "-"+ ""+this.price;
 		return result;
 	}
-	
+
 
 	public void initializeAll(){
 		this.price=150;
 		this.rent = 0;
+		this.isMortgaged=false;
 	}
+	
+	
 
+	public String[] sellUtility(Player p){
+		String[] result = new String[14];
+		initializeResult(result);
+		result[0]="0";
+		
+		if(owner != p){
+			result[1]="This utility doesn't belong to you!";
+			return result;
+		}else if (isMortgaged){
+			result[1]="This utility is mortgaged already";
+			return result;
+		}else{
+			initializeAll();
+			p.addMoney(price/2);
+			result[1]=p.name+" sold "+ this.name+" for $"+price/2;
+			result[p.id+2]=Integer.toString(price/2);
+			p.utilities.remove(this);
+		}
+		return result;
+	}
 
 }

@@ -40,7 +40,69 @@ public abstract class Square {
 
 	}
 
-	
+	public String[] mortgage(Player p){
+		int price=0;
+		if(this.type=="Property"){
+			((SquareProperty)this).isMortgaged=true;
+			price=((SquareProperty)this).price;
+		}else if(this.type=="Transit"){
+			((SquareTransit)this).isMortgaged=true;
+			((SquareTransit)this).twin.isMortgaged=true;
+			price=((SquareTransit)this).price;
+		}else if(this.type=="Utility"){
+			((SquareUtility)this).isMortgaged=true;
+			price=((SquareUtility)this).price;
+		}else if(this.type=="CabCompany"){
+			((SquareCabCompany)this).isMortgaged=true;
+			price=((SquareCabCompany)this).price;
+		}
+
+		String[] result = new String[14];
+		initializeResult(result);
+		p.addMoney(price/2);
+		result[0]="0";
+		result[1]="Player mortgaged the property.";
+		result[p.id+2]=""+(price/2);
+		return result;
+	}
+
+	public String[] unmortgage(Player p){
+		String[] result = new String[14];
+		initializeResult(result);
+		int unmortgagePrice=0;
+		if(this.type=="Property"){
+			unmortgagePrice = (((SquareProperty)this).price/2)*(11/10);
+		}else if(this.type=="Transit"){
+			unmortgagePrice = 100;
+		}else if(this.type=="Utility"){
+			unmortgagePrice = 75;
+		}else if(this.type=="CabCompany"){
+			unmortgagePrice =150;
+		}
+		
+		if(p.money<unmortgagePrice){
+			result[0]="0";
+			result[1]="Player can not unmortgage this property. Money is not enough.";
+			return result;
+		
+		}else{
+			p.substract(unmortgagePrice);
+			if(this.type=="Property"){
+				((SquareProperty)this).isMortgaged=false;
+			}else if(this.type=="Transit"){
+				((SquareTransit)this).isMortgaged=false;
+				((SquareTransit)this).twin.isMortgaged=false;
+			}else if(this.type=="Utility"){
+				((SquareUtility)this).isMortgaged=false;
+			}else if(this.type=="CabCompany"){
+				((SquareCabCompany)this).isMortgaged=false;
+			}
+			result[0]="0";
+			result[1]="Player unmortgaged the property.";
+			result[p.id+2]="-"+""+unmortgagePrice;
+			return result;
+		}
+	}
 
 	public String[] applyCard(Square s, Player p,int cardId){
 		String[] result = new String[14];

@@ -307,34 +307,9 @@ public class SquareProperty extends Square  {
 		return result;
 	}
 		
-	public String[] mortgageProperty(Player p){
-		this.isMortgaged=true;
-		String[] result = new String[14];
-		initializeResult(result);
-		p.addMoney(price/2);
-		result[0]="0";
-		result[1]="Player mortgaged the property.";
-		result[p.id+2]=""+(price/2);
-		return result;
-	}
+	
 
-	public String[] unmortgageProperty(Player p){
-		int unmortgagePrice = (price/2)*(11/10);
-		String[] result = new String[14];
-		initializeResult(result);
-		if(p.money>unmortgagePrice){
-			p.substract(unmortgagePrice);
-			isMortgaged=false;
-			result[0]="0";
-			result[1]="Player unmortgaged the property.";
-			result[p.id+2]="-"+""+unmortgagePrice;
-			return result;
-		}else {
-			result[0]="0";
-			result[1]="Player can not unmortgage this property. Money is not enough.";
-			return result;
-		}
-	}
+	
 	public void initializeAll(){
 		this.isMortgaged = false;
 		this.setOwner(null);
