@@ -261,6 +261,7 @@ public class Player {
 			border=56;
 		}
 		
+	
 		
 		
 	}
