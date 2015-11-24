@@ -323,17 +323,22 @@ public class SquareProperty extends Square  {
 		this.level=0;
 	}
 
-	public void hurricane(){
+	public void hurricane(Player p){
 		if(skyscraper==1){
 			skyscraper=0;
+			p.numberOfSkyscrapers--;
 			hotel=1;
+			p.numberOfHotels++;
 		}else if(hotel==1){
 			hotel=0;
+			p.numberOfHotels--;
 			house=4;
+			p.numberOfHouses+=4;
 		}else if(house==0){
 			return;
 		}else if (house<4){
 			house-=1;
+			p.numberOfHouses--;
 		}
 		updateRentAccordingToHouse(this);
 	}
