@@ -188,7 +188,7 @@ public class SquareProperty extends Square  {
 		if(level == 1){
 
 			if(house==4){ house=0; hotel=1;}
-			else if(house<4){house+=1;}
+			else if(house<4){house+=1; p.numberOfHouses++;}
 			updateRentAccordingToHouse(this);
 			p.substract(buildingPrice);
 			p.valueOfProperties+=buildingPrice/2;
@@ -203,9 +203,9 @@ public class SquareProperty extends Square  {
 		}else if (level == 2) {//monopoly
 
 
-			if(hotel==1){hotel=0; skyscraper=1;}
-			else if(house==4){ house=0; hotel=1;}
-			else if(house<4){house+=1;}
+			if(hotel==1){hotel=0; p.numberOfHotels--; skyscraper=1; p.numberOfSkyscrapers++;}
+			else if(house==4){ house=0; p.numberOfHouses-=4; hotel=1; p.numberOfHotels++;}
+			else if(house<4){house+=1; p.numberOfHouses++;}
 			updateRentAccordingToHouse(this);
 			p.substract(buildingPrice);
 			p.valueOfProperties+=buildingPrice/2;
@@ -268,13 +268,16 @@ public class SquareProperty extends Square  {
 			result[1]=p.name+" sold skyscraper for $"+buildingPrice/2;
 		}else if(hotel==1){
 			hotel=0;
+			p.numberOfHotels--;
 			house=4;
+			p.numberOfHouses+=4;
 			result[1]=p.name+" sold hotel for $"+buildingPrice/2;
 		}else if(house==0){
 			result[1]="You don't have any building here.";
 			return result;
 		}else if (house<4){
 			house-=1;
+			p.numberOfHouses--;
 			result[1]=p.name+" sold house for $"+buildingPrice/2;
 		}
 
@@ -301,7 +304,7 @@ public class SquareProperty extends Square  {
 			p.addMoney(price/2);
 			result[1]=p.name+" sold "+ this.name+" for $"+price/2;
 			result[p.id+2]=Integer.toString(buildingPrice/2);
-			p.properties.remove(this);
+			p.deleteProperty(this);
 		}
 
 		return result;
@@ -356,7 +359,20 @@ public class SquareProperty extends Square  {
 	public int getPrice(Square s){
 		return this.price;
 	}
-
+	
+	public void setHouse(int n){
+		house=n;
+		updateRentAccordingToHouse(this);
+	}
+	public void setHotel(int n){
+		hotel=n;
+		updateRentAccordingToHouse(this);
+	}
+	public void setSkyscraper(int n){
+		skyscraper=n;
+		updateRentAccordingToHouse(this);
+	}
+	
 
 }
 
