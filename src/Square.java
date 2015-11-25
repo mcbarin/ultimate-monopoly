@@ -150,6 +150,8 @@ public abstract class Square {
 	public String[] build(Player p,int total){
 		if(this.type.equals("Property")){
 			return ((SquareProperty)this).buildToProperty(p);
+		}else if(this.type.equals("CabCompany")){
+			return ((SquareCabCompany)this).buildCabStand(p);
 		}else{
 			return ((SquareTransit)this).buildTrainDepot(p,total);
 		}
