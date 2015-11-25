@@ -104,9 +104,9 @@ public class GUIPanel extends JPanel {
 		g.drawImage(cardImg, 725, 230, 290, 160, null);
 		
 		
-	    g.setFont(new Font("Comic Sans", Font.PLAIN,80));
+	    g.setFont(new Font("Alison", Font.PLAIN,80));
     	g.setColor(Color.black);
-    	g.drawString("6", 850, 362);
+    	g.drawString("6", 842, 362);
 		
 		
 	}

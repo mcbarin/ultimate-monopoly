@@ -198,7 +198,7 @@ public class MonopolyGame {
 				gui.setGUI(result[1], "01011", buttons);
 				break;
 			case 10:
-				gui.setGUI(result[1], "01011", buttons);
+				gui.setGUI(result, "000001", buttons);
 				break;
 			default:
 				gui.setGUI(result[1]+" Next player!", "1", buttons);
