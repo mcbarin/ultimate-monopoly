@@ -14,7 +14,7 @@
 //status=21 ask user msg with options "Try to throw double", "Pay $50 to bank"
 //status=23 play with current player again. if result[2] has number other than zero, play with it.(it is double play again.)
 //status=0 play with current player again.()
-//status=22 update position and call landOn of that position
+
 
 //check always player.countJail<4, if so, call SquareInJail.landOn()
 //check always player.reverse=true, if so, call SquareReverse.landOn()
