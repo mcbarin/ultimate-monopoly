@@ -123,7 +123,16 @@ public class CardChance extends Card {
 			
 		}  else if(number == 5){
 			
-			p.setPosition(p.position-3);
+			p.position= (p.position-3);
+			if(p.position<0){
+				if(p.row==0)
+					p.position+=24;
+				else if(p.row==1){
+					p.position+=40;
+				}else if(p.row==2){
+					p.position+=56;
+				}
+			}
 			result[0]="5"; // Must call the landOn method.
 			result[1]="Go Back Three Spaces.";
 			
@@ -232,7 +241,7 @@ public class CardChance extends Card {
 			}
 			
 			if(!isFound){
-				p.setPosition(first.position);
+				p.position = (first.position);
 			}
 			
 			result[0]="5";

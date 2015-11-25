@@ -82,6 +82,10 @@ public class CardCommunity extends Card {
 			result[1]="Player should move to income tax or jail.";
 			
 		}  else if(number == 30){
+			p.row = 2;
+			p.position=6;
+			result[0]="5";
+			result[1]="Player moved to the Checker Cab Company.";
 			
 			
 		}  else if(number == 31){
@@ -197,10 +201,29 @@ public class CardCommunity extends Card {
 			result[1]=title+" "+description;
 			
 		}  else if(number == 38){
+			p.row = 1;
+			p.position = 10;
+			p.countJail = 3;
+			result[0]="5";
+			result[1]="Player went directly to jail.";
 			
 		}  else if(number == 39){
+			// 0 12
+			if(p.row == 2 && p.position>7 && p.position<28){
+				p.addMoney(300);
+			}
+			p.position=12;
+			p.row = 0;
+			result[0]="5";
+			result[1]="Player advanced to stock exchange.";
+			result[p.id+2]="300";
 			
 		}  else if(number == 40){
+			//hurricane to player's own properties.
+			// player should choose a color group.
+			result[0]="27";
+			result[1]="PLayer should choose one color group of its own and it will be downgraded.";
+			// applyCard40 should be called with color code (0-19)
 			
 		}  else if(number == 41){
 			p.addCard(this);
@@ -226,6 +249,22 @@ public class CardCommunity extends Card {
 			result[1]="Player went directly to jail.";
 		}
 		
+		return result;
+	}
+	
+	public String[] applyCard40(Player p,int colorGroup){
+		String[] result= getResultArray();
+		int length = board.getNumberOfSameColor(colorGroup);
+		int[] otherHouses = board.getOtherProperties(colorGroup);
+		
+		for(int i=0;i<length;i++){
+			SquareProperty sp = (SquareProperty)board.getSquareFromBoard(otherHouses[i]);
+			if(sp.owner != null && sp.owner.id == p.id){
+				sp.hurricane(p);
+			}
+		}
+		result[0]="1";
+		result[1]="Properties of the chosen color group are downgraded.";
 		return result;
 	}
 	

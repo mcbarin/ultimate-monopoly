@@ -214,17 +214,16 @@ public class Player {
 		}else {
 			///////////////////
 			int posId = position;
-			int border = 24;
 			if(row==1){
 				posId+=24;
-				border=40;}
+				}
 			else if(row==2){
 				posId+=64;
-				border=56;
+				
 			}
 			// posId : bulundugu square'in id'si
 			// border: bulundugu row'un square sayisi
-			Square s = board.getSquareFromBoard(posId);;
+			Square s = board.getSquareFromBoard(posId);
 			
 			for(int i=0;i<dice;i++){
 				s = board.getSquareFromBoard(posId);
@@ -235,7 +234,7 @@ public class Player {
 					s = board.nextSquare(posId);
 					posId = s.id;
 				}
-				}
+			}
 				
 			
 			
@@ -261,10 +260,93 @@ public class Player {
 			border=56;
 		}
 		
-	
+		Square s = board.getSquareFromBoard(posId);
+		Square firstOwned = board.getSquareFromBoard(posId);
 		
+		boolean transitUsed = false;
+		boolean firstOwnedProperty = false;
+		boolean isFound = false;
 		
-	}
+		for(int i=0;i<border;i++){
+			s = board.getSquareFromBoard(posId);
+			
+			if(s.type.equals("Transit")){
+			if((MonopolyGame.dieOne + MonopolyGame.dieTwo)%2 == 0){
+				posId = ((SquareTransit)s).twin.id+1;
+				s = board.getSquareFromBoard(posId);
+				transitUsed=true;
+				break;
+			}else{
+				s = board.nextSquare(posId);
+				posId = s.id;
+			}
+			}
+			else {
+
+				if(s.type.equals("Property")){
+					if(((SquareProperty)s).owner == null){
+						// Property Square found. break
+						this.position = s.position;
+						this.row = s.row;
+						isFound=true;
+						break;
+					}else if(!firstOwnedProperty && ((SquareProperty)s).owner.id != this.id){
+						firstOwned = s;
+						firstOwnedProperty = true;
+						// If all properties are owned, this will be the next position.
+					}
+				}else{
+					s = board.nextSquare(posId);
+					posId = s.id;
+				}
+				
+
+			}
+		}
+		
+		if(transitUsed){
+			if(s.row == 0){
+				border = 24;
+			}else if(s.row==1){
+				border = 40;
+			}else if(s.row == 2){
+				border = 56;
+			}
+			firstOwnedProperty = false;
+			
+			for(int i=0;i<border;i++){
+			
+					s = board.nextSquare(posId);
+					posId = s.id;
+					if(s.type.equals("Property")){
+						if(((SquareProperty)s).owner == null){
+							// Property Square found. break
+							this.position = s.position;
+							this.row = s.row;
+							isFound = true;
+							break;
+						}else if(!firstOwnedProperty && ((SquareProperty)s).owner.id != this.id){
+							firstOwned = s;
+							firstOwnedProperty =true;
+							// If all properties are owned, this will be the next position.
+						}
+					}else{
+						s = board.nextSquare(posId);
+						posId = s.id;
+					}
+					
+				}
+			
+			
+			}
+		
+		if(!isFound){
+			this.position = firstOwned.position;
+			this.row = firstOwned.row;
+		}
+			
+		}
+		
 	
 	public void checkPosition(int dice,int old){
 		
