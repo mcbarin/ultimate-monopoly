@@ -10,7 +10,7 @@ public class SquareReverse extends Square {
 	public String[] landOn(Player player, Board board, int total) {
 		String[] result = new String[14];
 		initializeResult(result);
-		result[0]="22";
+		result[0]="5";
 		result[1]="";
 
 		if(!player.reverse){
