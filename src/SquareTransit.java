@@ -130,7 +130,7 @@ public class SquareTransit extends Square {
 				player.row=2;
 				player.position=99-64;
 			}
-			return "5";
+			//return "5";
 		}
 		return "1";
 	}

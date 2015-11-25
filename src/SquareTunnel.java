@@ -10,7 +10,7 @@ public class SquareTunnel extends Square {
 	public String[] landOn(Player player, Board board, int total) {
 		String[] result = new String[14];
 		initializeResult(result);
-		result[0]="5";
+		result[0]="1";
 		result[1] = "Go to other side of the Tunnel";	
 
 		if(id == 18){

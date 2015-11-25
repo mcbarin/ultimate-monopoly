@@ -185,7 +185,7 @@ public abstract class Square {
 	public String[] taxiRide(Player p, String n){
 		String[] result = new String[14];
 		initializeResult(result);
-		result[0]="5";
+		result[0]="1";
 
 		if (((SquareCabCompany)this).owner==p){
 			p.substract(20);
