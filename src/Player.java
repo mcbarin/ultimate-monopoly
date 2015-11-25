@@ -53,6 +53,16 @@ public class Player {
 		cards.add(c);	
 	}
 	
+	public void addCardDebug(int id){
+		if(id<26){
+			CardChance c = new CardChance(id,board.cardDescriptions[id][0],board.cardDescriptions[id][1],board);
+			cards.add(c);
+		}else{
+			CardCommunity c = new CardCommunity(id,board.cardDescriptions[id][0],board.cardDescriptions[id][1],board);
+			cards.add(c);
+		}
+	}
+	
 	public void deleteCard(int number){
 		
 		for(int i=0;i<cards.size();i++){
@@ -91,6 +101,19 @@ public class Player {
 			trains.get(i).initializeAll();
 		}
 		
+	}
+	
+	public void addPropertyDebug(int id,int house){
+		SquareProperty sp = (SquareProperty)board.getSquareFromBoard(id);
+		if(house==5){
+			sp.hotel=1;
+		}else if(house==6){
+			sp.skyscraper=1;
+		}else{
+			sp.house=house;
+		}
+		sp.updateRentAccordingToHouse(sp);
+		addProperty(sp);
 	}
 	
 	public void addProperty(SquareProperty sp){

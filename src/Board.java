@@ -1,8 +1,12 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.StringTokenizer;
 
 public class Board {
 
@@ -45,7 +49,72 @@ public class Board {
 		for(int i=0;i<totalPlayer;i++){
 			Player p = new Player(playerNames[i],3200,i,1,0,this);
 			players.add(p);
+		}	
+	}
+	
+	public void debugMode(){
+		
+		try{
+			BufferedReader rd = new BufferedReader(new FileReader("debug.txt"));
+			String line = rd.readLine();
+			if(line.equals("DEBUG OFF")){
+				// Do nothing
+			}else if(line.equals("DEBUG ON")){
+				// Debug is on.
+				
+				for(int i=0;i<players.size();i++){
+				rd.readLine(); // empty line
+				
+				// next line is player id.
+				line = rd.readLine();
+				StringTokenizer ss = new StringTokenizer(line);
+				ss.nextToken();
+				int playerid = Integer.parseInt(ss.nextToken());
+				Player p = players.get(playerid);
+				
+				// next line is "row position money"
+				line = rd.readLine();
+				StringTokenizer s1= new StringTokenizer(line);
+				int row = Integer.parseInt(s1.nextToken());
+				int position = Integer.parseInt(s1.nextToken());
+				int money = Integer.parseInt(s1.nextToken());
+				p.row=row;
+				p.position=position;
+				p.money=money;
+				
+				// next line is how many properties are added.
+				line = rd.readLine();
+				int propertyNumber = Integer.parseInt(line);				
+				for(int i1=0;i1<propertyNumber;i1++){
+					line = rd.readLine();
+					StringTokenizer st = new StringTokenizer(line);
+					st.nextToken();//property part is omitted.
+					int sqid = Integer.parseInt(st.nextToken());
+					int houseN = Integer.parseInt(st.nextToken());
+					p.addPropertyDebug(sqid, houseN);
+				}
+				
+				// next line is how many cards are added.
+				line = rd.readLine(); 
+				int cardNumber = Integer.parseInt(line);
+				
+				for(int i1=0;i1<cardNumber;i1++){
+					line = rd.readLine();
+					StringTokenizer st = new StringTokenizer(line);
+					st.nextToken();//card part is omitted.
+					int cardid = Integer.parseInt(st.nextToken());
+					p.addCardDebug(cardid);
+				}
+				
+			}
+			}
+			rd.close();	
 		}
+		
+		catch(IOException ex){
+			System.out.println("There is an error with the file." + ""+ex);
+		}
+		
 	}
 
 	public void initializeCards(){
@@ -61,6 +130,7 @@ public class Board {
 			}
 		}
 	}
+
 
 	public CardChance peekChance(){
 
@@ -85,6 +155,7 @@ public class Board {
 	}
 
 
+	
 	public int[] getOtherProperties(int color) {
 		// TODO Auto-generated method stub
 		int length = getNumberOfSameColor(color);
