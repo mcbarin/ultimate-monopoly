@@ -29,7 +29,7 @@ public class GUIPanel extends JPanel {
 	
 
 	private BufferedImage cardImg;
-	public int cardType=0;
+	public int cardType=3;
 	
 	
 	private ArrayList<Player> players;
@@ -82,6 +82,8 @@ public class GUIPanel extends JPanel {
 				this.cardImg = ImageIO.read(new File("img/chancecard.png"));
 			}else if (cardType==2){
 				this.cardImg = ImageIO.read(new File("img/comminitychest.png"));
+			}else if (cardType==3){
+				this.cardImg = ImageIO.read(new File("img/rollonce.png"));
 				}
 			
 			this.dieOneImg = ImageIO.read(new File("img/die"+dieOne+".png"));
@@ -100,6 +102,11 @@ public class GUIPanel extends JPanel {
 		g.drawImage(dieTwoImg, 332, 332, 50, 50, null);
 		g.drawImage(dieSpeedImg, 395, 395, 50, 50, null);
 		g.drawImage(cardImg, 725, 230, 290, 160, null);
+		
+		
+	    g.setFont(new Font("Comic Sans", Font.PLAIN,80));
+    	g.setColor(Color.black);
+    	g.drawString("6", 850, 362);
 		
 		
 	}

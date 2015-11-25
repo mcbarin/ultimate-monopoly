@@ -374,6 +374,7 @@ public String[] getResultArray(){
 		}
 		
 		this.currentPlayer = np;
+		GUI.playerChange = true;
 		
 		return np;
 	}

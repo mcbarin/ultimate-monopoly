@@ -18,8 +18,8 @@ public class MonopolyGame {
 	
 	private Dice die = new Dice();
 	private  int totalDice;
-	//buttons = rollDice,buy,buyChance,sell,no,rollOnce,pullChance,pullCommunity,mortgage,unMortgage,
-	//			yes,start,load,save, dieOne, dieTwo, dieTotal
+	//buttons = rollDice,	buy,	buyChance,	sell,	no,		rollOnce,	pullChance,	pullCommunity,mortgage,unMortgage,
+	//			yes,		start,	load,		save, 	dieOne,	dieTwo, 	dieTotal,	build
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -83,10 +83,31 @@ public class MonopolyGame {
 		    		  board.nextPlayer();
 		    		  gui.setGUI(result[1]+" Next player!","1",buttons);
 		    	  }else if(result[0].equals("9")){
-
-		    		  board.nextPlayer();
 		    		  gui.setGUI(result[1],"1",buttons);
 		    	  }
+		    	  
+		    	  setProps();
+		    	 
+		    	  
+		      }
+		});
+
+		//BuyButton
+		buttons[17].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).build(cP, totalDice);
+		    	  if(result[0].equals("1")){
+		    		  board.nextPlayer();
+		    		  gui.setGUI(result[1]+" Next player!","1",buttons);
+		    	  }else if(result[0].equals("5")){
+		    		  board.nextPlayer();
+		    		  gui.setGUI(result[1] + " Next player!","1",buttons);
+		    	  }
+		    	  
+		    	  setProps();
+		    	 
 		    	  
 		      }
 		});
@@ -124,6 +145,30 @@ public class MonopolyGame {
 		      }
 		});
 		
+		//Sell
+		buttons[3].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  System.out.println("Selected Radio Button: " + gui.freePropertiesButtonGroup.getSelection().getActionCommand());
+		      }
+		});
+		
+		
+		buttons[4].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+
+				board.nextPlayer();
+				gui.setGUI("Next player!", "1", buttons);
+		  		
+		      }
+		});
+		
+		
+		
+
 		
 		while(true){
 			if(board!=null && board.currentPlayer!=null){
@@ -134,7 +179,7 @@ public class MonopolyGame {
 			
 	}
 	
-	private void playMonopolyGuy(){play();}
+	private void playMonopolyGuy(){}
 	
 	private void play(){
 		
@@ -147,15 +192,17 @@ public class MonopolyGame {
 		
 		switch(resultStatus){
 			case 3:
-				gui.setGUI(result[1], "01001", buttons);
+				gui.setGUI(result[1], "01011", buttons);
 			break;
+			case 4:
+				gui.setGUI(result[1], "01011", buttons);
+				break;
+			case 10:
+				gui.setGUI(result[1], "01011", buttons);
+				break;
 			default:
-				gui.setGUI(result[1], "", buttons);
-				if(cP.monopolyGuyFlag==true){
-					cP.monopolyGuy();
-				}else{
-					board.nextPlayer();
-					gui.setGUI("Next player!", "1", buttons);}
+				gui.setGUI(result[1]+" Next player!", "1", buttons);
+				board.nextPlayer();
 				break;
 				
 		}
@@ -164,6 +211,39 @@ public class MonopolyGame {
 		
 		
 		
+	}
+	
+	public void setProps(){
+		 
+		gui.cpTotalFree=0;
+  	  for(int i = 0; i<cP.properties.size();i++){
+	  			if(cP.properties.get(i).isMortgaged==false){
+	  				gui.userFreeProperties[gui.cpTotalFree].setVisible(true);
+	  				gui.userFreeProperties[gui.cpTotalFree].setText(cP.properties.get(i).name);
+	  				gui.userFreeProperties[gui.cpTotalFree].setActionCommand(Integer.toString(cP.properties.get(i).id));
+	  				gui.cpTotalFree++;
+	  			}
+	    		}
+	  		for(int i = 0; i<cP.trains.size();i++){
+	  			if(cP.trains.get(i).isMortgaged==false){
+	  				gui.userFreeProperties[gui.cpTotalFree].setVisible(true);
+	  				gui.userFreeProperties[gui.cpTotalFree].setText(cP.trains.get(i).name);
+	  				gui.userFreeProperties[gui.cpTotalFree].setActionCommand(Integer.toString(cP.trains.get(i).id));
+	  				gui.cpTotalFree++;
+	  			}
+	    		}
+	  		for(int i = 0; i<cP.cabs.size();i++){
+	  			if(cP.cabs.get(i).isMortgaged==false){
+	  				gui.userFreeProperties[gui.cpTotalFree].setVisible(true);
+	  				gui.userFreeProperties[gui.cpTotalFree].setText(cP.cabs.get(i).name);
+	  				gui.userFreeProperties[gui.cpTotalFree].setActionCommand(Integer.toString(cP.cabs.get(i).id));
+	  				gui.cpTotalFree++;
+	  			}
+	    		}
+	  		for(int i = gui.cpTotalFree; i<gui.MAX_PROPERTIES; i++){
+	  			gui.userFreeProperties[i].setVisible(false);
+	  		}
+	  		buttons[3].setVisible(true); buttons[8].setVisible(true);
 	}
 
 
