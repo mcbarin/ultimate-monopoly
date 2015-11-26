@@ -50,12 +50,12 @@ public class SquareTransit extends Square {
 
 
 			}
-		}else if (owner==player && trainDepot==0 && owner.money>=trainDepotPrice && !isMortgaged){ //else trainDepot==1 do nothing or mortgaged  
+		}else if (owner.id==player.id && trainDepot==0 && owner.money>=trainDepotPrice && !isMortgaged){ //else trainDepot==1 do nothing or mortgaged  
 			result[0]="4";
 			result[1] = "Do you want to build Train Depot to "+this.name+" ?";
 			return result;
 
-		}else if (owner != player){
+		}else if (owner.id != player.id){
 			if (isMortgaged){
 				result[0]="1";
 				result[1] = "This transit station is mortgaged, don't pay rent.";
@@ -192,7 +192,7 @@ public class SquareTransit extends Square {
 		initializeResult(result);
 		result[0]="0";
 
-		if(owner != p){
+		if(owner.id != p.id){
 			result[1]="This train station doesn't belong to you!";
 			return result;
 		}else if (isMortgaged){
@@ -217,7 +217,7 @@ public class SquareTransit extends Square {
 		String[] result = new String[14];
 		initializeResult(result);
 		result[0]="0";
-		if(owner != p){
+		if(owner.id != p.id){
 			result[1]="This train station doesn't belong to you!";
 			return result;
 		}else if (isMortgaged){

@@ -25,12 +25,12 @@ public class SquareUtility extends Square {
 				result[0]="1";
 				result[1] = "";	
 			}
-		}else if (owner==player){
+		}else if (owner.id==player.id){
 
 			result[0]="1";
 			result[1] = "";	
 
-		}else if (owner != player){
+		}else if (owner.id != player.id){
 			if (isMortgaged){
 				result[0]="1";
 				result[1] = "This utility is mortgaged, don't pay rent.";
@@ -103,7 +103,7 @@ public class SquareUtility extends Square {
 		initializeResult(result);
 		result[0]="0";
 		
-		if(owner != p){
+		if(owner.id != p.id){
 			result[1]="This utility doesn't belong to you!";
 			return result;
 		}else if (isMortgaged){

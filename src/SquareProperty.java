@@ -64,7 +64,7 @@ public class SquareProperty extends Square  {
 
 			}
 
-		}else if(owner == player){
+		}else if(owner.id == player.id){
 
 			if(isMortgaged){
 				result[0]="1";
@@ -110,7 +110,7 @@ public class SquareProperty extends Square  {
 				result[1]="";
 			}
 
-		}else if(owner != player){	
+		}else if(owner.id != player.id){	
 
 			int unmortgagePrice = (price/2)*(11/10);
 			//player can unmortgage this square with his card
@@ -160,7 +160,7 @@ public class SquareProperty extends Square  {
 		int ids[] = board.getOtherProperties(this.color); 
 		for (int i = 0; i < ids.length; i++) {
 			ss = (SquareProperty)board.getSquareFromBoard(ids[i]);
-			if(ss.owner == player && ss.house>this.house){
+			if(ss.owner.id == player.id && ss.house>this.house){
 				return false;
 			}
 		}
@@ -255,7 +255,7 @@ public class SquareProperty extends Square  {
 		initializeResult(result);
 		result[0]="0";
 
-		if(owner != p){
+		if(owner.id != p.id){
 			result[1]="This property doesn't belong to you!";
 			return result;
 		}else if (isMortgaged){
@@ -292,7 +292,7 @@ public class SquareProperty extends Square  {
 		initializeResult(result);
 		result[0]="0";
 		
-		if(owner != p){
+		if(owner.id != p.id){
 			result[1]="This property doesn't belong to you!";
 			return result;
 		}else if(isMortgaged){

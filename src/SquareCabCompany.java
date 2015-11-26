@@ -27,7 +27,7 @@ public class SquareCabCompany extends Square {
 				result[1] = "Do you want to buy "+this.name+" ?";
 			}
 			
-		}else if (owner==player){
+		}else if (owner.id==player.id){
 			if(isMortgaged){
 				result[0]="1";
 				result[1] = "This cab company is mortgaged, can't build .";
@@ -43,7 +43,7 @@ public class SquareCabCompany extends Square {
 				result[1] = "Do you want to take a Taxi Ride for $20 ?";
 			}
 			
-		}else if (owner != player){
+		}else if (owner.id != player.id){
 			if (isMortgaged){
 				result[0]="1";
 				result[1] = "This property is mortgaged, don't pay rent.";
@@ -134,7 +134,7 @@ public class SquareCabCompany extends Square {
 		initializeResult(result);
 		result[0]="0";
 
-		if(owner != p){
+		if(owner.id != p.id){
 			result[1]="This cab stand doesn't belong to you!";
 			return result;
 		}else if (isMortgaged){
@@ -157,7 +157,7 @@ public class SquareCabCompany extends Square {
 		String[] result = new String[14];
 		initializeResult(result);
 		result[0]="0";
-		if(owner != p){
+		if(owner.id != p.id){
 			result[1]="This cab stand doesn't belong to you!";
 			return result;
 		}else if (isMortgaged){
