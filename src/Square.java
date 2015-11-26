@@ -229,28 +229,28 @@ public abstract class Square {
 			}
 		}else if (n.equals("CHECKER CAB CO.")){
 			p.position=6;
-			p.row=3;
+			p.row=2;
 			if(((SquareCabCompany)p.board.getSquareFromBoard(70)).owner==null && p.money>=300){  
 				result[0]="16";
 				result[1] += " Do you want to buy "+n+" ?";
 			}
 		}else if (n.equals("BLACK & WHITE CAB CO.")){
 			p.position=22;
-			p.row=3;
+			p.row=2;
 			if(((SquareCabCompany)p.board.getSquareFromBoard(86)).owner==null && p.money>=300){  
 				result[0]="17";
 				result[1] += " Do you want to buy "+n+" ?";
 			}
 		}else if (n.equals("YELLOW CAB CO.")){
 			p.position=34;
-			p.row=3;
+			p.row=2;
 			if(((SquareCabCompany)p.board.getSquareFromBoard(98)).owner==null && p.money>=300){  
 				result[0]="18";
 				result[1] += " Do you want to buy "+n+" ?";
 			}
 		}else if (n.equals("UTE CAB CO." )){
 			p.position=50;
-			p.row=3;
+			p.row=2;
 			if(((SquareCabCompany)p.board.getSquareFromBoard(114)).owner==null && p.money>=300){  
 				result[0]="19";
 				result[1] += " Do you want to buy "+n+" ?";
