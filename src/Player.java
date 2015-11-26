@@ -11,7 +11,7 @@ public class Player {
 	public ArrayList<Card> cards = new ArrayList<Card>();
 	public ArrayList<SquareTransit> trains = new ArrayList<SquareTransit>();
 	public ArrayList<SquareCabCompany> cabs = new ArrayList<SquareCabCompany>();	
-	public int[] colorProperties = new int[20];
+	public int colorProperties[] = new int[20];
 	public Board board;
 	public ArrayList<SquareUtility> utilities = new ArrayList<SquareUtility>();
 	public int countJail=4; //not in jail

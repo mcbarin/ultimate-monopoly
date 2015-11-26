@@ -13,7 +13,12 @@ public class SquareRollOnce extends Square {
 		String[] result = new String[14];
 		initializeResult(result);
 		result[0]="10";
-		result[1] = player.name+" will play Roll Once. Please pick a Roll Once Card.";
+		
+		Dice dice = new Dice();
+		int face = dice.getFace();
+		result[2]=Integer.toString(face);
+		
+		result[1] = player.name+" will play Roll Once. Please roll a die and wish to get '"+result[2]+"' on the face.";
 		
 		for (int i = 0; i < board.players.size(); i++) {
 			if( board.players.get(i).hasCardWithId(41) && board.players.get(i) != player) {
@@ -22,10 +27,6 @@ public class SquareRollOnce extends Square {
 			
 		}
 		
-		Dice dice = new Dice();
-		int face = dice.getFace();
-		
-		result[2]=Integer.toString(face);
 
 		return result;
 	}

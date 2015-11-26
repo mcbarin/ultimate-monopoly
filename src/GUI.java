@@ -16,6 +16,7 @@ public class GUI {
 	public boolean start=true;
 	
 	private int dieOne, dieTwo, dieSpeed;
+	public static int rollOnceCard, rollOnceDie;
 	
 	//buttons = 
 	//rollDice,buy,buyChance,sell,no,
@@ -134,10 +135,7 @@ public class GUI {
 		
 	    placeButton(b[3],"Sell",1025, 95, 115, 25,false);
 		placeButton(b[8],"Mortgage",1150, 95, 115, 25,false);
-	    
-	    
-	    
-
+	   
 		currentMessage = new JTextArea();
 	    currentMessage.setLineWrap( true );
 	    currentMessage.setWrapStyleWord( true );
@@ -239,25 +237,15 @@ public class GUI {
 	}
 
 	public void setGUI(String cm[], String bs, JButton b[]){
-		this.currentMessage.setText(cm[1]);
-		int l = bs.length();
-		if(l>26)
-			l = 26;
-		for(int i=0; i<l; i++){
-				if(bs.charAt(i)=='1' || i==11){
-					b[i].setVisible(true);}
-				else if(bs.charAt(i)=='0'){
-					b[i].setVisible(false);
-				}
+		setGUI(cm[1],bs,b);
 
-		}
+		
+	}
+	
+	public void removeSpecialConditions(){
 
-		for(int i=l; i<26; i++){
-			if(i!=11)
-					b[i].setVisible(false);
-		}
-		
-		
+		for(int i=0; i<26; i++){
+			MonopolyGame.specialConditions[i] = false;}
 	}
 
 	public void setGUI(String cm, String bs, JButton b[]){
@@ -278,6 +266,7 @@ public class GUI {
 			if(i!=11)
 					b[i].setVisible(false);
 		}
+		removeSpecialConditions();
 		
 	}
 	

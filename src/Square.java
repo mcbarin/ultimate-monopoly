@@ -5,8 +5,8 @@
 ///cokotoşa sor//status=5 display msg and update player position on screen
 //status=9 display msg with option "NO", "FREE PARKING", "PENNSYLVANIA RAILROAD" , "SHORT LINE", "READING RAILROAD", "B&O RAILROAD", "CHECKER CAB CO." , "BLACK & WHITE CAB CO." , "YELLOW CAB CO." ,"UTE CAB CO." then call taxiRide(Player p, String n)    
 
-//status=10 ise result[2]'de roll once kartÄ± bulunuyo. Bunu ekrana yansÄ±t ve rollOnce(Player p, int card, int die)'Ä± Ã§aÄŸÄ±r.(card kÄ±smÄ±na result[2]'yi ver.)
-//status=10 ise result[2]'de roll once kartı bulunuyo. Bunu ekrana yansıt, msg'ı ekrana yansıt.(kimin oynıcağını söylüyo) ve rollOnce(Player p, int card, int die)'ı çağır.(card kısmına result[2]'yi ver.)
+////////status=10 ise result[2]'de roll once kartÄ± bulunuyo. Bunu ekrana yansÄ±t ve rollOnce(Player p, int card, int die)'Ä± Ã§aÄŸÄ±r.(card kÄ±smÄ±na result[2]'yi ver.)
+////////status=10 ise result[2]'de roll once kartı bulunuyo. Bunu ekrana yansıt, msg'ı ekrana yansıt.(kimin oynıcağını söylüyo) ve rollOnce(Player p, int card, int die)'ı çağır.(card kısmına result[2]'yi ver.)
 
 //status=11 or 35 ask user msg, if says yes call applyCard(Square s, Player p, int status). 
 //status=12 13 14 15 16 17 18 19 first update position and then ask user msg, if says yes, call taxiRideAction(Player p, int status)
@@ -167,17 +167,11 @@ public abstract class Square {
 		String[] result = new String[14];
 		initializeResult(result);
 		result[0]="1";
-		Player pl = null;
-		for (int i = 0; i < p.board.players.size(); i++) {
-			if( p.board.players.get(i).hasCardWithId(41)) {
-				pl=p.board.players.get(i);
-			}
-			
-		}
+		Player pl = p;
 		if(card==die){
 			result[1]=pl.name+" won Roll Once Game and took $100";
 			p.addMoney(100);
-			result[pl.id+2]="100";
+			result[(pl.id+2)]="100";
 		}else{
 			result[1]=pl.name+" lost Roll Once Game.";
 		}

@@ -13,7 +13,11 @@ public class MonopolyGame {
 	private ArrayList<Player> players;
 	private Player cP;
 	
+	public static boolean manipulate=true; 
+	
 	private JButton buttons[] = new JButton[26];
+	public static boolean specialConditions[] = new boolean[26];
+	//	0-rollOnce	1-rollOnce Die
 	private int initialNumberofPlayers;
 	
 	private Dice die = new Dice();
@@ -32,7 +36,8 @@ public class MonopolyGame {
 	public MonopolyGame() throws Exception{
 
 		for(int i=0; i<26; i++){
-			buttons[i] = new JButton();}
+			buttons[i] = new JButton();
+			specialConditions[i] = false;}
 		
 		
 		if(Board.gameStatus==-1){
@@ -41,17 +46,24 @@ public class MonopolyGame {
 			Board.gameStatus = 0;
 			}
 		
-		
-		
 
 		//RollDice
 		buttons[0].addActionListener(new ActionListener()
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
-		    	  dieOne = die.getFace();
-		    	  dieTwo = die.getFace();
-		    	  dieSpeed = die.getFace();
+		    	  gui.removeSpecialConditions();
+		    	  
+		    	  if(!manipulate){
+			    	  dieOne = die.getFace();
+			    	  dieTwo = die.getFace();
+			    	  dieSpeed = die.getFace();}
+		    	  else{
+		    		 manipulate = false;
+		    		 dieOne = 1;
+			    	 dieTwo = 1;
+			    	 dieSpeed = 1;
+		    	  }
 		    	  totalDice = dieOne+dieTwo;
 		  			if(dieSpeed<4) totalDice+=dieSpeed;	
 		    	  gui.setDice(dieOne, dieTwo, dieSpeed);
@@ -66,9 +78,9 @@ public class MonopolyGame {
 		    		  cP.monopolyGuyFlag = true;
 		    	  }else{
 		    		  cP.setPosition(dieOne+dieTwo+dieSpeed);
+			    	  play();
 		    	  }
 		    	  
-		    	  play();
 		    	  
 		      }
 		});
@@ -89,6 +101,23 @@ public class MonopolyGame {
 		    	  setProps();
 		    	 
 		    	  
+		      }
+		});
+
+
+		//RllOnce Button
+		buttons[5].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  GUI.rollOnceDie = die.getFace();
+		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).rollOnce(cP, GUI.rollOnceCard,GUI.rollOnceDie);
+	    		  
+		    	  
+		    	  board.nextPlayer();
+	    		  gui.setGUI(result[1]+" Next player!","1",buttons);
+		    	  specialConditions[0]=true;
+		    	  specialConditions[1]=true;
 		      }
 		});
 
@@ -131,6 +160,10 @@ public class MonopolyGame {
 		    	  
 		    	  board = new Board(initialNumberofPlayers);
 		    	  players = board.getPlayers();
+
+			  		players.get(0).row=1;
+			  		players.get(0).position=27;
+		  		
 		    	  try {
 		    		gui = null;
 					gui = new GUI(board,buttons);
@@ -199,6 +232,8 @@ public class MonopolyGame {
 				break;
 			case 10:
 				gui.setGUI(result, "000001", buttons);
+				GUI.rollOnceCard = Integer.parseInt(result[2]);
+				specialConditions[0] = true;
 				break;
 			default:
 				gui.setGUI(result[1]+" Next player!", "1", buttons);
@@ -246,121 +281,6 @@ public class MonopolyGame {
 	  		buttons[3].setVisible(true); buttons[8].setVisible(true);
 	}
 
-
-	public static ActionListener rollDiceListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println(Integer.toBinaryString(13).charAt(1));
-	      }
-	};
-
-	public static ActionListener buyListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println("buy");
-	      }
-	};
-
-	public static ActionListener noListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println("no");
-	      }
-	};
-
-	public static ActionListener sellListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println("sell");
-	      }
-	};
-
-	public static ActionListener buyChanceListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println("buy chance");
-	      }
-	};
-
-	public static ActionListener yesListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println("yesss");
-	      }
-	};
-
-	public static ActionListener rollOnceListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println("roll once");
-	      }
-	};
-
-	public static ActionListener pullChanceListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println(Integer.toString(3/2));
-	      }
-	};
-
-	public static ActionListener pullCommunityListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println(Integer.toString(3/2));
-	      }
-	};
-
-	public static ActionListener mortgageListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println("Mortgage");
-	    	 // System.out.println(Integer.toString(gui.getPropertyIndex()));
-	      }
-	};
-
-	public static ActionListener unMortgageListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println("Un Mortgage");
-	      }
-	};
-
-	public static ActionListener startListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println("Un Mortgage");
-	      }
-	};
-
-	public static ActionListener loadListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println("Un Mortgage");
-	      }
-	};
-
-	public static ActionListener saveListener = new ActionListener()
-	{
-	      public void actionPerformed(ActionEvent e)
-	      {
-	    	  System.out.println("Un Mortgage");
-	      }
-	};
-	
-	
 	
 
 }

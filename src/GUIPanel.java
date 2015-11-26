@@ -26,10 +26,11 @@ public class GUIPanel extends JPanel {
 	private BufferedImage dieOneImg;
 	private BufferedImage dieTwoImg;
 	private BufferedImage dieSpeedImg;
+	private BufferedImage rollOnceDieImg;
 	
 
 	private BufferedImage cardImg;
-	public int cardType=3;
+	public int cardType=0;
 	
 	
 	private ArrayList<Player> players;
@@ -82,8 +83,10 @@ public class GUIPanel extends JPanel {
 				this.cardImg = ImageIO.read(new File("img/chancecard.png"));
 			}else if (cardType==2){
 				this.cardImg = ImageIO.read(new File("img/comminitychest.png"));
-			}else if (cardType==3){
-				this.cardImg = ImageIO.read(new File("img/rollonce.png"));
+			}
+			
+			if (MonopolyGame.specialConditions[0]){
+					this.cardImg = ImageIO.read(new File("img/rollonce.png"));
 				}
 			
 			this.dieOneImg = ImageIO.read(new File("img/die"+dieOne+".png"));
@@ -104,10 +107,23 @@ public class GUIPanel extends JPanel {
 		g.drawImage(cardImg, 725, 230, 290, 160, null);
 		
 		
-	    g.setFont(new Font("Alison", Font.PLAIN,80));
-    	g.setColor(Color.black);
-    	g.drawString("6", 842, 362);
+		if (MonopolyGame.specialConditions[1]){
+			try {
+				this.rollOnceDieImg = ImageIO.read(new File("img/die"+GUI.rollOnceDie+".png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			g.drawImage(rollOnceDieImg, 880, 294, 80, 80, null);
+		}
 		
+		
+		if (MonopolyGame.specialConditions[0]){
+		    g.setFont(new Font("Arial", Font.PLAIN,80));
+	    	g.setColor(Color.black);
+	    	if (MonopolyGame.specialConditions[1]){g.drawString(Integer.toString(GUI.rollOnceCard), 800, 362);}
+	    	else{g.drawString(Integer.toString(GUI.rollOnceCard), 842, 362);}
+		}
 		
 	}
 	
