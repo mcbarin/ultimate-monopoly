@@ -96,9 +96,9 @@ public class SquareCabCompany extends Square {
 	public String[] buyCabCompany(Player p){
 		String[] result = new String[14];
 		initializeResult(result);
+		this.owner = p;
 		p.cabs.add(this);
 		p.substract(this.price);
-		this.owner = p;
 		p.valueOfProperties += this.price/2;
 		result[0]="1";
 		result[1] = p.name + " has bought the " + ""+this.name+".";
