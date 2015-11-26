@@ -263,7 +263,8 @@ public abstract class Square {
 	public String[] taxiRideAction(Player p, int status){
 		String[] result = new String[14];
 		initializeResult(result);
-
+		result[0]="1";
+		
 		if (status == 12 && ((SquareTransit)p.board.getSquareFromBoard(9)).owner==null){
 			result[0] = "5";
 			p.position=9;
@@ -303,7 +304,7 @@ public abstract class Square {
 			p.row=2;
 
 		}
-		result[0]="1";
+		
 		return result;
 
 	}
