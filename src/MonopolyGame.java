@@ -97,8 +97,6 @@ public class MonopolyGame {
 		    	  }else if(result[0].equals("9")){
 		    		  gui.setGUI(result[1],"1",buttons);
 		    	  }
-		    	  
-		    	  setProps();
 		    	 
 		    	  
 		      }
@@ -134,8 +132,6 @@ public class MonopolyGame {
 		    		  board.nextPlayer();
 		    		  gui.setGUI(result[1] + " Next player!","1",buttons);
 		    	  }
-		    	  
-		    	  setProps();
 		    	 
 		    	  
 		      }
@@ -254,7 +250,7 @@ public class MonopolyGame {
 	public void setProps(){
 		 
 		gui.cpTotalFree=0;
-  	  for(int i = 0; i<cP.properties.size();i++){
+  	  		for(int i = 0; i<cP.properties.size();i++){
 	  			if(cP.properties.get(i).isMortgaged==false){
 	  				gui.userFreeProperties[gui.cpTotalFree].setVisible(true);
 	  				gui.userFreeProperties[gui.cpTotalFree].setText(cP.properties.get(i).name);

@@ -65,6 +65,7 @@ public abstract class Square {
 		result[0]="0";
 		result[1]="Player mortgaged the property.";
 		result[p.id+2]=""+(price/2);
+		p.setFreeProperties();
 		return result;
 	}
 
@@ -85,7 +86,6 @@ public abstract class Square {
 		if(p.money<unmortgagePrice){
 			result[0]="0";
 			result[1]="Player can not unmortgage this property. Money is not enough.";
-			return result;
 		
 		}else{
 			p.substract(unmortgagePrice);
@@ -102,8 +102,9 @@ public abstract class Square {
 			result[0]="0";
 			result[1]="Player unmortgaged the property.";
 			result[p.id+2]="-"+""+unmortgagePrice;
-			return result;
 		}
+		p.setFreeProperties();
+		return result;
 	}
 
 	public String[] applyCard(Square s, Player p,int cardId){

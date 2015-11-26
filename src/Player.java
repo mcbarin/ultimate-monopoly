@@ -11,6 +11,8 @@ public class Player {
 	public ArrayList<Card> cards = new ArrayList<Card>();
 	public ArrayList<SquareTransit> trains = new ArrayList<SquareTransit>();
 	public ArrayList<SquareCabCompany> cabs = new ArrayList<SquareCabCompany>();	
+	public ArrayList<Square> freeProperties = new ArrayList<Square>();
+	public ArrayList<Square> mortgagedProperties = new ArrayList<Square>();
 	public int colorProperties[] = new int[20];
 	public Board board;
 	public ArrayList<SquareUtility> utilities = new ArrayList<SquareUtility>();
@@ -115,8 +117,23 @@ public class Player {
 		}else{
 			sp.house=house;
 		}
-		sp.updateRentAccordingToHouse(sp);
+		
+		
+		
+		
+		
+		//Buğra Can Sefercik en comentaria la línea.
+		//sp.updateRentAccordingToHouse(sp);
+		
+		
+		
+		
+		
+		
+		
 		addProperty(sp);
+
+		setFreeProperties();
 	}
 	
 	public void addProperty(SquareProperty sp){
@@ -126,7 +143,20 @@ public class Player {
 		numberOfProperties++;
 		valueOfProperties+=sp.price;
 		//check for majority ownership or monopoly.
-		updateRentPrices(sp.color);
+		
+		
+		
+		
+		
+		//Buğra Can Sefercik en comentaria la línea.
+		//updateRentPrices(sp.color);
+		
+		
+		
+		
+		
+
+		setFreeProperties();
 	}
 	
 	public void deleteProperty(SquareProperty sp){
@@ -145,6 +175,8 @@ public class Player {
 			}
 			
 		}
+
+		setFreeProperties();
 	}
 
 	public String[] getResultArray(){
@@ -226,6 +258,7 @@ public class Player {
 				}}
 			
 		}
+		setFreeProperties();
 	}
 	
 	public void addMoney(int money){
@@ -241,6 +274,7 @@ public class Player {
 	}
 	
 	public void setPosition(int dice){
+
 		int old = position;
 		
 		if(dice%2 == 1){
@@ -289,7 +323,8 @@ public class Player {
 				this.row = s.row;
 			}
 			
-			
+
+			setFreeProperties();
 			
 		///////////////////
 		}
@@ -393,6 +428,7 @@ public class Player {
 			this.position = firstOwned.position;
 			this.row = firstOwned.row;
 		}
+		setFreeProperties();
 			
 		}
 		
@@ -444,6 +480,28 @@ public class Player {
 		}
 	}
 	
+	
+	public void setFreeProperties(){
+		freeProperties.clear();
+
+		for(int i=0; i<properties.size(); i++){
+			if(!properties.get(i).isMortgaged)
+				freeProperties.add(properties.get(i));
+		}
+		for(int i=0; i<cabs.size(); i++){
+			if(!cabs.get(i).isMortgaged)
+				freeProperties.add(cabs.get(i));
+		}
+		for(int i=0; i<trains.size(); i++){
+			if(!trains.get(i).isMortgaged)
+				freeProperties.add(trains.get(i));
+		}
+		for(int i=0; i<utilities.size(); i++){
+			if(!utilities.get(i).isMortgaged)
+				freeProperties.add(utilities.get(i));
+		}
+		
+	};
 	
 	
 	
