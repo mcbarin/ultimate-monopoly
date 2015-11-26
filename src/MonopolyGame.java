@@ -23,8 +23,9 @@ public class MonopolyGame {
 	
 	private Dice die = new Dice();
 	private  int totalDice;
-	//buttons = rollDice,	buy,	buyChance,	sell,	4-no,		5-rollOnce,	pullChance,	pullCommunity,	mortgage,	unMortgage,
-	//			10-yes,		start,	load,		save, 	dieOne,		15-dieTwo, 	dieTotal,	build,			18-taxiRide,
+	//buttons = rollDice,	buy,	buyChance,	sell,	4-no,		5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
+	//			10-yes,		start,	load,		save, 	dieOne,		15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
+	//			20-yes
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -193,6 +194,20 @@ public class MonopolyGame {
 		      }
 		});
 		
+		//applyCard
+		buttons[20].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).applyCard(board.getSquareWithRowAndPosition(cP.row, cP.position), cP, specialStatus);
+		    	  
+		    	  specialConditions[3] = true;
+		    	  specialStatus = Integer.parseInt(result[0]);
+		    	  play();
+		    	 
+		      }
+		});
+		
 		//No button
 		ActionListener nolistener = new ActionListener()
 		{
@@ -261,6 +276,11 @@ public class MonopolyGame {
 				gui.setGUI(result, "000001", buttons);
 				GUI.rollOnceCard = Integer.parseInt(result[2]);
 				specialConditions[0] = true;
+				break;
+			case 11: case 35:
+				specialConditions[3] = true;
+				specialStatus = resultStatus;
+				gui.setGUI(result, "000010000000000000011", buttons);
 				break;
 			default:
 				gui.setGUI(result[1]+" Next player!", "1", buttons);

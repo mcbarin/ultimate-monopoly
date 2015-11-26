@@ -122,7 +122,6 @@ public abstract class Square {
 			result[0]="1";
 			result[1]="Player used Foreclosed Property Sale card and bought this property.";
 			result[p.id+2]="-"+""+unmortgagePrice;
-			return result;
 
 
 		}else if(cardId==35){ // reverse
@@ -132,7 +131,6 @@ public abstract class Square {
 			result[1]="Reverse rent, owner pays the rent to the guest.";
 			result[p.id+2]=""+((SquareProperty)s).rent;
 			result[((SquareProperty)s).owner.id+2]="-"+""+((SquareProperty)s).rent;
-			return result;
 		}
 		return result;
 	}

@@ -241,6 +241,7 @@ public class GUI {
 		placeButton(b[5],"Roll Once",735, 180, 270, 40,false);
 		placeButton(b[1],"Buy",735, 188, 130, 25,false);
 		placeButton(b[10],"Yes",735, 188, 130, 25,false);
+		placeButton(b[19],"Yes",735, 188, 130, 25,false);
 		placeButton(b[4],"No",875, 188, 130, 25,false);
 		placeButton(b[2],"Buy with Cance Card",735, 188, 270, 25,false);
 		
