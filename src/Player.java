@@ -13,6 +13,7 @@ public class Player {
 	public ArrayList<SquareCabCompany> cabs = new ArrayList<SquareCabCompany>();	
 	public ArrayList<Square> freeProperties = new ArrayList<Square>();
 	public ArrayList<Square> mortgagedProperties = new ArrayList<Square>();
+	public String allPropertiesNames = "";
 	public int colorProperties[] = new int[20];
 	public Board board;
 	public ArrayList<SquareUtility> utilities = new ArrayList<SquareUtility>();
@@ -473,6 +474,7 @@ public class Player {
 	public void setFreeProperties(){
 		freeProperties.clear();
 		mortgagedProperties.clear();
+		allPropertiesNames = "";
 
 		for(int i=0; i<properties.size(); i++){
 			if(!properties.get(i).isMortgaged)
@@ -509,8 +511,15 @@ public class Player {
 			if(utilities.get(i).isMortgaged)
 				mortgagedProperties.add(utilities.get(i));
 		}
+
+		for(int i=0; i<freeProperties.size(); i++){
+			allPropertiesNames = allPropertiesNames+", "+freeProperties.get(i).name;
+		}
+		for(int i=0; i<mortgagedProperties.size(); i++){
+			allPropertiesNames = allPropertiesNames+", "+mortgagedProperties.get(i).name;
+		}
 		
-	};
+	}
 	
 	
 	
