@@ -137,6 +137,7 @@ public class GUI {
 	     }
 		scrollPane.setSize(240, 100);
 		sellpanel.setBackground(Color.DARK_GRAY);
+		userFreeProperties[0].setSelected(true);
 		scrollPane.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
 		scrollPane.setAutoscrolls(true);
 		scrollPane.setVisible(false);
@@ -183,6 +184,7 @@ public class GUI {
 	    	unmortgagepanel.add(userMortgagedProperties[i]);
 	     }
 	    scrollPaneUnmortgage.setSize(240, 100);
+	    userMortgagedProperties[0].setSelected(true);
 	    unmortgagepanel.setBackground(Color.DARK_GRAY);
 		scrollPaneUnmortgage.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
 		scrollPaneUnmortgage.setAutoscrolls(true);
@@ -408,7 +410,6 @@ public class GUI {
 		for(int i=cpFreeProperties.size(); i<MAX_PROPERTIES; i++){
 				userFreeProperties[i].setVisible(false);
 		}
-	userFreeProperties[0].setSelected(true);
 		buttons[3].setVisible(true); buttons[3].setLocation(1025, starty+135);
 		buttons[8].setVisible(true); buttons[8].setLocation(1150, starty+135);
 
@@ -446,7 +447,6 @@ public class GUI {
 			for(int i=cpMortgagedProperties.size(); i<MAX_PROPERTIES; i++){
 				userMortgagedProperties[i].setVisible(false);
 			}
-			userMortgagedProperties[0].setSelected(true);
 			buttons[9].setVisible(true); buttons[9].setLocation(1025, y+135);
 	
 	  }else{buttons[9].setVisible(false); scrollPaneUnmortgage.setVisible(false);titles[1].setVisible(false);}
