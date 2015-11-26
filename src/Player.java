@@ -119,17 +119,9 @@ public class Player {
 		}
 		
 		
+		sp.updateRentAccordingToHouse(sp);
 		
-		
-		
-		//Buğra Can Sefercik en comentaria la línea.
-		//sp.updateRentAccordingToHouse(sp);
-		
-		
-		
-		
-		
-		
+
 		
 		addProperty(sp);
 
@@ -144,19 +136,16 @@ public class Player {
 		valueOfProperties+=sp.price;
 		//check for majority ownership or monopoly.
 		
-		
-		
-		
-		
-		//Buğra Can Sefercik en comentaria la línea.
-		//updateRentPrices(sp.color);
-		
-		
-		
-		
-		
-
+		updateRentPrices(sp.color);
 		setFreeProperties();
+	}
+	
+	public void deleteUpgradedColor(int id){
+		for(int i=0;i<upgradedColors.size();i++){
+			if(upgradedColors.get(i)==id){
+				upgradedColors.remove(i);
+			}
+		}
 	}
 	
 	public void deleteProperty(SquareProperty sp){
@@ -214,8 +203,8 @@ public class Player {
 					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
 					sp.normalizeRent();
 					sp.level=0;
-					upgradedColors.remove(sp.color);
-				}
+					deleteUpgradedColor(sp.color);
+}
 			}
 			else if(colorProperties[color] == housesSameColor){
 				int[] houses = new int[housesSameColor];
@@ -241,7 +230,7 @@ public class Player {
 					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
 					sp.normalizeRent();
 					sp.level=0;
-					upgradedColors.remove(sp.color);
+					deleteUpgradedColor(sp.color);
 				}
 			}
 			else if(colorProperties[color] == housesSameColor){
