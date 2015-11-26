@@ -356,9 +356,8 @@ public String[] getResultArray(){
 		((SquareTransit) squares[1][5]).SquareTransitTwin(29,this);
 		((SquareTransit) squares[1][25]).SquareTransitTwin(49,this);
 		
-		
+		debugMode();
 
-		currentPlayer.addPropertyDebug(2, 0);
 	}
 	
 	public void setCurrentPlayer(Player p){
@@ -384,6 +383,7 @@ public String[] getResultArray(){
 		
 		return np;
 	}
+	
 
 }
 
