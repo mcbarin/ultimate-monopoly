@@ -42,6 +42,27 @@ public abstract class Square {
 		}
 
 	}
+	public void sellSquare(Player p){
+		if(this.type=="Property"){
+			((SquareProperty)this).sellProperty(p);
+		}else if(this.type=="Transit"){
+			((SquareTransit)this).sellTrainStation(p);
+		}else if(this.type=="Utility"){
+			((SquareUtility)this).sellUtility(p);
+		}else if(this.type=="CabCompany"){
+			((SquareCabCompany)this).sellCabCompany(p);
+		}
+	}
+
+	public void sellSquareBuilding(Player p){
+		if(this.type=="Property"){
+			((SquareProperty)this).sellBuilding(p);
+		}else if(this.type=="Transit"){
+			((SquareTransit)this).sellTrainDepot(p);
+		}else if(this.type=="CabCompany"){
+			((SquareCabCompany)this).sellCabStand(p);
+		}
+	}
 
 	public String[] mortgage(Player p){
 		int price=0;
