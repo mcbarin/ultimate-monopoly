@@ -16,6 +16,9 @@ public class Player {
 	public ArrayList<SquareUtility> utilities = new ArrayList<SquareUtility>();
 	public int countJail=4; //not in jail
 	public boolean reverse = false;
+	
+	// If a player has a majority ownership or monopoly, color id of the property is here.(For hurricane card.)
+	public ArrayList<Integer> upgradedColors = new ArrayList<Integer>();
 
 	public Player(String name,int money, int id, int row, int position,Board board) {
 		super();
@@ -152,6 +155,7 @@ public class Player {
 		return result;
 	}
 	
+	
 
 	
 	public void updateRentPrices(int color){
@@ -166,6 +170,7 @@ public class Player {
 					if(sp.getOwner() != null && sp.getOwner().equals(this)){
 						sp.doubleRent();
 						sp.level=1;
+						upgradedColors.add(sp.color);
 					}
 				}
 				
@@ -177,6 +182,7 @@ public class Player {
 					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
 					sp.normalizeRent();
 					sp.level=0;
+					upgradedColors.remove(sp.color);
 				}
 			}
 			else if(colorProperties[color] == housesSameColor){
@@ -187,6 +193,7 @@ public class Player {
 					if(sp.getOwner() != null && sp.getOwner().equals(this) && sp.house==0){
 						sp.TripleRent();
 						sp.level=2;
+						upgradedColors.add(sp.color);
 					}
 					
 				}
@@ -201,6 +208,8 @@ public class Player {
 				for(int i=0;i<housesSameColor;i++){
 					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
 					sp.normalizeRent();
+					sp.level=0;
+					upgradedColors.remove(sp.color);
 				}
 			}
 			else if(colorProperties[color] == housesSameColor){
@@ -210,6 +219,8 @@ public class Player {
 					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
 					if(sp.getOwner() != null && sp.getOwner().equals(this)){
 						sp.TripleRent();
+						sp.level=2;
+						upgradedColors.add(sp.color);
 					}
 					
 				}}
