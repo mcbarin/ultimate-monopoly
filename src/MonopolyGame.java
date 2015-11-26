@@ -222,6 +222,7 @@ public class MonopolyGame {
 		    	  
 		    	  specialConditions[3] = true;
 		    	  specialStatus = Integer.parseInt(result[0]);
+		    	  System.out.println("asdasdasd");
 		    	  play();
 		    	 
 		      }
@@ -286,7 +287,8 @@ public class MonopolyGame {
 				gui.setGUI(result[1], "01011", buttons);
 				break;
 			case 5:
-	    		  play();
+				gui.setGUI(result, "00000000000000000011", buttons);
+	    		play();
 			case 9:
 				gui.setGUI(result, "00000000000000000011", buttons);
 				specialConditions[2] = true;
