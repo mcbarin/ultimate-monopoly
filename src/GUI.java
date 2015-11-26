@@ -38,23 +38,26 @@ public class GUI {
 
 	private JTextField initalNumberofPlayers;
 	private JTextArea currentMessage;
-	private JLabel currentPlayer;
+	private JLabel currentPlayer = new JLabel();
 	
-	private JComboBox<String> cpPropertiesNames = new JComboBox<String>();
+	private JLabel titles[] = new JLabel[13];
 
 
-	public JComboBox<String> cpMortgagedPropertiesNames = new JComboBox<String>();
 	public ArrayList<Square> cpFreeProperties;
-	public ArrayList<Square> cpMortgagedProperties = new ArrayList<Square>();
+	public ArrayList<Square> cpMortgagedProperties;
 	
 	public final static int MAX_PROPERTIES = 86;
 	public JRadioButton[] userFreeProperties = new JRadioButton[MAX_PROPERTIES];
-	public ButtonGroup freePropertiesButtonGroup;
-	public int cpTotalFree=0,cpTotalMortgaged=0;
+	public ButtonGroup freePropertiesButtonGroup = new ButtonGroup();
+	public JPanel sellpanel = new JPanel(new GridLayout(0,1));
+    JScrollPane scrollPane = new JScrollPane(sellpanel);
 
 	private JButton buttons[] = new JButton[26];
 	
-	
+	public static Color colorCodes[] = {new Color(255,255,255),new Color(0,0,0),new Color(128,128,128),new Color(170,68,0),new Color(88,12,57),
+										new Color(135,165,215),new Color(239,55,120),new Color(245,128,35),new Color(212,0,0),new Color(255,204,0),
+										new Color(9,135,51),new Color(40,78,161),new Color(255,170,170),new Color(128,255,128),new Color(255,230,128),
+										new Color(0,128,102),new Color(128,0,51),new Color(170,136,0),new Color(255,179,128),new Color(128,0,0)};
 	
 	Font font = new Font("Verdana", Font.PLAIN, 12);
 	
@@ -109,8 +112,7 @@ public class GUI {
 		
 		
 		
-		freePropertiesButtonGroup = new ButtonGroup();
-		JPanel sellpanel = new JPanel(new GridLayout(0,1));
+		
 	    for(int i = 0; i<MAX_PROPERTIES; i++){
 	        userFreeProperties[i] = new JRadioButton("text" + i);
 	        userFreeProperties[i].setActionCommand(Integer.toString(i));
@@ -122,13 +124,12 @@ public class GUI {
 	    	freePropertiesButtonGroup.add(userFreeProperties[i]);
 	        sellpanel.add(userFreeProperties[i]);
 	     }
-	    JScrollPane scrollPane = new JScrollPane(sellpanel);
-		scrollPane.setLocation(1025, 400);
 		scrollPane.setSize(240, 100);
 		sellpanel.setBackground(Color.DARK_GRAY);
 		scrollPane.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
 		scrollPane.setAutoscrolls(true);
-	    panel.add(scrollPane);
+		scrollPane.setVisible(false);
+		panel.add(scrollPane);
 		
 	    placeButton(b[3],"Sell",1025, 95, 115, 25,false);
 		placeButton(b[8],"Mortgage",1150, 95, 115, 25,false);
@@ -150,12 +151,12 @@ public class GUI {
 
         
 
-        currentPlayer = new JLabel("");
-        currentPlayer.setFont(new Font("Verdana", Font.BOLD, 25));
-        currentPlayer.setSize(240, 40);
-        currentPlayer.setLocation(1025, 10);
-        currentPlayer.setForeground(new Color(255,155,155));
+        
+        placeLabel(currentPlayer,"",240,30,1025,10,new Color(255,155,155),Color.GRAY,new Font("Verdana", Font.BOLD, 25));
         panel.add(currentPlayer);
+        
+        titles[0] = new JLabel();
+        panel.add(titles[0]);
 		
 
 		placeButton(b[0],"Roll Dice!",735, 180, 270, 40,false);
@@ -221,6 +222,15 @@ public class GUI {
 		panel.add(button);
 	}
 	
+	public void placeLabel(JLabel l, String t, int w, int h, int x, int y, Color f, Color b, Font font){
+		l.setText(t);
+		l.setFont(font);
+        l.setSize(w, h);
+        l.setLocation(x, y);
+        l.setBackground(b);
+        l.setForeground(f);
+	}
+	
 	
 	public int getInitialNumberofPlayers(){
 		int a = 2;
@@ -235,12 +245,6 @@ public class GUI {
 		
 	}
 
-	public void setGUI(String cm[], String bs, JButton b[]){
-		setGUI(cm[1],bs,b);
-
-		
-	}
-	
 	public void removeSpecialConditions(){
 
 		for(int i=0; i<26; i++){
@@ -253,7 +257,7 @@ public class GUI {
 		if(l>26)
 			l = 26;
 		for(int i=0; i<l; i++){
-				if(bs.charAt(i)=='1' || i==11 || i==3){
+				if(bs.charAt(i)=='1'){
 					b[i].setVisible(true);}
 				else if(bs.charAt(i)=='0'){
 					b[i].setVisible(false);
@@ -266,6 +270,12 @@ public class GUI {
 					b[i].setVisible(false);
 		}
 		removeSpecialConditions();
+	}
+
+	public void setGUI(String cm[], String bs, JButton b[]){
+		setGUI(cm[1],bs,b);
+
+		
 	}
 	
 	
@@ -284,56 +294,41 @@ public class GUI {
 	public void setProps(){
 		JButton b[] = buttons;
 			
-			
-		for(int i = 0; i<cpFreeProperties.size();i++){
-  				userFreeProperties[i].setVisible(true);
-  				userFreeProperties[i].setText(cpFreeProperties.get(i).name);
-  				userFreeProperties[i].setActionCommand(Integer.toString(cpFreeProperties.get(i).id));
-  			
-    		}
-		for(int i=cpFreeProperties.size(); i<MAX_PROPERTIES; i++){
-				userFreeProperties[i].setVisible(false);
-		}
-  		buttons[3].setVisible(true); buttons[8].setVisible(true);
-			
-/*
-			if(cpFreeProperties.size()>0){
-			    cpPropertiesNames.setEditable(true);
-			    cpPropertiesNames.setSelectedIndex(0);
-			    cpPropertiesNames.setSize(240, 30);
-			    cpPropertiesNames.setAutoscrolls(true);
-			    cpPropertiesNames.setLocation(1025, 55);
-				cpPropertiesNames.setBackground(new Color(102,150,0));
-			    panel.add(cpPropertiesNames);
-			    cpPropertiesNames.addActionListener(new ActionListener() {
-			        public void actionPerformed(ActionEvent e) {
-			        	if(cpPropertiesNames.getSelectedIndex()>0)
-			        		cpSelectedProperty = cpFreeProperties.get(cpPropertiesNames.getSelectedIndex()-1);
-			          }
-			        });
-				
-				
-			}else{b[3].setVisible(false);b[8].setVisible(false);}
-			
-			if(cpMortgagedProperties.size()>0){
-				cpMortgagedPropertiesNames.addItem("Select a property to UNmortgage.");
-				cpMortgagedPropertiesNames.setEditable(true);
-				cpMortgagedPropertiesNames.setSelectedIndex(0);
-				cpMortgagedPropertiesNames.setSize(240, 30);
-				cpMortgagedPropertiesNames.setAutoscrolls(true);
-				cpMortgagedPropertiesNames.setLocation(1025, 130);
-				cpMortgagedPropertiesNames.setBackground(new Color(185,0,0));
-			    panel.add(cpMortgagedPropertiesNames);
-			    cpMortgagedPropertiesNames.addActionListener(new ActionListener() {
-			        public void actionPerformed(ActionEvent e) {
-			        	if(cpMortgagedPropertiesNames.getSelectedIndex()>0)
-			        		cpSelectedMortgagedProperty = cpMortgagedProperties.get(cpMortgagedPropertiesNames.getSelectedIndex()-1);
-			          }
-			        });
-			    placeButton(b[9],"UnMortgage",1025, 170, 240, 25,false);
-			}else{b[9].setVisible(false);}
-	*/
+	  if(cpFreeProperties.size()>0){	
+		  titles[0].setVisible(true);
+		  placeLabel(titles[0],"Select a propety to sell or mortgage:",240,20,1025,45,Color.WHITE,Color.GRAY,font);
+	        
+		  scrollPane.setVisible(true);
+		  scrollPane.setLocation(1025,70);
+			for(int i = 0; i<cpFreeProperties.size();i++){
+	  				userFreeProperties[i].setVisible(true);
+	  				userFreeProperties[i].setText(cpFreeProperties.get(i).name);
+	  				
+	
+	  				userFreeProperties[i].setForeground(Color.WHITE);
+	  				if(cpFreeProperties.get(i).color<20 && cpFreeProperties.get(i).color>-1){
+	  					Color sqColor = colorCodes[cpFreeProperties.get(i).color];
+	  	  				userFreeProperties[i].setBackground(sqColor);
+	  	  				if(sqColor.getBlue()>128 && sqColor.getGreen()>128 && sqColor.getRed()>128){
+	  	  					userFreeProperties[i].setForeground(Color.BLACK);
+	  	  				}
+	  				}else{
+	  					userFreeProperties[i].setBackground(Color.DARK_GRAY);
+	  				}
+	  				userFreeProperties[i].setActionCommand(Integer.toString(cpFreeProperties.get(i).id));
+	  			
+	    		}
+			for(int i=cpFreeProperties.size(); i<MAX_PROPERTIES; i++){
+					userFreeProperties[i].setVisible(false);
+			}
+		userFreeProperties[0].setSelected(true);
+  		buttons[3].setVisible(true); buttons[3].setLocation(1025, 180);
+  		buttons[8].setVisible(true); buttons[8].setLocation(1150, 180);
+	  }else{buttons[3].setVisible(false); buttons[8].setVisible(false); scrollPane.setVisible(false);titles[0].setVisible(false);}
+  
 	}
+	
+	
 	
 
 }

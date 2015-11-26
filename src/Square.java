@@ -23,6 +23,7 @@ public abstract class Square {
 	int id;
 	int position;
 	int row;
+	int color;
 
 
 	public Square(String type,String name,int id, int position, int row) {

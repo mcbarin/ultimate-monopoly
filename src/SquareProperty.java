@@ -5,7 +5,6 @@
 public class SquareProperty extends Square  {
 
 	Player owner=null;
-	int color;
 	int price;
 	int originalRent;
 	int rent;
