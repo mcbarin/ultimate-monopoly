@@ -72,6 +72,7 @@ public class GUI {
     JLabel playerPics[] = new JLabel[12];
     JLabel playerNames[] = new JLabel[12];
     JLabel playerMoneys[] = new JLabel[12];
+    JLabel playerPropertiesNames[] = new JLabel[12];
     
 	private JButton buttons[] = new JButton[26];
 	
@@ -174,11 +175,12 @@ public class GUI {
 		playerMoneys[0].setFont(new Font("Lucida Calligraphy", Font.BOLD, 24));
 		playerStatsPanel.add(playerMoneys[0]);
 		
-		playerMoneys[0] = new JLabel("$3200".toUpperCase());
-		playerMoneys[0].setSize(200, 40);
-		playerMoneys[0].setLocation(150,0*20+2);
-		playerMoneys[0].setFont(new Font("Lucida Calligraphy", Font.BOLD, 24));
-		playerStatsPanel.add(playerMoneys[0]);
+		playerPropertiesNames[0] = new JLabel(players.get(0).allPropertiesNames);
+		playerPropertiesNames[0].setToolTipText(players.get(0).allPropertiesNames);
+		playerPropertiesNames[0].setSize(540, 40);
+		playerPropertiesNames[0].setLocation(150,0*20+44);
+		playerPropertiesNames[0].setFont(new Font("Arial", Font.PLAIN, 16));
+		playerStatsPanel.add(playerPropertiesNames[0]);
 		
 		playerStatsPanel.setLayout(null);
 		scrollPanePlayerStats.setSize(540, 200);
