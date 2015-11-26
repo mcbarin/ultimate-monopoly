@@ -3,13 +3,12 @@ DEBUG ON
 PLAYER 0
 1 1 4000
 1
-property 1 1
+property 5 0
 1
 card 4
 
 PLAYER 1
 1 2 4000
 1
-property 2 2
-1
-card 7
+property 7 0
+0
