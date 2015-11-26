@@ -190,13 +190,7 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).taxiRide(cP, gui.taxiRideGroup.getSelection().getActionCommand());
-		    	  if(result[0].equals("1")){
-		    		  board.nextPlayer();
-		    		  gui.setGUI(result[1]+" Next player!","1",buttons);
-		    	  }else if(result[0].equals("5")){
-		    		  board.nextPlayer();
-		    		  gui.setGUI(result[1] + " Next player!","1",buttons);
-		    	  }
+
 		    	 
 		    	  System.out.println("Taxi Ride: " + gui.taxiRideGroup.getSelection().getActionCommand());
 		      }
@@ -238,8 +232,8 @@ public class MonopolyGame {
 		
 		String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
 		
-		//resultStatus = Integer.parseInt(result[0]);
-		resultStatus = 9;
+		resultStatus = Integer.parseInt(result[0]);
+		//resultStatus = 9;
 		switch(resultStatus){
 			case 0:
 				gui.setGUI(result, "1", buttons);
