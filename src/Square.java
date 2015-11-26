@@ -183,7 +183,7 @@ public abstract class Square {
 		initializeResult(result);
 		result[0]="1";
 
-		if (((SquareCabCompany)this).owner!=null && ((SquareCabCompany)this).owner.id==p.id){
+		if (!n.equals("FREE PARKING") && ((SquareCabCompany)this).owner!=null && ((SquareCabCompany)this).owner.id==p.id){
 			p.substract(20);
 			p.board.pool +=20;
 			result[1] = p.name + " move to " + ""+name+".";

@@ -25,7 +25,7 @@ public class MonopolyGame {
 	private  int totalDice;
 	//buttons = rollDice,	buy,	buyChance,	sell,	4-no,		5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
 	//			10-yes,		start,	load,		save, 	dieOne,		15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
-	//			20-yes
+	//			20-yes		21-yestaxiact
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -175,6 +175,11 @@ public class MonopolyGame {
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
+		    	 /* String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position);
+		    	  
+		    	  specialConditions[3] = truee;
+		    	  specialStatus = Integer.parseInt(result[0]);
+		    	  play();*/
 		    	  System.out.println("Selected Radio Button: " + gui.freePropertiesButtonGroup.getSelection().getActionCommand());
 		      }
 		});
@@ -208,12 +213,26 @@ public class MonopolyGame {
 		      }
 		});
 		
+		//taxiRideAction
+		buttons[21].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).applyCard(board.getSquareWithRowAndPosition(cP.row, cP.position), cP, specialStatus);
+		    	  
+		    	  specialConditions[3] = true;
+		    	  specialStatus = Integer.parseInt(result[0]);
+		    	  play();
+		    	 
+		      }
+		});
+		
 		//No button
 		ActionListener nolistener = new ActionListener()
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
-
+		    	
 				board.nextPlayer();
 				gui.setGUI("Next player!", "1", buttons);
 		  		
@@ -281,6 +300,10 @@ public class MonopolyGame {
 				specialConditions[3] = true;
 				specialStatus = resultStatus;
 				gui.setGUI(result, "000010000000000000011", buttons);
+				break;
+			case 12: case 13: case 14: case 15: case 16: case 17: case 18: case 19:
+				gui.setGUI(result, "0000100000000000000001", buttons);
+				
 				break;
 			default:
 				gui.setGUI(result[1]+" Next player!", "1", buttons);

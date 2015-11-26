@@ -372,9 +372,11 @@ public String[] getResultArray(){
 	public Player nextPlayer(){
 		int npID = (this.currentPlayer.id+1)%totalPlayer;
 		Player np = players.get(npID);
-		while(np.isPlaying==false){
-			npID = (npID+1)%totalPlayer;
-			np = players.get(npID);
+		if(MonopolyGame.dieOne!=MonopolyGame.dieTwo){
+			while(np.isPlaying==false){
+				npID = (npID+1)%totalPlayer;
+				np = players.get(npID);
+			}
 		}
 		
 		this.currentPlayer = np;
