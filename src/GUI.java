@@ -220,8 +220,9 @@ public class GUI {
 
         
 
-        
-        placeLabel(currentPlayer,"",240,30,1025,10,new Color(255,155,155),Color.GRAY,new Font("Verdana", Font.BOLD, 25));
+        currentPlayer.setIcon(new ImageIcon("img/p1.png"));
+        currentPlayer.setSize(40, 40);
+        currentPlayer.setLocation(1025, 5);
         panel.add(currentPlayer);
         //cp money
         titles[2] = new JLabel(); 
@@ -241,7 +242,8 @@ public class GUI {
 		placeButton(b[5],"Roll Once",735, 180, 270, 40,false);
 		placeButton(b[1],"Buy",735, 188, 130, 25,false);
 		placeButton(b[10],"Yes",735, 188, 130, 25,false);
-		placeButton(b[19],"Yes",735, 188, 130, 25,false);
+		placeButton(b[20],"Yes",735, 188, 130, 25,false);
+		placeButton(b[21],"Yes",735, 188, 130, 25,false);
 		placeButton(b[4],"No",875, 188, 130, 25,false);
 		placeButton(b[2],"Buy with Cance Card",735, 188, 270, 25,false);
 		
@@ -274,6 +276,8 @@ public class GUI {
 				players = board.getPlayers();
 				cP = board.getCurrentPlayer();
 				currentPlayer.setText(cP.name);
+			
+				currentPlayer.setIcon(new ImageIcon("img/p"+Integer.toString(cP.id+1)+".png"));
 				titles[2].setText("$"+Integer.toString(cP.money));
 
 				cpFreeProperties = cP.freeProperties;
