@@ -13,11 +13,10 @@
 //status=20 ask user msg with options "Try to throw double", "Pay $50 to bank", "Use 'Get Out of Jail Card'" , then call SquareInJail.getOutJail(Player p, int choice)
 //status=21 ask user msg with options "Try to throw double", "Pay $50 to bank"
 //status=23 play with current player again. if result[2] has number other than zero, play with it.(it is double play again.)
-//status=0 play with current player again.()
+///////////////////status=0 play with current player again.()
 
 
 //check always player.countJail<4, if so, call SquareInJail.landOn()
-//check always player.reverse=true, if so, call SquareReverse.landOn()
 
 public abstract class Square {
 	String name,type;

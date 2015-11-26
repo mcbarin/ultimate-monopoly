@@ -244,36 +244,51 @@ public class Player {
 		int old = position;
 		
 		if(dice%2 == 1){
-			this.position = position + dice;
+			if(!reverse){
+				this.position = position + dice;
+			}else{ //odd dice, stay on track
+				position = 22-dice;
+			}
 		}else {
-			///////////////////
-			int posId = position;
-			if(row==1){
-				posId+=24;
-				}
-			else if(row==2){
-				posId+=64;
-				
-			}
-			// posId : bulundugu square'in id'si
-			// border: bulundugu row'un square sayisi
-			Square s = board.getSquareFromBoard(posId);
-			
-			for(int i=0;i<dice;i++){
-				s = board.getSquareFromBoard(posId);
-				if(s.type.equals("Transit")){
-					posId = ((SquareTransit)s).twin.id+1;
-					s = board.getSquareFromBoard(posId);
+			if(reverse){ //even dice, change track if possible
+				if(dice<11){
+					position = 36-dice;
+					row=1;
 				}else{
-					s = board.nextSquare(posId);
-					posId = s.id;
+					position=46-dice;
+					row=2;
 				}
-			}
 				
+				reverse=false;
+			}else{
+			///////////////////
+				int posId = position;
+				if(row==1){
+					posId+=24;
+					}
+				else if(row==2){
+					posId+=64;
+					
+				}
+				// posId : bulundugu square'in id'si
+				// border: bulundugu row'un square sayisi
+				Square s = board.getSquareFromBoard(posId);
+				
+				for(int i=0;i<dice;i++){
+					s = board.getSquareFromBoard(posId);
+					if(s.type.equals("Transit")){
+						posId = ((SquareTransit)s).twin.id+1;
+						s = board.getSquareFromBoard(posId);
+					}else{
+						s = board.nextSquare(posId);
+						posId = s.id;
+					}
+				}
+				
+				this.position = s.position;
+				this.row = s.row;
+			}
 			
-			
-			this.position = s.position;
-			this.row = s.row;
 			
 			
 		///////////////////

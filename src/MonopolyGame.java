@@ -60,9 +60,9 @@ public class MonopolyGame {
 			    	  dieSpeed = die.getFace();}
 		    	  else{
 		    		 manipulate = false;
-		    		 dieOne = 1;
-			    	 dieTwo = 1;
-			    	 dieSpeed = 1;
+		    		 dieOne = 2;
+			    	 dieTwo = 2;
+			    	 dieSpeed = 2;
 		    	  }
 		    	  totalDice = dieOne+dieTwo;
 		  			if(dieSpeed<4) totalDice+=dieSpeed;	
@@ -162,7 +162,7 @@ public class MonopolyGame {
 		    	  players = board.getPlayers();
 
 			  		players.get(0).row=1;
-			  		players.get(0).position=27;
+			  		players.get(0).position=30;
 		  		
 		    	  try {
 		    		gui = null;
@@ -224,6 +224,9 @@ public class MonopolyGame {
 		resultStatus = Integer.parseInt(result[0]);
 		
 		switch(resultStatus){
+			case 0:
+				gui.setGUI(result, "1", buttons);
+			break;
 			case 3:
 				gui.setGUI(result[1], "01011", buttons);
 			break;
