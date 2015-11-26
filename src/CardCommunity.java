@@ -203,7 +203,6 @@ public class CardCommunity extends Card {
 		}  else if(number == 38){
 			p.row = 1;
 			p.position = 10;
-			p.countJail = 3;
 			result[0]="5";
 			result[1]="Player went directly to jail.";
 			
@@ -244,7 +243,6 @@ public class CardCommunity extends Card {
 		}else{
 			p.row = 1;
 			p.position = 10;
-			p.countJail = 3;
 			result[0]="5";
 			result[1]="Player went directly to jail.";
 		}

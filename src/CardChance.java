@@ -63,7 +63,6 @@ public class CardChance extends Card {
 		} else if(number == 1){
 			p.row = 1;
 			p.position = 10;
-			p.countJail = 3;
 			result[0]="5";
 			result[1]="Player went directly to jail.";
 			
@@ -339,7 +338,6 @@ public class CardChance extends Card {
 			if(p.numberOfProperties==0){
 				p.row = 1;
 				p.position = 10;
-				p.countJail = 3;
 				result[0]="5";
 				result[1]="Player went directly to jail.";
 			}else{
@@ -354,7 +352,6 @@ public class CardChance extends Card {
 				if(pr.size()==0){
 					p.row = 1;
 					p.position = 10;
-					p.countJail = 3;
 					result[0]="5";
 					result[1]="All of player's properties are mortgaged. Player directly went to the jail.";
 				}
