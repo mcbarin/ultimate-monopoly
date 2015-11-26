@@ -260,38 +260,6 @@ public class MonopolyGame {
 		
 	}
 	
-	public void setProps(){
-		 
-		gui.cpTotalFree=0;
-  	  		for(int i = 0; i<cP.properties.size();i++){
-	  			if(cP.properties.get(i).isMortgaged==false){
-	  				gui.userFreeProperties[gui.cpTotalFree].setVisible(true);
-	  				gui.userFreeProperties[gui.cpTotalFree].setText(cP.properties.get(i).name);
-	  				gui.userFreeProperties[gui.cpTotalFree].setActionCommand(Integer.toString(cP.properties.get(i).id));
-	  				gui.cpTotalFree++;
-	  			}
-	    		}
-	  		for(int i = 0; i<cP.trains.size();i++){
-	  			if(cP.trains.get(i).isMortgaged==false){
-	  				gui.userFreeProperties[gui.cpTotalFree].setVisible(true);
-	  				gui.userFreeProperties[gui.cpTotalFree].setText(cP.trains.get(i).name);
-	  				gui.userFreeProperties[gui.cpTotalFree].setActionCommand(Integer.toString(cP.trains.get(i).id));
-	  				gui.cpTotalFree++;
-	  			}
-	    		}
-	  		for(int i = 0; i<cP.cabs.size();i++){
-	  			if(cP.cabs.get(i).isMortgaged==false){
-	  				gui.userFreeProperties[gui.cpTotalFree].setVisible(true);
-	  				gui.userFreeProperties[gui.cpTotalFree].setText(cP.cabs.get(i).name);
-	  				gui.userFreeProperties[gui.cpTotalFree].setActionCommand(Integer.toString(cP.cabs.get(i).id));
-	  				gui.cpTotalFree++;
-	  			}
-	    		}
-	  		for(int i = gui.cpTotalFree; i<gui.MAX_PROPERTIES; i++){
-	  			gui.userFreeProperties[i].setVisible(false);
-	  		}
-	  		buttons[3].setVisible(true); buttons[8].setVisible(true);
-	}
 
 	
 
