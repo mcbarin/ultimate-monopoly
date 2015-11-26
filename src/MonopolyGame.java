@@ -8,7 +8,7 @@ public class MonopolyGame {
 	private GUI gui;
 	private Board board;
 	
-	public static int dieOne, dieTwo, dieSpeed;
+	public static int dieOne=0, dieTwo=0, dieSpeed=0;
 	
 	private ArrayList<Player> players;
 	private Player cP;
@@ -17,7 +17,8 @@ public class MonopolyGame {
 	
 	private JButton buttons[] = new JButton[26];
 	public static boolean specialConditions[] = new boolean[26];
-	//	0-rollOnce	1-rollOnce Die	2-
+	//	0-rollOnce	1-rollOnce Die	2-taxiRide	3-specialStatus
+	private int specialStatus;
 	private int initialNumberofPlayers;
 	
 	private Dice die = new Dice();
@@ -92,12 +93,9 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).buy(cP, totalDice);
-		    	  if(result[0].equals("1")){
-		    		  board.nextPlayer();
-		    		  gui.setGUI(result[1]+" Next player!","1",buttons);
-		    	  }else if(result[0].equals("9")){
-		    		  gui.setGUI(result,"1",buttons);
-		    	  }
+		    	  specialConditions[3] = true;
+		    	  specialStatus = Integer.parseInt(result[0]);
+		    	  play();
 		    	 
 		    	  
 		      }
@@ -126,13 +124,9 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).build(cP, totalDice);
-		    	  if(result[0].equals("1")){
-		    		  board.nextPlayer();
-		    		  gui.setGUI(result[1]+" Next player!","1",buttons);
-		    	  }else if(result[0].equals("5")){
-		    		  board.nextPlayer();
-		    		  gui.setGUI(result[1] + " Next player!","1",buttons);
-		    	  }
+		    	  specialConditions[3] = true;
+		    	  specialStatus = Integer.parseInt(result[0]);
+		    	  play();
 		    	 
 		    	  
 		      }
@@ -158,8 +152,8 @@ public class MonopolyGame {
 		    	  board = new Board(initialNumberofPlayers);
 		    	  players = board.getPlayers();
 
-			  		players.get(0).row=1;
-			  		players.get(0).position=27;
+			  		players.get(0).row=2;
+			  		players.get(0).position=3;
 		  		
 		    	  try {
 		    		gui = null;
@@ -190,7 +184,10 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).taxiRide(cP, gui.taxiRideGroup.getSelection().getActionCommand());
-
+		    	  
+		    	  specialConditions[3] = true;
+		    	  specialStatus = Integer.parseInt(result[0]);
+		    	  play();
 		    	 
 		    	  System.out.println("Taxi Ride: " + gui.taxiRideGroup.getSelection().getActionCommand());
 		      }
@@ -232,18 +229,31 @@ public class MonopolyGame {
 		
 		String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
 		
-		resultStatus = Integer.parseInt(result[0]);
-		//resultStatus = 9;
+		if(!specialConditions[3]){
+			resultStatus = Integer.parseInt(result[0]);
+			//resultStatus = 9;
+		}else{
+			specialConditions[3] = false;
+			resultStatus = specialStatus;
+		}
+		
 		switch(resultStatus){
 			case 0:
 				gui.setGUI(result, "1", buttons);
 			break;
+			case 1:
+	    		board.nextPlayer();
+	    		gui.setGUI(result[1]+" Next player!","1",buttons);
+				break;
 			case 3:
 				gui.setGUI(result[1], "01011", buttons);
 			break;
 			case 4:
 				gui.setGUI(result[1], "01011", buttons);
 				break;
+			case 5:
+	    		  board.nextPlayer();
+	    		  gui.setGUI(result[1] + " Next player!","1",buttons);
 			case 9:
 				gui.setGUI(result, "00000000000000000011", buttons);
 				specialConditions[2] = true;

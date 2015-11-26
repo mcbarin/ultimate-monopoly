@@ -391,7 +391,7 @@ public class GUI {
 	  scrollPane.setLocation(1025,starty+25);
 		for(int i = 0; i<cpFreeProperties.size();i++){
   				userFreeProperties[i].setVisible(true);
-  				userFreeProperties[i].setText(cpFreeProperties.get(i).name);
+  				userFreeProperties[i].setText(cpFreeProperties.get(i).name.toLowerCase());
   				
 
   				userFreeProperties[i].setForeground(Color.WHITE);
@@ -428,7 +428,7 @@ public class GUI {
 		  scrollPaneUnmortgage.setLocation(1025,y+25);
 			for(int i = 0; i<cpMortgagedProperties.size();i++){
 				userMortgagedProperties[i].setVisible(true);
-	  				userMortgagedProperties[i].setText(cpMortgagedProperties.get(i).name);
+	  				userMortgagedProperties[i].setText(cpMortgagedProperties.get(i).name.toLowerCase());
 	  				
 	
 	  				userMortgagedProperties[i].setForeground(Color.WHITE);
