@@ -170,6 +170,7 @@ public class SquareProperty extends Square  {
 	public String[] buyProperty(Player p){
 		String[] result = new String[14];
 		initializeResult(result);
+		owner=p;
 		p.substract(price);
 		p.addProperty(this);
 		result[0]="1"; // Success
