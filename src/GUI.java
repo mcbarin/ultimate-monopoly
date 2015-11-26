@@ -69,6 +69,9 @@ public class GUI {
 
 	public JPanel playerStatsPanel = new JPanel();
     JScrollPane scrollPanePlayerStats = new JScrollPane(playerStatsPanel);
+    JLabel playerPics[] = new JLabel[12];
+    JLabel playerNames[] = new JLabel[12];
+    JLabel playerMoneys[] = new JLabel[12];
     
 	private JButton buttons[] = new JButton[26];
 	
@@ -153,10 +156,34 @@ public class GUI {
 		
 		
 		
+		playerPics[0] = new JLabel();
+		playerPics[0].setIcon(new ImageIcon("img/p"+Integer.toString(0+1)+".png"));
+		playerPics[0].setSize(40, 40);
+		playerPics[0].setLocation(5,0*20+5);
+		playerStatsPanel.add(playerPics[0]);
+
+		playerNames[0] = new JLabel("Alfa".toUpperCase());
+		playerNames[0].setSize(100, 40);
+		playerNames[0].setLocation(50,0*20+5);
+		playerNames[0].setFont(new Font("Verdana", Font.BOLD, 20));
+		playerStatsPanel.add(playerNames[0]);
 		
-		playerStatsPanel
+		playerMoneys[0] = new JLabel("$3200".toUpperCase());
+		playerMoneys[0].setSize(200, 40);
+		playerMoneys[0].setLocation(150,0*20+2);
+		playerMoneys[0].setFont(new Font("Lucida Calligraphy", Font.BOLD, 24));
+		playerStatsPanel.add(playerMoneys[0]);
+		
+		playerMoneys[0] = new JLabel("$3200".toUpperCase());
+		playerMoneys[0].setSize(200, 40);
+		playerMoneys[0].setLocation(150,0*20+2);
+		playerMoneys[0].setFont(new Font("Lucida Calligraphy", Font.BOLD, 24));
+		playerStatsPanel.add(playerMoneys[0]);
+		
+		playerStatsPanel.setLayout(null);
 		scrollPanePlayerStats.setSize(540, 200);
-		
+		scrollPanePlayerStats.setLocation(725, 400);
+		scrollPanePlayerStats.setAutoscrolls(true);
 		scrollPanePlayerStats.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
 		panel.add(scrollPanePlayerStats);
 		
