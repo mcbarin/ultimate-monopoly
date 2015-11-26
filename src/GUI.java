@@ -51,7 +51,20 @@ public class GUI {
 	public ButtonGroup freePropertiesButtonGroup = new ButtonGroup();
 	public JPanel sellpanel = new JPanel(new GridLayout(0,1));
     JScrollPane scrollPane = new JScrollPane(sellpanel);
+    
 
+	public JRadioButton[] userMortgagedProperties = new JRadioButton[MAX_PROPERTIES];
+	public ButtonGroup mortgagedPropertiesButtonGroup = new ButtonGroup();
+	public JPanel unmortgagepanel = new JPanel(new GridLayout(0,1));
+    JScrollPane scrollPaneUnmortgage = new JScrollPane(unmortgagepanel);
+    
+    
+
+	public JRadioButton[] taxiRideDestinations = new JRadioButton[9];
+	public ButtonGroup taxiRideGroup = new ButtonGroup();
+	public JPanel taxiRidePanel = new JPanel(new GridLayout(0,1));
+    JScrollPane scrollPaneTaxiRide = new JScrollPane(taxiRidePanel);
+    
 	private JButton buttons[] = new JButton[26];
 	
 	public static Color colorCodes[] = {new Color(255,255,255),new Color(0,0,0),new Color(128,128,128),new Color(170,68,0),new Color(88,12,57),
@@ -111,16 +124,14 @@ public class GUI {
 		
 		
 		
-		
+
 		
 	    for(int i = 0; i<MAX_PROPERTIES; i++){
 	        userFreeProperties[i] = new JRadioButton("text" + i);
 	        userFreeProperties[i].setActionCommand(Integer.toString(i));
 	        userFreeProperties[i].setVisible(false);
-	        userFreeProperties[i].setBackground(new Color(84,84,84));
-	    	if(i%2==1)
-	    		userFreeProperties[i].setBackground(Color.DARK_GRAY);
 	    	userFreeProperties[i].setForeground(Color.WHITE);
+	    	userFreeProperties[i].setBackground(Color.GRAY);
 	    	freePropertiesButtonGroup.add(userFreeProperties[i]);
 	        sellpanel.add(userFreeProperties[i]);
 	     }
@@ -130,9 +141,65 @@ public class GUI {
 		scrollPane.setAutoscrolls(true);
 		scrollPane.setVisible(false);
 		panel.add(scrollPane);
-		
+	
 	    placeButton(b[3],"Sell",1025, 95, 115, 25,false);
 		placeButton(b[8],"Mortgage",1150, 95, 115, 25,false);
+		
+		
+		
+		//Taxi Ride List
+		///////////////////////////////
+		String taxiRideNames[] = {"FREE PARKING", "PENNSYLVANIA RAILROAD" , "SHORT LINE", "READING RAILROAD", "B&O RAILROAD", "CHECKER CAB CO." , "BLACK & WHITE CAB CO." , "YELLOW CAB CO." ,"UTE CAB CO."};
+			
+		for(int i=0; i<taxiRideNames.length;i++){
+			taxiRideDestinations[i] = new JRadioButton(taxiRideNames[i]);
+			taxiRideDestinations[i].setActionCommand(taxiRideNames[i]);
+			taxiRideDestinations[i].setForeground(Color.WHITE);
+			if(i%2==0){taxiRideDestinations[i].setBackground(Color.DARK_GRAY);
+			}else{taxiRideDestinations[i].setBackground(Color.GRAY);}
+			
+			taxiRideGroup.add(taxiRideDestinations[i]);
+			taxiRidePanel.add(taxiRideDestinations[i]);
+		}
+		scrollPaneTaxiRide.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
+		taxiRidePanel.setBackground(Color.DARK_GRAY);
+		taxiRideDestinations[0].setSelected(true);
+		scrollPaneTaxiRide.setAutoscrolls(true);
+		scrollPaneTaxiRide.setVisible(false);
+		scrollPaneTaxiRide.setLocation(725, 170);
+		scrollPaneTaxiRide.setSize(290, 100);
+		panel.add(scrollPaneTaxiRide);
+		placeButton(b[18],"Take a Cab",735,280, 130, 25,false);
+		placeButton(b[19],"No",875, 280, 130, 25,false);
+		//////////////////////////////////////////
+		
+		//UNMortgage Pane
+	    for(int i = 0; i<MAX_PROPERTIES; i++){
+	    	userMortgagedProperties[i] = new JRadioButton("text" + i);
+	    	userMortgagedProperties[i].setActionCommand(Integer.toString(i));
+	    	userMortgagedProperties[i].setVisible(false);
+	    	userMortgagedProperties[i].setForeground(Color.WHITE);
+	    	mortgagedPropertiesButtonGroup.add(userMortgagedProperties[i]);
+	    	unmortgagepanel.add(userMortgagedProperties[i]);
+	     }
+	    scrollPaneUnmortgage.setSize(240, 100);
+	    unmortgagepanel.setBackground(Color.DARK_GRAY);
+		scrollPaneUnmortgage.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
+		scrollPaneUnmortgage.setAutoscrolls(true);
+		scrollPaneUnmortgage.setVisible(false);
+		panel.add(scrollPaneUnmortgage);
+	
+		placeButton(b[9],"Mortgage",105, 95, 240, 25,false);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	   
 		currentMessage = new JTextArea();
 	    currentMessage.setLineWrap( true );
@@ -154,9 +221,18 @@ public class GUI {
         
         placeLabel(currentPlayer,"",240,30,1025,10,new Color(255,155,155),Color.GRAY,new Font("Verdana", Font.BOLD, 25));
         panel.add(currentPlayer);
+        //cp money
+        titles[2] = new JLabel(); 
+        placeLabel(titles[2],"",240,24,1025,13,new Color(255,255,255),Color.GRAY,new Font("Verdana", Font.PLAIN, 18));
+        titles[2].setHorizontalAlignment(JLabel.RIGHT);
+        panel.add(titles[2]);
         
+        //mortgage
         titles[0] = new JLabel();
         panel.add(titles[0]);
+        //unmortgage
+        titles[1] = new JLabel();
+        panel.add(titles[1]);
 		
 
 		placeButton(b[0],"Roll Dice!",735, 180, 270, 40,false);
@@ -171,6 +247,7 @@ public class GUI {
 		b[6].setBackground(new Color(208,200,0));
 		placeButton(b[7],"Pull Community Chest Card",735, 180, 270, 40,false);
 		b[7].setBackground(new Color(208,200,0));
+		
 		
 
 		placeButton(b[14],"",735, 188, 80, 25,false);
@@ -194,10 +271,20 @@ public class GUI {
 				players = board.getPlayers();
 				cP = board.getCurrentPlayer();
 				currentPlayer.setText(cP.name);
-
+				titles[2].setText("$"+Integer.toString(cP.money));
 
 				cpFreeProperties = cP.freeProperties;
-				setProps();
+				cpMortgagedProperties = cP.mortgagedProperties;
+				setProps(45);
+				
+				
+				
+				if(MonopolyGame.specialConditions[2]){
+					b[18].setVisible(true);
+					b[19].setVisible(true);
+					scrollPaneTaxiRide.setVisible(true);
+				}else{scrollPaneTaxiRide.setVisible(false);}
+				
 				panel.repaint();
 				
 				
@@ -291,41 +378,82 @@ public class GUI {
 		panel.setDice(i, j, k);
 	}
 	
-	public void setProps(){
-		JButton b[] = buttons;
-			
-	  if(cpFreeProperties.size()>0){	
-		  titles[0].setVisible(true);
-		  placeLabel(titles[0],"Select a propety to sell or mortgage:",240,20,1025,45,Color.WHITE,Color.GRAY,font);
+	public void setProps(int starty){
+		int y = starty;
+		
+  if(cpFreeProperties.size()>0){	
+	  titles[0].setVisible(true);
+	  placeLabel(titles[0],"Select a propety to sell or mortgage:",240,20,1025,starty,Color.WHITE,Color.GRAY,font);
+        
+	  scrollPane.setVisible(true);
+	  scrollPane.setLocation(1025,starty+25);
+		for(int i = 0; i<cpFreeProperties.size();i++){
+  				userFreeProperties[i].setVisible(true);
+  				userFreeProperties[i].setText(cpFreeProperties.get(i).name);
+  				
+
+  				userFreeProperties[i].setForeground(Color.WHITE);
+  				if(cpFreeProperties.get(i).color<20 && cpFreeProperties.get(i).color>-1){
+  					Color sqColor = colorCodes[cpFreeProperties.get(i).color];
+  	  				userFreeProperties[i].setBackground(sqColor);
+  	  				if(sqColor.getBlue()>128 && sqColor.getGreen()>128 && sqColor.getRed()>128){
+  	  					userFreeProperties[i].setForeground(Color.BLACK);
+  	  				}
+  				}else{
+  					userFreeProperties[i].setBackground(Color.DARK_GRAY);
+  				}
+  				userFreeProperties[i].setActionCommand(Integer.toString(cpFreeProperties.get(i).id));
+  			
+    		}
+		for(int i=cpFreeProperties.size(); i<MAX_PROPERTIES; i++){
+				userFreeProperties[i].setVisible(false);
+		}
+	userFreeProperties[0].setSelected(true);
+		buttons[3].setVisible(true); buttons[3].setLocation(1025, starty+135);
+		buttons[8].setVisible(true); buttons[8].setLocation(1150, starty+135);
+
+		y = starty+170;
+	  }else{buttons[3].setVisible(false); buttons[8].setVisible(false); 
+	  scrollPane.setVisible(false);titles[0].setVisible(false);}
+	  
+	  
+	
+		
+	  if(cpMortgagedProperties.size()>0){	
+		  titles[1].setVisible(true);
+		  placeLabel(titles[1],"Select a propety to UNmortgage:",240,20,1025,y,Color.WHITE,Color.GRAY,font);
 	        
-		  scrollPane.setVisible(true);
-		  scrollPane.setLocation(1025,70);
-			for(int i = 0; i<cpFreeProperties.size();i++){
-	  				userFreeProperties[i].setVisible(true);
-	  				userFreeProperties[i].setText(cpFreeProperties.get(i).name);
+		  scrollPaneUnmortgage.setVisible(true);
+		  scrollPaneUnmortgage.setLocation(1025,y+25);
+			for(int i = 0; i<cpMortgagedProperties.size();i++){
+				userMortgagedProperties[i].setVisible(true);
+	  				userMortgagedProperties[i].setText(cpMortgagedProperties.get(i).name);
 	  				
 	
-	  				userFreeProperties[i].setForeground(Color.WHITE);
-	  				if(cpFreeProperties.get(i).color<20 && cpFreeProperties.get(i).color>-1){
-	  					Color sqColor = colorCodes[cpFreeProperties.get(i).color];
-	  	  				userFreeProperties[i].setBackground(sqColor);
+	  				userMortgagedProperties[i].setForeground(Color.WHITE);
+	  				if(cpMortgagedProperties.get(i).color<20 && cpMortgagedProperties.get(i).color>-1){
+	  					Color sqColor = colorCodes[cpMortgagedProperties.get(i).color];
+	  					userMortgagedProperties[i].setBackground(sqColor);
 	  	  				if(sqColor.getBlue()>128 && sqColor.getGreen()>128 && sqColor.getRed()>128){
-	  	  					userFreeProperties[i].setForeground(Color.BLACK);
+	  	  				userMortgagedProperties[i].setForeground(Color.BLACK);
 	  	  				}
 	  				}else{
-	  					userFreeProperties[i].setBackground(Color.DARK_GRAY);
+	  					userMortgagedProperties[i].setBackground(Color.DARK_GRAY);
 	  				}
-	  				userFreeProperties[i].setActionCommand(Integer.toString(cpFreeProperties.get(i).id));
+	  				userMortgagedProperties[i].setActionCommand(Integer.toString(cpMortgagedProperties.get(i).id));
 	  			
 	    		}
-			for(int i=cpFreeProperties.size(); i<MAX_PROPERTIES; i++){
-					userFreeProperties[i].setVisible(false);
+			for(int i=cpMortgagedProperties.size(); i<MAX_PROPERTIES; i++){
+				userMortgagedProperties[i].setVisible(false);
 			}
-		userFreeProperties[0].setSelected(true);
-  		buttons[3].setVisible(true); buttons[3].setLocation(1025, 180);
-  		buttons[8].setVisible(true); buttons[8].setLocation(1150, 180);
-	  }else{buttons[3].setVisible(false); buttons[8].setVisible(false); scrollPane.setVisible(false);titles[0].setVisible(false);}
+			userMortgagedProperties[0].setSelected(true);
+			buttons[9].setVisible(true); buttons[9].setLocation(1025, y+135);
+	
+	  }else{buttons[9].setVisible(false); scrollPaneUnmortgage.setVisible(false);titles[1].setVisible(false);}
+	  
+	  
   
+	  
 	}
 	
 	

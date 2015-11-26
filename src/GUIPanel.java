@@ -104,7 +104,8 @@ public class GUIPanel extends JPanel {
 		g.drawImage(dieOneImg, 269, 269, 50, 50, null);
 		g.drawImage(dieTwoImg, 332, 332, 50, 50, null);
 		g.drawImage(dieSpeedImg, 395, 395, 50, 50, null);
-		g.drawImage(cardImg, 725, 230, 290, 160, null);
+		if(!MonopolyGame.specialConditions[2])
+			g.drawImage(cardImg, 725, 230, 290, 160, null);
 		
 		
 		if (MonopolyGame.specialConditions[1]){
