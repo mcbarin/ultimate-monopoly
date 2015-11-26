@@ -58,6 +58,7 @@ public class CardChance extends Card {
 			
 			result[0]="5";
 			result[1]="Player advanced to the nearest utility.";
+			board.pullPushChance();
 			
 			
 		} else if(number == 1){
@@ -65,6 +66,7 @@ public class CardChance extends Card {
 			p.position = 10;
 			result[0]="5";
 			result[1]="Player went directly to jail.";
+			board.pullPushChance();
 			
 		}  else if(number == 2){
 			
@@ -92,6 +94,7 @@ public class CardChance extends Card {
 			
 			result[0]="5";
 			result[1]="Player went directly to nearest railroad.";
+			board.pullPushChance();
 			
 			
 		}  else if(number == 3){
@@ -105,6 +108,7 @@ public class CardChance extends Card {
 				result[0]="1";
 				result[1]="Player has paid $"+""+amount+" for making general repair for the properties.";
 				result[p.id+2]="-"+""+amount;
+				board.pullPushChance();
 				
 			}
 			else if(p.money+p.valueOfProperties>amount){
@@ -113,12 +117,14 @@ public class CardChance extends Card {
 			}else{
 				result[0]="-1";
 				result[1]= "Player is broke";
+				board.pullPushChance();
 			}
 			
 		}  else if(number == 4){
 			p.addCard(this);
 			result[0]="1";
 			result[1]=title+" "+description;
+			board.pullPushChance();
 			
 		}  else if(number == 5){
 			
@@ -134,6 +140,7 @@ public class CardChance extends Card {
 			}
 			result[0]="5"; // Must call the landOn method.
 			result[1]="Go Back Three Spaces.";
+			board.pullPushChance();
 			
 		
 		}  else if(number == 6){
@@ -144,12 +151,14 @@ public class CardChance extends Card {
 				result[0]="1";
 				result[1]= "Player has paid $150 to the pool.";
 				result[p.id+2]="-150";
+				board.pullPushChance();
 			} else if(p.money+p.valueOfProperties>150){
 				result[0]= "2";
 				result[1] = "Player has to sell a property.";
 			}else{
 				result[0]="-1";
 				result[1]= "Player is broke";
+				board.pullPushChance();
 			}
 		}  else if(number == 7){
 			//Advance to stock exchange square. row0 pos12
@@ -159,9 +168,11 @@ public class CardChance extends Card {
 				result[0]="5";
 				result[1]="Player advanced to Stock Exchange and collected $300.";
 				result[p.id+2]="300";
+				board.pullPushChance();
 			}else{
 				result[0]="5";
 				result[1]="Player advanced to Stock Exchange";	
+				board.pullPushChance();
 			}
 			p.row=0;        // Advancing to Stock Exchange.
 			p.position=12;
@@ -172,6 +183,7 @@ public class CardChance extends Card {
 			result[0]= "1";
 			result[1] = "Loan Matures, Player won $150 from the bank.";
 			result[p.id+2] = "150";
+			board.pullPushChance();
 			
 			
 			
@@ -189,13 +201,14 @@ public class CardChance extends Card {
 				result[p.id+2] = "-"+""+amount;
 				result[0]="1";
 				result[1]="Player paid $50 to each player.";
+				board.pullPushChance();
 			}else if(p.money+p.valueOfProperties>amount){
 				result[0]="2";
 				result[1]="Player must sell property.";
 			}else {
 				result[0]="-1";
 				result[1]="Player is broke.";
-				
+				board.pullPushChance();
 			}
 			
 		}  else if(number == 10){
@@ -244,7 +257,8 @@ public class CardChance extends Card {
 			}
 			
 			result[0]="5";
-			result[1]="Player advanced to the nearest Square Property.";	
+			result[1]="Player advanced to the nearest Square Property.";
+			board.pullPushChance();
 		
 			
 			
@@ -252,6 +266,7 @@ public class CardChance extends Card {
 			p.addCard(this);
 			result[0]="1";
 			result[1]=title+" "+description;
+			board.pullPushChance();
 			
 		}  else if(number == 12){
 			//board.getAllPool(p);
@@ -269,6 +284,7 @@ public class CardChance extends Card {
 			p.addCard(this);
 			result[0]="1";
 			result[1]=title+" "+description;
+			board.pullPushChance();
 			
 		}  else if(number == 13){
 			//Advance to roll one.
@@ -277,6 +293,7 @@ public class CardChance extends Card {
 			p.position= 30;
 			result[0]="5";
 			result[1]="Player advanced to Roll One.";
+			board.pullPushChance();
 			
 		}  else if(number == 14){
 			result[0]="8"; // For asking player id and color group.
@@ -296,6 +313,7 @@ public class CardChance extends Card {
 				result[0] = "1";
 				result[1] = "Property Taxes, Player paid $25 for each unmortgaged property of its own.";
 				result[p.id+2] = "-"+""+amount;
+				board.pullPushChance();
 			}else if(p.money+p.valueOfProperties>amount){
 				result[0]="2";
 				result[1]="Player must sell property.";
@@ -303,6 +321,7 @@ public class CardChance extends Card {
 			}else {
 				result[0]="-1";
 				result[1]="Player is broke.";
+				board.pullPushChance();
 				
 			}
 			
@@ -311,6 +330,7 @@ public class CardChance extends Card {
 			result[1]="Player advanced to Black & White Cab Co.";
 			p.row=2;
 			p.position=22;
+			board.pullPushChance();
 			
 		}  else if(number == 17){
 			int amount = (board.getNumberOfPlayers()-1)*50;
@@ -326,12 +346,14 @@ public class CardChance extends Card {
 				result[p.id+2] = "-"+""+amount;
 				result[0]="1";
 				result[1]="Player paid $50 to each player.";
+				board.pullPushChance();
 			}else if(p.money+p.valueOfProperties>amount){
 				result[0]="2";
 				result[1]="Player must sell property.";
 			}else {
 				result[0]="-1";
 				result[1]="Player is broke.";
+				board.pullPushChance();
 				
 			}
 		}  else if(number == 18){
@@ -340,6 +362,7 @@ public class CardChance extends Card {
 				p.position = 10;
 				result[0]="5";
 				result[1]="Player went directly to jail.";
+				board.pullPushChance();
 			}else{
 				ArrayList<SquareProperty> pr = p.properties;
 				
@@ -354,6 +377,7 @@ public class CardChance extends Card {
 					p.position = 10;
 					result[0]="5";
 					result[1]="All of player's properties are mortgaged. Player directly went to the jail.";
+					board.pullPushChance();
 				}
 				else{
 					result[0]="24"; // Player should choose from its unmortgaged properties. Than in controller class,
@@ -368,6 +392,7 @@ public class CardChance extends Card {
 		}  else if(number == 19){
 			result[0]="1";
 			result[1]="Win the marathon, Player took a victory lap and collected the pay corner income.";
+			board.pullPushChance();
 			if(p.row == 0){
 				p.addMoney(250);
 				result[p.id+2]="250";
@@ -389,6 +414,7 @@ public class CardChance extends Card {
 			}
 			result[0]="5";
 			result[1]="All players moved to Canal Street.";
+			board.pullPushChance();
 			
 		}  else if(number == 21){
 			result[0]="25"; // Player should choose a cab company.
@@ -399,11 +425,13 @@ public class CardChance extends Card {
 			p.addCard(this);
 			result[0]="1";
 			result[1]="Build 1 free house on any property in a monopoly you own.";
+			board.pullPushChance();
 			
 		}  else if(number == 23){
 			p.addCard(this);
 			result[0]="1";
 			result[1]="Player pulled the Comped Room card.";
+			board.pullPushChance();
 			
 		}  else if(number == 24){
 			//Move directly to the space that 1 track below this one. If row==2 do nothing
@@ -431,6 +459,7 @@ public class CardChance extends Card {
 				result[0]="5";
 				result[1]="Player moved to  1 track below.";
 			}
+			board.pullPushChance();
 			
 		}  else if(number == 25){
 			//Move directly to the space that 1 track above this one. If row==0 do nothing
@@ -459,7 +488,7 @@ public class CardChance extends Card {
 				result[0]="5";
 				result[1]="Player moved to  1 track above.";
 			}
-			
+			board.pullPushChance();
 		} 
 		
 		return result;
@@ -496,7 +525,7 @@ public class CardChance extends Card {
 		
 		result[0]="1";
 		result[1]="Hurricane makes a landfall!!";
-		
+		board.pullPushChance();
 		return result;
 	}
 	
@@ -511,6 +540,7 @@ public class CardChance extends Card {
 			p.hurricane(p.owner);
 			result[0]="1";
 			result[1]="Player's one of the property is downgraded.";
+			board.pullPushChance();
 		}
 		
 		return result;
@@ -540,6 +570,7 @@ public class CardChance extends Card {
 			}
 			result[0]="5";
 			result[1]="Player took the Cab Company from its owner.";
+			board.pullPushChance();
 		}
 		
 		return result;
