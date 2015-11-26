@@ -38,6 +38,7 @@ public class CardCommunity extends Card {
 			result[0]= "1";
 			result[1] = "Player inherit $100. Player collected $100 from the bank.";
 			result[p.id+2] = "100";
+			board.pullPushCommunity();
 	
 		} 
 		else if(number == 27){
@@ -56,7 +57,7 @@ public class CardCommunity extends Card {
 			result[0]="5";
 			result[1]="Player collected 10$ from each player and moved to the birthdat gift space.";
 			
-			
+			board.pullPushCommunity();
 			
 		}  else if(number == 28){
 			
@@ -67,12 +68,14 @@ public class CardCommunity extends Card {
 				result[0]="1";
 				result[1]= "Player has paid $50 to the pool.";
 				result[p.id+2]="-50";
+				board.pullPushCommunity();
 			} else if(p.money+p.valueOfProperties>50){
 				result[0]= "2";
 				result[1] = "Player has to sell a property.";
 			}else{
 				result[0]="-1";
 				result[1]= "Player is broke";
+				board.pullPushCommunity();
 			}
 			
 		}  else if(number == 29){
@@ -80,13 +83,14 @@ public class CardCommunity extends Card {
 							// only two options. than applyCard29 should be called.
 							// argument boolean, if true income tax, if false jail.
 			result[1]="Player should move to income tax or jail.";
+			board.pullPushCommunity();
 			
 		}  else if(number == 30){
 			p.row = 2;
 			p.position=6;
 			result[0]="5";
 			result[1]="Player moved to the Checker Cab Company.";
-			
+			board.pullPushCommunity();
 			
 		}  else if(number == 31){
 			//Move directly to the space that 1 track below this one. If row==2 do nothing
@@ -114,6 +118,7 @@ public class CardCommunity extends Card {
 				result[0]="5";
 				result[1]="Player moved to  1 track below.";
 			}
+			board.pullPushCommunity();
 		
 		}  else if(number == 32){
 			//Move directly to the space that 1 track above this one. If row==0 do nothing
@@ -142,6 +147,7 @@ public class CardCommunity extends Card {
 				result[0]="5";
 				result[1]="Player moved to  1 track above.";
 			}
+			board.pullPushCommunity();
 	
 		}  else if(number == 33){
 			
@@ -158,6 +164,7 @@ public class CardCommunity extends Card {
 				}
 				result[0]="1";
 				result[1]="City condemned one house of the player.";
+				board.pullPushCommunity();
 			}
 			
 			
@@ -165,11 +172,13 @@ public class CardCommunity extends Card {
 			p.addCard(this);
 			result[0]="1";
 			result[1]=title+" "+description;
+			board.pullPushCommunity();
 			
 		}  else if(number == 35){
 			p.addCard(this);
 			result[0]="1";
 			result[1]=title+" "+description;
+			board.pullPushCommunity();
 			
 		}  else if(number == 36){
 			
@@ -185,7 +194,7 @@ public class CardCommunity extends Card {
 				result[0]="1";
 				result[1]="Player has paid $"+""+amount+" for making general repair for the properties.";
 				result[p.id+2]="-"+""+amount;
-				
+				board.pullPushCommunity();
 			}
 			else if(p.money+p.valueOfProperties>amount){
 				result[0]= "2";
@@ -193,19 +202,20 @@ public class CardCommunity extends Card {
 			}else{
 				result[0]="-1";
 				result[1]= "Player is broke";
+				board.pullPushCommunity();
 			}
 			
 		}  else if(number == 37){
 			p.addCard(this);
 			result[0]="1";
 			result[1]=title+" "+description;
-			
+			board.pullPushCommunity();
 		}  else if(number == 38){
 			p.row = 1;
 			p.position = 10;
 			result[0]="5";
 			result[1]="Player went directly to jail.";
-			
+			board.pullPushCommunity();
 		}  else if(number == 39){
 			// 0 12
 			if(p.row == 2 && p.position>7 && p.position<28){
@@ -216,6 +226,7 @@ public class CardCommunity extends Card {
 			result[0]="5";
 			result[1]="Player advanced to stock exchange.";
 			result[p.id+2]="300";
+			board.pullPushCommunity();
 			
 		}  else if(number == 40){
 			//hurricane to player's own properties.
@@ -228,6 +239,7 @@ public class CardCommunity extends Card {
 			p.addCard(this);
 			result[0]="1";
 			result[1]=title+" "+description;
+			board.pullPushCommunity();
 		} 
 		return result;
 	}
@@ -246,7 +258,7 @@ public class CardCommunity extends Card {
 			result[0]="5";
 			result[1]="Player went directly to jail.";
 		}
-		
+		board.pullPushCommunity();
 		return result;
 	}
 	
@@ -263,6 +275,7 @@ public class CardCommunity extends Card {
 		}
 		result[0]="1";
 		result[1]="Properties of the chosen color group are downgraded.";
+		board.pullPushCommunity();
 		return result;
 	}
 	

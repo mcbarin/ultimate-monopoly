@@ -185,7 +185,7 @@ public class SquareTransit extends Square {
 		this.twin.initializeAll();
 	}
 	
-	
+	  
 	
 	public String[] sellTrainDepot(Player p){
 		String[] result = new String[14];

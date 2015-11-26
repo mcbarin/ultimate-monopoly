@@ -42,6 +42,27 @@ public abstract class Square {
 		}
 
 	}
+	public void sellSquare(Player p){
+		if(this.type=="Property"){
+			((SquareProperty)this).sellProperty(p);
+		}else if(this.type=="Transit"){
+			((SquareTransit)this).sellTrainStation(p);
+		}else if(this.type=="Utility"){
+			((SquareUtility)this).sellUtility(p);
+		}else if(this.type=="CabCompany"){
+			((SquareCabCompany)this).sellCabCompany(p);
+		}
+	}
+
+	public void sellSquareBuilding(Player p){
+		if(this.type=="Property"){
+			((SquareProperty)this).sellBuilding(p);
+		}else if(this.type=="Transit"){
+			((SquareTransit)this).sellTrainDepot(p);
+		}else if(this.type=="CabCompany"){
+			((SquareCabCompany)this).sellCabStand(p);
+		}
+	}
 
 	public String[] mortgage(Player p){
 		int price=0;
@@ -167,9 +188,17 @@ public abstract class Square {
 		initializeResult(result);
 		result[0]="1";
 		Player pl = p;
+
+		for (int i = 0; i < p.board.players.size(); i++) {
+			if( pl.board.players.get(i).hasCardWithId(41) && pl.board.players.get(i).id != p.id) {
+				pl=pl.board.players.get(i);
+				pl.deleteCard(41);
+			}
+
+		}
 		if(card==die){
 			result[1]=pl.name+" won Roll Once Game and took $100";
-			p.addMoney(100);
+			pl.addMoney(100);
 			result[(pl.id+2)]="100";
 		}else{
 			result[1]=pl.name+" lost Roll Once Game.";
@@ -264,7 +293,7 @@ public abstract class Square {
 		String[] result = new String[14];
 		initializeResult(result);
 		result[0]="1";
-		
+
 		if (status == 12 && ((SquareTransit)p.board.getSquareFromBoard(9)).owner==null){
 			result[0] = "5";
 			p.position=9;
@@ -304,7 +333,7 @@ public abstract class Square {
 			p.row=2;
 
 		}
-		
+
 		return result;
 
 	}
