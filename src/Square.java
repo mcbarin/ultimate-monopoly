@@ -9,7 +9,7 @@
 ////////status=10 ise result[2]'de roll once kartı bulunuyo. Bunu ekrana yansıt, msg'ı ekrana yansıt.(kimin oynıcağını söylüyo) ve rollOnce(Player p, int card, int die)'ı çağır.(card kısmına result[2]'yi ver.)
 
 //status=11 or 35 ask user msg, if says yes call applyCard(Square s, Player p, int status). 
-//status=12 13 14 15 16 17 18 19 first update position and then ask user msg, if says yes, call taxiRideAction(Player p, int status)
+////////status=12 13 14 15 16 17 18 19 first update position and then ask user msg, if says yes, call taxiRideAction(Player p, int status)
 //status=20 ask user msg with options "Try to throw double", "Pay $50 to bank", "Use 'Get Out of Jail Card'" , then call SquareInJail.getOutJail(Player p, int choice)
 //status=21 ask user msg with options "Try to throw double", "Pay $50 to bank"
 //status=23 play with current player again. if result[2] has number other than zero, play with it.(it is double play again.)

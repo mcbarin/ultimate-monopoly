@@ -41,7 +41,7 @@ public class SquareCommunity extends Square {
 		// TODO Auto-generated method stub
 		String[] result= board.getResultArray();
 		
-		result[0]="28";
+		result[0]="31";
 		result[1]="Pull Community Card";
 		
 		return result;

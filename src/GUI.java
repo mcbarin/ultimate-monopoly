@@ -57,13 +57,18 @@ public class GUI {
 	public ButtonGroup mortgagedPropertiesButtonGroup = new ButtonGroup();
 	public JPanel unmortgagepanel = new JPanel(new GridLayout(0,1));
     JScrollPane scrollPaneUnmortgage = new JScrollPane(unmortgagepanel);
-    
+
     
 
 	public JRadioButton[] taxiRideDestinations = new JRadioButton[9];
 	public ButtonGroup taxiRideGroup = new ButtonGroup();
 	public JPanel taxiRidePanel = new JPanel(new GridLayout(0,1));
     JScrollPane scrollPaneTaxiRide = new JScrollPane(taxiRidePanel);
+    
+    
+
+	public JPanel playerStatsPanel = new JPanel();
+    JScrollPane scrollPanePlayerStats = new JScrollPane(playerStatsPanel);
     
 	private JButton buttons[] = new JButton[26];
 	
@@ -145,6 +150,16 @@ public class GUI {
 	
 	    placeButton(b[3],"Sell",1025, 95, 115, 25,false);
 		placeButton(b[8],"Mortgage",1150, 95, 115, 25,false);
+		
+		
+		
+		
+		playerStatsPanel
+		scrollPanePlayerStats.setSize(540, 200);
+		
+		scrollPanePlayerStats.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
+		panel.add(scrollPanePlayerStats);
+		
 		
 		
 		

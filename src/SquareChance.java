@@ -40,7 +40,7 @@ public class SquareChance extends Square {
 		// TODO Auto-generated method stub
 		String[] result= board.getResultArray();
 		
-		result[0]="27";
+		result[0]="30";
 		result[1]="Pull Chance Card";
 		
 		return result;
