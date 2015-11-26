@@ -175,10 +175,10 @@ public class GUI {
 		playerMoneys[0].setFont(new Font("Lucida Calligraphy", Font.BOLD, 24));
 		playerStatsPanel.add(playerMoneys[0]);
 		
-		playerPropertiesNames[0] = new JLabel(players.get(0).allPropertiesNames);
+		playerPropertiesNames[0] = new JLabel(players.get(0).allPropertiesNames.toLowerCase());
 		playerPropertiesNames[0].setToolTipText(players.get(0).allPropertiesNames);
 		playerPropertiesNames[0].setSize(540, 40);
-		playerPropertiesNames[0].setLocation(150,0*20+44);
+		playerPropertiesNames[0].setLocation(150,0*20+30);
 		playerPropertiesNames[0].setFont(new Font("Arial", Font.PLAIN, 16));
 		playerStatsPanel.add(playerPropertiesNames[0]);
 		

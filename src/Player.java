@@ -474,8 +474,6 @@ public class Player {
 	public void setFreeProperties(){
 		freeProperties.clear();
 		mortgagedProperties.clear();
-		allPropertiesNames = "";
-
 		for(int i=0; i<properties.size(); i++){
 			if(!properties.get(i).isMortgaged)
 				freeProperties.add(properties.get(i));
@@ -513,7 +511,10 @@ public class Player {
 		}
 
 		for(int i=0; i<freeProperties.size(); i++){
-			allPropertiesNames = allPropertiesNames+", "+freeProperties.get(i).name;
+			if(i==0){
+				allPropertiesNames = freeProperties.get(i).name;
+			}else{
+				allPropertiesNames = allPropertiesNames+", "+freeProperties.get(i).name;}
 		}
 		for(int i=0; i<mortgagedProperties.size(); i++){
 			allPropertiesNames = allPropertiesNames+", "+mortgagedProperties.get(i).name;
