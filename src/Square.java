@@ -83,11 +83,11 @@ public abstract class Square {
 		}else if(this.type=="CabCompany"){
 			unmortgagePrice =150;
 		}
-		
+
 		if(p.money<unmortgagePrice){
 			result[0]="0";
 			result[1]="Player can not unmortgage this property. Money is not enough.";
-		
+
 		}else{
 			p.substract(unmortgagePrice);
 			if(this.type=="Property"){
@@ -177,7 +177,7 @@ public abstract class Square {
 
 		return result;
 	}
-	
+
 	public String[] taxiRide(Player p, String n){
 		String[] result = new String[14];
 		initializeResult(result);
@@ -264,26 +264,44 @@ public abstract class Square {
 		String[] result = new String[14];
 		initializeResult(result);
 
-		if (status == 12 ){
-			result = ((SquareTransit)p.board.getSquareFromBoard(9)).buyTransit(p, 1);
-		}else if (status == 13 ){
-			result = ((SquareTransit)p.board.getSquareFromBoard(21)).buyTransit(p, 1);
-		}else if (status == 14 ){
-			result = ((SquareTransit)p.board.getSquareFromBoard(29)).buyTransit(p, 1);
-		}else if (status == 15 ){
-			result = ((SquareTransit)p.board.getSquareFromBoard(49)).buyTransit(p, 1);
-		}else if (status == 16 ){
-			result = ((SquareCabCompany)p.board.getSquareFromBoard(70)).buyCabCompany(p);
-			result[1] = p.name + " has bought the CHECKER CAB CO.";
-		}else if (status == 17 ){
-			result = ((SquareCabCompany)p.board.getSquareFromBoard(86)).buyCabCompany(p);
-			result[1] = p.name + " has bought the BLACK & WHITE CAB CO.";
-		}else if (status == 18 ){
-			result = ((SquareCabCompany)p.board.getSquareFromBoard(98)).buyCabCompany(p);
-			result[1] = p.name + " has bought the YELLOW CAB CO.";
-		}else if (status == 19 ){
-			result = ((SquareCabCompany)p.board.getSquareFromBoard(114)).buyCabCompany(p);
-			result[1] = p.name + " has bought the UTE CAB CO.";
+		if (status == 12 && ((SquareTransit)p.board.getSquareFromBoard(9)).owner==null){
+			result[0] = "5";
+			p.position=9;
+			p.row=0;
+		}else if (status == 13 && ((SquareTransit)p.board.getSquareFromBoard(21)).owner==null){
+			result[0] = "5";
+			p.position=21;
+			p.row=0;
+
+		}else if (status == 14 && ((SquareTransit)p.board.getSquareFromBoard(29)).owner==null){
+			result[0] = "5";
+			p.position=5;
+			p.row=1;
+
+		}else if (status == 15 && ((SquareTransit)p.board.getSquareFromBoard(49)).owner==null){
+			result[0] = "5";
+			p.position=25;
+			p.row=1;
+
+		}else if (status == 16 && ((SquareCabCompany)p.board.getSquareFromBoard(70)).owner==null){
+			result[0] = "5";
+			p.position=6;
+			p.row=2;
+		}else if (status == 17 && ((SquareCabCompany)p.board.getSquareFromBoard(86)).owner==null){
+			result[0] = "5";
+			p.position=22;
+			p.row=2;
+
+		}else if (status == 18 && ((SquareCabCompany)p.board.getSquareFromBoard(98)).owner==null){
+			result[0] = "5";
+			p.position=34;
+			p.row=2;
+
+		}else if (status == 19 && ((SquareCabCompany)p.board.getSquareFromBoard(114)).owner==null){
+			result[0] = "5";
+			p.position=50;
+			p.row=2;
+
 		}
 		result[0]="1";
 		return result;
