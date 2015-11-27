@@ -35,7 +35,6 @@ public class GUI {
 	
 	private JFrame mainFrame = new JFrame("BECB Monopoly");
 	private GUIPanel panel;
-	private JPanel debugPanel = new JPanel();
 
 	private JTextField initalNumberofPlayers;
 	private JTextArea currentMessage = new JTextArea();
@@ -67,18 +66,30 @@ public class GUI {
     JScrollPane scrollPaneTaxiRide = new JScrollPane(taxiRidePanel);
     
 
-    
-
 	public JRadioButton[] cabDestinations = new JRadioButton[4];
 	public ButtonGroup cabGroup = new ButtonGroup();
 	public JPanel cabPanel = new JPanel(new GridLayout(0,1));
     JScrollPane cabScrollPane = new JScrollPane(cabPanel);
-    
+
 
 	public JRadioButton[] hurElt = new JRadioButton[20];
 	public ButtonGroup hurGroup = new ButtonGroup();
 	public JPanel hurPanel = new JPanel(new GridLayout(0,1));
     JScrollPane hurScrollPane = new JScrollPane(hurPanel);
+
+	public JRadioButton[] dProps = new JRadioButton[120];
+	public ButtonGroup dPropsGroup = new ButtonGroup();
+	public JPanel dPropsPanel = new JPanel(new GridLayout(0,1));
+    JScrollPane dPropsScrollPane = new JScrollPane(dPropsPanel);
+	public JRadioButton[] dPropsType = new JRadioButton[3];
+	public ButtonGroup dPropsTypeGroup = new ButtonGroup();
+	public JTextField row = new JTextField();
+	public JTextField position = new JTextField();
+	public JTextField money = new JTextField();
+	
+	public JTextField dieOneF = new JTextField();
+	public JTextField dieTwoF = new JTextField();
+	public JTextField dieSpeedF = new JTextField();
     
     
 
@@ -211,7 +222,7 @@ public class GUI {
 				playerPropertiesNames[i].setBorder(BorderFactory.createMatteBorder(0, 0, 2,0, Color.black));
 				playerStatsPanel.add(playerPropertiesNames[i]);
 			}
-			playerStatsPanel.setSize(570,800);
+			playerStatsPanel.setSize(5700,800);
 			scrollPanePlayerStats.setSize(540, 74);
 			scrollPanePlayerStats.setLocation(725, 630);
 			scrollPanePlayerStats.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
@@ -378,6 +389,104 @@ public class GUI {
 			placeButton(b[15],"",830, 188, 80, 25,false);
 			placeButton(b[16],"",925, 188, 80, 25,false);
 			
+			///////////////////////////////////////////
+			//DEBUG
+			//////////////////////////////////////////
+			
+
+			////////////////////////////////
+		    dPropsScrollPane.setLocation(725, 170);
+		    dPropsScrollPane.setSize(540, 200);
+		    //dProps[0].setSelected(true);
+		    dPropsPanel.setBackground(Color.DARK_GRAY);
+		    dPropsScrollPane.setBorder(BorderFactory.createMatteBorder(0, 0,0, 0, Color.black));
+		    dPropsScrollPane.setAutoscrolls(true);
+		    dPropsScrollPane.setVisible(false);
+		    
+		    for(int i=0;i<3;i++){
+				dPropsType[i] = new JRadioButton("SkyScraper");
+				dPropsType[i].setLocation(725 + i*150,375);
+				dPropsType[i].setSize(150, 25);
+				dPropsType[i].setVisible(false);
+				dPropsType[i].setBackground(Color.DARK_GRAY);
+				dPropsType[i].setForeground(Color.WHITE);
+
+				panel.add(dPropsType[i]);
+				dPropsTypeGroup.add(dPropsType[i]);
+		    }
+		    dPropsType[0].setSelected(true);
+		    dPropsType[0].setText("House");
+		    dPropsType[0].setActionCommand("0");
+		    dPropsType[1].setText("Hotel");
+		    dPropsType[1].setActionCommand("5");
+		    dPropsType[2].setText("SkyScraper");
+		    dPropsType[2].setActionCommand("6");
+			placeButton(b[24],"Add Property",725, 405, 540, 25,false);
+			placeButton(b[25],"Next Player",725, 450, 540, 50,false);
+		    
+			panel.add(dPropsScrollPane);
+			
+			
+
+	        placeLabel(titles[6],"asdasdsad",540,50,725,13,new Color(255,255,255),Color.GRAY,new Font("Verdana", Font.BOLD, 18));
+	        titles[6].setHorizontalAlignment(JLabel.CENTER);
+	        panel.add(titles[6]);
+	        
+	        
+
+
+			row.setSize(80, 40);
+			row.setLocation(910, 65);
+			row.setBackground(Color.GRAY);
+			row.setHorizontalAlignment(JTextField.CENTER);
+			row.setFont(new Font("Verdana", Font.BOLD, 18));
+			row.setText("1");
+
+			position.setSize(80, 40);
+			position.setLocation(1010, 65);
+			position.setBackground(Color.GRAY);
+			position.setHorizontalAlignment(JTextField.CENTER);
+			position.setFont(new Font("Verdana", Font.BOLD, 18));
+			position.setText("0");
+
+			money.setSize(180, 40);
+			money.setLocation(910, 110);
+			money.setBackground(Color.GRAY);
+			money.setHorizontalAlignment(JTextField.CENTER);
+			money.setFont(new Font("Verdana", Font.BOLD, 18));
+			money.setText("3200");
+
+			dieOneF.setSize(80, 40);
+			dieOneF.setLocation(880, 510);
+			dieOneF.setBackground(Color.GRAY);
+			dieOneF.setHorizontalAlignment(JTextField.CENTER);
+			dieOneF.setFont(new Font("Verdana", Font.BOLD, 18));
+			dieOneF.setText("0");
+
+			dieTwoF.setSize(80, 40);
+			dieTwoF.setLocation(970, 510);
+			dieTwoF.setBackground(Color.GRAY);
+			dieTwoF.setHorizontalAlignment(JTextField.CENTER);
+			dieTwoF.setFont(new Font("Verdana", Font.BOLD, 18));
+			dieTwoF.setText("0");
+
+			dieSpeedF.setSize(80, 40);
+			dieSpeedF.setLocation(1060, 510);
+			dieSpeedF.setBackground(Color.GRAY);
+			dieSpeedF.setHorizontalAlignment(JTextField.CENTER);
+			dieSpeedF.setFont(new Font("Verdana", Font.BOLD, 18));
+			dieSpeedF.setText("0");
+	        dieOneF.setVisible(false);
+	        dieTwoF.setVisible(false);
+	        dieSpeedF.setVisible(false);
+			
+			panel.add(row);
+			panel.add(position);
+			panel.add(money);
+			panel.add(dieOneF);
+			panel.add(dieTwoF);
+			panel.add(dieSpeedF);
+			//////////////////////////////////
 		
 			
 	        
@@ -389,13 +498,44 @@ public class GUI {
 	
 					players = board.getPlayers();
 					cP = board.getCurrentPlayer();
+					scrollPanePlayerStats.setVisible(true);
+
+					for(int i=0; i<players.size(); i++){
+				
+						playerNames[i].setText(players.get(i).name.toUpperCase());
+						
+						playerMoneys[i].setText("$"+Integer.toString(players.get(i).money).toUpperCase());
+						
+						playerPropertiesNames[i].setText(players.get(i).allPropertiesNames.toLowerCase());
+					}
+					
 				if(MonopolyGame.debugLeft==0){
 
-					scrollPanePlayerStats.setVisible(true);
 				    currentMessage.setVisible(true);
 			        currentPlayer.setVisible(true);
 			        b[0].setVisible(true);
-			        
+
+			        dieOneF.setVisible(false);
+			        dieTwoF.setVisible(false);
+			        dieSpeedF.setVisible(false);
+
+			        titles[6].setVisible(false);
+				    dPropsScrollPane.setVisible(false);
+				    row.setVisible(false);
+				    position.setVisible(false);
+				    money.setVisible(false);
+				    
+				    for(int i=0;i<3;i++){
+				    	dPropsType[i].setVisible(false);}
+				    b[24].setVisible(false);
+				    b[25].setVisible(false);
+
+					MonopolyGame.debugLeft--;
+				}
+				else if(MonopolyGame.debugLeft<0){
+				    row.setVisible(false);
+				    position.setVisible(false);
+				    money.setVisible(false);
 					
 					
 					currentPlayer.setText(cP.name);
@@ -422,27 +562,34 @@ public class GUI {
 					b[22].setVisible(false);}
 					
 					
-					for(int i=0; i<players.size(); i++){
-				
-						playerNames[i].setText(players.get(i).name.toUpperCase());
-						
-						playerMoneys[i].setText("$"+Integer.toString(players.get(i).money).toUpperCase());
-						
-						playerPropertiesNames[i].setText(players.get(i).allPropertiesNames.toLowerCase());
-					}
-					
 					
 					if(MonopolyGame.specialConditions[5]){
 						listHurricane();
 					}else{hurScrollPane.setVisible(false);
 					b[23].setVisible(false);}
+					
+					
+					
+
 				}else{
 
 					setGUI("","",b);
-					MonopolyGame.debugLeft--;
+			        titles[6].setVisible(true);
+			        titles[6].setText(board.players.get(MonopolyGame.initialNumberofPlayers-MonopolyGame.debugLeft).name);
+					debugProps();
+				    b[24].setVisible(true);
+				    b[25].setVisible(true);
+				    
+				    if(MonopolyGame.debugLeft==1){
+
+				        dieOneF.setVisible(true);
+				        dieTwoF.setVisible(true);
+				        dieSpeedF.setVisible(true);
+				    }
+					//MonopolyGame.debugLeft--;
 					
 					
-					System.out.println(MonopolyGame.debugLeft);
+					//System.out.println(MonopolyGame.debugLeft);
 				}
 					panel.repaint();
 					
@@ -450,7 +597,7 @@ public class GUI {
 				
 	            }
 	        };
-	        Timer timer = new Timer(1000 ,taskPerformer);
+	        Timer timer = new Timer(100 ,taskPerformer);
 	        timer.setRepeats(true);
 	        timer.start();
 	
@@ -498,6 +645,31 @@ public class GUI {
 		}
 		return a;
 		
+	}	
+
+	public int getRow(){
+		int a = Integer.parseInt(row.getText()); 
+		return a;
+	}
+	public int getPosition(){
+		int a = Integer.parseInt(position.getText()); 
+		return a;
+	}
+	public int getMoney(){
+		int a = Integer.parseInt(money.getText()); 
+		return a;
+	}
+	public int getDieOneF(){
+		int a = Integer.parseInt(dieOneF.getText()); 
+		return a;
+	}
+	public int getDieTwoF(){
+		int a = Integer.parseInt(dieTwoF.getText()); 
+		return a;
+	}
+	public int getDieSpeedF(){
+		int a = Integer.parseInt(dieSpeedF.getText()); 
+		return a;
 	}
 
 	public void removeSpecialConditions(){
@@ -623,6 +795,45 @@ public class GUI {
 	}
 	
 	
+	
+	public void debugProps(){
+
+		int abc = 0;
+	    for(int i = 0; i<120; i++){
+	    	dProps[i] = null;
+	    	Square sq = board.getSquareFromBoard(i);
+	    	
+	    	if(sq.type=="Property" || sq.type=="Transit" || sq.type=="Utility" || sq.type=="CabCompany"){
+	    		
+
+	    		if(sq.owner==null){
+			    	dProps[abc] = new JRadioButton(sq.name);
+			    	dProps[abc].setActionCommand(Integer.toString(i));
+			    	dProps[abc].setVisible(true);
+			    	dProps[abc].setForeground(Color.WHITE);
+		    		dProps[abc].setBackground(Color.DARK_GRAY);
+			    	if(sq.color<20 && sq.color>-1){
+			    		dProps[abc].setBackground(colorCodes[sq.color]);
+	  	  				if(colorCodes[sq.color].getBlue()>128 && colorCodes[sq.color].getGreen()>128 && colorCodes[sq.color].getRed()>128)
+	  	  					dProps[abc].setForeground(Color.BLACK);
+	  	  				}
+			    	dPropsGroup.add(dProps[abc]);
+			    	dPropsPanel.add(dProps[abc]);
+			    	abc++;
+	    		}
+			    	
+	    	}
+	     }
+	    for(int i=0;i<3;i++){
+	    	dPropsType[i].setVisible(true);}
+	    
+	    
+
+	    dPropsScrollPane.setVisible(true);
+	}
+	
+	
+	
 	public void listHurricane(){
 		int a=0;
 		for(int i=0;i<20;i++){
@@ -642,6 +853,7 @@ public class GUI {
 			}
 			
 		}
+		
 		hurScrollPane.setVisible(true);
 		buttons[23].setVisible(true);
 		
