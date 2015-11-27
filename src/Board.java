@@ -131,28 +131,15 @@ public class Board {
 		}
 	}
 
-
-	public CardChance peekChance(){
+	public CardChance peekChanceCard(){
 
 		CardChance x = chanceDeck.peek();
-		if(x.number == 18){
-			CardChance c = chanceDeck.poll();
-			chanceDeck.add(c);
-			x = chanceDeck.peek();
-		}
 		return x;
 	}
+	public CardCommunity peekCommunityCard(){
 
-	public CardCommunity peekCommunity(){
-
-		CardCommunity c = communityDeck.peek();
-		if(c.number==29 || c.number == 40){
-			CardCommunity p = communityDeck.poll();
-			communityDeck.add(p);
-			c = communityDeck.peek();
-		}
-		
-		return c;
+		CardCommunity x = communityDeck.peek();
+		return x;
 	}
 
 	public void pullPushChance(){
@@ -377,6 +364,29 @@ public String[] getResultArray(){
 	public Player getCurrentPlayer(){
 		return this.currentPlayer;
 	}
+	public CardChance peekChance(){
+
+		CardChance x = chanceDeck.peek();
+		if(x.number == 18){
+			CardChance c = chanceDeck.poll();
+			chanceDeck.add(c);
+			x = chanceDeck.peek();
+		}
+		return x;
+	}
+
+	public CardCommunity peekCommunity(){
+
+		CardCommunity c = communityDeck.peek();
+		if(c.number==29 || c.number == 40){
+			CardCommunity p = communityDeck.poll();
+			communityDeck.add(p);
+			c = communityDeck.peek();
+		}
+		
+		return c;
+	}
+
 	
 	public Player nextPlayer(){
 		int npID = (this.currentPlayer.id+1)%totalPlayer;
