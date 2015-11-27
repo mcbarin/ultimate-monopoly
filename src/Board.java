@@ -356,7 +356,11 @@ public String[] getResultArray(){
 		((SquareTransit) squares[1][5]).SquareTransitTwin(29,this);
 		((SquareTransit) squares[1][25]).SquareTransitTwin(49,this);
 		
-		debugMode();
+		//debugMode();
+		players.get(1).addPropertyDebug(5, 5);
+
+		players.get(1).addPropertyDebug(7, 5);
+		players.get(1).addPropertyDebug(8, 5);
 
 	}
 	
