@@ -546,9 +546,9 @@ public class CardChance extends Card {
 		return result;
 	}
 	
-	public String[] applyCard21(SquareCabCompany sc,Player p){
+	public String[] applyCard21(Square sp,Player p){
 		String[] result= getResultArray();
-		
+		SquareCabCompany sc = (SquareCabCompany)sp;
 		if(sc.owner == null){
 			p.row = sc.row;
 			p.position = sc.position;
