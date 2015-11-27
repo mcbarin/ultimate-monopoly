@@ -308,6 +308,7 @@ public class SquareProperty extends Square  {
 			initializeAll();
 		}
 
+		p.setFreeProperties();
 		return result;
 	}
 		

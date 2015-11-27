@@ -42,26 +42,32 @@ public abstract class Square {
 		}
 
 	}
-	public void sellSquare(Player p){
+	public String[] sellSquare(Player p){
+		String a[] = new String[14];
 		if(this.type=="Property"){
-			((SquareProperty)this).sellProperty(p);
+			a= ((SquareProperty)this).sellProperty(p);
 		}else if(this.type=="Transit"){
-			((SquareTransit)this).sellTrainStation(p);
+			a= ((SquareTransit)this).sellTrainStation(p);
 		}else if(this.type=="Utility"){
-			((SquareUtility)this).sellUtility(p);
+			a= ((SquareUtility)this).sellUtility(p);
 		}else if(this.type=="CabCompany"){
-			((SquareCabCompany)this).sellCabCompany(p);
+			a= ((SquareCabCompany)this).sellCabCompany(p);
 		}
+		p.setFreeProperties();
+		return a;
 	}
 
-	public void sellSquareBuilding(Player p){
+	public String[] sellSquareBuilding(Player p){
+		String a[] = null;
 		if(this.type=="Property"){
-			((SquareProperty)this).sellBuilding(p);
+			a= ((SquareProperty)this).sellBuilding(p);
 		}else if(this.type=="Transit"){
-			((SquareTransit)this).sellTrainDepot(p);
+			a= ((SquareTransit)this).sellTrainDepot(p);
 		}else if(this.type=="CabCompany"){
-			((SquareCabCompany)this).sellCabStand(p);
+			a=((SquareCabCompany)this).sellCabStand(p);
 		}
+		p.setFreeProperties();
+		return a;
 	}
 
 	public String[] mortgage(Player p){
@@ -111,6 +117,7 @@ public abstract class Square {
 
 		}else{
 			p.substract(unmortgagePrice);
+			
 			if(this.type=="Property"){
 				((SquareProperty)this).isMortgaged=false;
 			}else if(this.type=="Transit"){
@@ -121,11 +128,11 @@ public abstract class Square {
 			}else if(this.type=="CabCompany"){
 				((SquareCabCompany)this).isMortgaged=false;
 			}
+			p.setFreeProperties();
 			result[0]="0";
 			result[1]="Player unmortgaged the property.";
 			result[p.id+2]="-"+""+unmortgagePrice;
 		}
-		p.setFreeProperties();
 		return result;
 	}
 

@@ -546,14 +546,14 @@ public class CardChance extends Card {
 		return result;
 	}
 	
-	public String[] applyCard21(SquareCabCompany sc,Player p){
+	public String[] applyCard21(Square sp,Player p){
 		String[] result= getResultArray();
-		
+		SquareCabCompany sc = (SquareCabCompany)sp;
 		if(sc.owner == null){
 			p.row = sc.row;
 			p.position = sc.position;
 			result = sc.buyCabCompany(p);
-			result[0] = "5";
+			result[0] = "1";
 		}else {
 			p.row = sc.row;
 			p.position = sc.position;
@@ -568,7 +568,7 @@ public class CardChance extends Card {
 			sc.owner = p;
 			p.numberOfCabStand+=sc.cabStand;
 			}
-			result[0]="5";
+			result[0]="1";
 			result[1]="Player took the Cab Company from its owner.";
 			board.pullPushChance();
 		}

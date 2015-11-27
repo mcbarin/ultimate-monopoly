@@ -475,19 +475,19 @@ public class Player {
 		freeProperties.clear();
 		mortgagedProperties.clear();
 		for(int i=0; i<properties.size(); i++){
-			if(!properties.get(i).isMortgaged)
+			if(properties.get(i).isMortgaged==false)
 				freeProperties.add(properties.get(i));
 		}
 		for(int i=0; i<cabs.size(); i++){
-			if(!cabs.get(i).isMortgaged)
+			if(cabs.get(i).isMortgaged==false)
 				freeProperties.add(cabs.get(i));
 		}
 		for(int i=0; i<trains.size(); i++){
-			if(!trains.get(i).isMortgaged)
+			if(trains.get(i).isMortgaged==false)
 				freeProperties.add(trains.get(i));
 		}
 		for(int i=0; i<utilities.size(); i++){
-			if(!utilities.get(i).isMortgaged)
+			if(utilities.get(i).isMortgaged==false)
 				freeProperties.add(utilities.get(i));
 		}
 		

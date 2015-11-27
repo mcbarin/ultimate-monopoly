@@ -35,9 +35,10 @@ public class GUI {
 	
 	private JFrame mainFrame = new JFrame("BECB Monopoly");
 	private GUIPanel panel;
+	private JPanel debugPanel = new JPanel();
 
 	private JTextField initalNumberofPlayers;
-	private JTextArea currentMessage;
+	private JTextArea currentMessage = new JTextArea();
 	private JLabel currentPlayer = new JLabel();
 	
 	private JLabel titles[] = new JLabel[13];
@@ -65,6 +66,20 @@ public class GUI {
 	public JPanel taxiRidePanel = new JPanel(new GridLayout(0,1));
     JScrollPane scrollPaneTaxiRide = new JScrollPane(taxiRidePanel);
     
+
+    
+
+	public JRadioButton[] cabDestinations = new JRadioButton[4];
+	public ButtonGroup cabGroup = new ButtonGroup();
+	public JPanel cabPanel = new JPanel(new GridLayout(0,1));
+    JScrollPane cabScrollPane = new JScrollPane(cabPanel);
+    
+
+	public JRadioButton[] hurElt = new JRadioButton[20];
+	public ButtonGroup hurGroup = new ButtonGroup();
+	public JPanel hurPanel = new JPanel(new GridLayout(0,1));
+    JScrollPane hurScrollPane = new JScrollPane(hurPanel);
+    
     
 
 	public JPanel playerStatsPanel = new JPanel();
@@ -73,6 +88,8 @@ public class GUI {
     JLabel playerNames[] = new JLabel[12];
     JLabel playerMoneys[] = new JLabel[12];
     JLabel playerPropertiesNames[] = new JLabel[12];
+
+	int c[] = new int[20];
     
 	private JButton buttons[] = new JButton[26];
 	
@@ -123,231 +140,329 @@ public class GUI {
 		this.board = board;
 		players = board.getPlayers();
 		cP = board.getCurrentPlayer();
-		 panel = new GUIPanel(board,dice);
-		panel.setBackground(Color.DARK_GRAY);
 		
 		mainFrame = new JFrame("BECB Monopoly");
-    	Container contentPane = mainFrame.getContentPane();
+		Container contentPane = mainFrame.getContentPane();
+	
+		panel = new GUIPanel(board,dice);
+		panel.setBackground(Color.DARK_GRAY);
 		panel.setLayout(null);
 		contentPane.add(panel);
 		
-		
-		
-
-		
-	    for(int i = 0; i<MAX_PROPERTIES; i++){
-	        userFreeProperties[i] = new JRadioButton("text" + i);
-	        userFreeProperties[i].setActionCommand(Integer.toString(i));
-	        userFreeProperties[i].setVisible(false);
-	    	userFreeProperties[i].setForeground(Color.WHITE);
-	    	userFreeProperties[i].setBackground(Color.GRAY);
-	    	freePropertiesButtonGroup.add(userFreeProperties[i]);
-	        sellpanel.add(userFreeProperties[i]);
-	     }
-		scrollPane.setSize(240, 100);
-		sellpanel.setBackground(Color.DARK_GRAY);
-		userFreeProperties[0].setSelected(true);
-		scrollPane.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
-		scrollPane.setAutoscrolls(true);
-		scrollPane.setVisible(false);
-		panel.add(scrollPane);
-	
-	    placeButton(b[3],"Sell",1025, 95, 115, 25,false);
-		placeButton(b[8],"Mortgage",1150, 95, 115, 25,false);
-		
-		
-		
-		playerPics[0] = new JLabel();
-		playerPics[0].setIcon(new ImageIcon("img/p"+Integer.toString(0+1)+".png"));
-		playerPics[0].setSize(40, 40);
-		playerPics[0].setLocation(5,0*20+5);
-		playerStatsPanel.add(playerPics[0]);
-
-		playerNames[0] = new JLabel("Alfa".toUpperCase());
-		playerNames[0].setSize(100, 40);
-		playerNames[0].setLocation(50,0*20+5);
-		playerNames[0].setFont(new Font("Verdana", Font.BOLD, 20));
-		playerStatsPanel.add(playerNames[0]);
-		
-		playerMoneys[0] = new JLabel("$3200".toUpperCase());
-		playerMoneys[0].setSize(200, 40);
-		playerMoneys[0].setLocation(150,0*20+2);
-		playerMoneys[0].setFont(new Font("Lucida Calligraphy", Font.BOLD, 24));
-		playerStatsPanel.add(playerMoneys[0]);
-		
-		playerPropertiesNames[0] = new JLabel(players.get(0).allPropertiesNames.toLowerCase());
-		playerPropertiesNames[0].setToolTipText(players.get(0).allPropertiesNames);
-		playerPropertiesNames[0].setSize(540, 40);
-		playerPropertiesNames[0].setLocation(150,0*20+30);
-		playerPropertiesNames[0].setFont(new Font("Arial", Font.PLAIN, 16));
-		playerStatsPanel.add(playerPropertiesNames[0]);
-		
-		playerStatsPanel.setLayout(null);
-		scrollPanePlayerStats.setSize(540, 200);
-		scrollPanePlayerStats.setLocation(725, 400);
-		scrollPanePlayerStats.setAutoscrolls(true);
-		scrollPanePlayerStats.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
-		panel.add(scrollPanePlayerStats);
-		
-		
-		
-		
-		//Taxi Ride List
-		///////////////////////////////
-		String taxiRideNames[] = {"FREE PARKING", "PENNSYLVANIA RAILROAD" , "SHORT LINE", "READING RAILROAD", "B&O RAILROAD", "CHECKER CAB CO." , "BLACK & WHITE CAB CO." , "YELLOW CAB CO." ,"UTE CAB CO."};
-			
-		for(int i=0; i<taxiRideNames.length;i++){
-			taxiRideDestinations[i] = new JRadioButton(taxiRideNames[i]);
-			taxiRideDestinations[i].setActionCommand(taxiRideNames[i]);
-			taxiRideDestinations[i].setForeground(Color.WHITE);
-			if(i%2==0){taxiRideDestinations[i].setBackground(Color.DARK_GRAY);
-			}else{taxiRideDestinations[i].setBackground(Color.GRAY);}
-			
-			taxiRideGroup.add(taxiRideDestinations[i]);
-			taxiRidePanel.add(taxiRideDestinations[i]);
+		for(int i=0;i<13;i++){
+			 titles[i] = new JLabel();
 		}
-		scrollPaneTaxiRide.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
-		taxiRidePanel.setBackground(Color.DARK_GRAY);
-		taxiRideDestinations[0].setSelected(true);
-		scrollPaneTaxiRide.setAutoscrolls(true);
-		scrollPaneTaxiRide.setVisible(false);
-		scrollPaneTaxiRide.setLocation(725, 170);
-		scrollPaneTaxiRide.setSize(290, 100);
-		panel.add(scrollPaneTaxiRide);
-		placeButton(b[18],"Take a Cab",735,280, 130, 25,false);
-		placeButton(b[19],"No",875, 280, 130, 25,false);
-		//////////////////////////////////////////
 		
-		//UNMortgage Pane
-	    for(int i = 0; i<MAX_PROPERTIES; i++){
-	    	userMortgagedProperties[i] = new JRadioButton("text" + i);
-	    	userMortgagedProperties[i].setActionCommand(Integer.toString(i));
-	    	userMortgagedProperties[i].setVisible(false);
-	    	userMortgagedProperties[i].setForeground(Color.WHITE);
-	    	mortgagedPropertiesButtonGroup.add(userMortgagedProperties[i]);
-	    	unmortgagepanel.add(userMortgagedProperties[i]);
-	     }
-	    scrollPaneUnmortgage.setSize(240, 100);
-	    userMortgagedProperties[0].setSelected(true);
-	    unmortgagepanel.setBackground(Color.DARK_GRAY);
-		scrollPaneUnmortgage.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
-		scrollPaneUnmortgage.setAutoscrolls(true);
-		scrollPaneUnmortgage.setVisible(false);
-		panel.add(scrollPaneUnmortgage);
+		for(int i=0;i<12;i++){
+			 playerNames[i] = new JLabel();
+			 
+			 playerMoneys[i] = new JLabel();
+			 playerPics[i] = new JLabel();
+			 playerPropertiesNames[i] = new JLabel();
+		}
+			
+			
+		    for(int i = 0; i<MAX_PROPERTIES; i++){
+		        userFreeProperties[i] = new JRadioButton("text" + i);
+		        userFreeProperties[i].setActionCommand(Integer.toString(i));
+		        userFreeProperties[i].setVisible(false);
+		    	userFreeProperties[i].setForeground(Color.WHITE);
+		    	userFreeProperties[i].setBackground(Color.GRAY);
+		    	freePropertiesButtonGroup.add(userFreeProperties[i]);
+		        sellpanel.add(userFreeProperties[i]);
+		     }
+			scrollPane.setSize(240, 100);
+			sellpanel.setBackground(Color.DARK_GRAY);
+			userFreeProperties[0].setSelected(true);
+			scrollPane.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
+			scrollPane.setAutoscrolls(true);
+			scrollPane.setVisible(false);
+			panel.add(scrollPane);
+		
+		    placeButton(b[3],"Sell",1025, 95, 115, 25,false);
+			placeButton(b[8],"Mortgage",1150, 95, 115, 25,false);
+			
+			
+			for(int i=0; i<players.size(); i++){
+				
+				playerPics[i] = new JLabel();
+				playerPics[i].setIcon(new ImageIcon("img/p"+Integer.toString(i+1)+".png"));
+				playerPics[i].setSize(40, 40);
+				playerPics[i].setLocation(5,i*75+5);
+				playerStatsPanel.add(playerPics[i]);
+		
+				playerNames[i] = new JLabel(players.get(i).name.toUpperCase());
+				playerNames[i].setSize(100, 40);
+				playerNames[i].setLocation(50,i*75+5);
+				playerNames[i].setFont(new Font("Verdana", Font.BOLD, 20));
+				playerStatsPanel.add(playerNames[i]);
+				
+				playerMoneys[i] = new JLabel("$"+Integer.toString(players.get(i).money).toUpperCase());
+				playerMoneys[i].setSize(200, 40);
+				playerMoneys[i].setLocation(150,i*75+2);
+				playerMoneys[i].setFont(new Font("Lucida Calligraphy", Font.BOLD, 24));
+				playerStatsPanel.add(playerMoneys[i]);
+				
+				playerPropertiesNames[i] = new JLabel(players.get(i).allPropertiesNames.toLowerCase());
+				playerPropertiesNames[i].setToolTipText(players.get(i).allPropertiesNames);
+				playerPropertiesNames[i].setSize(540, 40);
+				playerPropertiesNames[i].setLocation(0,i*75+35);
+				playerPropertiesNames[i].setFont(new Font("Arial", Font.PLAIN, 16));
+				playerPropertiesNames[i].setBorder(BorderFactory.createMatteBorder(0, 0, 2,0, Color.black));
+				playerStatsPanel.add(playerPropertiesNames[i]);
+			}
+			playerStatsPanel.setSize(570,800);
+			scrollPanePlayerStats.setSize(540, 74);
+			scrollPanePlayerStats.setLocation(725, 630);
+			scrollPanePlayerStats.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
+			scrollPanePlayerStats.setVisible(false);
+			panel.add(scrollPanePlayerStats);
+			
+			
+			
+			
+			//Taxi Ride List
+			///////////////////////////////
+			String taxiRideNames[] = {"FREE PARKING", "PENNSYLVANIA RAILROAD" , "SHORT LINE", "READING RAILROAD", "B&O RAILROAD", "CHECKER CAB CO." , "BLACK & WHITE CAB CO." , "YELLOW CAB CO." ,"UTE CAB CO."};
+				
+			for(int i=0; i<taxiRideNames.length;i++){
+				taxiRideDestinations[i] = new JRadioButton(taxiRideNames[i]);
+				taxiRideDestinations[i].setActionCommand(taxiRideNames[i]);
+				taxiRideDestinations[i].setForeground(Color.WHITE);
+				if(i%2==0){taxiRideDestinations[i].setBackground(Color.DARK_GRAY);
+				}else{taxiRideDestinations[i].setBackground(Color.GRAY);}
+				
+				taxiRideGroup.add(taxiRideDestinations[i]);
+				taxiRidePanel.add(taxiRideDestinations[i]);
+			}
+			scrollPaneTaxiRide.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
+			taxiRidePanel.setBackground(Color.DARK_GRAY);
+			taxiRideDestinations[0].setSelected(true);
+			scrollPaneTaxiRide.setAutoscrolls(true);
+			scrollPaneTaxiRide.setVisible(false);
+			scrollPaneTaxiRide.setLocation(725, 170);
+			scrollPaneTaxiRide.setSize(290, 100);
+			panel.add(scrollPaneTaxiRide);
+			placeButton(b[18],"Take a Cab",735,280, 130, 25,false);
+			placeButton(b[19],"No",875, 280, 130, 25,false);
+			//////////////////////////////////////////
+			
+			//UNMortgage Pane
+		    for(int i = 0; i<MAX_PROPERTIES; i++){
+		    	userMortgagedProperties[i] = new JRadioButton("text" + i);
+		    	userMortgagedProperties[i].setActionCommand(Integer.toString(i));
+		    	userMortgagedProperties[i].setVisible(false);
+		    	userMortgagedProperties[i].setForeground(Color.WHITE);
+		    	mortgagedPropertiesButtonGroup.add(userMortgagedProperties[i]);
+		    	unmortgagepanel.add(userMortgagedProperties[i]);
+		     }
+		    scrollPaneUnmortgage.setSize(240, 100);
+		    userMortgagedProperties[0].setSelected(true);
+		    unmortgagepanel.setBackground(Color.DARK_GRAY);
+			scrollPaneUnmortgage.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
+			scrollPaneUnmortgage.setAutoscrolls(true);
+			scrollPaneUnmortgage.setVisible(false);
+			panel.add(scrollPaneUnmortgage);
+		
+			placeButton(b[9],"UNMortgage",105, 95, 240, 25,false);
+			
+			
 	
-		placeButton(b[9],"Mortgage",105, 95, 240, 25,false);
+			
+			//cabbo
+			////////////////////////////////
+			int ids[] = {70,86,99,114};
+		    for(int i = 0; i<4; i++){
+		    	Square sq = board.getSquareFromBoard(ids[i]);
+		    	cabDestinations[i] = new JRadioButton(sq.name);
+		    	cabDestinations[i].setActionCommand(Integer.toString(ids[i]));
+		    	cabDestinations[i].setVisible(true);
+		    	cabDestinations[i].setForeground(Color.WHITE);
+		    	cabDestinations[i].setBackground(Color.DARK_GRAY);
+		    	cabGroup.add(cabDestinations[i]);
+		    	cabPanel.add(cabDestinations[i]);
+		     }
+		    cabScrollPane.setLocation(725, 170);
+		    cabScrollPane.setSize(290, 100);
+		    cabDestinations[0].setSelected(true);
+		    cabPanel.setBackground(Color.DARK_GRAY);
+		    cabScrollPane.setBorder(BorderFactory.createMatteBorder(0, 0,0, 0, Color.black));
+		    cabScrollPane.setAutoscrolls(true);
+		    cabScrollPane.setVisible(false);
+			panel.add(cabScrollPane);
 		
+			//////////////////////////////////
+			
+			
+			//hurro
+			////////////////////////////////
+		    for(int i = 0; i<20; i++){
+		    	hurElt[i] = new JRadioButton("");
+		    	hurElt[i].setVisible(false);
+		    	hurGroup.add(hurElt[i]);
+		    	hurPanel.add(hurElt[i]);
+		     }
+		    hurScrollPane.setLocation(725, 170);
+		    hurScrollPane.setSize(290, 100);
+		    hurElt[0].setSelected(true);
+		    hurPanel.setBackground(Color.DARK_GRAY);
+		    hurScrollPane.setBorder(BorderFactory.createMatteBorder(0, 0,0, 0, Color.black));
+		    hurScrollPane.setAutoscrolls(true);
+		    hurScrollPane.setVisible(false);
+			placeButton(b[23],"Hurricane",735, 280, 270, 25,false);
+			panel.add(hurScrollPane);
 		
-		
-		
-		
-		
-		
-		
-		
-		
-	   
-		currentMessage = new JTextArea();
-	    currentMessage.setLineWrap( true );
-	    currentMessage.setWrapStyleWord( true );
-	    currentMessage.setMargin(new Insets(10,10,10,10));
-	    currentMessage.setForeground(new Color(180,255,240));
-	    currentMessage.setBackground(new Color(50,50,50));
-	    currentMessage.setEditable(false);
-        currentMessage.setFont(new Font("Verdana", Font.PLAIN, 16));
-        currentMessage.setSize(290, 160);
-        currentMessage.setLocation(725, 10);
-        currentMessage.setText(cP.name);
-        panel.add(currentMessage);
-        
-        
-
-        
-
-        currentPlayer.setIcon(new ImageIcon("img/p1.png"));
-        currentPlayer.setSize(40, 40);
-        currentPlayer.setLocation(1025, 5);
-        panel.add(currentPlayer);
-        //cp money
-        titles[2] = new JLabel(); 
-        placeLabel(titles[2],"",240,24,1025,13,new Color(255,255,255),Color.GRAY,new Font("Verdana", Font.PLAIN, 18));
-        titles[2].setHorizontalAlignment(JLabel.RIGHT);
-        panel.add(titles[2]);
-        
-        //mortgage
-        titles[0] = new JLabel();
-        panel.add(titles[0]);
-        //unmortgage
-        titles[1] = new JLabel();
-        panel.add(titles[1]);
-		
-
-		placeButton(b[0],"Roll Dice!",735, 180, 270, 40,false);
-		placeButton(b[5],"Roll Once",735, 180, 270, 40,false);
-		placeButton(b[1],"Buy",735, 188, 130, 25,false);
-		placeButton(b[10],"Yes",735, 188, 130, 25,false);
-		placeButton(b[20],"Yes",735, 188, 130, 25,false);
-		placeButton(b[21],"Yes",735, 188, 130, 25,false);
-		placeButton(b[4],"No",875, 188, 130, 25,false);
-		placeButton(b[2],"Buy with Cance Card",735, 188, 270, 25,false);
-		
-
-		placeButton(b[6],"Pull Chance Card",735, 180, 270, 40,false);
-		b[6].setBackground(new Color(208,200,0));
-		placeButton(b[7],"Pull Community Chest Card",735, 180, 270, 40,false);
-		b[7].setBackground(new Color(208,200,0));
-		
-		
-
-		placeButton(b[14],"",735, 188, 80, 25,false);
-		placeButton(b[15],"",830, 188, 80, 25,false);
-		placeButton(b[16],"",925, 188, 80, 25,false);
-		
-		
+			//////////////////////////////////
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		   
+			
+		    currentMessage.setLineWrap( true );
+		    currentMessage.setWrapStyleWord( true );
+		    currentMessage.setMargin(new Insets(10,10,10,10));
+		    currentMessage.setForeground(new Color(180,255,240));
+		    currentMessage.setBackground(new Color(50,50,50));
+		    currentMessage.setEditable(false);
+		    currentMessage.setVisible(false);
+	        currentMessage.setFont(new Font("Verdana", Font.PLAIN, 16));
+	        currentMessage.setSize(290, 160);
+	        currentMessage.setLocation(725, 10);
+	        currentMessage.setText(cP.name);
+	        panel.add(currentMessage);
+	        
+	        
 	
+	        
+	
+	        currentPlayer.setIcon(new ImageIcon("img/p1.png"));
+	        currentPlayer.setSize(40, 40);
+	        currentPlayer.setLocation(1025, 5);
+	        currentPlayer.setVisible(false);
+	        panel.add(currentPlayer);
+	        //cp money
+
+	        placeLabel(titles[2],"",240,24,1025,13,new Color(255,255,255),Color.GRAY,new Font("Verdana", Font.PLAIN, 18));
+	        titles[2].setHorizontalAlignment(JLabel.RIGHT);
+	        panel.add(titles[2]);
+	        
+	        //mortgage
+	        panel.add(titles[0]);
+	        //unmortgage
+	        panel.add(titles[1]);
+			
+	
+			placeButton(b[0],"Roll Dice!",735, 180, 270, 40,false);
+			placeButton(b[5],"Roll Once",735, 180, 270, 40,false);
+			placeButton(b[1],"Buy",735, 188, 130, 25,false);
+			placeButton(b[10],"Yes",735, 188, 130, 25,false);
+			placeButton(b[20],"Yes",735, 188, 130, 25,false);
+			placeButton(b[21],"Yes",735, 188, 130, 25,false);
+			placeButton(b[22],"Go to Company",735, 280, 270, 25,false);
+			placeButton(b[4],"No",875, 188, 130, 25,false);
+			placeButton(b[2],"Buy with Cance Card",735, 188, 270, 25,false);
+			
+	
+			placeButton(b[6],"Pull Chance Card",735, 180, 270, 40,false);
+			b[6].setBackground(new Color(208,200,0));
+			placeButton(b[7],"Pull Community Chest Card",735, 180, 270, 40,false);
+			b[7].setBackground(new Color(208,200,0));
+	
+			placeButton(b[14],"",735, 188, 80, 25,false);
+			placeButton(b[15],"",830, 188, 80, 25,false);
+			placeButton(b[16],"",925, 188, 80, 25,false);
+			
+		
+			
+	        
+	      
+	        
+	        ActionListener taskPerformer = new ActionListener() {
+	            public void actionPerformed(ActionEvent evt) {
+	            	//System.out.println("Repaints Continuously");
+	
+					players = board.getPlayers();
+					cP = board.getCurrentPlayer();
+				if(MonopolyGame.debugLeft==0){
+
+					scrollPanePlayerStats.setVisible(true);
+				    currentMessage.setVisible(true);
+			        currentPlayer.setVisible(true);
+					
+					
+					currentPlayer.setText(cP.name);
+					currentPlayer.setIcon(new ImageIcon("img/p"+Integer.toString(cP.id+1)+".png"));
+					titles[2].setText("$"+Integer.toString(cP.money));
+	
+					cpFreeProperties = cP.freeProperties;
+					cpMortgagedProperties = cP.mortgagedProperties;
+					setProps(45);
+					
+					
+	
+					if(MonopolyGame.specialConditions[2]){
+						b[18].setVisible(true);
+						b[19].setVisible(true);
+						scrollPaneTaxiRide.setVisible(true);
+					}else{scrollPaneTaxiRide.setVisible(false);}
+					
+					
+					if(MonopolyGame.specialConditions[4]){
+						b[22].setVisible(true);
+						cabScrollPane.setVisible(true);
+					}else{cabScrollPane.setVisible(false);
+					b[22].setVisible(false);}
+					
+					
+					for(int i=0; i<players.size(); i++){
+				
+						playerNames[i].setText(players.get(i).name.toUpperCase());
+						
+						playerMoneys[i].setText("$"+Integer.toString(players.get(i).money).toUpperCase());
+						
+						playerPropertiesNames[i].setText(players.get(i).allPropertiesNames.toLowerCase());
+					}
+					
+					
+					if(MonopolyGame.specialConditions[5]){
+						listHurricane();
+					}else{hurScrollPane.setVisible(false);
+					b[23].setVisible(false);}
+				}else{
+
+					setGUI("","",b);
+					MonopolyGame.debugLeft--;
+					
+					
+					System.out.println(MonopolyGame.debugLeft);
+				}
+					panel.repaint();
+					
+					
+				
+	            }
+	        };
+	        Timer timer = new Timer(1000 ,taskPerformer);
+	        timer.setRepeats(true);
+	        timer.start();
+	
+	        Thread.sleep(500);
+       
+        
+    	
+		
+    	
         //mainFrame.setResizable(false);
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);  
-        
-      
-        
-        ActionListener taskPerformer = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-            	//System.out.println("Repaints Continuously");
-
-				players = board.getPlayers();
-				cP = board.getCurrentPlayer();
-				currentPlayer.setText(cP.name);
-			
-				currentPlayer.setIcon(new ImageIcon("img/p"+Integer.toString(cP.id+1)+".png"));
-				titles[2].setText("$"+Integer.toString(cP.money));
-
-				cpFreeProperties = cP.freeProperties;
-				cpMortgagedProperties = cP.mortgagedProperties;
-				setProps(45);
-				
-				
-				
-				if(MonopolyGame.specialConditions[2]){
-					b[18].setVisible(true);
-					b[19].setVisible(true);
-					scrollPaneTaxiRide.setVisible(true);
-				}else{scrollPaneTaxiRide.setVisible(false);}
-				
-				panel.repaint();
-				
-				
-			
-            }
-        };
-        Timer timer = new Timer(100 ,taskPerformer);
-        timer.setRepeats(true);
-        timer.start();
-
-        Thread.sleep(500);
-       
     	
     	
 	}
@@ -505,6 +620,30 @@ public class GUI {
 	  
 	}
 	
+	
+	public void listHurricane(){
+		int a=0;
+		for(int i=0;i<20;i++){
+			c[i] = 0;
+		}
+		for(int i=0;i<players.size();i++){
+			for(int j=0; j<players.get(i).upgradedColors.size(); j++){
+				if(c[players.get(i).upgradedColors.get(j)]==0){
+					hurElt[a].setText(players.get(i).name);
+					hurElt[a].setBackground(colorCodes[players.get(i).upgradedColors.get(j)]);
+					hurElt[a].setVisible(true);
+	
+					hurElt[a].setActionCommand(Integer.toString(players.get(i).upgradedColors.get(j))+"-"+Integer.toString(players.get(i).id));
+					a++;
+					c[players.get(i).upgradedColors.get(j)]=1;
+				}
+			}
+			
+		}
+		hurScrollPane.setVisible(true);
+		buttons[23].setVisible(true);
+		
+	}
 	
 	
 
