@@ -91,6 +91,7 @@ public class SquareUtility extends Square {
 
 
 	public void initializeAll(){
+		this.owner=null;
 		this.price=150;
 		this.rent = 0;
 		this.isMortgaged=false;
@@ -110,11 +111,12 @@ public class SquareUtility extends Square {
 			result[1]="This utility is mortgaged already";
 			return result;
 		}else{
-			initializeAll();
+			
 			p.addMoney(price/2);
 			result[1]=p.name+" sold "+ this.name+" for $"+price/2;
 			result[p.id+2]=Integer.toString(price/2);
 			p.utilities.remove(this);
+			initializeAll();
 		}
 		return result;
 	}

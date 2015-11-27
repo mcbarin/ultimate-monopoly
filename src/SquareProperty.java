@@ -300,11 +300,12 @@ public class SquareProperty extends Square  {
 			result[1]="This property is mortgaged already";
 			return result;
 		}else if(house==0 && hotel==0 && skyscraper==0){
-			initializeAll();
+			
 			p.addMoney(price/2);
 			result[1]=p.name+" sold "+ this.name+" for $"+price/2;
 			result[p.id+2]=Integer.toString(buildingPrice/2);
 			p.deleteProperty(this);
+			initializeAll();
 		}
 
 		return result;

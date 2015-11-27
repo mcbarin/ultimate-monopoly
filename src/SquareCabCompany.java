@@ -167,11 +167,12 @@ public class SquareCabCompany extends Square {
 			result[1]="You should sell Cab Stand first.";
 			return result;
 		}else if(cabStand==0){
-			initializeAll();
+			
 			p.addMoney(price/2);
 			result[1]=p.name+" sold "+ this.name+" for $"+price/2;
 			result[p.id+2]=Integer.toString(price/2);
 			p.cabs.remove(this);
+			initializeAll();
 		}
 		return result;
 	}

@@ -227,12 +227,13 @@ public class SquareTransit extends Square {
 			result[1]="You should sell Cab Stand first.";
 			return result;
 		}else if(trainDepot==0){
-			initializeAll();
+		
 			p.addMoney(price/2);
 			result[1]=p.name+" sold "+ this.name+" for $"+price/2;
 			result[p.id+2]=Integer.toString(price/2);
 			p.trains.remove(this);
 			p.trains.remove(this.twin);
+			initializeAll();
 		}
 		return result;
 	}
