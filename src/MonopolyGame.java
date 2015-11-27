@@ -19,7 +19,9 @@ public class MonopolyGame {
 	public static boolean specialConditions[] = new boolean[26];
 	//	0-rollOnce	1-rollOnce Die	2-taxiRide	3-specialStatus	4-cabcomp	5-chance8	
 	private int specialStatus;
-	private int initialNumberofPlayers;
+	public static int initialNumberofPlayers;
+	public static int debugPlayerID=0;
+	public static int debugLeft;
 	
 	private Dice die = new Dice();
 	private  int totalDice;
@@ -63,9 +65,9 @@ public class MonopolyGame {
 			    	  dieSpeed = die.getFace();}
 		    	  else{
 		    		 manipulate = false;
-		    		 dieOne = 3;
-			    	 dieTwo = 2;
-			    	 dieSpeed = 2;
+		    		 dieOne = 1;
+			    	 dieTwo = 1;
+			    	 dieSpeed = 4;
 		    	  }
 		    	  totalDice = dieOne+dieTwo;
 		  			if(dieSpeed<4) totalDice+=dieSpeed;	
@@ -191,12 +193,13 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  initialNumberofPlayers = gui.getInitialNumberofPlayers();
+		    	  debugLeft = initialNumberofPlayers;
 		    	  
 		    	  board = new Board(initialNumberofPlayers);
 		    	  players = board.getPlayers();
 
-			  		players.get(0).row=2;
-			  		players.get(0).position=3;
+			  		players.get(0).row=1;
+			  		players.get(0).position=0;
 		  		
 		    	  try {
 		    		gui = null;
@@ -244,6 +247,26 @@ public class MonopolyGame {
 		
 		//pull chance
 		buttons[6].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  String result[] = board.peekChance().doAction(cP);
+		    	  int s = Integer.parseInt(result[0]);
+		    	  if(s==25){
+		    		  gui.setGUI(result,"",buttons);
+		    		  specialConditions[4] = true;
+		    	  }else if(s==8){
+		    		  gui.setGUI(result,"",buttons);
+		    		  specialConditions[5] = true;
+		    	  }else{
+		    		  play2(1,result);
+		    	  }
+		    	 
+		      }
+		});
+		
+		//pull community
+		buttons[7].addActionListener(new ActionListener()
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
@@ -378,6 +401,9 @@ public class MonopolyGame {
 			case 30:
 				gui.setGUI(result, "0000001", buttons);
 				break;
+			case 31:
+				gui.setGUI(result, "00000001", buttons);
+				break;
 				
 			default:
 				gui.setGUI(result[1]+" Next player!", "1", buttons);
@@ -448,6 +474,9 @@ public class MonopolyGame {
 				break;
 			case 30:
 				gui.setGUI(result, "0000001", buttons);
+				break;
+			case 31:
+				gui.setGUI(result, "00000001", buttons);
 				break;
 			default:
 				gui.setGUI(result[1]+" Next player!", "1", buttons);
