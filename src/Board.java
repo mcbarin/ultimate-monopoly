@@ -134,13 +134,24 @@ public class Board {
 
 	public CardChance peekChance(){
 
-		CardChance c = chanceDeck.peek();
-		return c;
+		CardChance x = chanceDeck.peek();
+		if(x.number == 18){
+			CardChance c = chanceDeck.poll();
+			chanceDeck.add(c);
+			x = chanceDeck.peek();
+		}
+		return x;
 	}
 
 	public CardCommunity peekCommunity(){
 
 		CardCommunity c = communityDeck.peek();
+		if(c.number==29 || c.number == 40){
+			CardCommunity p = communityDeck.poll();
+			communityDeck.add(p);
+			c = communityDeck.peek();
+		}
+		
 		return c;
 	}
 
