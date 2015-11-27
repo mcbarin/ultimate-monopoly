@@ -13,7 +13,7 @@ public class MonopolyGame {
 	private ArrayList<Player> players;
 	private Player cP;
 	
-	public static boolean manipulate=true; 
+	public static boolean manipulate=false; 
 	
 	private JButton buttons[] = new JButton[26];
 	public static boolean specialConditions[] = new boolean[26];
@@ -25,9 +25,9 @@ public class MonopolyGame {
 	
 	private Dice die = new Dice();
 	private  int totalDice;
-	//buttons = rollDice,	buy,	buyChance,	sell,			4-no,		5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
-	//			10-yes,		start,	load,		save, 			dieOne,		15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
-	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	
+	//buttons = rollDice,	buy,	buyChance,	sell,			4-no,			5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
+	//			10-yes,		start,	load,		save, 			dieOne,			15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
+	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-addPropDebug			25-debugnext
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -65,9 +65,6 @@ public class MonopolyGame {
 			    	  dieSpeed = die.getFace();}
 		    	  else{
 		    		 manipulate = false;
-		    		 dieOne = 1;
-			    	 dieTwo = 1;
-			    	 dieSpeed = 4;
 		    	  }
 		    	  totalDice = dieOne+dieTwo;
 		  			if(dieSpeed<4) totalDice+=dieSpeed;	
@@ -210,7 +207,7 @@ public class MonopolyGame {
 						e1.printStackTrace();
 					}
 		    	  
-		    	  gui.setGUI("Let's play!", "1",buttons);
+		    	  gui.setGUI("Let's play!", "",buttons);
 		    	  System.out.println("cont "+initialNumberofPlayers);
 		      }
 		});
@@ -311,6 +308,38 @@ public class MonopolyGame {
 		    		  result = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
 		    		  play2(Integer.parseInt(result[0]),result);
 		    	 
+		      }
+		});
+		
+		//addPropDebug
+		buttons[24].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).addPropertyDebug(Integer.parseInt(gui.dPropsGroup.getSelection().getActionCommand()), Integer.parseInt(gui.dPropsTypeGroup.getSelection().getActionCommand()));
+		    	  System.out.println("debo: " + gui.dPropsGroup.getSelection().getActionCommand()+" "+gui.dPropsTypeGroup.getSelection().getActionCommand());
+		    	 
+		      }
+		});
+		
+		//addPropDebug
+		buttons[25].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).row=gui.getRow();
+		    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).position=gui.getPosition();
+		    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).money=gui.getMoney();
+		    	  if(debugLeft==1){
+		    		  
+		    		  dieOne = gui.getDieOneF();
+		    		  dieTwo = gui.getDieTwoF();
+		    		  dieSpeed = gui.getDieSpeedF();
+		    		  if(dieOne>0 && dieTwo>0 && dieSpeed>0)
+		    			  manipulate = true;
+		    			  
+		    	  }
+		    	  debugLeft--;
 		      }
 		});
 		

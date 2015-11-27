@@ -42,7 +42,7 @@ public class Board {
 	Queue<CardCommunity> communityDeck = new LinkedList<CardCommunity>();
 	Queue<CardChance> chanceDeck = new LinkedList<CardChance>();
 
-	String[] playerNames = {"Alpha","Beta","Gamma","Delta","Epsilon","Zeta","Eta","Theta","Iota","Kappa","Lambda","Pi"};
+	String[] playerNames = {"Ezgi","Cagatay","Bugra","Delta","Epsilon","Zeta","Eta","Theta","Iota","Kappa","Lambda","Pi"};
 
 
 	public void initializePlayers(int totalPlayer){
@@ -357,11 +357,6 @@ public String[] getResultArray(){
 		((SquareTransit) squares[1][25]).SquareTransitTwin(49,this);
 		
 		//debugMode();
-		players.get(1).addPropertyDebug(5, 5);
-
-		players.get(1).addPropertyDebug(7, 5);
-		players.get(1).addPropertyDebug(8, 5);
-
 	}
 	
 	public void setCurrentPlayer(Player p){

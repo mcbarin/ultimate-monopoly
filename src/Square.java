@@ -24,6 +24,7 @@ public abstract class Square {
 	int position;
 	int row;
 	int color;
+	Player owner=null;
 
 
 	public Square(String type,String name,int id, int position, int row) {
