@@ -394,6 +394,8 @@ public class GUI {
 					scrollPanePlayerStats.setVisible(true);
 				    currentMessage.setVisible(true);
 			        currentPlayer.setVisible(true);
+			        b[0].setVisible(true);
+			        
 					
 					
 					currentPlayer.setText(cP.name);

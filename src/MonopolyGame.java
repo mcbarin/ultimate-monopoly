@@ -25,9 +25,9 @@ public class MonopolyGame {
 	
 	private Dice die = new Dice();
 	private  int totalDice;
-	//buttons = rollDice,	buy,	buyChance,	sell,			4-no,		5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
-	//			10-yes,		start,	load,		save, 			dieOne,		15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
-	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	
+	//buttons = rollDice,	buy,	buyChance,	sell,			4-no,			5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
+	//			10-yes,		start,	load,		save, 			dieOne,			15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
+	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -210,7 +210,7 @@ public class MonopolyGame {
 						e1.printStackTrace();
 					}
 		    	  
-		    	  gui.setGUI("Let's play!", "1",buttons);
+		    	  gui.setGUI("Let's play!", "",buttons);
 		    	  System.out.println("cont "+initialNumberofPlayers);
 		      }
 		});
