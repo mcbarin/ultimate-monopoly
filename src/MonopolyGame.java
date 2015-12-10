@@ -49,6 +49,7 @@ public class MonopolyGame {
 			JTextField nump = new JTextField();
 			gui = new GUI(buttons, nump); 
 			Board.gameStatus = 0;
+			
 			}
 		
 
@@ -75,8 +76,7 @@ public class MonopolyGame {
 		    		  buttons[14].setText(Integer.toString(dieOne));
 		    		  buttons[15].setText(Integer.toString(dieTwo));
 		    		  buttons[16].setText(Integer.toString((dieOne+dieTwo)));
-		    	  }else if(dieSpeed>4){
-		    		  cP.setPosition(dieOne+dieTwo);		
+		    	  }else if(dieSpeed>4){	
 		    		  cP.monopolyGuyFlag = true;
 		    	  }else{
 		    		  cP.setPosition(dieOne+dieTwo+dieSpeed);
@@ -86,6 +86,14 @@ public class MonopolyGame {
 		    	  
 		      }
 		});
+		
+		buttons[0].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	 System.out.println("bugraCanS"); 
+		    	 board.refreshGUI();
+		      }});
 
 		//BuyButton
 		buttons[1].addActionListener(new ActionListener()
@@ -195,13 +203,15 @@ public class MonopolyGame {
 		    	  board = new Board(initialNumberofPlayers);
 		    	  players = board.getPlayers();
 
-			  		players.get(0).row=1;
-			  		players.get(0).position=0;
+			  	
 		  		
 		    	  try {
 		    		gui = null;
 					gui = new GUI(board,buttons);
 					gui.setPlayers(board.getPlayers());
+					
+					
+					board.addressGUI(gui);
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

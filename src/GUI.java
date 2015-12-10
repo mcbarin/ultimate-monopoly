@@ -34,6 +34,8 @@ public class GUI {
 	
 	
 	private JFrame mainFrame = new JFrame("BECB Monopoly");
+	Container contentPane = mainFrame.getContentPane();
+
 	private GUIPanel panel;
 
 	private JTextField initalNumberofPlayers;
@@ -118,7 +120,6 @@ public class GUI {
 		panel.setBackground(Color.DARK_GRAY);
 		
 		
-    	Container contentPane = mainFrame.getContentPane();
 		panel.setLayout(null);
 		contentPane.add(panel);
 		
@@ -152,9 +153,6 @@ public class GUI {
 		players = board.getPlayers();
 		cP = board.getCurrentPlayer();
 		
-		mainFrame = new JFrame("BECB Monopoly");
-		Container contentPane = mainFrame.getContentPane();
-	
 		panel = new GUIPanel(board,dice);
 		panel.setBackground(Color.DARK_GRAY);
 		panel.setLayout(null);
@@ -615,8 +613,15 @@ public class GUI {
     	
     	
 	}
-	
+	public void refresh(){
+		System.out.println("Beni Köyümün Yağmurlarında Yıkasınlar!");
+		
+	}
 
+	
+	
+	
+	
 	private void placeButton(JButton button, String title, int x, int y, int width, int height, boolean visibility){
 		button.setText(title);
 		button.setLocation(x, y);
