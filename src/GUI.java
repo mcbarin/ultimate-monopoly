@@ -494,105 +494,7 @@ public class GUI {
 	            public void actionPerformed(ActionEvent evt) {
 	            	//System.out.println("Repaints Continuously");
 	
-					players = board.getPlayers();
-					cP = board.getCurrentPlayer();
-					scrollPanePlayerStats.setVisible(true);
-
-					for(int i=0; i<players.size(); i++){
-				
-						playerNames[i].setText(players.get(i).name.toUpperCase());
-						
-						playerMoneys[i].setText("$"+Integer.toString(players.get(i).money).toUpperCase());
-						
-						playerPropertiesNames[i].setText(players.get(i).allPropertiesNames.toLowerCase());
-					}
 					
-				if(MonopolyGame.debugLeft==0){
-
-				    currentMessage.setVisible(true);
-			        currentPlayer.setVisible(true);
-			        b[0].setVisible(true);
-
-			        dieOneF.setVisible(false);
-			        dieTwoF.setVisible(false);
-			        dieSpeedF.setVisible(false);
-
-			        titles[6].setVisible(false);
-				    dPropsScrollPane.setVisible(false);
-				    row.setVisible(false);
-				    position.setVisible(false);
-				    money.setVisible(false);
-				    
-				    for(int i=0;i<3;i++){
-				    	dPropsType[i].setVisible(false);}
-				    b[24].setVisible(false);
-				    b[25].setVisible(false);
-
-					MonopolyGame.debugLeft--;
-				}
-				else if(MonopolyGame.debugLeft<0){
-				    row.setVisible(false);
-				    position.setVisible(false);
-				    money.setVisible(false);
-					
-					
-					currentPlayer.setText(cP.name);
-					currentPlayer.setIcon(new ImageIcon("img/p"+Integer.toString(cP.id+1)+".png"));
-					titles[2].setText("$"+Integer.toString(cP.money));
-	
-					cpFreeProperties = cP.freeProperties;
-					cpMortgagedProperties = cP.mortgagedProperties;
-					setProps(45);
-					
-					
-	
-					if(MonopolyGame.specialConditions[2]){
-						b[18].setVisible(true);
-						b[19].setVisible(true);
-						scrollPaneTaxiRide.setVisible(true);
-					}else{scrollPaneTaxiRide.setVisible(false);}
-					
-					
-					if(MonopolyGame.specialConditions[4]){
-						b[22].setVisible(true);
-						cabScrollPane.setVisible(true);
-					}else{cabScrollPane.setVisible(false);
-					b[22].setVisible(false);}
-					
-					
-					
-					if(MonopolyGame.specialConditions[5]){
-						listHurricane();
-					}else{hurScrollPane.setVisible(false);
-					b[23].setVisible(false);}
-					
-					
-					
-
-				}else{
-
-					setGUI("","",b);
-			        titles[6].setVisible(true);
-			        titles[6].setText(board.players.get(MonopolyGame.initialNumberofPlayers-MonopolyGame.debugLeft).name);
-					debugProps();
-				    b[24].setVisible(true);
-				    b[25].setVisible(true);
-				    
-				    if(MonopolyGame.debugLeft==1){
-
-				        dieOneF.setVisible(true);
-				        dieTwoF.setVisible(true);
-				        dieSpeedF.setVisible(true);
-				    }
-					//MonopolyGame.debugLeft--;
-					
-					
-					//System.out.println(MonopolyGame.debugLeft);
-				}
-					panel.repaint();
-					
-					
-				
 	            }
 	        };
 	        Timer timer = new Timer(100 ,taskPerformer);
@@ -614,7 +516,105 @@ public class GUI {
     	
 	}
 	public void refresh(){
-		System.out.println("Beni Köyümün Yağmurlarında Yıkasınlar!");
+		players = board.getPlayers();
+		cP = board.getCurrentPlayer();
+		scrollPanePlayerStats.setVisible(true);
+
+		for(int i=0; i<players.size(); i++){
+	
+			playerNames[i].setText(players.get(i).name.toUpperCase());
+			
+			playerMoneys[i].setText("$"+Integer.toString(players.get(i).money).toUpperCase());
+			
+			playerPropertiesNames[i].setText(players.get(i).allPropertiesNames.toLowerCase());
+		}
+				
+			if(MonopolyGame.debugLeft==0){
+		
+			    currentMessage.setVisible(true);
+		        currentPlayer.setVisible(true);
+		        buttons[0].setVisible(true);
+		
+		        dieOneF.setVisible(false);
+		        dieTwoF.setVisible(false);
+		        dieSpeedF.setVisible(false);
+		
+		        titles[6].setVisible(false);
+			    dPropsScrollPane.setVisible(false);
+			    row.setVisible(false);
+			    position.setVisible(false);
+			    money.setVisible(false);
+			    
+			    for(int i=0;i<3;i++){
+			    	dPropsType[i].setVisible(false);}
+			    buttons[24].setVisible(false);
+			    buttons[25].setVisible(false);
+		
+				MonopolyGame.debugLeft--;
+			}
+			else if(MonopolyGame.debugLeft<0){
+			    row.setVisible(false);
+			    position.setVisible(false);
+			    money.setVisible(false);
+				
+				
+				currentPlayer.setText(cP.name);
+				currentPlayer.setIcon(new ImageIcon("img/p"+Integer.toString(cP.id+1)+".png"));
+				titles[2].setText("$"+Integer.toString(cP.money));
+		
+				cpFreeProperties = cP.freeProperties;
+				cpMortgagedProperties = cP.mortgagedProperties;
+				setProps(45);
+				
+				
+		
+				if(MonopolyGame.specialConditions[2]){
+					buttons[18].setVisible(true);
+					buttons[19].setVisible(true);
+					scrollPaneTaxiRide.setVisible(true);
+				}else{scrollPaneTaxiRide.setVisible(false);}
+				
+				
+				if(MonopolyGame.specialConditions[4]){
+					buttons[22].setVisible(true);
+					cabScrollPane.setVisible(true);
+				}else{cabScrollPane.setVisible(false);
+				buttons[22].setVisible(false);}
+				
+				
+				
+				if(MonopolyGame.specialConditions[5]){
+					listHurricane();
+				}else{hurScrollPane.setVisible(false);
+				buttons[23].setVisible(false);}
+				
+				
+				
+		
+			}else{
+		
+				setGUI("","",buttons);
+		        titles[6].setVisible(true);
+		        titles[6].setText(board.players.get(MonopolyGame.initialNumberofPlayers-MonopolyGame.debugLeft).name);
+				debugProps();
+				buttons[24].setVisible(true);
+				buttons[25].setVisible(true);
+			    
+			    if(MonopolyGame.debugLeft==1){
+		
+			        dieOneF.setVisible(true);
+			        dieTwoF.setVisible(true);
+			        dieSpeedF.setVisible(true);
+			    }
+				//MonopolyGame.debugLeft--;
+				
+				
+				//System.out.println(MonopolyGame.debugLeft);
+			}
+				panel.repaint();
+				
+				
+	
 		
 	}
 

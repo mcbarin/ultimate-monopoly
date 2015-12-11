@@ -15,8 +15,9 @@ public class MonopolyGame {
 	
 	public static boolean manipulate=false; 
 	
-	private JButton buttons[] = new JButton[26];
-	public static boolean specialConditions[] = new boolean[26];
+	private JButton buttons[] = new JButton[39];
+	public static boolean specialConditions[] = new boolean[39];
+	private ActionListener guiPublish;
 	//	0-rollOnce	1-rollOnce Die	2-taxiRide	3-specialStatus	4-cabcomp	5-chance8	
 	private int specialStatus;
 	public static int initialNumberofPlayers;
@@ -40,8 +41,20 @@ public class MonopolyGame {
 	
 	public MonopolyGame() throws Exception{
 		
-		for(int i=0; i<26; i++){
+
+		
+		guiPublish = new ActionListener()
+										{
+										      public void actionPerformed(ActionEvent e)
+										      {
+										    	 board.refreshGUI();
+										      }};
+		
+		
+		for(int i=0; i<39; i++){
 			buttons[i] = new JButton();
+			buttons[i].addActionListener(guiPublish);
+					
 			specialConditions[i] = false;}
 		
 		
@@ -86,14 +99,6 @@ public class MonopolyGame {
 		    	  
 		      }
 		});
-		
-		buttons[0].addActionListener(new ActionListener()
-		{
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	 System.out.println("bugraCanS"); 
-		    	 board.refreshGUI();
-		      }});
 
 		//BuyButton
 		buttons[1].addActionListener(new ActionListener()
