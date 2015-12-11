@@ -489,19 +489,7 @@ public class GUI {
 			
 	        
 	      
-	        
-	        ActionListener taskPerformer = new ActionListener() {
-	            public void actionPerformed(ActionEvent evt) {
-	            	//System.out.println("Repaints Continuously");
-	
-					
-	            }
-	        };
-	        Timer timer = new Timer(100 ,taskPerformer);
-	        timer.setRepeats(true);
-	        timer.start();
-	
-	        Thread.sleep(500);
+
        
         
     	
