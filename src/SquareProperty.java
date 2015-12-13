@@ -2,18 +2,24 @@
 //majority ownership : 4 eve kadar dikebilir.
 //monopoly olduktan sonra evenly hale getirmeli sonra hotel dikebilir.
 
-public class SquareProperty extends Square  {
 
-	Player owner=null;
-	int price;
-	int originalRent;
-	int rent;
-	boolean isMortgaged=false;
-	int house=0;
-	int buildingPrice;
-	int hotel=0;
-	int skyscraper=0;
-	int level=0; //1 majority 2 monopoly
+
+
+public class SquareProperty extends Square  {
+	
+
+
+
+	public Player owner=null;
+	public int price;
+	public int originalRent;
+	public int rent;
+	public boolean isMortgaged=false;
+	public int house=0;
+	public int buildingPrice;
+	public int hotel=0;
+	public int skyscraper=0;
+	public int level=0; //1 majority 2 monopoly
 
 	public SquareProperty(String type,String name, int id, int position, int row, int color, int price, int originalRent) {
 		super(type,name, id, position, row);

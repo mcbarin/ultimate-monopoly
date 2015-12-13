@@ -332,7 +332,7 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).addPropertyDebug(Integer.parseInt(gui.dPropsGroup.getSelection().getActionCommand()), Integer.parseInt(gui.dPropsTypeGroup.getSelection().getActionCommand()));
-		    	  System.out.println("debo: " + gui.dPropsGroup.getSelection().getActionCommand()+" "+gui.dPropsTypeGroup.getSelection().getActionCommand());
+		    	 // System.out.println("debo: " + gui.dPropsGroup.getSelection().getActionCommand()+" "+gui.dPropsTypeGroup.getSelection().getActionCommand());
 		    	 
 		      }
 		});
