@@ -8,15 +8,15 @@ public class Player {
 	public boolean monopolyGuyFlag=false;
 	String name = "";
 	public ArrayList<SquareProperty> properties = new ArrayList<SquareProperty>();
-	public ArrayList<Card> cards = new ArrayList<Card>();
 	public ArrayList<SquareTransit> trains = new ArrayList<SquareTransit>();
 	public ArrayList<SquareCabCompany> cabs = new ArrayList<SquareCabCompany>();	
+	public ArrayList<SquareUtility> utilities = new ArrayList<SquareUtility>();
 	public ArrayList<Square> freeProperties = new ArrayList<Square>();
 	public ArrayList<Square> mortgagedProperties = new ArrayList<Square>();
+	public ArrayList<Card> cards = new ArrayList<Card>();
 	public String allPropertiesNames = "";
 	public int colorProperties[] = new int[20];
 	public Board board;
-	public ArrayList<SquareUtility> utilities = new ArrayList<SquareUtility>();
 	public int countJail=4; //not in jail
 	public boolean reverse = false;
 	

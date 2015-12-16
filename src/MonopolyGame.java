@@ -7,6 +7,7 @@ public class MonopolyGame {
 	
 	private GUI gui;
 	private Board board;
+	private GameLS ls = new GameLS();
 	
 	public static int dieOne=0, dieTwo=0, dieSpeed=0;
 	
@@ -369,6 +370,16 @@ public class MonopolyGame {
 		    		 // result = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
 		    		  play2(Integer.parseInt(result[0]),result);
 		    	  System.out.println(a.substring(a.indexOf("-")+1, a.length()));
+		    	 
+		      }
+		});
+		
+		//Save Game
+		buttons[38].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  ls.saveGame(board, "");
 		    	 
 		      }
 		});
