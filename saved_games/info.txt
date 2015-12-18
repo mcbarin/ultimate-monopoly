@@ -1,14 +1,14 @@
 //Bugra Can Sefercik Save/Load
 
-1
+8
 bugracan - 16/12/2015 20:03:54
-uno
-dos
-tres
-cuatro
-cinco
-seis
-siete
+Saved Game - 17/12/2015 13:52:15
+Saved Game - 17/12/2015 13:52:15
+Saved Game - 17/12/2015 13:52:15
+Saved Game - 17/12/2015 13:52:15
+Save Name - 17/12/2015 13:55:55
+Buğra Can Sefercik - 17/12/2015 13:55:55
+Saved Game - 17/12/2015 13:57:54
 ocho
 nueve
 bugracan - 16/12/2015 20:03:44

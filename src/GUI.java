@@ -1,10 +1,5 @@
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.Timer;
 
@@ -92,6 +87,7 @@ public class GUI {
 	public JTextField dieOneF = new JTextField();
 	public JTextField dieTwoF = new JTextField();
 	public JTextField dieSpeedF = new JTextField();
+	public JTextField saveName = new JTextField();
     
     
 
@@ -104,7 +100,7 @@ public class GUI {
 
 	int c[] = new int[20];
     
-	private JButton buttons[] = new JButton[26];
+	private JButton buttons[];
 	
 	public static Color colorCodes[] = {new Color(255,255,255),new Color(0,0,0),new Color(128,128,128),new Color(170,68,0),new Color(88,12,57),
 										new Color(135,165,215),new Color(239,55,120),new Color(245,128,35),new Color(212,0,0),new Color(255,204,0),
@@ -489,8 +485,18 @@ public class GUI {
 			
 	        
 	      
+		// saveGame Begin
 
-       
+
+		saveName.setSize(270, 30);
+		saveName.setLocation(725, 590);
+		saveName.setBackground(Color.GRAY);
+		saveName.setHorizontalAlignment(JTextField.CENTER);
+		saveName.setFont(new Font("Verdana", Font.BOLD, 14));
+		saveName.setVisible(true);
+		saveName.setText("Save Name");
+		panel.add(saveName);
+		placeButton(b[38],"Save Game",1005, 590, 135, 30,false);
         
     	
 		
@@ -663,6 +669,9 @@ public class GUI {
 	public int getDieSpeedF(){
 		int a = Integer.parseInt(dieSpeedF.getText()); 
 		return a;
+	}
+	public String getSaveName(){
+		return saveName.getText(); 
 	}
 
 	public void removeSpecialConditions(){

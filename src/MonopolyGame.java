@@ -379,7 +379,7 @@ public class MonopolyGame {
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
-		    	  ls.saveGame(board, "");
+		    	  ls.saveGame(board, gui.getSaveName());
 		    	 
 		      }
 		});

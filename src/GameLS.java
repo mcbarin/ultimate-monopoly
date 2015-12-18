@@ -26,7 +26,7 @@ public class GameLS {
     
     public void saveGame(Board board, String n){
     	String name = "Saved Game";
-    	if(!n.equals(""))
+    	if(!n.equals("") && !n.equals("Save Name"))
     		name = n;
    
 
