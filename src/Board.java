@@ -339,9 +339,11 @@ public String[] getResultArray(){
 				squares[2][j] = new SquareChance("Chance",names[2][j],j + 64,j,2);
 			}else if(j == 11 || j== 18 || j == 39 || j== 49  ){
 				squares[2][j] = new SquareUtility("Utility",names[2][j],j + 64,j,2);
-			}else if(j == 28 || j== 51 ){
+			}else if(j == 28){
 				squares[2][j] = new SquareGo("Go",names[2][j],j + 64,j,2);
 				//pay day(28) birthday(51)
+			}else if(j== 51 ){
+				squares[2][j] = new SquareBirthday("Birthday",names[2][j],j + 64,j,2);
 			}else if(j == 14 ){
 				squares[2][j] = new SquareTunnel("Tunnel",names[2][j],j + 64,j,2);	
 			}else if(j == 6 || j == 22 || j == 34 || j == 50){
