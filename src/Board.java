@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 
 public class Board {
 
+	public Bank bank;
 	public int pool = 0;
 	public int totalPlayer;
 	public static int gameStatus = -1;
@@ -253,13 +254,14 @@ public String[] getResultArray(){
 	}
 
 	public Board(int totalPlayer) {
-
+		
 		// Initialization Processes
 		initializePlayers(totalPlayer);
 		this.totalPlayer = totalPlayer;
 		currentPlayer = players.get(0);
 		initializeCards(); // Chance and Community Chest cards are initialized.
-
+		bank = new Bank(players);
+		
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 56; j++) {
 				squares[i][j]=null;

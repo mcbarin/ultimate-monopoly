@@ -19,6 +19,7 @@ public class Player {
 	public Board board;
 	public int countJail=4; //not in jail
 	public boolean reverse = false;
+	public int[] shares = new int[6];
 	
 	// If a player has a majority ownership or monopoly, color id of the property is here.(For hurricane card.)
 	public ArrayList<Integer> upgradedColors = new ArrayList<Integer>();
