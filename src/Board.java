@@ -123,13 +123,14 @@ public class Board {
 			if(i<26){//ChanceCards
 				CardChance c = new CardChance(i,cardDescriptions[i][0],cardDescriptions[i][1],this);
 				chanceDeck.add(c);	
-				Collections.shuffle((List<?>) chanceDeck);
 			}else{//CommunityChestCards
 				CardCommunity c = new CardCommunity(i,cardDescriptions[i][0],cardDescriptions[i][1],this);
 				communityDeck.add(c);
-				Collections.shuffle((List<?>) communityDeck);
 			}
 		}
+		Collections.shuffle((List<?>) chanceDeck);
+		Collections.shuffle((List<?>) communityDeck);
+
 	}
 
 	public CardChance peekChanceCard(){
