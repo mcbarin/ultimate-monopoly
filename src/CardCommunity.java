@@ -32,7 +32,7 @@ public class CardCommunity extends Card {
 	public String[] doAction(Player p){
 		String[] result= getResultArray();
 		
-		if(number == 26){
+		if(number == 36){//**
 			
 			p.addMoney(100);
 			result[0]= "1";
@@ -41,7 +41,7 @@ public class CardCommunity extends Card {
 			board.pullPushCommunity();
 	
 		} 
-		else if(number == 27){
+		else if(number == 37){//**
 			for(int i=0;i<board.players.size();i++){
 				if(p.id != board.players.get(i).id){
 					p.addMoney(10);
@@ -55,11 +55,13 @@ public class CardCommunity extends Card {
 			p.row=2;
 			p.position=51;
 			result[0]="5";
-			result[1]="Player collected 10$ from each player and moved to the birthdat gift space.";
+			result[1]="Player collected 10$ from each player and moved to the birthday gift space.";
 			
 			board.pullPushCommunity();
 			
-		}  else if(number == 28){
+		}  else if(number == 38){
+			
+		}else if(number == 39){//**
 			
 			if(p.money > 50){
 				
@@ -78,109 +80,24 @@ public class CardCommunity extends Card {
 				board.pullPushCommunity();
 			}
 			
-		}  else if(number == 29){
+		}  else if(number == 40){//**
 			result[0]="26"; // Player should choose that 1. player goes to the income tax or player goes to jail.
 							// only two options. than applyCard29 should be called.
 							// argument boolean, if true income tax, if false jail.
 			result[1]="Player should move to income tax or jail.";
 			board.pullPushCommunity();
 			
-		}  else if(number == 30){
+		}  else if(number == 41){//** AUCTION EKLENECEK
 			p.row = 2;
 			p.position=6;
 			result[0]="5";
 			result[1]="Player moved to the Checker Cab Company.";
 			board.pullPushCommunity();
 			
-		}  else if(number == 31){
-			//Move directly to the space that 1 track below this one. If row==2 do nothing
-			int pRow=p.row;
-			int pPos=p.position;
-			int squareId = pPos;
-			if(pRow==0){
-			}else if(pRow==1){
-				squareId+=24;
-			}else if(pRow==2){
-				squareId+=64;
-			}
+		}  else if(number == 42){
 			
-			if(pRow==2){
-				result[0]="1";
-				result[1]="Player is on the Outer Track, do nothing.";
-			}else if(pRow==1){
-				p.row=2;
-				p.position=((SquareCommunity)board.getSquareFromBoard(squareId)).downPos;
-				result[0]="5";
-				result[1]="Player moved to  1 track below.";
-			}else if(pRow==0){
-				p.row=1;
-				p.position=((SquareCommunity)board.getSquareFromBoard(squareId)).downPos;
-				result[0]="5";
-				result[1]="Player moved to  1 track below.";
-			}
-			board.pullPushCommunity();
 		
-		}  else if(number == 32){
-			//Move directly to the space that 1 track above this one. If row==0 do nothing
-			int pRow=p.row;
-			int pPos=p.position;
-			int squareId = pPos;
-			if(pRow==0){
-				
-			}else if(pRow==1){
-				squareId+=24;
-			}else if(pRow==2){
-				squareId+=64;
-			}
-			
-			if(pRow==0){
-				result[0]="1";
-				result[1]="Player is on the Inner Track, do nothing.";
-			}else if(pRow==1){
-				p.row=0;
-				p.position=((SquareCommunity)board.getSquareFromBoard(squareId)).upPos;
-				result[0]="5";
-				result[1]="Player moved to  1 track above.";
-			}else if(pRow==2){
-				p.row=1;
-				p.position=((SquareCommunity)board.getSquareFromBoard(squareId)).upPos;
-				result[0]="5";
-				result[1]="Player moved to  1 track above.";
-			}
-			board.pullPushCommunity();
-	
-		}  else if(number == 33){
-			
-			if(p.numberOfHouses == 0){
-				result[0]="1";
-				result[1]="Player has no house.";
-			}else {
-				for(int i=0;i<p.properties.size();i++){
-					if(p.properties.get(i).house != 0){
-						p.properties.get(i).sellBuilding(p);
-						p.properties.get(i).updateRentAccordingToHouse(p.properties.get(i));
-						break;
-					}
-				}
-				result[0]="1";
-				result[1]="City condemned one house of the player.";
-				board.pullPushCommunity();
-			}
-			
-			
-		}  else if(number == 34){
-			p.addCard(this);
-			result[0]="1";
-			result[1]=title+" "+description;
-			board.pullPushCommunity();
-			
-		}  else if(number == 35){
-			p.addCard(this);
-			result[0]="1";
-			result[1]=title+" "+description;
-			board.pullPushCommunity();
-			
-		}  else if(number == 36){
+		}  else if(number == 43){//**
 			
 			int amount = 0;
 			amount += 25*(p.numberOfCabStand+p.numberOfTransitStation);
@@ -205,46 +122,37 @@ public class CardCommunity extends Card {
 				board.pullPushCommunity();
 			}
 			
-		}  else if(number == 37){
+		} else if(number == 44){//**
 			p.addCard(this);
 			result[0]="1";
 			result[1]=title+" "+description;
 			board.pullPushCommunity();
-		}  else if(number == 38){
+		}  else if(number == 45){//**
 			p.row = 1;
 			p.position = 10;
 			result[0]="5";
 			result[1]="Player went directly to jail.";
 			board.pullPushCommunity();
-		}  else if(number == 39){
-			// 0 12
-			if(p.row == 2 && p.position>7 && p.position<28){
-				p.addMoney(300);
-			}
-			p.position=12;
-			p.row = 0;
-			result[0]="5";
-			result[1]="Player advanced to stock exchange.";
-			result[p.id+2]="300";
-			board.pullPushCommunity();
+		} else if(number == 46){
 			
-		}  else if(number == 40){
+			
+		}  else if(number == 47){
+			
+			
+		} else if(number == 48){
+	
+		}  else if(number == 49){//**
 			//hurricane to player's own properties.
 			// player should choose a color group.
 			result[0]="27";
 			result[1]="PLayer should choose one color group of its own and it will be downgraded.";
 			// applyCard40 should be called with color code (0-19)
 			
-		}  else if(number == 41){
-			p.addCard(this);
-			result[0]="1";
-			result[1]=title+" "+description;
-			board.pullPushCommunity();
-		} 
+		}  
 		return result;
 	}
 	
-	public String[] applyCard29(boolean choice,Player p){
+	public String[] applyCard40(boolean choice,Player p){
 		String[] result= getResultArray();
 		
 		if(choice){
@@ -262,7 +170,7 @@ public class CardCommunity extends Card {
 		return result;
 	}
 	
-	public String[] applyCard40(Player p,int colorGroup){
+	public String[] applyCard49(Player p,int colorGroup){
 		String[] result= getResultArray();
 		int length = board.getNumberOfSameColor(colorGroup);
 		int[] otherHouses = board.getOtherProperties(colorGroup);

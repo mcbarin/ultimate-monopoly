@@ -32,8 +32,14 @@ public class CardChance extends Card {
 	
 	public String[] doAction(Player p){
 		String[] result= getResultArray();
-				
-		if(number == 0){
+		
+		if(number==0){
+			
+		}
+		else if(number==1){
+			
+			
+		}else if(number == 2){ //**
 			// Advance to the nearest utility.
 			if(p.row==0){
 				p.position=3;
@@ -61,14 +67,14 @@ public class CardChance extends Card {
 			board.pullPushChance();
 			
 			
-		} else if(number == 1){
+		} else if(number == 3){//**
 			p.row = 1;
 			p.position = 10;
 			result[0]="5";
 			result[1]="Player went directly to jail.";
 			board.pullPushChance();
 			
-		}  else if(number == 2){
+		}  else if(number == 4){//**
 			
 			if(p.row==0){
 					p.position = 21;				
@@ -97,7 +103,10 @@ public class CardChance extends Card {
 			board.pullPushChance();
 			
 			
-		}  else if(number == 3){
+		} else if(number==5){
+			
+			
+		} else if(number == 6){//**
 			int amount = 0;
 			amount += 25*(p.numberOfHouses+p.numberOfCabStand+p.numberOfTransitStation);
 			amount += 100*(p.numberOfHotels+p.numberOfSkyscrapers);
@@ -120,13 +129,16 @@ public class CardChance extends Card {
 				board.pullPushChance();
 			}
 			
-		}  else if(number == 4){
+		}  else if(number == 7){//**
 			p.addCard(this);
 			result[0]="1";
 			result[1]=title+" "+description;
 			board.pullPushChance();
 			
-		}  else if(number == 5){
+		}  else if(number==8){
+			
+			
+		}else if(number == 9){//**
 			
 			p.position= (p.position-3);
 			if(p.position<0){
@@ -143,7 +155,7 @@ public class CardChance extends Card {
 			board.pullPushChance();
 			
 		
-		}  else if(number == 6){
+		}  else if(number == 10){//**
 			if(p.money > 150){
 			
 				board.payToPool(150);
@@ -160,7 +172,11 @@ public class CardChance extends Card {
 				result[1]= "Player is broke";
 				board.pullPushChance();
 			}
-		}  else if(number == 7){
+		}     else if(number == 10){
+			
+			
+			
+		} else if(number == 11){//**
 			//Advance to stock exchange square. row0 pos12
 			// 8-27 row2
 			if(p.row==2 && p.position>7 && p.position<29){
@@ -178,7 +194,19 @@ public class CardChance extends Card {
 			p.position=12;
 			
 			
-		}  else if(number == 8){
+		} else if(number==12){
+			
+			
+		}else if(number==13){
+			
+			
+		}else if(number==14){
+			
+			
+		}else if(number==15){
+			
+			
+		}else if(number == 16){//**
 			p.addMoney(150);
 			result[0]= "1";
 			result[1] = "Loan Matures, Player won $150 from the bank.";
@@ -187,7 +215,7 @@ public class CardChance extends Card {
 			
 			
 			
-		}  else if(number == 9){
+		}  else if(number == 17){//**
 			int amount = (board.getNumberOfPlayers()-1)*50;
 			
 			if(p.money > amount){
@@ -211,64 +239,10 @@ public class CardChance extends Card {
 				board.pullPushChance();
 			}
 			
-		}  else if(number == 10){
-			int posId = p.position;
-			int border = 24;
-			if(p.row==1){
-				posId+=24;
-				border=40;}
-			else if(p.row==2){
-				
-				posId+=64;
-				border=56;
-			}
-			
-			SquareProperty first = (SquareProperty)board.getSquareFromBoard(17);
-			boolean isFound=false;
-			int k=0;
-
-			for(int i=0;i<border;i++){
-				Square sq = board.nextSquare(posId);
-				if(posId==23)
-					posId=0;
-				else if(posId==63)
-					posId=24;
-				else if(posId==119)
-					posId=64;
-				else
-					posId++;
-				
-				if(sq.type.equals("Property")){
-					if(k==0){
-						if(((SquareProperty)sq).owner != null && ((SquareProperty)sq).owner.id != p.id){
-						first = (SquareProperty)sq;
-						k++;
-					}}
-					if(((SquareProperty)sq).owner==null){
-						p.position = (sq.position);
-						isFound = true;
-						break;
-					}
-				}
-			}
-			
-			if(!isFound){
-				p.position = (first.position);
-			}
-			
-			result[0]="5";
-			result[1]="Player advanced to the nearest Square Property.";
-			board.pullPushChance();
-		
+		}else if(number==18){
 			
 			
-		}  else if(number == 11){
-			p.addCard(this);
-			result[0]="1";
-			result[1]=title+" "+description;
-			board.pullPushChance();
-			
-		}  else if(number == 12){
+		}else if(number == 19){//**
 			//board.getAllPool(p);
 			//tax refund row0 pos14
 			
@@ -286,7 +260,7 @@ public class CardChance extends Card {
 			result[1]=title+" "+description;
 			board.pullPushChance();
 			
-		}  else if(number == 13){
+		}  else if(number == 20){//**
 			//Advance to roll one.
 			// row1 pos30
 			p.row=1;
@@ -295,11 +269,11 @@ public class CardChance extends Card {
 			result[1]="Player advanced to Roll One.";
 			board.pullPushChance();
 			
-		}  else if(number == 14){
+		}  else if(number == 21){//**
 			result[0]="8"; // For asking player id and color group.
 			result[1]="Player should choose a player and color group to make a hurricane.";
 			
-		}  else if(number == 15){
+		}  else if(number == 22){//**
 			int amount = 0;
 			for(int i=0;i<p.properties.size();i++){
 				if(!p.properties.get(i).isMortgaged){
@@ -325,14 +299,14 @@ public class CardChance extends Card {
 				
 			}
 			
-		}  else if(number == 16){
+		}  else if(number == 23){//**
 			result[0]="5";
 			result[1]="Player advanced to Black & White Cab Co.";
 			p.row=2;
 			p.position=22;
 			board.pullPushChance();
 			
-		}  else if(number == 17){
+		}  else if(number == 24){//**
 			int amount = (board.getNumberOfPlayers()-1)*50;
 			
 			if(p.money > amount){
@@ -356,7 +330,10 @@ public class CardChance extends Card {
 				board.pullPushChance();
 				
 			}
-		}  else if(number == 18){
+		} else if(number==25){
+			
+			
+		} else if(number == 26){//**
 			if(p.numberOfProperties==0){
 				p.row = 1;
 				p.position = 10;
@@ -389,7 +366,7 @@ public class CardChance extends Card {
 			}
 			
 			
-		}  else if(number == 19){
+		}  else if(number == 27){//**
 			result[0]="1";
 			result[1]="Win the marathon, Player took a victory lap and collected the pay corner income.";
 			board.pullPushChance();
@@ -404,7 +381,10 @@ public class CardChance extends Card {
 				result[p.id+2]="400";
 			}
 			
-		}  else if(number == 20){
+		}  else if(number==28){
+			
+			
+		}else if(number == 29){//**
 			// All players are moving to Canal Street
 			// row2 pos9
 			for(int i=0;i<board.getNumberOfPlayers();i++){
@@ -416,24 +396,27 @@ public class CardChance extends Card {
 			result[1]="All players moved to Canal Street.";
 			board.pullPushChance();
 			
-		}  else if(number == 21){
+		}  else if(number==30){
+			
+			
+		}else if(number == 31){//**
 			result[0]="25"; // Player should choose a cab company.
 			result[1]="Player should choose a Cab Company. If it has an owner,player takes it. IF it is not owned,player will buy it.";
 			// applyCard21 should be called in controller class.
 			
-		}  else if(number == 22){
+		}  else if(number == 32){//**
 			p.addCard(this);
 			result[0]="1";
 			result[1]="Build 1 free house on any property in a monopoly you own.";
 			board.pullPushChance();
 			
-		}  else if(number == 23){
+		}  else if(number == 33){//**
 			p.addCard(this);
 			result[0]="1";
 			result[1]="Player pulled the Comped Room card.";
 			board.pullPushChance();
 			
-		}  else if(number == 24){
+		}  else if(number == 34){//**
 			//Move directly to the space that 1 track below this one. If row==2 do nothing
 			int pRow=p.row;
 			int pPos=p.position;
@@ -461,7 +444,7 @@ public class CardChance extends Card {
 			}
 			board.pullPushChance();
 			
-		}  else if(number == 25){
+		}  else if(number == 35){//**
 			//Move directly to the space that 1 track above this one. If row==0 do nothing
 			int pRow=p.row;
 			int pPos=p.position;
@@ -546,7 +529,7 @@ public class CardChance extends Card {
 		return result;
 	}
 	
-	public String[] applyCard21(Square sp,Player p){
+	public String[] applyCard31(Square sp,Player p){
 		String[] result= getResultArray();
 		SquareCabCompany sc = (SquareCabCompany)sp;
 		if(sc.owner == null){
