@@ -2,7 +2,8 @@
 //status=2 player has to sell something + update player's position on screen
 //////status=3 ask user msg, if says yes, then call buy(Player p, int total)
 //////status=4 ask user msg, if says yes, then call build(Player p, int total)
-///cokotoşa sor//status=5 display msg and update player position on screen
+
+//!!!ezgiye sor//status=5 display msg and call landOn of updated position immediately.
 //status=9 display msg with option "NO", "FREE PARKING", "PENNSYLVANIA RAILROAD" , "SHORT LINE", "READING RAILROAD", "B&O RAILROAD", "CHECKER CAB CO." , "BLACK & WHITE CAB CO." , "YELLOW CAB CO." ,"UTE CAB CO." then call taxiRide(Player p, String n)    
 
 ////////status=10 ise result[2]'de roll once kartÄ± bulunuyo. Bunu ekrana yansÄ±t ve rollOnce(Player p, int card, int die)'Ä± Ã§aÄŸÄ±r.(card kÄ±smÄ±na result[2]'yi ver.)
@@ -17,6 +18,9 @@
 
 
 //check always player.countJail<4, if so, call SquareInJail.landOn()
+
+//-------------------PHASE2-------------------------
+//status=29 ask user msg with options "Either take 100$"(choice 1) , "Or go to nearest cab station"(choice 2). Then call SquareBirthday.birthdayAction(int choice,player,board)
 
 public abstract class Square {
 	String name,type;

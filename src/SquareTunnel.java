@@ -20,7 +20,8 @@ public class SquareTunnel extends Square {
 			player.row=0;
 			player.position=18;
 		}
-
+		
+		board.refreshGUI();
 		return result;
 
 	}

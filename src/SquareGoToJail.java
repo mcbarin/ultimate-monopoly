@@ -16,7 +16,7 @@ public class SquareGoToJail extends Square {
 		//player.countJail = 3;
 		player.row=1;
 		player.position=10;
-
+		board.refreshGUI();
 		return result;
 
 	}

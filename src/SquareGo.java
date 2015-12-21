@@ -25,11 +25,7 @@ public class SquareGo extends Square {
 				amount = 400;
 				player.addMoney(amount);	
 			}
-		}else if(this.name.equals("BIRTHDAY GIFT")){
-			amount = 100;
-			msg = "'"+player.name + "' has won "+ "$"+amount+" as birthday gift";
-			player.addMoney(amount);
-		}
+		
 
 
 		String[] result = new String[14];
