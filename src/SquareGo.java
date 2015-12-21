@@ -27,7 +27,7 @@ public class SquareGo extends Square {
 			}
 		
 
-
+		}
 		String[] result = new String[14];
 		initializeResult(result);
 
