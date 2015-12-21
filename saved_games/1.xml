@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+  <bank>
+    <money>10000000</money>
+  </bank>
+  <currentPlayer>1</currentPlayer>
+  <numberOfPlayers>2</numberOfPlayers>
+  <date>21/12/2015 22:48:00</date>
+  <player>
+    <id>0</id>
+    <name>Ezgi</name>
+    <isPlaying>true</isPlaying>
+    <money>2940</money>
+    <countJail>4</countJail>
+    <row>2</row>
+    <position>32</position>
+    <reverse>false</reverse>
+    <numbers>4-0-0-0-0-0-0</numbers>
+    <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
+    <allPropertiesNames>NEWBURY STREET, MADISON AVENUE, DEKALB AVENUE, WACKER DRIVE</allPropertiesNames>
+    <properties>
+      <property>
+        <ownerID>0</ownerID>
+        <price>380</price>
+        <originalRent>38</originalRent>
+        <rent>38</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>1</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+      <property>
+        <ownerID>0</ownerID>
+        <price>430</price>
+        <originalRent>43</originalRent>
+        <rent>43</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>1</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+      <property>
+        <ownerID>0</ownerID>
+        <price>210</price>
+        <originalRent>21</originalRent>
+        <rent>21</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+      <property>
+        <ownerID>0</ownerID>
+        <price>300</price>
+        <originalRent>30</originalRent>
+        <rent>30</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+    </properties>
+    <transits />
+    <cabs />
+    <utilities />
+    <freeProperties>
+      <ID>8</ID>
+      <ID>11</ID>
+      <ID>87</ID>
+      <ID>96</ID>
+    </freeProperties>
+    <mortgagedProperties />
+    <cards />
+  </player>
+  <player>
+    <id>1</id>
+    <name>Cagatay</name>
+    <isPlaying>true</isPlaying>
+    <money>3120</money>
+    <countJail>4</countJail>
+    <row>2</row>
+    <position>14</position>
+    <reverse>false</reverse>
+    <numbers>3-0-0-0-0-0-0</numbers>
+    <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
+    <allPropertiesNames>FIFTH AVENUE, FIFTH AVENUE, FLORIDA AVENUE</allPropertiesNames>
+    <properties>
+      <property>
+        <ownerID>1</ownerID>
+        <price>430</price>
+        <originalRent>43</originalRent>
+        <rent>86</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>1</level>
+      </property>
+      <property>
+        <ownerID>1</ownerID>
+        <price>430</price>
+        <originalRent>43</originalRent>
+        <rent>86</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>1</level>
+      </property>
+      <property>
+        <ownerID>1</ownerID>
+        <price>130</price>
+        <originalRent>13</originalRent>
+        <rent>13</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+    </properties>
+    <transits />
+    <cabs />
+    <utilities />
+    <freeProperties>
+      <ID>10</ID>
+      <ID>10</ID>
+      <ID>17</ID>
+    </freeProperties>
+    <mortgagedProperties />
+    <cards />
+  </player>
+</game>
