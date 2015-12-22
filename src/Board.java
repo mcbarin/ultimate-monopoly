@@ -139,17 +139,39 @@ public class Board {
 		CardChance x = chanceDeck.peek();
 		return x;
 	}
+	
+	/**
+	 * This method returns the CardCommunity object at the top of the communityDeck.
+	 * @requires There is no requirement for this method.
+	 * @modifies This method doesn't modify the communityDeck object. It just returns the top of it.
+	 * @effects The card which is at the top of deck will be returned.
+	 * @return It returns CardCommunity object
+	 */
 	public CardCommunity peekCommunityCard(){
 
 		CardCommunity x = communityDeck.peek();
 		return x;
 	}
 
+	/**
+	 * This method picks the card at the top of the deck and puts it to the bottom.
+	 * After this method is called, the next card which will be picked will change.
+	 * @requires There is no requirement for this method.
+	 * @modifies It modifies the communityDeck.
+	 * @effects The card at the top of the deck is changed.
+	 */
 	public void pullPushChance(){
 		CardChance c = chanceDeck.poll();
 		chanceDeck.add(c);
 	}
 
+	/**
+	 * This method picks the card at the top of the deck and puts it to the bottom.
+	 * After this method is called, the next card which will be picked will change.
+	 * @requires There is no requirement for this method.
+	 * @modifies It modifies the communityDeck.
+	 * @effects The card at the top of the deck is changed.
+	 */
 	public void pullPushCommunity(){
 		CardCommunity c = communityDeck.poll();
 		communityDeck.add(c);
