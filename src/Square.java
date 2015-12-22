@@ -23,7 +23,10 @@
 //status=29 ask user msg with options "Either take 100$"(choice 1) , "Or go to nearest cab station"(choice 2). Then call SquareBirthday.birthdayAction(int choice,player,board)
 //status=30 ask user msg with options that are returned by board.bank.ckeckShareOfStocks(). and user picks one.
 	//then ask "Do you want to buy?" if says yes call board.bank.buyStock(stockname,player)
-								  //if says no display "Auction! Make a bid." then call auctionStock(name, bids[])   !!!bids array size'ı player sayısı kadar olmalı, 12 değil.
+								  //if says no display "Auction! Make a bid.". collect bids[]from all users and then call auctionStock(name, bids[])   !!!bids array size'ı player sayısı kadar olmalı, 12 değil.
+//status=32 ask user msg with options returned by bank.getUnownedProperties(). user picks one SquareProperty
+		//then call display "Auction! Make a bid.". collect bids[] from all users and call bank.auction(SquareProperty,bids[])
+		
 
 public abstract class Square {
 	String name,type;

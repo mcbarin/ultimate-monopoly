@@ -40,6 +40,9 @@ public class Player {
 		for(int i=0;i<20;i++){
 			colorProperties[i]=0;
 		}
+		for (int i = 0; i < 6; i++) {
+			shares[i]=0;
+		}
 	}
 
 	public boolean hasCardWithId(int number){

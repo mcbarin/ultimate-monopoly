@@ -260,7 +260,7 @@ public String[] getResultArray(){
 		this.totalPlayer = totalPlayer;
 		currentPlayer = players.get(0);
 		initializeCards(); // Chance and Community Chest cards are initialized.
-		bank = new Bank(players);
+		bank = new Bank(players,squares);
 		
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 56; j++) {
@@ -284,7 +284,7 @@ public String[] getResultArray(){
 				squares[0][j] = new SquareGo("Go",names[0][j],j,j,0);
 				//bonus
 			}else if(j == 12){
-				squares[0][j] = new SquareFree("Free",names[0][j],j,j,0);
+				squares[0][j] = new SquareStock("Stock",names[0][j],j,j,0);
 				//stock exchange
 			}else if(j == 14 ){
 				squares[0][j] = new SquareTaxRefund("TaxRefund",names[0][j],j,j,0);
@@ -329,9 +329,11 @@ public String[] getResultArray(){
 		((SquareTransit) squares[1][35]).SquareTransitTwin(59,this);
 
 		for (int j = 0; j <56 ; j++) {
-			if (j==0 || j == 5 || j == 15 || j == 48){
+			if (j==0 || j == 5 || j == 48){
 				squares[2][j] = new SquareFree("Free",names[2][j],j + 64 ,j,2);
 				//subway(0), bus ticket(5 48), auction(15),
+			}else if(j == 15 ){
+				squares[2][j] = new SquareAuction("Auction",names[2][j],j + 64,j,2);
 			}else if(j == 7 || j== 35 ){
 				squares[2][j] = new SquareTransit("Transit",names[2][j],j+64,j,2);
 				((SquareTransit) squares[2][j]).SquareTransitTwin(j+64,this);
