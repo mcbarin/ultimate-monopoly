@@ -84,17 +84,7 @@ public class Player {
 		
 	}
 	
-	/*
-	 * public void initializeAll(){
-	 * 		this.isMortgaged = false;
-	 * 		this.setOwner(null);
-	 * 		this.building=0;
-	 * 		this.hotel = 0;
-	 * 		this.skyscraper = 0;
-	 * 		this.normalizeRent();
-	 * }
-	 * */
-	
+
 	public void destroy(){
 		for(int i=0;i<properties.size();i++){
 			properties.get(i).initializeAll();

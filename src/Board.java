@@ -47,6 +47,13 @@ public class Board {
 	String[] playerNames = {"Ezgi","Cagatay","Bugra","Delta","Epsilon","Zeta","Eta","Theta","Iota","Kappa","Lambda","Pi"};
 
 
+	/**
+	 * This method creates the player of the game with given values.
+	 * @param totalPlayer
+	 * @requires totalPlayer must be between 2 and 12.
+	 * @modifies players arraylist is changed
+	 * @effects Players are created and listed in the players arraylist.
+	 */
 	public void initializePlayers(int totalPlayer){
 		for(int i=0;i<totalPlayer;i++){
 			Player p = new Player(playerNames[i],3200,i,1,0,this);
@@ -54,7 +61,7 @@ public class Board {
 		}	
 	}
 	
-	public void debugMode(){
+	private void debugMode(){
 		
 		try{
 			BufferedReader rd = new BufferedReader(new FileReader("debug.txt"));
@@ -119,6 +126,13 @@ public class Board {
 		
 	}
 
+	/**
+	 * This method creates the Card objects, chanceDeck and communityDeck.
+	 * After creating the decks, it shuffles it so that cards are in random order.
+	 * @requires There is no requirement for this method.
+	 * @modifies This method modifies the chanceDeck and communityDeck
+	 * @effects chanceDeck and communityDeck are full of cards in random order.
+	 */
 	public void initializeCards(){
 		for(int i=0;i<42;i++){
 			if(i<26){//ChanceCards
@@ -133,7 +147,13 @@ public class Board {
 		Collections.shuffle((List<?>) communityDeck);
 
 	}
-
+	/**
+	 * This method returns the CardChance object at the top of the chanceDeck.
+	 * @requires There is no requirement for this method.
+	 * @modifies This method doesn't modify the chanceDeck object. It just returns the top of it.
+	 * @effects The card which is at the top of deck will be returned.
+	 * @return It returns CardChance object
+	 */
 	public CardChance peekChanceCard(){
 
 		CardChance x = chanceDeck.peek();
@@ -178,7 +198,14 @@ public class Board {
 	}
 
 
-	
+	/**
+	 * This method takes a color code and gives the all properties with the given color.
+	 * @param color
+	 * @requires color must be between 0 and 19.
+	 * @modifies This method does not modifies anything.
+	 * @effects Properties in the same color group will be returned.
+	 * @return Returns the array of integers with the id's of the properties.
+	 */
 	public int[] getOtherProperties(int color) {
 		// TODO Auto-generated method stub
 		int length = getNumberOfSameColor(color);
@@ -195,7 +222,14 @@ public class Board {
 		return result;
 
 	}
-
+/**
+ * This method takes the square id as a parameter and returns the square object to the user.
+ * @param id
+ * @requires id must be between 0 and 119
+ * @modifies This method does not modifies anything.
+ * @effects Square with the input id is returned to the user.
+ * @return This method returns the Square object with the given id.
+ */
 	public Square getSquareFromBoard(int id) {
 		// TODO Auto-generated method stub
 		for(int i=0;i<3;i++){
@@ -208,6 +242,15 @@ public class Board {
 		return null;
 	}
 	
+	/**
+	 * This method takes the coordinates of the square and returns the square object from Board.
+	 * @param row
+	 * @param position
+	 * @requires row must be between 0-2 and position must be limited depends on the row.
+	 * @modifies This method does not modifies anything.
+	 * @effects Square with the input row and position is returned to the user.
+	 * @return This method returns the Square object with the given row and position.
+	 */
 	public Square getSquareWithRowAndPosition(int row,int position){
 		int x = position;
 		if(row==1)
@@ -218,6 +261,14 @@ public class Board {
 		return getSquareFromBoard(x);
 	}
 
+	/**
+	 * This method takes a color code and returns the number of properties in the same color group.
+	 * @param color
+	 * @requires color must be between 0 and 19.
+	 * @modifies This method does not modifies anything.
+	 * @effects number of properties in the given integer color will be returned to the user.
+	 * @return number of properties with given color.
+	 */
 	public int getNumberOfSameColor(int color) {
 		// TODO Auto-generated method stub
 		int result=0;
@@ -231,7 +282,14 @@ public class Board {
 		return result;
 	}
 
-public String[] getResultArray(){
+	/**
+	 * This method returns an empty String array.
+	 * @requires There is no requirement for this method.
+	 * @modifies This method does not modifies anything.
+	 * @effects String array with the length of 14 is given to the user. All indexes are initialized to 0.
+	 * @return It returns a string array which all elements are zero.
+	 */
+	public String[] getResultArray(){
 		
 		String[] result = new String[14];
 		for(int i=0;i<14;i++){
@@ -239,6 +297,15 @@ public String[] getResultArray(){
 		}
 		return result;
 	}
+	
+	/**
+	 * This method takes a square id and returns the next square to that square.
+	 * @param id
+	 * @requires id must be between 0 and 119
+	 * @modifies This method does not modifies anything.
+	 * @effects Square which is next to the given square id is given to the user.
+	 * @return Square object which is next to the given id of Square in the same row.
+	 */
 	public Square nextSquare(int id){
 		int x = id;
 		if(id==23){
@@ -252,29 +319,71 @@ public String[] getResultArray(){
 		}
 		return getSquareFromBoard(x);
 	}
-
+	
+	/**
+	 * This method returns the player ArrayList to the user.
+	 * @requires There is no requirement for this method.
+	 * @modifies This method does not modifies anything.
+	 * @effects players Arraylist is returned to the user.
+	 * @return It returns the players ArrayList
+	 */
 	public ArrayList<Player> getPlayers(){
 		return players;
 	}
 
+	/**
+	 * This method returns the number of players in the game.
+	 * @requires There is no requirement for this method.
+	 * @modifies This method does not modifies anything.
+	 * @effects Number of players are given.
+	 * @return size of players arraylist
+	 */
 	public int getNumberOfPlayers(){
 		return players.size();
 	}
 
+	/**
+	 * This method takes an integer money and adds it to the pool.
+	 * @requires money should be positive.
+	 * @modifies pool
+	 * @effects money is added to the pool.
+	 * @param money
+	 */
 	public void payToPool(int money){
 		pool = pool + money;
 	}
 
+	/**
+	 * This method gives the half of the pool to the player.
+	 * @param p
+	 * @requires Player p must be an active player.
+	 * @modifies pool and money of the player
+	 * @effects Half of the pool is added to the player and pool is decreased to its half.
+	 */
 	public void getHalfPool(Player p){
 		p.addMoney((int)Math.ceil(pool/2));
 		pool = (int) (pool - Math.ceil(pool/2));
 	}
 
+	/**
+	 * This method gives the all of the pool to the player.
+	 * @param p
+	 * @requires Player p must be an active player.
+	 * @modifies pool and money of the player
+	 * @effects All of the pool is added to the player and pool is decreased to 0.
+	 */
 	public void getAllPool(Player p){
 		p.addMoney(pool);
 		pool = 0;
 	}
 
+	/**
+	 * This method is the Constructor method of the board. This method initializes the cards,players,all of the squares of the board.
+	 * @requires totalPlayer must be between 2-12.
+	 * @modifies totalPlayer,players,chanceDeck,communityDeck,squares
+	 * @effects Board is created and ready for the game.
+	 * @param totalPlayer
+	 */
 	public Board(int totalPlayer) {
 		
 		// Initialization Processes
@@ -387,37 +496,35 @@ public String[] getResultArray(){
 		//debugMode();
 	}
 	
+	/**
+	 * This method changes the current player to the parameter p.
+	 * @param p
+	 * @requires Player p must be an active player.
+	 * @modifies currentPlayer
+	 * @effects currentPlayer is changed to the p.
+	 */
 	public void setCurrentPlayer(Player p){
 		this.currentPlayer = p;
 	}
 	
+	/**
+	 * This method returns the current player in the game.
+	 * @requires There is no requirement for this method.
+	 * @modifies This method does not modifies anything.
+	 * @effects current player is returned to the user.
+	 * @return currentPlayer
+	 */
 	public Player getCurrentPlayer(){
 		return this.currentPlayer;
 	}
-	public CardChance peekChance(){
-
-		CardChance x = chanceDeck.peek();
-		if(x.number == 18){
-			CardChance c = chanceDeck.poll();
-			chanceDeck.add(c);
-			x = chanceDeck.peek();
-		}
-		return x;
-	}
-
-	public CardCommunity peekCommunity(){
-
-		CardCommunity c = communityDeck.peek();
-		if(c.number==29 || c.number == 40){
-			CardCommunity p = communityDeck.poll();
-			communityDeck.add(p);
-			c = communityDeck.peek();
-		}
-		
-		return c;
-	}
-
 	
+	/**
+	 * This method returns the next player for the game.
+	 * @requires There is no requirement for this method.
+	 * @modifies currentPlayer
+	 * @effects next player is returned to the user.
+	 * @return player which will play next.
+	 */
 	public Player nextPlayer(){
 		int npID = (this.currentPlayer.id+1)%totalPlayer;
 		Player np = players.get(npID);
@@ -434,13 +541,20 @@ public String[] getResultArray(){
 		return np;
 	}
 	
-	
-	
-	public void addressGUI(GUI g){gui = g;}
+	/**
+	 * This method refreshes the GUI of the board.
+	 * @requires There is no requirement for this method.
+	 * @modifies This method modifies the gui.
+	 * @effects GUI is changed to its newest version.
+	 */
 	public void refreshGUI(){
 		if(gui!=null)
 			gui.refresh();
 	}
+	
+	public void addressGUI(GUI g){gui = g;}
+	
+
 
 }
 

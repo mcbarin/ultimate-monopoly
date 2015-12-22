@@ -5,6 +5,17 @@ public class CardChance extends Card {
 	String title,description;
 	Board board;
 
+	/**
+	 * This method is the Constructor method for the CardChance class. 
+	 * It takes the number of the card, title, description and board as an input.
+	 * @param number
+	 * @param title
+	 * @param description
+	 * @param board
+	 * @requires number must be between 0 and 35.
+	 * @modifies number,title,description,board
+	 * @effects The new CardChance object with given parameters is created.
+	 */
 	public CardChance(int number,String title,String description,Board board){
 		super("Chance",number);
 		this.number = number;
@@ -13,14 +24,24 @@ public class CardChance extends Card {
 		this.board = board;
 	}
 
+	/**
+	 * This method returns the number of the card.
+	 * @requires There is no requirement for this method.
+	 * @modifies This method does not modifies anything.
+	 * @effects number of the card is returned to the user.
+	 * @return number
+	 */
 	public int getNumber() {
 		return number;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
-	}
-	
+	/**
+	 * This method returns an empty String array.
+	 * @requires There is no requirement for this method.
+	 * @modifies This method does not modifies anything.
+	 * @effects String array with the length of 14 is given to the user. All indexes are initialized to 0.
+	 * @return It returns a string array which all elements are zero.
+	 */
 	public String[] getResultArray(){
 		
 		String[] result = new String[14];
@@ -30,6 +51,15 @@ public class CardChance extends Card {
 		return result;
 	}
 	
+	/**
+	 * This method takes the player as a parameter and does the action of the card to the player.
+	 * After executing the card, it creates the result array and returns it to the MonopolyGame class.
+	 * @param p
+	 * @requires Player p must be an active player.
+	 * @modifies It modifies the result array. Also depends on the card, player's some fields might be modified after the action.
+	 * @effects Action of the card is applied to the player.
+	 * @return result[]
+	 */
 	public String[] doAction(Player p){
 		String[] result= getResultArray();
 		
