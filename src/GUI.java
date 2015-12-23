@@ -160,10 +160,12 @@ public class GUI {
 		
 		for(int i=0;i<12;i++){
 			 playerNames[i] = new JLabel();
-			 
 			 playerMoneys[i] = new JLabel();
+			 
 			 playerPics[i] = new JLabel();
+			 
 			 playerPropertiesNames[i] = new JLabel();
+			 
 		}
 			
 			
@@ -187,36 +189,39 @@ public class GUI {
 		    placeButton(b[3],"Sell",1025, 95, 115, 25,false);
 			placeButton(b[8],"Mortgage",1150, 95, 115, 25,false);
 			
-			if(players!=null){
-				for(int i=0; i<players.size(); i++){
-					
-					playerPics[i] = new JLabel();
-					playerPics[i].setIcon(new ImageIcon("img/p"+Integer.toString(i+1)+".png"));
-					playerPics[i].setSize(40, 40);
-					playerPics[i].setLocation(5,i*75+5);
-					playerStatsPanel.add(playerPics[i]);
-			
-					playerNames[i] = new JLabel(players.get(i).name.toUpperCase());
-					playerNames[i].setSize(100, 40);
-					playerNames[i].setLocation(50,i*75+5);
-					playerNames[i].setFont(new Font("Verdana", Font.BOLD, 20));
-					playerStatsPanel.add(playerNames[i]);
-					
-					playerMoneys[i] = new JLabel("$"+Integer.toString(players.get(i).money).toUpperCase());
-					playerMoneys[i].setSize(200, 40);
-					playerMoneys[i].setLocation(150,i*75+2);
-					playerMoneys[i].setFont(new Font("Lucida Calligraphy", Font.BOLD, 24));
-					playerStatsPanel.add(playerMoneys[i]);
-					
-					playerPropertiesNames[i] = new JLabel(players.get(i).allPropertiesNames.toLowerCase());
-					playerPropertiesNames[i].setToolTipText(players.get(i).allPropertiesNames);
-					playerPropertiesNames[i].setSize(540, 40);
-					playerPropertiesNames[i].setLocation(0,i*75+35);
-					playerPropertiesNames[i].setFont(new Font("Arial", Font.PLAIN, 16));
-					playerPropertiesNames[i].setBorder(BorderFactory.createMatteBorder(0, 0, 2,0, Color.black));
-					playerStatsPanel.add(playerPropertiesNames[i]);
-				}
+			for(int i=0; i<12; i++){
+				
+				playerPics[i] = new JLabel();
+				playerPics[i].setIcon(new ImageIcon("img/p"+Integer.toString(i+1)+".png"));
+				playerPics[i].setSize(40, 40);
+				playerPics[i].setLocation(5,i*75+5);
+				playerStatsPanel.add(playerPics[i]);
+
+				//playerNames[i] = new JLabel(players.get(i).name.toUpperCase());
+				playerNames[i] = new JLabel("");
+				playerNames[i].setSize(100, 40);
+				playerNames[i].setLocation(50,i*75+5);
+				playerNames[i].setFont(new Font("Verdana", Font.BOLD, 20));
+				playerStatsPanel.add(playerNames[i]);
+
+				//playerMoneys[i] = new JLabel("$"+Integer.toString(players.get(i).money).toUpperCase());
+				playerMoneys[i] = new JLabel("$");
+				playerMoneys[i].setSize(200, 40);
+				playerMoneys[i].setLocation(150,i*75+2);
+				playerMoneys[i].setFont(new Font("Lucida Calligraphy", Font.BOLD, 24));
+				playerStatsPanel.add(playerMoneys[i]);
+
+				//playerPropertiesNames[i] = new JLabel(players.get(i).allPropertiesNames.toLowerCase());
+				//playerPropertiesNames[i].setToolTipText(players.get(i).allPropertiesNames);
+				playerPropertiesNames[i] = new JLabel("");
+				playerPropertiesNames[i].setToolTipText("");
+				playerPropertiesNames[i].setSize(540, 40);
+				playerPropertiesNames[i].setLocation(0,i*75+35);
+				playerPropertiesNames[i].setFont(new Font("Arial", Font.PLAIN, 16));
+				playerPropertiesNames[i].setBorder(BorderFactory.createMatteBorder(0, 0, 2,0, Color.black));
+				playerStatsPanel.add(playerPropertiesNames[i]);
 			}
+			
 			playerStatsPanel.setSize(5700,800);
 			scrollPanePlayerStats.setSize(540, 74);
 			scrollPanePlayerStats.setLocation(725, 630);
@@ -388,6 +393,7 @@ public class GUI {
 			//////////////////////////////////////////////////////
 			//Very Beginning of the Game
 			placeLabel(titles[12],"Start a Brand New Game:",240,24,735,18,new Color(255,255,255),Color.GRAY,new Font("Verdana", Font.PLAIN, 18));
+			titles[12].setVisible(false);
 			panel.add(titles[12]);
 			initalNumberofPlayers = new JTextField();
 			initalNumberofPlayers.setSize(300, 40);
@@ -403,6 +409,8 @@ public class GUI {
 			b[11].setLocation(1045, 60);
 			b[11].setSize(200, 40);
 			b[11].setVisible(true);
+			initalNumberofPlayers.setVisible(false);
+			b[11].setVisible(false);
 			panel.add(b[11]);
 	        panel.add(initalNumberofPlayers);
 	        
@@ -555,23 +563,40 @@ public class GUI {
 		if(Board.gameStatus==-1){
 			setGUI("","",buttons);
 			titles[12].setVisible(true);
+			initalNumberofPlayers.setVisible(true);
+			buttons[11].setVisible(true);
 		    
 			
 		}else{
+
+			titles[12].setVisible(false);
+			initalNumberofPlayers.setVisible(false);
+			buttons[11].setVisible(false);
+		    row.setVisible(true);
+		    position.setVisible(true);
+		    money.setVisible(true);
+	
+		    scrollPanePlayerStats.setVisible(true);
+			
+			
 			players = board.getPlayers();
 			cP = board.getCurrentPlayer();
 			scrollPanePlayerStats.setVisible(true);
 	
 			for(int i=0; i<players.size(); i++){
-		
 				playerNames[i].setText(players.get(i).name.toUpperCase());
-				
 				playerMoneys[i].setText("$"+Integer.toString(players.get(i).money).toUpperCase());
-				
 				playerPropertiesNames[i].setText(players.get(i).allPropertiesNames.toLowerCase());
-			}
+			}for(int i=players.size(); i<12; i++){
+				playerNames[i].setVisible(false);
+				playerMoneys[i].setVisible(false);
+				playerPropertiesNames[i].setVisible(false);
+				playerPics[i].setVisible(false);}
 					
 				if(MonopolyGame.debugLeft==0){
+				    row.setVisible(true);
+				    position.setVisible(true);
+				    money.setVisible(true);
 			
 				    currentMessage.setVisible(true);
 			        currentPlayer.setVisible(true);

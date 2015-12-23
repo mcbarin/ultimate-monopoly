@@ -204,6 +204,7 @@ public class MonopolyGame {
 		      {
 		    	  initialNumberofPlayers = gui.getInitialNumberofPlayers();
 		    	  debugLeft = initialNumberofPlayers;
+		    	  Board.gameStatus = 0;
 		    	  
 		    	  board = new Board(initialNumberofPlayers);
 		    	  players = board.getPlayers();
@@ -211,12 +212,13 @@ public class MonopolyGame {
 			  	
 		  		
 		    	  try {
-		    		gui = null;
-					gui = new GUI(board,buttons);
+		    		gui.initGUI(board);
 					gui.setPlayers(board.getPlayers());
 					
 					
 					board.addressGUI(gui);
+					
+					
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
