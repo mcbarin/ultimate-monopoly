@@ -24,6 +24,18 @@ public class Player {
 	// If a player has a majority ownership or monopoly, color id of the property is here.(For hurricane card.)
 	public ArrayList<Integer> upgradedColors = new ArrayList<Integer>();
 
+	/**
+	 * This method is the Constructor method for the player. It creates the player object with given parameters.
+	 * @param name
+	 * @param money
+	 * @param id
+	 * @param row
+	 * @param position
+	 * @param board
+	 * @requires money,id should be positive. row should be between 0-2 and position must be between 0-49.
+	 * @modifies It modifies the all fields of the new player and initializes them.
+	 * @effects A new player object with given parameters are created.
+	 */
 	public Player(String name,int money, int id, int row, int position,Board board) {
 		super();
 		this.name = name;
@@ -35,6 +47,7 @@ public class Player {
 		initialize();
 	}
 	
+	
 	private void initialize() {
 		// TODO Auto-generated method stub
 		for(int i=0;i<20;i++){
@@ -45,6 +58,14 @@ public class Player {
 		}
 	}
 
+	/**
+	 * This method takes a card number and checks that if player has that card or not.
+	 * @param number
+	 * @requires number must be between 0-49
+	 * @modifies This method does not modify anything.
+	 * @effects Boolean value is returned that if player has that card result is true, otherwise result is false.
+	 * @return boolean result
+	 */
 	public boolean hasCardWithId(int number){
 		boolean result = false;
 		
@@ -59,12 +80,26 @@ public class Player {
 		
 	}
 	
+	/**
+	 * Input card is added to the player's cards ArrayList.
+	 * @param c
+	 * @requires Card c must be a keepable card for player.
+	 * @modifies cards
+	 * @effects Given card is added to the player and player may use the card later.
+	 */
 	public void addCard(Card c){
 		cards.add(c);	
 	}
 	
+	/**
+	 * A card is created with input id and added to the player.
+	 * @param id
+	 * @requires Card c must be a keepable card for player.
+	 * @modifies cards
+	 * @effects Given card is added to the player and player may use the card later.
+	 */
 	public void addCardDebug(int id){
-		if(id<26){
+		if(id<36){
 			CardChance c = new CardChance(id,board.cardDescriptions[id][0],board.cardDescriptions[id][1],board);
 			cards.add(c);
 		}else{
@@ -73,6 +108,13 @@ public class Player {
 		}
 	}
 	
+	/**
+	 * This method deletes the card from player's cards ArrayList.
+	 * @param number
+	 * @requires number must be between 0-49 and player must have the card.
+	 * @modifies cards
+	 * @effects A card with given number is deleted from cards.
+	 */
 	public void deleteCard(int number){
 		
 		for(int i=0;i<cards.size();i++){
@@ -84,7 +126,13 @@ public class Player {
 		
 	}
 	
-
+	/**
+	 * This method deletes the everything that player has. After the execution, player loses every item he/she has and
+	 * player is out of game.
+	 * @requires Player must be out of game.
+	 * @modifies properties,utilities,cabs and trains ArrayLists
+	 * @effects Player loses the items and out of the game.
+	 */
 	public void destroy(){
 		for(int i=0;i<properties.size();i++){
 			properties.get(i).initializeAll();
@@ -103,6 +151,13 @@ public class Player {
 		
 	}
 	
+	/**
+	 * This method takes a property id and number of house as a parameter and adds it to the player.
+	 * @param id
+	 * @param house
+	 * @requires Square with the given id must be in the type of SquareProperty. house must be between 0-6
+	 * @effects A new SquareProperty object is added to the player.
+	 */
 	public void addPropertyDebug(int id,int house){
 		SquareProperty sp = (SquareProperty)board.getSquareFromBoard(id);
 		if(house==5){
@@ -123,6 +178,13 @@ public class Player {
 		setFreeProperties();
 	}
 	
+	/**
+	 * This method takes a SquareProperty object and adds it to the player.
+	 * @param sp
+	 * @requires There is no requirement for this method.
+	 * @modifies properties, colorProperties, numberOfProperties, valueOfProperties
+	 * @effects A new SquareProperty object is added to the player.
+	 */
 	public void addProperty(SquareProperty sp){
 		properties.add(sp);
 		sp.setOwner(this);
@@ -135,6 +197,13 @@ public class Player {
 		setFreeProperties();
 	}
 	
+	/**
+	 * This method deletes the object from upgraded colors ArrayList.
+	 * @param id
+	 * @requires id must be between 0 and 19.
+	 * @modifies upgradedColors
+	 * @effects upgradedColors ArrayList is lost the given color group.
+	 */
 	public void deleteUpgradedColor(int id){
 		for(int i=0;i<upgradedColors.size();i++){
 			if(upgradedColors.get(i)==id){
@@ -143,6 +212,13 @@ public class Player {
 		}
 	}
 	
+	/**
+	 * This method deletes the property of the player from properties ArrayList.
+	 * @param sp
+	 * @requires Player must own the SquareProperty
+	 * @modifies colorProperties,numberOfProperties,valueOfProperties,properties
+	 * @effects Player loses the given SquareProperty object.
+	 */
 	public void deleteProperty(SquareProperty sp){
 		if(sp.getOwner().equals(this)){
 			
@@ -163,6 +239,13 @@ public class Player {
 		setFreeProperties();
 	}
 
+	/**
+	 * This method returns an empty String array.
+	 * @requires There is no requirement for this method.
+	 * @modifies This method does not modifies anything.
+	 * @effects String array with the length of 14 is given to the user. All indexes are initialized to 0.
+	 * @return It returns a string array which all elements are zero.
+	 */
 	public String[] getResultArray(){
 		String[] result = new String[14];
 		for(int i=0;i<14;i++){
@@ -173,7 +256,14 @@ public class Player {
 	
 	
 
-	
+	/**
+	 * This method checks the properties of the given color group. Then, it updates the rent prices of the properties
+	 * according to majority ownership or monopoly rules.
+	 * @param color
+	 * @requires color must be between 0-19
+	 * @modifies upgradedColors
+	 * @effects Rent prices of the SquareProperty object is updated to its current value.
+	 */
 	public void updateRentPrices(int color){
 		int housesSameColor = board.getNumberOfSameColor(color); // total number of the properties in that color.
 		if(housesSameColor!=2){
@@ -245,18 +335,46 @@ public class Player {
 		setFreeProperties();
 	}
 	
+	/**
+	 * This method adds the given money amount to the player.
+	 * @param money
+	 * @requires There is no requirement for this method.
+	 * @modifies money
+	 * @effects money is added to the player's money.
+	 */
 	public void addMoney(int money){
 		this.money += money;
 	}
 	
+	/**
+	 * This method substracts the given money amount to the player.
+	 * @param money
+	 * @requires There is no requirement for this method.
+	 * @modifies money
+	 * @effects money is substracted from the player's money.
+	 */
 	public void substract(int money){
 		this.money -= money;
 	}
 	
+	/**
+	 * This method changes the row of the player.
+	 * @param row
+	 * @requires row must be between 0-2.
+	 * @modifies row
+	 * @effects row is updated to it new value.
+	 */
 	public void setRow(int row){
 		this.row = row;
 	}
 	
+	/**
+	 * This method takes the dice value of the player, determines its new position and moves the player.
+	 * @param dice
+	 * @requires dice must be an integer between 3 and 16.
+	 * @modifies This method modifies the player's row and position.
+	 * @effects Player's position is changed according to dice value.
+	 */
 	public void setPosition(int dice){
 
 		int old = position;
@@ -317,6 +435,12 @@ public class Player {
 		checkPosition(dice,old);
 	}
 	
+	/**
+	 * This method moves the player according to Monopoly Guy card.
+	 * @requires Player must be the current player.
+	 * @modifies This method modifies the player's row and position.
+	 * @effects Player's position is changed according to Monopoly Guy rules.
+	 */
 	public void monopolyGuy(){
 		int posId = position;
 		int border = 24;
@@ -416,7 +540,15 @@ public class Player {
 			
 		}
 		
-	
+	/**
+	 * This method takes the dice value of the player and checks if player passed any paycorner or not.
+	 * If so, money of the paycorner is added to the player.
+	 * @param dice
+	 * @param old
+	 * @requires There is no requirement for this method.
+	 * @modifies money
+	 * @effects Player's money is updated according to the position.
+	 */
 	public void checkPosition(int dice,int old){
 		
 		if(row==0){
