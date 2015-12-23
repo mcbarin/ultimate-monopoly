@@ -145,6 +145,9 @@ public class GUI {
 	
 	public GUI(Board board,JButton b[]) throws Exception{
 		buttons = b;
+		for(int i=0; i<39; i++){
+			buttons[i].setVisible(false);
+		}
 		this.board = board;
 		players = board.getPlayers();
 		cP = board.getCurrentPlayer();
@@ -424,6 +427,7 @@ public class GUI {
 
 	        placeLabel(titles[6],"asdasdsad",540,50,725,13,new Color(255,255,255),Color.GRAY,new Font("Verdana", Font.BOLD, 18));
 	        titles[6].setHorizontalAlignment(JLabel.CENTER);
+	        titles[6].setVisible(false);
 	        panel.add(titles[6]);
 	        
 	        
@@ -434,6 +438,7 @@ public class GUI {
 			row.setBackground(Color.GRAY);
 			row.setHorizontalAlignment(JTextField.CENTER);
 			row.setFont(new Font("Verdana", Font.BOLD, 18));
+			row.setVisible(false);
 			row.setText("1");
 
 			position.setSize(80, 40);
@@ -442,6 +447,7 @@ public class GUI {
 			position.setHorizontalAlignment(JTextField.CENTER);
 			position.setFont(new Font("Verdana", Font.BOLD, 18));
 			position.setText("0");
+			position.setVisible(false);
 
 			money.setSize(180, 40);
 			money.setLocation(910, 110);
@@ -449,6 +455,7 @@ public class GUI {
 			money.setHorizontalAlignment(JTextField.CENTER);
 			money.setFont(new Font("Verdana", Font.BOLD, 18));
 			money.setText("3200");
+			money.setVisible(false);
 
 			dieOneF.setSize(80, 40);
 			dieOneF.setLocation(880, 510);
@@ -495,6 +502,7 @@ public class GUI {
 		saveName.setFont(new Font("Verdana", Font.BOLD, 14));
 		saveName.setVisible(true);
 		saveName.setText("Save Name");
+		saveName.setVisible(false);
 		panel.add(saveName);
 		placeButton(b[38],"Save Game",1005, 590, 135, 30,false);
         
@@ -507,104 +515,114 @@ public class GUI {
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);  
     	
-    	
+    	refresh();
 	}
 	public void refresh(){
-		players = board.getPlayers();
-		cP = board.getCurrentPlayer();
-		scrollPanePlayerStats.setVisible(true);
+		
+		if(Board.gameStatus==-1){
+			setGUI("","",buttons);
 
-		for(int i=0; i<players.size(); i++){
+		    
+			
+		}else{
+			players = board.getPlayers();
+			cP = board.getCurrentPlayer();
+			scrollPanePlayerStats.setVisible(true);
 	
-			playerNames[i].setText(players.get(i).name.toUpperCase());
+			for(int i=0; i<players.size(); i++){
+		
+				playerNames[i].setText(players.get(i).name.toUpperCase());
+				
+				playerMoneys[i].setText("$"+Integer.toString(players.get(i).money).toUpperCase());
+				
+				playerPropertiesNames[i].setText(players.get(i).allPropertiesNames.toLowerCase());
+			}
+					
+				if(MonopolyGame.debugLeft==0){
 			
-			playerMoneys[i].setText("$"+Integer.toString(players.get(i).money).toUpperCase());
+				    currentMessage.setVisible(true);
+			        currentPlayer.setVisible(true);
+			        buttons[0].setVisible(true);
 			
-			playerPropertiesNames[i].setText(players.get(i).allPropertiesNames.toLowerCase());
+			        dieOneF.setVisible(false);
+			        dieTwoF.setVisible(false);
+			        dieSpeedF.setVisible(false);
+			
+			        titles[6].setVisible(false);
+				    dPropsScrollPane.setVisible(false);
+				    row.setVisible(false);
+				    position.setVisible(false);
+				    money.setVisible(false);
+				    
+				    for(int i=0;i<3;i++){
+				    	dPropsType[i].setVisible(false);}
+				    buttons[24].setVisible(false);
+				    buttons[25].setVisible(false);
+			
+					MonopolyGame.debugLeft--;
+				}
+				else if(MonopolyGame.debugLeft<0){
+				    row.setVisible(false);
+				    position.setVisible(false);
+				    money.setVisible(false);
+					
+					
+					currentPlayer.setText(cP.name);
+					currentPlayer.setIcon(new ImageIcon("img/p"+Integer.toString(cP.id+1)+".png"));
+					titles[2].setText("$"+Integer.toString(cP.money));
+			
+					cpFreeProperties = cP.freeProperties;
+					cpMortgagedProperties = cP.mortgagedProperties;
+					setProps(45);
+					
+					
+			
+					if(MonopolyGame.specialConditions[2]){
+						buttons[18].setVisible(true);
+						buttons[19].setVisible(true);
+						scrollPaneTaxiRide.setVisible(true);
+					}else{scrollPaneTaxiRide.setVisible(false);}
+					
+					
+					if(MonopolyGame.specialConditions[4]){
+						buttons[22].setVisible(true);
+						cabScrollPane.setVisible(true);
+					}else{cabScrollPane.setVisible(false);
+					buttons[22].setVisible(false);}
+					
+					
+					
+					if(MonopolyGame.specialConditions[5]){
+						listHurricane();
+					}else{hurScrollPane.setVisible(false);
+					buttons[23].setVisible(false);}
+					
+					
+					
+			
+				}else{
+			
+					setGUI("","",buttons);
+			        titles[6].setVisible(true);
+			        titles[6].setText(board.players.get(MonopolyGame.initialNumberofPlayers-MonopolyGame.debugLeft).name);
+					debugProps();
+					buttons[24].setVisible(true);
+					buttons[25].setVisible(true);
+				    
+				    if(MonopolyGame.debugLeft==1){
+			
+				        dieOneF.setVisible(true);
+				        dieTwoF.setVisible(true);
+				        dieSpeedF.setVisible(true);
+				    }
+					//MonopolyGame.debugLeft--;
+					
+					
+					//System.out.println(MonopolyGame.debugLeft);
+				}
+
 		}
 				
-			if(MonopolyGame.debugLeft==0){
-		
-			    currentMessage.setVisible(true);
-		        currentPlayer.setVisible(true);
-		        buttons[0].setVisible(true);
-		
-		        dieOneF.setVisible(false);
-		        dieTwoF.setVisible(false);
-		        dieSpeedF.setVisible(false);
-		
-		        titles[6].setVisible(false);
-			    dPropsScrollPane.setVisible(false);
-			    row.setVisible(false);
-			    position.setVisible(false);
-			    money.setVisible(false);
-			    
-			    for(int i=0;i<3;i++){
-			    	dPropsType[i].setVisible(false);}
-			    buttons[24].setVisible(false);
-			    buttons[25].setVisible(false);
-		
-				MonopolyGame.debugLeft--;
-			}
-			else if(MonopolyGame.debugLeft<0){
-			    row.setVisible(false);
-			    position.setVisible(false);
-			    money.setVisible(false);
-				
-				
-				currentPlayer.setText(cP.name);
-				currentPlayer.setIcon(new ImageIcon("img/p"+Integer.toString(cP.id+1)+".png"));
-				titles[2].setText("$"+Integer.toString(cP.money));
-		
-				cpFreeProperties = cP.freeProperties;
-				cpMortgagedProperties = cP.mortgagedProperties;
-				setProps(45);
-				
-				
-		
-				if(MonopolyGame.specialConditions[2]){
-					buttons[18].setVisible(true);
-					buttons[19].setVisible(true);
-					scrollPaneTaxiRide.setVisible(true);
-				}else{scrollPaneTaxiRide.setVisible(false);}
-				
-				
-				if(MonopolyGame.specialConditions[4]){
-					buttons[22].setVisible(true);
-					cabScrollPane.setVisible(true);
-				}else{cabScrollPane.setVisible(false);
-				buttons[22].setVisible(false);}
-				
-				
-				
-				if(MonopolyGame.specialConditions[5]){
-					listHurricane();
-				}else{hurScrollPane.setVisible(false);
-				buttons[23].setVisible(false);}
-				
-				
-				
-		
-			}else{
-		
-				setGUI("","",buttons);
-		        titles[6].setVisible(true);
-		        titles[6].setText(board.players.get(MonopolyGame.initialNumberofPlayers-MonopolyGame.debugLeft).name);
-				debugProps();
-				buttons[24].setVisible(true);
-				buttons[25].setVisible(true);
-			    
-			    if(MonopolyGame.debugLeft==1){
-		
-			        dieOneF.setVisible(true);
-			        dieTwoF.setVisible(true);
-			        dieSpeedF.setVisible(true);
-			    }
-				//MonopolyGame.debugLeft--;
-				
-				
-				//System.out.println(MonopolyGame.debugLeft);
-			}
 				panel.repaint();
 				
 				

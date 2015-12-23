@@ -61,8 +61,7 @@ public class MonopolyGame {
 		
 		if(Board.gameStatus==-1){
 			JTextField nump = new JTextField();
-			gui = new GUI(buttons, nump); 
-			Board.gameStatus = 0;
+			gui = new GUI(new Board(1),buttons); 
 			
 			}
 		
@@ -263,7 +262,7 @@ public class MonopolyGame {
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
-		    	  String result[] = board.peekChance().doAction(cP);
+		    	  String result[] = board.peekChanceCard().doAction(cP);
 		    	  int s = Integer.parseInt(result[0]);
 		    	  if(s==25){
 		    		  gui.setGUI(result,"",buttons);
@@ -283,7 +282,7 @@ public class MonopolyGame {
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
-		    	  String result[] = board.peekChance().doAction(cP);
+		    	  String result[] = board.peekChanceCard().doAction(cP);
 		    	  int s = Integer.parseInt(result[0]);
 		    	  if(s==25){
 		    		  gui.setGUI(result,"",buttons);
@@ -338,7 +337,7 @@ public class MonopolyGame {
 		      }
 		});
 		
-		//addPropDebug
+		//debug next player
 		buttons[25].addActionListener(new ActionListener()
 		{
 		      public void actionPerformed(ActionEvent e)
@@ -365,7 +364,7 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String a = gui.hurGroup.getSelection().getActionCommand();
-		    	 String result[] = board.peekChance().applyCard14(Integer.parseInt(a.substring(0, a.indexOf("-"))), Integer.parseInt(a.substring(a.indexOf("-")+1, a.length())));
+		    	 String result[] = board.peekChanceCard().applyCard14(Integer.parseInt(a.substring(0, a.indexOf("-"))), Integer.parseInt(a.substring(a.indexOf("-")+1, a.length())));
 		    
 		    		 // result = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
 		    		  play2(Integer.parseInt(result[0]),result);
