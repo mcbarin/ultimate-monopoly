@@ -148,9 +148,6 @@ public class GUI {
 		for(int i=0; i<39; i++){
 			buttons[i].setVisible(false);
 		}
-		this.board = board;
-		players = board.getPlayers();
-		cP = board.getCurrentPlayer();
 		
 		panel = new GUIPanel(board,dice);
 		panel.setBackground(Color.DARK_GRAY);
@@ -190,34 +187,35 @@ public class GUI {
 		    placeButton(b[3],"Sell",1025, 95, 115, 25,false);
 			placeButton(b[8],"Mortgage",1150, 95, 115, 25,false);
 			
+			if(players!=null){
+				for(int i=0; i<players.size(); i++){
+					
+					playerPics[i] = new JLabel();
+					playerPics[i].setIcon(new ImageIcon("img/p"+Integer.toString(i+1)+".png"));
+					playerPics[i].setSize(40, 40);
+					playerPics[i].setLocation(5,i*75+5);
+					playerStatsPanel.add(playerPics[i]);
 			
-			for(int i=0; i<players.size(); i++){
-				
-				playerPics[i] = new JLabel();
-				playerPics[i].setIcon(new ImageIcon("img/p"+Integer.toString(i+1)+".png"));
-				playerPics[i].setSize(40, 40);
-				playerPics[i].setLocation(5,i*75+5);
-				playerStatsPanel.add(playerPics[i]);
-		
-				playerNames[i] = new JLabel(players.get(i).name.toUpperCase());
-				playerNames[i].setSize(100, 40);
-				playerNames[i].setLocation(50,i*75+5);
-				playerNames[i].setFont(new Font("Verdana", Font.BOLD, 20));
-				playerStatsPanel.add(playerNames[i]);
-				
-				playerMoneys[i] = new JLabel("$"+Integer.toString(players.get(i).money).toUpperCase());
-				playerMoneys[i].setSize(200, 40);
-				playerMoneys[i].setLocation(150,i*75+2);
-				playerMoneys[i].setFont(new Font("Lucida Calligraphy", Font.BOLD, 24));
-				playerStatsPanel.add(playerMoneys[i]);
-				
-				playerPropertiesNames[i] = new JLabel(players.get(i).allPropertiesNames.toLowerCase());
-				playerPropertiesNames[i].setToolTipText(players.get(i).allPropertiesNames);
-				playerPropertiesNames[i].setSize(540, 40);
-				playerPropertiesNames[i].setLocation(0,i*75+35);
-				playerPropertiesNames[i].setFont(new Font("Arial", Font.PLAIN, 16));
-				playerPropertiesNames[i].setBorder(BorderFactory.createMatteBorder(0, 0, 2,0, Color.black));
-				playerStatsPanel.add(playerPropertiesNames[i]);
+					playerNames[i] = new JLabel(players.get(i).name.toUpperCase());
+					playerNames[i].setSize(100, 40);
+					playerNames[i].setLocation(50,i*75+5);
+					playerNames[i].setFont(new Font("Verdana", Font.BOLD, 20));
+					playerStatsPanel.add(playerNames[i]);
+					
+					playerMoneys[i] = new JLabel("$"+Integer.toString(players.get(i).money).toUpperCase());
+					playerMoneys[i].setSize(200, 40);
+					playerMoneys[i].setLocation(150,i*75+2);
+					playerMoneys[i].setFont(new Font("Lucida Calligraphy", Font.BOLD, 24));
+					playerStatsPanel.add(playerMoneys[i]);
+					
+					playerPropertiesNames[i] = new JLabel(players.get(i).allPropertiesNames.toLowerCase());
+					playerPropertiesNames[i].setToolTipText(players.get(i).allPropertiesNames);
+					playerPropertiesNames[i].setSize(540, 40);
+					playerPropertiesNames[i].setLocation(0,i*75+35);
+					playerPropertiesNames[i].setFont(new Font("Arial", Font.PLAIN, 16));
+					playerPropertiesNames[i].setBorder(BorderFactory.createMatteBorder(0, 0, 2,0, Color.black));
+					playerStatsPanel.add(playerPropertiesNames[i]);
+				}
 			}
 			playerStatsPanel.setSize(5700,800);
 			scrollPanePlayerStats.setSize(540, 74);
@@ -342,6 +340,7 @@ public class GUI {
 	        currentMessage.setFont(new Font("Verdana", Font.PLAIN, 16));
 	        currentMessage.setSize(290, 160);
 	        currentMessage.setLocation(725, 10);
+	        if(cP!=null)
 	        currentMessage.setText(cP.name);
 	        panel.add(currentMessage);
 	        
@@ -385,6 +384,40 @@ public class GUI {
 			placeButton(b[14],"",735, 188, 80, 25,false);
 			placeButton(b[15],"",830, 188, 80, 25,false);
 			placeButton(b[16],"",925, 188, 80, 25,false);
+			
+			//////////////////////////////////////////////////////
+			//Very Beginning of the Game
+			placeLabel(titles[12],"Start a Brand New Game:",240,24,735,18,new Color(255,255,255),Color.GRAY,new Font("Verdana", Font.PLAIN, 18));
+			panel.add(titles[12]);
+			initalNumberofPlayers = new JTextField();
+			initalNumberofPlayers.setSize(300, 40);
+			initalNumberofPlayers.setLocation(735, 60);
+			initalNumberofPlayers.setBackground(Color.GRAY);
+			initalNumberofPlayers.setHorizontalAlignment(JTextField.CENTER);
+			initalNumberofPlayers.setFont(new Font("Verdana", Font.BOLD, 18));
+			initalNumberofPlayers.setText("Enter number of Players...");
+			
+
+			
+			b[11].setText("Start Game");
+			b[11].setLocation(1045, 60);
+			b[11].setSize(200, 40);
+			b[11].setVisible(true);
+			panel.add(b[11]);
+	        panel.add(initalNumberofPlayers);
+	        
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			///////////////////////////////////////////
 			//DEBUG
@@ -521,7 +554,7 @@ public class GUI {
 		
 		if(Board.gameStatus==-1){
 			setGUI("","",buttons);
-
+			titles[12].setVisible(true);
 		    
 			
 		}else{
@@ -879,6 +912,14 @@ public class GUI {
 		
 	}
 	
+	
+	public void initGUI(Board b){
+		this.board = b;
+		players = board.getPlayers();
+		cP = board.getCurrentPlayer();
+		
+		panel.initGUIPanel(this.board);
+	}
 	
 
 }

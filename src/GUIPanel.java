@@ -33,7 +33,7 @@ public class GUIPanel extends JPanel {
 	public int cardType=0;
 	
 	
-	private ArrayList<Player> players;
+	private ArrayList<Player> players = null;
 	private Board board;
 	
 	private ArrayList<BufferedImage> playerIcons = new ArrayList();
@@ -45,18 +45,10 @@ public class GUIPanel extends JPanel {
 		
 		//Position 
 		initSquarePositions();
-
-		board = b;
-		players = board.getPlayers();
 		
+
 		try {
 			this.backGround = ImageIO.read(new File("img/board.png"));
-			
-			for(int i=0;i<12;i++){
-				this.p = ImageIO.read(new File("img/p"+Integer.toString(i+1)+".png"));
-				playerIcons.add(this.p);
-			}
-
 
 		
 		} catch (IOException ex) {}
@@ -71,9 +63,11 @@ public class GUIPanel extends JPanel {
 	
 
 		g.drawImage(backGround, 0, 0, height, height, null);
-		for(int i=0;i<board.getNumberOfPlayers();i++){
-			g.drawImage(playerIcons.get(i), GUIPositions[players.get(i).row][players.get(i).position][0], GUIPositions[players.get(i).row][players.get(i).position][1], 40, 40, null);
-			}
+		if(players!=null){
+			for(Player p : players){
+				g.drawImage(playerIcons.get(p.id), GUIPositions[p.row][p.position][0], GUIPositions[p.row][p.position][1], 40, 40, null);
+				}
+		}
 		
 		try {
 			
@@ -271,4 +265,22 @@ public void setDice(int i, int j, int k){
 }
 
 
+public void initGUIPanel(Board b){
+
+
+	board = b;
+	players = board.getPlayers();
+	
+	try {
+		this.backGround = ImageIO.read(new File("img/board.png"));
+		
+		for(int i=0;i<12;i++){
+			this.p = ImageIO.read(new File("img/p"+Integer.toString(i+1)+".png"));
+			playerIcons.add(this.p);
+		}
+
+
+	
+	} catch (IOException ex) {}
+}
 }
