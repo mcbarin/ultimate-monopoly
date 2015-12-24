@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -61,6 +62,16 @@ public class Board {
 		}	
 	}
 	
+	@Override
+	public String toString() {
+		return "Board [bank=" + bank + ", pool=" + pool + ", totalPlayer=" + totalPlayer + ", players=" + players
+				+ ", currentPlayer=" + currentPlayer + ", squares=" + Arrays.toString(squares) + ", gui=" + gui
+				+ ", names=" + Arrays.toString(names) + ", colors=" + Arrays.toString(colors) + ", price="
+				+ Arrays.toString(price) + ", rent=" + Arrays.toString(rent) + ", cardDescriptions="
+				+ Arrays.toString(cardDescriptions) + ", communityDeck=" + communityDeck + ", chanceDeck=" + chanceDeck
+				+ ", playerNames=" + Arrays.toString(playerNames) + "]";
+	}
+
 	private void debugMode(){
 		
 		try{

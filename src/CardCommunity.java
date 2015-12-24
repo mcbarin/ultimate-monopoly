@@ -37,6 +37,11 @@ public class CardCommunity extends Card {
 	}
 
 	
+	@Override
+	public String toString() {
+		return "CardCommunity [number=" + number + ", title=" + title + ", description=" + description + "]";
+	}
+
 	/**
 	 * This method returns an empty String array.
 	 * @requires There is no requirement for this method.

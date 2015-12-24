@@ -588,5 +588,11 @@ public class CardChance extends Card {
 		
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return "CardChance [number=" + number + ", title=" + title + ", description=" + description + ", toString()="
+				+ super.toString() + "]";
+	}
 	
 }

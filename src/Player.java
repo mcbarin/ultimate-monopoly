@@ -1,5 +1,6 @@
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Player {
 	public int money,id,row,position,numberOfProperties=0,numberOfCards=0,valueOfProperties=0,
@@ -91,6 +92,18 @@ public class Player {
 		cards.add(c);	
 	}
 	
+	@Override
+	public String toString() {
+		return "Player [money=" + money + ", id=" + id + ", row=" + row + ", position=" + position
+				+ ", numberOfProperties=" + numberOfProperties + ", numberOfCards=" + numberOfCards
+				+ ", valueOfProperties=" + valueOfProperties + ", numberOfHouses=" + numberOfHouses
+				+ ", numberOfHotels=" + numberOfHotels + ", numberOfSkyscrapers=" + numberOfSkyscrapers
+				+ ", numberOfCabStand=" + numberOfCabStand + ", numberOfTransitStation=" + numberOfTransitStation
+				+ ", isPlaying=" + isPlaying + ", name=" + name + ", cards=" + cards + ", allPropertiesNames="
+				+ allPropertiesNames + ", shares=" + Arrays.toString(shares) + "]";
+	}
+
+
 	/**
 	 * A card is created with input id and added to the player.
 	 * @param id
