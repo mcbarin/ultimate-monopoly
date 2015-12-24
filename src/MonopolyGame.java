@@ -1,8 +1,15 @@
 import java.awt.*;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 import java.awt.event.*;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.*;
+
+import mp3.MP3Player;
 public class MonopolyGame {
 	
 	private GUI gui;
@@ -26,6 +33,7 @@ public class MonopolyGame {
 	public static int debugLeft;
 	
 	private Dice die = new Dice();
+	
 	private  int totalDice;
 	//buttons = rollDice,	buy,	buyChance,	sell,			4-no,			5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
 	//			10-yes,		start,	load,		save, 			dieOne,			15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
@@ -202,6 +210,9 @@ public class MonopolyGame {
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
+
+		    	  
+		    	  
 		    	  initialNumberofPlayers = gui.getInitialNumberofPlayers();
 		    	  debugLeft = initialNumberofPlayers;
 		    	  Board.gameStatus = 0;
@@ -333,6 +344,9 @@ public class MonopolyGame {
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
+
+		    	  //MP3Player.play("bip.mp3");
+		    	  
 		    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).addPropertyDebug(Integer.parseInt(gui.dPropsGroup.getSelection().getActionCommand()), Integer.parseInt(gui.dPropsTypeGroup.getSelection().getActionCommand()));
 		    	 // System.out.println("debo: " + gui.dPropsGroup.getSelection().getActionCommand()+" "+gui.dPropsTypeGroup.getSelection().getActionCommand());
 		    	 
@@ -376,11 +390,12 @@ public class MonopolyGame {
 		});
 		
 		//Save Game
-		buttons[38].addActionListener(new ActionListener()
+		buttons[13].addActionListener(new ActionListener()
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  ls.saveGame(board, gui.getSaveName());
+		    	  
 		    	 
 		      }
 		});

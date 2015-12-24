@@ -1,16 +1,16 @@
 //Bugra Can Sefercik Save/Load
 
-10
-cero
-uno
-dos
-tres
-cuatro
-cinco
-seis
-siete
-ocho
-nueve
-diez
-once
-doce
+0
+na
+na
+na
+na
+na
+na
+na
+na
+na
+na
+na
+na
+na

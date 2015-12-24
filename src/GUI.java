@@ -1,7 +1,7 @@
 import java.awt.*;
 
 import javax.swing.*;
-import javax.swing.Timer;
+//import javax.swing.Timer;
 
 import java.util.*;
 
@@ -42,6 +42,12 @@ public class GUI {
 
 	public ArrayList<Square> cpFreeProperties;
 	public ArrayList<Square> cpMortgagedProperties;
+	
+	
+
+	public JRadioButton[] savedGamesElt = new JRadioButton[13];
+	public ButtonGroup savedGamesGroup = new ButtonGroup();
+	
 	
 	public final static int MAX_PROPERTIES = 86;
 	public JRadioButton[] userFreeProperties = new JRadioButton[MAX_PROPERTIES];
@@ -161,11 +167,8 @@ public class GUI {
 		for(int i=0;i<12;i++){
 			 playerNames[i] = new JLabel();
 			 playerMoneys[i] = new JLabel();
-			 
 			 playerPics[i] = new JLabel();
-			 
 			 playerPropertiesNames[i] = new JLabel();
-			 
 		}
 			
 			
@@ -228,6 +231,10 @@ public class GUI {
 			scrollPanePlayerStats.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
 			scrollPanePlayerStats.setVisible(false);
 			panel.add(scrollPanePlayerStats);
+			
+			
+			
+			
 			
 			
 			
@@ -390,6 +397,8 @@ public class GUI {
 			placeButton(b[15],"",830, 188, 80, 25,false);
 			placeButton(b[16],"",925, 188, 80, 25,false);
 			
+			
+			
 			//////////////////////////////////////////////////////
 			//Very Beginning of the Game
 			placeLabel(titles[12],"Start a Brand New Game:",240,24,735,18,new Color(255,255,255),Color.GRAY,new Font("Verdana", Font.PLAIN, 18));
@@ -414,11 +423,39 @@ public class GUI {
 			panel.add(b[11]);
 	        panel.add(initalNumberofPlayers);
 	        
+	        
 
+			placeLabel(titles[11],"or Choose a Saved Game to Play:",400,24,735,118,new Color(255,255,255),Color.GRAY,new Font("Verdana", Font.PLAIN, 18));
+			titles[11].setVisible(false);
+			panel.add(titles[11]);
 			
 			
+		    for(int i = 0; i<13; i++){
+		        savedGamesElt[i] = new JRadioButton("lorem ipsum");
+		        savedGamesElt[i].setFont(new Font("Arial", Font.BOLD, 15));
+		        savedGamesElt[i].setActionCommand(Integer.toString(i));
+		        savedGamesElt[i].setVisible(true);
+		        savedGamesElt[i].setForeground(new Color(199,199,0));
+		        if(i%2==0){
+		        	savedGamesElt[i].setBackground(new Color(62,62,62));
+		        }else{
+		        	savedGamesElt[i].setBackground(new Color(75,75,75));
+		        }
+		        
+
+	        	//savedGamesElt[i].setBackground(new Color(218-i*13,218-i*13,218-i*13));
+		        savedGamesElt[i].setSize(510, 32);
+		        savedGamesElt[i].setLocation(735, 162 + i*32);
+		    	savedGamesGroup.add(savedGamesElt[i]);
+		        panel.add(savedGamesElt[i]);
+		     }
 			
-			
+
+			b[12].setText("Load Game");
+			b[12].setLocation(1045, 589);
+			b[12].setSize(200, 40);
+			b[12].setVisible(false);
+			panel.add(b[12]);
 			
 			
 			
@@ -545,7 +582,7 @@ public class GUI {
 		saveName.setText("Save Name");
 		saveName.setVisible(false);
 		panel.add(saveName);
-		placeButton(b[38],"Save Game",1005, 590, 135, 30,false);
+		placeButton(b[13],"Save Game",1005, 590, 135, 30,false);
         
     	
 		
@@ -562,14 +599,17 @@ public class GUI {
 		
 		if(Board.gameStatus==-1){
 			setGUI("","",buttons);
+			titles[11].setVisible(true);
 			titles[12].setVisible(true);
 			initalNumberofPlayers.setVisible(true);
 			buttons[11].setVisible(true);
+			buttons[12].setVisible(true);
 		    
 			
 		}else{
 
 			titles[12].setVisible(false);
+			titles[11].setVisible(false);
 			initalNumberofPlayers.setVisible(false);
 			buttons[11].setVisible(false);
 		    row.setVisible(true);
@@ -594,12 +634,13 @@ public class GUI {
 				playerPics[i].setVisible(false);}
 					
 				if(MonopolyGame.debugLeft==0){
-				    row.setVisible(true);
-				    position.setVisible(true);
-				    money.setVisible(true);
 			
 				    currentMessage.setVisible(true);
-			        currentPlayer.setVisible(true);
+					currentPlayer.setText(cP.name);
+					currentPlayer.setVisible(true);
+					currentPlayer.setIcon(new ImageIcon("img/p"+Integer.toString(cP.id+1)+".png"));
+					titles[2].setText("$"+Integer.toString(cP.money));
+					titles[2].setVisible(true);
 			        buttons[0].setVisible(true);
 			
 			        dieOneF.setVisible(false);
@@ -624,8 +665,7 @@ public class GUI {
 				    position.setVisible(false);
 				    money.setVisible(false);
 					
-					
-					currentPlayer.setText(cP.name);
+
 					currentPlayer.setIcon(new ImageIcon("img/p"+Integer.toString(cP.id+1)+".png"));
 					titles[2].setText("$"+Integer.toString(cP.money));
 			
@@ -948,10 +988,3 @@ public class GUI {
 	
 
 }
-
-
-
-
-
-
-
