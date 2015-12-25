@@ -368,7 +368,7 @@ public class GameLS {
 	      }		
 	   }
     
-    private String[] readLineArray(BufferedReader rd) {
+private String[] readLineArray(BufferedReader rd) {
 		String[] result = null;
 		String[] t = new String[1000];
 		int count = 0;

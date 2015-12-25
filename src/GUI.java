@@ -1,7 +1,8 @@
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.IOException;
 
 import javax.swing.*;
-//import javax.swing.Timer;
 
 import java.util.*;
 
@@ -47,6 +48,7 @@ public class GUI {
 
 	public JRadioButton[] savedGamesElt = new JRadioButton[13];
 	public ButtonGroup savedGamesGroup = new ButtonGroup();
+	private String[] loadGameLines;
 	
 	
 	public final static int MAX_PROPERTIES = 86;
@@ -986,5 +988,27 @@ public class GUI {
 		panel.initGUIPanel(this.board);
 	}
 	
+	
+	private String[] readLineArray(BufferedReader rd) {
+		String[] result = null;
+		String[] t = new String[1000];
+		int count = 0;
+		// Your code starts here
+	try{
+		while(true){
+			String line = rd.readLine();
+			if(line == null) break;
+			t[count] = line;
+			count++;
+		}
+		result = new String[count];
+		for(int i=0;i<count;i++){
+			result[i] = t[i];
+		}
+	} catch (IOException e) {
+	}
+		// Your code ends here
+		return result;
+	}
 
 }
