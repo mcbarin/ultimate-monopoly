@@ -82,8 +82,5 @@ public class BoardTest {
 	
 	
 	
-	public static void main(String[] args) {
-		BoardTest bt = new BoardTest();
-		bt.testZeroBoard();
-	}
+	
 }

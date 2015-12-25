@@ -1,5 +1,7 @@
-package domain;
+package tests;
 import static org.junit.Assert.*;
+import domain.Board;
+import domain.SquareProperty;
 
 import org.junit.Test;
 
