@@ -34,9 +34,9 @@ package domain;
 
 public abstract class Square {
 	String name,type;
-	int id;
-	int position;
-	int row;
+	public int id;
+	public int position;
+	public int row;
 	int color;
 	Player owner=null;
 
