@@ -84,7 +84,7 @@ public class Bank {
 		if(total%2 == 0){//use transit if possible
 			//search through upper track
 			for (int i = 0; i < 40; i++) {
-				if(squares[1][i].type.equals("Property") && ((SquareProperty)squares[1][i]).rent> max && !((SquareProperty)squares[2][i]).isMortgaged){
+				if(squares[1][i].type.equals("Property") && ((SquareProperty)squares[1][i]).rent> max && !((SquareProperty)squares[1][i]).isMortgaged){
 					max=((SquareProperty)squares[1][i]).rent;
 					row=1;
 					position=i;
