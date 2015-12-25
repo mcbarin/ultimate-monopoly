@@ -1,6 +1,8 @@
-package domain;
+package tests;
 
 import static org.junit.Assert.*;
+import domain.CardCommunity;
+import domain.Player;
 
 import org.junit.Test;
 

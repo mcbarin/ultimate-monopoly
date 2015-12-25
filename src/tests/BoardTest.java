@@ -43,14 +43,12 @@ public class BoardTest {
 	
 	@Test
 	public void getSquareFromBoardTest(){
-
 		Board test = new Board(4);
 		Square s = test.getSquareFromBoard(5);
 		// id = 5
 		//row =0
 		//pos = 5
-		assertTrue("getSquareFromBoardTest() works correctly", s.id==5 && s.row==0 &&  s.position==5);
-		
+		assertTrue("getSquareFromBoardTest() works correctly", s.id==5 && s.row==0 &&  s.position==5);		
 	}
 	
 	@Test 
@@ -70,15 +68,13 @@ public class BoardTest {
 		// color id = 19
 		// There are 3 properties. id of them(116,117,119)		
 		assertTrue("getOtherProperties() works correctly", test.getOtherProperties(19)[0]==116 &&  test.getOtherProperties(19)[1]==117 &&  test.getOtherProperties(19)[2]==119);
-
 	}
 	
 	@Test
 	public void payToPoolTest(){
 		Board test = new Board(4);	
 		int pool = test.pool;		
-		test.payToPool(100);
-		
+		test.payToPool(100);	
 		assertTrue("payToPool() works correctly",pool == (test.pool-100));
 	}
 

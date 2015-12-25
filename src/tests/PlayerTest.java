@@ -1,7 +1,8 @@
-package domain;
+package tests;
 
 
 import static org.junit.Assert.*;
+import domain.Player;
 
 import org.junit.Test;
 
