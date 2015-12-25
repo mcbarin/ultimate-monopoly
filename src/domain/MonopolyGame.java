@@ -70,7 +70,7 @@ public class MonopolyGame {
 		
 		if(Board.gameStatus==-1){
 			JTextField nump = new JTextField();
-			gui = new GUI(new Board(1),buttons); 
+			gui = new GUI(new Board(2),buttons); 
 			
 			}
 		
