@@ -1,5 +1,7 @@
 package domain;
 import java.io.BufferedReader;
+
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,6 +11,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
+
+
+import exceptions.InvalidBoardException;
 
 public class Board {
 
@@ -505,6 +510,10 @@ public class Board {
 		((SquareTransit) squares[1][5]).SquareTransitTwin(29,this);
 		((SquareTransit) squares[1][25]).SquareTransitTwin(49,this);
 		
+		
+		if(!repOk()){
+			throw new InvalidBoardException("Invalid Board Construction");
+		}
 		//debugMode();
 	}
 	
