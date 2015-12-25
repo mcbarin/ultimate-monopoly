@@ -37,7 +37,7 @@ public abstract class Square {
 	public int id;
 	public int position;
 	public int row;
-	int color;
+	public int color;
 	Player owner=null;
 
 
