@@ -24,7 +24,7 @@ public class BankTest {
 		int[] a = board.bank.findHighestRentProperty(3);
 		int[] b = board.bank.findHighestRentProperty(4);
 		assertTrue("findHighestRentProperty odd case is true",outer.position == a[1] && outer.row == a[0]);
-		assertTrue("findHighestRentProperty even case is true",inner.position == a[1] && inner.row == b[0]);
+		assertTrue("findHighestRentProperty even case is true",inner.position == b[1] && inner.row == b[0]);
 			
 	}
 
