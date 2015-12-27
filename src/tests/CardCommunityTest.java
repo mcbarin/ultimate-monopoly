@@ -12,7 +12,10 @@ public class CardCommunityTest {
 	//////////////////////////////////////
 	//Tested Methods
 	//////////////////////////////////////
-	//
+	//doAction() for Community Card 36
+	//doAction() for Community Card 37
+	//doAction() for Community Card 39
+	//doAction() for Community Card 43
 	//applyCard40()
 
 	@Test
