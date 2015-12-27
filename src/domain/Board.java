@@ -54,14 +54,8 @@ public class Board {
 	String[] playerNames = {"Ezgi","Cagatay","Bugra","Delta","Epsilon","Zeta","Eta","Theta","Iota","Kappa","Lambda","Pi"};
 
 
-	/**
-	 * This method creates the player of the game with given values.
-	 * @param totalPlayer
-	 * @requires totalPlayer must be between 2 and 12.
-	 * @modifies players arraylist is changed
-	 * @effects Players are created and listed in the players arraylist.
-	 */
-	public void initializePlayers(int totalPlayer){
+	
+	private void initializePlayers(int totalPlayer){
 			
 			for(int i=0;i<this.totalPlayer;i++){
 				Player p = new Player(playerNames[i],3200,i,1,0,this);

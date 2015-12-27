@@ -36,8 +36,8 @@ public class Bank {
 	public boolean thereIsUnownedProperty(){
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 64; j++) {
-				if(squares[i][j] != null && squares[i][j].type.equals("Property") && squares[i][j].owner != null)
-					return true;
+				if(squares[i][j] != null && squares[i][j].type.equals("Property") && squares[i][j].owner == null){
+					return true;}
 			}
 		}
 		return false;
@@ -54,7 +54,7 @@ public class Bank {
 	public ArrayList<SquareProperty> getUnownedProperties(){
 		ArrayList<SquareProperty> unowned = new ArrayList<SquareProperty>();
 		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 64; j++) {
+			for (int j = 0; j < 56; j++) {
 				if(squares[i][j] != null && squares[i][j].type.equals("Property") && squares[i][j].owner == null)
 					unowned.add((SquareProperty) squares[i][j]);
 			}
@@ -236,12 +236,28 @@ public class Bank {
 		return result;
 	}
 
-	private int getIdByStockName(String name){
+
+	/**
+	 * This method gives the ID of the stock belonging to given name.
+	 * @param name
+	 * @requires no requirement.
+	 * @modifies nothing.
+	 * @effects nothing.
+	 * @return integer which is the IDof the stock
+	 */
+	public int getIdByStockName(String name){
 		for (int i = 0; i < 6; i++) {
 			if(name.equals(names[i]))
 				return i;
 		}
 		return 0;
+	}
+	
+	public boolean repOk(){
+		if(this==null || companies==null || players==null || squares == null)
+			return false;
+		else
+			return true;
 	}
 
 }

@@ -39,7 +39,6 @@ public class Player {
 	 * @effects A new player object with given parameters are created.
 	 */
 	public Player(String name,int money, int id, int row, int position,Board board) {
-		super();
 		this.name = name;
 		this.money = money;
 		this.id = id;
@@ -176,10 +175,13 @@ public class Player {
 		SquareProperty sp = (SquareProperty)board.getSquareFromBoard(id);
 		if(house==5){
 			sp.hotel=1;
+			this.numberOfHotels++;
 		}else if(house==6){
 			sp.skyscraper=1;
+			this.numberOfSkyscrapers++;
 		}else{
 			sp.house=house;
+			this.numberOfHouses++;
 		}
 		
 		
@@ -307,10 +309,14 @@ public class Player {
 			}
 			else if(colorProperties[color] == housesSameColor){
 				int[] houses = new int[housesSameColor];
-				houses = board.getOtherProperties(color);
+				for(int i=0; i<board.getOtherProperties(color).length;i++){
+					houses[i] = board.getOtherProperties(color)[i];
+				}
+				
 				for(int i=0;i<housesSameColor;i++){
 					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
 					if(sp.getOwner() != null && sp.getOwner().equals(this) && sp.house==0){
+						System.out.println(i);
 						sp.TripleRent();
 						sp.level=2;
 						upgradedColors.add(sp.color);
@@ -334,7 +340,9 @@ public class Player {
 			}
 			else if(colorProperties[color] == housesSameColor){
 				int[] houses = new int[housesSameColor];
-				houses = board.getOtherProperties(color);
+				for(int i=0; i<board.getOtherProperties(color).length;i++){
+					houses[i] = board.getOtherProperties(color)[i];
+				}
 				for(int i=0;i<housesSameColor;i++){
 					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
 					if(sp.getOwner() != null && sp.getOwner().equals(this)){
@@ -609,6 +617,13 @@ public class Player {
 			
 		}
 	}
+	/**
+	 * This method takes the dice value of the player and checks if player passed any paycorner or not.
+	 * If so, money of the paycorner is added to the player.
+	 * @requires There is no requirement for this method.
+	 * @modifies freePorperties and mortgagedProperties strings.
+	 * @effects Player's properties names updated in oder to help GUI.
+	 */
 	
 	
 	public void setFreeProperties(){
@@ -661,8 +676,30 @@ public class Player {
 		}
 		
 	}
+
+	/**
+	 * This method checks whether the given player is thisplayer or not.
+	 * @param player
+	 * @requires There is no requirement for this method.
+	 * @modifies nothing.
+	 * @effects nothing.
+	 */
+	public boolean equals(Player p){
+		if(this.id==p.id)
+			return true;
+		else
+			return false;
+	}
 	
-	
-	
+	public boolean repOk(){
+		if(money<0 || id<0 || id>11 || row < 0 || row > 2 || position<0)
+			return false;
+		else if(properties==null || trains==null || cabs==null || utilities==null || cards == null || board==null)
+			return false;
+		else
+			return true;
+		
+			
+	}
 	
 }

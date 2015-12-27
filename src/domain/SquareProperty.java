@@ -356,7 +356,7 @@ public class SquareProperty extends Square  {
 		rent = originalRent*2;
 	}
 	public void TripleRent(){
-		rent = originalRent*3;
+		this.rent = originalRent*3;
 	}
 	public void normalizeRent(){
 		rent = originalRent;
@@ -387,6 +387,9 @@ public class SquareProperty extends Square  {
 		updateRentAccordingToHouse(this);
 	}
 	
+	public String getName(){
+		return name;
+	}
 
 }
 

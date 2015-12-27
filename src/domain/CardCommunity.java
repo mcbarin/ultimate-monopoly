@@ -224,5 +224,11 @@ public class CardCommunity extends Card {
 		board.pullPushCommunity();
 		return result;
 	}
-	
+
+	public boolean repOk(){
+		if(this==null || title == null || description==null || board==null)
+			return false;
+		else
+			return true;
+	}
 }

@@ -508,6 +508,17 @@ public class CardChance extends Card {
 		return result;
 	}
 	
+	/**
+	 * This method takes color and player id applies hurricane!
+	 * After executing the card, it creates the result array and returns it to the MonopolyGame class.
+	 * @param id
+	 * @param color
+	 * @requires Player player must be an active player.
+	 * @modifies It modifies the result array. Also depends on the card, player's some fields might be modified after the action.
+	 * @effects Action of the card is applied to the player.
+	 * @return result[]
+	 */
+	
 	public String[] applyCard14(int id,int color){
 		String[] result= getResultArray();
 		
@@ -542,7 +553,17 @@ public class CardChance extends Card {
 		board.pullPushChance();
 		return result;
 	}
+
 	
+	/**
+	 * This method takes square as a parameter and does the action of the card to the player.
+	 * After executing the card, it creates the result array and returns it to the MonopolyGame class.
+	 * @param square
+	 * @requires Player player must be an active player.
+	 * @modifies It modifies the result array. Also depends on the card, player's some fields might be modified after the action.
+	 * @effects Action of the card is applied to the player.
+	 * @return result[]
+	 */
 	public String[] applyCard18(SquareProperty p){
 		String[] result= getResultArray();
 		
@@ -559,7 +580,18 @@ public class CardChance extends Card {
 		
 		return result;
 	}
+
 	
+	/**
+	 * This method takes the player and square as a parameter and does the action of the card to the player.
+	 * After executing the card, it creates the result array and returns it to the MonopolyGame class.
+	 * @param square
+	 * @param player
+	 * @requires Player player must be an active player.
+	 * @modifies It modifies the result array. Also depends on the card, player's some fields might be modified after the action.
+	 * @effects Action of the card is applied to the player.
+	 * @return result[]
+	 */
 	public String[] applyCard31(Square sp,Player p){
 		String[] result= getResultArray();
 		SquareCabCompany sc = (SquareCabCompany)sp;
@@ -595,5 +627,10 @@ public class CardChance extends Card {
 		return "CardChance [number=" + number + ", title=" + title + ", description=" + description + ", toString()="
 				+ super.toString() + "]";
 	}
-	
+	public boolean repOk(){
+		if(this==null || title == null || description==null || board==null)
+			return false;
+		else
+			return true;
+	}
 }
