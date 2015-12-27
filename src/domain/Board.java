@@ -62,10 +62,12 @@ public class Board {
 	 * @effects Players are created and listed in the players arraylist.
 	 */
 	public void initializePlayers(int totalPlayer){
-		for(int i=0;i<totalPlayer;i++){
-			Player p = new Player(playerNames[i],3200,i,1,0,this);
-			players.add(p);
-		}	
+			
+			for(int i=0;i<this.totalPlayer;i++){
+				Player p = new Player(playerNames[i],3200,i,1,0,this);
+				players.add(p);
+			}	
+		
 	}
 	
 	@Override
@@ -404,8 +406,14 @@ public class Board {
 	public Board(int totalPlayer) {
 		
 		// Initialization Processes
-		initializePlayers(totalPlayer);
-		this.totalPlayer = totalPlayer;
+		if(totalPlayer<2)
+			this.totalPlayer = 2;
+		else if (totalPlayer<13)
+			this.totalPlayer = totalPlayer;
+		else
+			this.totalPlayer = 12;
+			
+		initializePlayers(this.totalPlayer);
 		currentPlayer = players.get(0);
 		initializeCards(); // Chance and Community Chest cards are initialized.
 		bank = new Bank(players,squares);

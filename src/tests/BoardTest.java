@@ -14,7 +14,7 @@ public class BoardTest {
 	@Test(expected = NullPointerException.class)
 	public void testNullBoard() {
 		Board b=null;
-		b.repOk();
+		assertTrue("null board repOK is true",b.repOk());
 	}
 	
 	@Test
