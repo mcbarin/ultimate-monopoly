@@ -508,8 +508,9 @@ public class CardChance extends Card {
 		return result;
 	}
 	
+	
 	/**
-	 * This method takes color and player id applies hurricane!
+	 * This method takes color and player id. Then it applies  hurricane!
 	 * After executing the card, it creates the result array and returns it to the MonopolyGame class.
 	 * @param id
 	 * @param color

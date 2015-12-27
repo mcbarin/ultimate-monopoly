@@ -190,6 +190,16 @@ public class CardCommunity extends Card {
 		return result;
 	}
 	
+	/**
+	 * This method applies the community card with the id of 40.
+	 * It takes the player's choice and player, then it applies the card to the player.
+	 * @param choice
+	 * @param p
+	 * @requires This method requires that player has to be an active player.
+	 * @modifies It modifies the player's position.
+	 * @effects Player's position will be changed depends on player's choice.
+	 * @return result[]
+	 */
 	public String[] applyCard40(boolean choice,Player p){
 		String[] result= getResultArray();
 		
@@ -208,6 +218,16 @@ public class CardCommunity extends Card {
 		return result;
 	}
 	
+	/**
+	 * This method applies the community card with the id of 49.
+	 * It takes a player and a color group, then it applies hurricane to player's properties in that color group. 
+	 * @param p
+	 * @param colorGroup
+	 * @requires Player should be an active player. Color group should be that player's properties.
+	 * @modifies It modifies the number of houses, rents of the properties in that color group.
+	 * @effects Player's properties in that color group is downgraded after this method.
+	 * @return result[]
+	 */
 	public String[] applyCard49(Player p,int colorGroup){
 		String[] result= getResultArray();
 		int length = board.getNumberOfSameColor(colorGroup);
