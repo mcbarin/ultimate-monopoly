@@ -63,7 +63,9 @@ public class MonopolyGame {
 		
 		for(int i=0; i<39; i++){
 			buttons[i] = new JButton();
-			buttons[i].addActionListener(guiPublish);
+			
+			if(i!=12)
+				buttons[i].addActionListener(guiPublish);
 					
 			specialConditions[i] = false;}
 		
@@ -241,6 +243,30 @@ public class MonopolyGame {
 		      }
 		});
 
+		
+		
+		
+
+
+		//LOADButton
+		buttons[12].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+
+		    	  debugLeft = -1;
+		    	  Board.gameStatus = 0;
+		    	  System.out.println("Selected Radio Button: " + Integer.parseInt(gui.savedGamesGroup.getSelection().getActionCommand()));
+		    	  gui.refresh();
+		    	  
+		      }
+		});
+
+		
+		
+		
+		
+		
 		
 		//Take a TaxiRide
 		buttons[18].addActionListener(new ActionListener()

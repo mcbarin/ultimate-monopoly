@@ -1,15 +1,19 @@
 package domain;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
@@ -21,9 +25,113 @@ public class GameLS {
      Board board;
    
    
-    //public static void main(String[] args) {saveGame("bugracan");}
+    public static void main(String[] args) {GameLS a = new GameLS(); Board b = a.loadGame(10); System.out.println(b.totalPlayer);}
     public GameLS(){}
     public void setBoard(Board b){this.board = b;}
+    
+    
+
+    
+    public Board loadGame(int index){
+
+    	
+
+    	  // reading can be done using any of the two 'DOM' or 'SAX' parser
+    	  // we have used saxBuilder object here
+    	  // please note that this saxBuilder is not internal sax from jdk
+    	     SAXBuilder saxBuilder = new SAXBuilder();
+    	     
+    	     // obtain file object 
+    	     File file = new File("./saved_games/"+Integer.toString(index)+".xml");
+
+    	  try {
+    	   // converted file to document object
+    	   Document document = saxBuilder.build(file);
+    	   
+    	   // get root node from xml
+    	   Element rootNode = document.getRootElement();
+    	   
+    	   // got all xml elements into a list
+    	   
+    	   board = new Board(Integer.parseInt(rootNode.getChildText("numberOfPlayers")));
+    	   board.currentPlayer = board.players.get(Integer.parseInt(rootNode.getChildText("currentPlayer")));
+    	   
+    	   Element bankl = rootNode.getChild("bank");
+    	   List<Element> comp = bankl.getChildren("company");
+    	   
+    	   for(int i=0; i<board.bank.companies.size(); i++){
+    		   board.bank.companies.get(i).parValue = Integer.parseInt(comp.get(i).getChildText("parValue"));
+    		   board.bank.companies.get(i).share = Integer.parseInt(comp.get(i).getChildText("share"));
+    		   
+    	   }
+    	  
+
+
+    	   List<Element> playerList = rootNode.getChildren("player");
+    	      
+    	      
+    	      // simple iteration to see the result on console
+    	      for(int i=0;i<=playerList.size()-1;i++){
+    	    	  Player p = board.players.get(i);
+    	    	  Element element = playerList.get(i);
+    	    	  p.name = element.getChildText("name");
+    	    	  p.isPlaying = Boolean.parseBoolean(element.getChildText("isPlaying"));
+    	    	  p.money = Integer.parseInt(element.getChildText("money"));
+    	    	  p.countJail = Integer.parseInt(element.getChildText("countJail"));
+    	    	  p.row = Integer.parseInt(element.getChildText("row"));
+    	    	  p.position = Integer.parseInt(element.getChildText("position"));
+    	    	  p.reverse = Boolean.parseBoolean(element.getChildText("reverse"));
+    	    	  
+    	    	  
+    	    	  String shrs[] = element.getChildText("shares").split("-");
+    	    	  for(int j = 0; j<6; j++){
+    	    		  p.shares[j] = Integer.parseInt(shrs[j]);
+    	    	  }
+    	    	  
+    	    	  String nums[] = element.getChildText("numbers").split("-");
+    			  p.numberOfProperties = Integer.parseInt(nums[0]);
+    			  p.numberOfCards = Integer.parseInt(nums[1]);
+    			  p.numberOfHouses = Integer.parseInt(nums[2]);
+    			  p.numberOfHotels = Integer.parseInt(nums[3]);
+    			  p.numberOfSkyscrapers = Integer.parseInt(nums[4]);
+    			  p.numberOfCabStand = Integer.parseInt(nums[5]);
+    			  p.numberOfTransitStation = Integer.parseInt(nums[6]);
+    			  
+
+    	    	  String clrprp[] = element.getChildText("colorProperties").split("-");
+    	    	  for(int j = 0; j<20; j++){
+    	    		  p.colorProperties[j] = Integer.parseInt(clrprp[j]);
+    	    	  }
+
+    	    	  p.allPropertiesNames = element.getChildText("allPropertiesNames");
+    	    	  
+    	    	  Element props = element.getChild("properties");
+    	    	  List<Element> proplist = props.getChildren("property");
+    	    	  for(Element prp : proplist){
+    	    		 
+    	    		  
+    	    		  System.out.println( prp.getChildText("price"));
+    	    	  }
+    	    	  
+    	       
+    	       System.out.println("Last Name : "+element.getChildText("name"));
+    	       System.out.println("Email : "+element.getChildText("money"));
+    	       System.out.println("Phone : "+element.getChildText("cabs"));
+    	      }
+    	     
+    	  } catch (JDOMException e) {
+    	   // TODO Auto-generated catch block
+    	   e.printStackTrace();
+    	  } catch (IOException e) {
+    	   // TODO Auto-generated catch block
+    	   e.printStackTrace();
+    	  }  
+    	
+    	return board;
+    	
+    }
+    
+    
     
     public void saveGame(Board board, String n){
     	String name = "Saved Game";
@@ -52,10 +160,28 @@ public class GameLS {
 
 	     //Bank
 	     Element bank = new Element("bank");   
+	     Element company;
+
+	     for(Company c: board.bank.companies){
+		     company = new Element("company");
+		     
+		     Element celt = new Element("name");
+		     celt.setText(c.name);
+		     company.addContent(celt);
+		     
+		     celt = new Element("id");
+		     celt.setText(Integer.toString(c.id));
+		     company.addContent(celt);
+		     
+		     celt = new Element("parValue");
+		     celt.setText(Integer.toString(c.parValue));
+		     company.addContent(celt);
+		     
+		     celt = new Element("share");
+		     celt.setText(Integer.toString(c.share));
+		     company.addContent(celt);
+			 bank.addContent(company);}
 	     
-	     	Element bankelt = new Element("money");
-	     	bankelt.setText("10000000");
-		    bank.addContent(bankelt);
 			     
 		 doc.getRootElement().addContent(bank);
 		 bank = null;
@@ -108,6 +234,11 @@ public class GameLS {
 		     elt.setText(Boolean.toString(p.reverse));
 		     player.addContent(elt);
 		     elt = null;
+		     
+		     elt = new Element("shares");
+		     elt.setText(Integer.toString(p.shares[0])+"-"+Integer.toString(p.shares[1])+"-"+Integer.toString(p.shares[2])+"-"+Integer.toString(p.shares[3])+"-"+Integer.toString(p.shares[4])+"-"+Integer.toString(p.shares[5]));
+		     player.addContent(elt);
+		     elt = null;
 		    
 		     elt = new Element("numbers");
 		     elt.setText(Integer.toString(p.numberOfProperties)+"-"+Integer.toString(p.numberOfCards)+"-"+Integer.toString(p.numberOfHouses)+"-"+Integer.toString(p.numberOfHotels)+"-"+Integer.toString(p.numberOfSkyscrapers)+"-"+Integer.toString(p.numberOfCabStand)+"-"+Integer.toString(p.numberOfTransitStation));
@@ -138,6 +269,9 @@ public class GameLS {
 		     //For loop Begin
 		     for(SquareProperty sq : p.properties){
 		     	Element propelt = new Element("property");
+			     	element = new Element("ID");
+			     	element.setText(Integer.toString(sq.id));
+			     	propelt.addContent(element);
 			     	element = new Element("ownerID");
 			     	element.setText(Integer.toString(sq.owner.id));
 			     	propelt.addContent(element);
@@ -184,6 +318,9 @@ public class GameLS {
 			     	element = new Element("ownerID");
 			     	element.setText(Integer.toString(tr.owner.id));
 			     	trainelt.addContent(element);
+			     	element = new Element("ID");
+			     	element.setText(Integer.toString(tr.id));
+			     	trainelt.addContent(element);
 			     	element = new Element("price");
 			     	element.setText(Integer.toString(tr.price));
 			     	trainelt.addContent(element);
@@ -219,6 +356,9 @@ public class GameLS {
 		     	Element cabelt = new Element("cab");
 			     	element = new Element("ownerID");
 			     	element.setText(Integer.toString(cb.owner.id));
+			     	cabelt.addContent(element);
+			     	element = new Element("ID");
+			     	element.setText(Integer.toString(cb.id));
 			     	cabelt.addContent(element);
 			     	element = new Element("price");
 			     	element.setText(Integer.toString(cb.price));
@@ -256,6 +396,9 @@ public class GameLS {
 		     	Element utilityelt = new Element("utility");
 			     	element = new Element("ownerID");
 			     	element.setText(Integer.toString(ut.owner.id));
+			     	utilityelt.addContent(element);
+			     	element = new Element("ID");
+			     	element.setText(Integer.toString(ut.id));
 			     	utilityelt.addContent(element);
 			     	element = new Element("price");
 			     	element.setText(Integer.toString(ut.price));
@@ -368,7 +511,6 @@ public class GameLS {
 	         e.printStackTrace();
 	      }		
 	   }
-    
 private String[] readLineArray(BufferedReader rd) {
 		String[] result = null;
 		String[] t = new String[1000];

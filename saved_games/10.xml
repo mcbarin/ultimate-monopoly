@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+  <bank>
+    <company>
+      <name>General Radio</name>
+      <id>0</id>
+      <parValue>100</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>United Railways</name>
+      <id>1</id>
+      <parValue>110</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>National Utilities</name>
+      <id>2</id>
+      <parValue>120</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>Acme Motors</name>
+      <id>3</id>
+      <parValue>130</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>Allied Steamships</name>
+      <id>4</id>
+      <parValue>140</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>Motion Pictures</name>
+      <id>5</id>
+      <parValue>150</parValue>
+      <share>0</share>
+    </company>
+  </bank>
+  <currentPlayer>1</currentPlayer>
+  <numberOfPlayers>2</numberOfPlayers>
+  <date>29/12/2015 23:14:46</date>
+  <player>
+    <id>0</id>
+    <name>Ezgi</name>
+    <isPlaying>true</isPlaying>
+    <money>2730</money>
+    <countJail>4</countJail>
+    <row>2</row>
+    <position>38</position>
+    <reverse>false</reverse>
+    <shares>0-0-0-0-0-0</shares>
+    <numbers>3-0-0-0-0-0-0</numbers>
+    <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
+    <allPropertiesNames>PEACHTREE STREET, MICHIGAN AVENUE, WEST TAMPLE</allPropertiesNames>
+    <properties>
+      <property>
+        <ID>91</ID>
+        <ownerID>0</ownerID>
+        <price>240</price>
+        <originalRent>24</originalRent>
+        <rent>24</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+      <property>
+        <ID>97</ID>
+        <ownerID>0</ownerID>
+        <price>300</price>
+        <originalRent>30</originalRent>
+        <rent>30</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+      <property>
+        <ID>102</ID>
+        <ownerID>0</ownerID>
+        <price>330</price>
+        <originalRent>33</originalRent>
+        <rent>33</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+    </properties>
+    <transits />
+    <cabs />
+    <utilities />
+    <freeProperties>
+      <ID>91</ID>
+      <ID>97</ID>
+      <ID>102</ID>
+    </freeProperties>
+    <mortgagedProperties />
+    <cards />
+  </player>
+  <player>
+    <id>1</id>
+    <name>Cagatay</name>
+    <isPlaying>true</isPlaying>
+    <money>3405</money>
+    <countJail>4</countJail>
+    <row>2</row>
+    <position>28</position>
+    <reverse>false</reverse>
+    <shares>0-0-0-0-0-0</shares>
+    <numbers>2-0-0-0-0-0-0</numbers>
+    <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
+    <allPropertiesNames>MAGAZINE STREET, KATY FREEWAY</allPropertiesNames>
+    <properties>
+      <property>
+        <ID>76</ID>
+        <ownerID>1</ownerID>
+        <price>120</price>
+        <originalRent>12</originalRent>
+        <rent>12</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+      <property>
+        <ID>80</ID>
+        <ownerID>1</ownerID>
+        <price>150</price>
+        <originalRent>15</originalRent>
+        <rent>15</rent>
+        <isMortgaged>true</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+    </properties>
+    <transits />
+    <cabs />
+    <utilities />
+    <freeProperties>
+      <ID>76</ID>
+    </freeProperties>
+    <mortgagedProperties>
+      <ID>80</ID>
+    </mortgagedProperties>
+    <cards />
+  </player>
+</game>

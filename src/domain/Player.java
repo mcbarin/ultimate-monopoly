@@ -161,6 +161,7 @@ public class Player {
 		for(int i=0;i<trains.size();i++){
 			trains.get(i).initializeAll();
 		}
+		isPlaying = false;
 		
 	}
 	

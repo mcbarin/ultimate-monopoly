@@ -253,6 +253,8 @@ public class Bank {
 		return 0;
 	}
 	
+	
+	
 	public boolean repOk(){
 		if(this==null || companies==null || players==null || squares == null)
 			return false;

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+  <bank>
+    <company>
+      <name>General Radio</name>
+      <id>0</id>
+      <parValue>100</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>United Railways</name>
+      <id>1</id>
+      <parValue>110</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>National Utilities</name>
+      <id>2</id>
+      <parValue>120</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>Acme Motors</name>
+      <id>3</id>
+      <parValue>130</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>Allied Steamships</name>
+      <id>4</id>
+      <parValue>140</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>Motion Pictures</name>
+      <id>5</id>
+      <parValue>150</parValue>
+      <share>0</share>
+    </company>
+  </bank>
+  <currentPlayer>0</currentPlayer>
+  <numberOfPlayers>2</numberOfPlayers>
+  <date>29/12/2015 22:23:16</date>
+  <player>
+    <id>0</id>
+    <name>Ezgi</name>
+    <isPlaying>true</isPlaying>
+    <money>3200</money>
+    <countJail>4</countJail>
+    <row>1</row>
+    <position>0</position>
+    <reverse>false</reverse>
+    <numbers>0-0-0-0-0-0-0</numbers>
+    <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
+    <allPropertiesNames />
+    <properties />
+    <transits />
+    <cabs />
+    <utilities />
+    <freeProperties />
+    <mortgagedProperties />
+    <cards />
+  </player>
+  <player>
+    <id>1</id>
+    <name>Cagatay</name>
+    <isPlaying>true</isPlaying>
+    <money>3200</money>
+    <countJail>4</countJail>
+    <row>1</row>
+    <position>0</position>
+    <reverse>false</reverse>
+    <numbers>0-0-0-0-0-0-0</numbers>
+    <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
+    <allPropertiesNames />
+    <properties />
+    <transits />
+    <cabs />
+    <utilities />
+    <freeProperties />
+    <mortgagedProperties />
+    <cards />
+  </player>
+</game>

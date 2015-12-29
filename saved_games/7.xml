@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+  <bank>
+    <company>
+      <name>General Radio</name>
+      <id>0</id>
+      <parValue>100</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>United Railways</name>
+      <id>1</id>
+      <parValue>110</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>National Utilities</name>
+      <id>2</id>
+      <parValue>120</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>Acme Motors</name>
+      <id>3</id>
+      <parValue>130</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>Allied Steamships</name>
+      <id>4</id>
+      <parValue>140</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>Motion Pictures</name>
+      <id>5</id>
+      <parValue>150</parValue>
+      <share>0</share>
+    </company>
+  </bank>
+  <currentPlayer>0</currentPlayer>
+  <numberOfPlayers>2</numberOfPlayers>
+  <date>29/12/2015 23:03:04</date>
+  <player>
+    <id>0</id>
+    <name>Ezgi</name>
+    <isPlaying>true</isPlaying>
+    <money>2850</money>
+    <countJail>4</countJail>
+    <row>1</row>
+    <position>19</position>
+    <reverse>false</reverse>
+    <shares>0-0-0-0-0-0</shares>
+    <numbers>3-0-0-0-0-0-0</numbers>
+    <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
+    <allPropertiesNames>CONNECTICUT AVENUE, SOUTH TEMPLE, PENNSYLVANIA RAILROAD, PENNSYLVANIA RAILROAD, NEW YORK AVENUE</allPropertiesNames>
+    <properties>
+      <property>
+        <ownerID>0</ownerID>
+        <price>120</price>
+        <originalRent>12</originalRent>
+        <rent>12</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+      <property>
+        <ownerID>0</ownerID>
+        <price>330</price>
+        <originalRent>33</originalRent>
+        <rent>33</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+      <property>
+        <ownerID>0</ownerID>
+        <price>200</price>
+        <originalRent>20</originalRent>
+        <rent>20</rent>
+        <isMortgaged>true</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+    </properties>
+    <transits>
+      <train>
+        <ownerID>0</ownerID>
+        <price>200</price>
+        <rent>20</rent>
+        <originalRent>20</originalRent>
+        <trainDepot>0</trainDepot>
+        <trainDepotPrice>100</trainDepotPrice>
+        <isMortgaged>false</isMortgaged>
+      </train>
+      <train>
+        <ownerID>0</ownerID>
+        <price>200</price>
+        <rent>20</rent>
+        <originalRent>20</originalRent>
+        <trainDepot>0</trainDepot>
+        <trainDepotPrice>100</trainDepotPrice>
+        <isMortgaged>false</isMortgaged>
+      </train>
+    </transits>
+    <cabs />
+    <utilities />
+    <freeProperties>
+      <ID>33</ID>
+      <ID>101</ID>
+      <ID>39</ID>
+      <ID>9</ID>
+    </freeProperties>
+    <mortgagedProperties>
+      <ID>43</ID>
+    </mortgagedProperties>
+    <cards />
+  </player>
+  <player>
+    <id>1</id>
+    <name>Cagatay</name>
+    <isPlaying>true</isPlaying>
+    <money>2730</money>
+    <countJail>4</countJail>
+    <row>2</row>
+    <position>33</position>
+    <reverse>false</reverse>
+    <shares>0-0-0-0-0-0</shares>
+    <numbers>2-0-0-0-0-0-0</numbers>
+    <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
+    <allPropertiesNames>MAGAZINE STREET, MICHIGAN AVENUE, INTERNET SERVICE PROVIDER</allPropertiesNames>
+    <properties>
+      <property>
+        <ownerID>1</ownerID>
+        <price>120</price>
+        <originalRent>12</originalRent>
+        <rent>12</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+      <property>
+        <ownerID>1</ownerID>
+        <price>300</price>
+        <originalRent>30</originalRent>
+        <rent>30</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+    </properties>
+    <transits />
+    <cabs />
+    <utilities>
+      <utility>
+        <ownerID>1</ownerID>
+        <price>150</price>
+        <rent>0</rent>
+        <isMortgaged>false</isMortgaged>
+      </utility>
+    </utilities>
+    <freeProperties>
+      <ID>76</ID>
+      <ID>97</ID>
+      <ID>82</ID>
+    </freeProperties>
+    <mortgagedProperties />
+    <cards />
+  </player>
+</game>

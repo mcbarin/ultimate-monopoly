@@ -1,6 +1,8 @@
 package domain;
 import java.awt.*;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.*;
@@ -401,7 +403,8 @@ public class GUI {
 			placeButton(b[16],"",925, 188, 80, 25,false);
 			
 			
-			
+
+			//////////////////////////////////////////////////////
 			//////////////////////////////////////////////////////
 			//Very Beginning of the Game
 			placeLabel(titles[12],"Start a Brand New Game:",240,24,735,18,new Color(255,255,255),Color.GRAY,new Font("Verdana", Font.PLAIN, 18));
@@ -437,7 +440,7 @@ public class GUI {
 		        savedGamesElt[i] = new JRadioButton("lorem ipsum");
 		        savedGamesElt[i].setFont(new Font("Arial", Font.BOLD, 15));
 		        savedGamesElt[i].setActionCommand(Integer.toString(i));
-		        savedGamesElt[i].setVisible(true);
+		        savedGamesElt[i].setVisible(false);
 		        savedGamesElt[i].setForeground(new Color(199,199,0));
 		        if(i%2==0){
 		        	savedGamesElt[i].setBackground(new Color(62,62,62));
@@ -602,19 +605,56 @@ public class GUI {
 		
 		if(Board.gameStatus==-1){
 			setGUI("","",buttons);
-			titles[11].setVisible(true);
 			titles[12].setVisible(true);
 			initalNumberofPlayers.setVisible(true);
 			buttons[11].setVisible(true);
-			buttons[12].setVisible(true);
+			
+			
+
+			
+			String lines[];
+			BufferedReader rd;
+			int ito = 0;
+			try {
+				rd = new BufferedReader(new FileReader("./saved_games/info.txt"));
+				lines =  readLineArray(rd);
+				if(!lines[3].equals("na")){
+					buttons[12].setVisible(true);
+					titles[11].setVisible(true);}
+				
+			    for(int i = 0; i<(lines.length-3); i++){
+			    	if(lines[i+3]!=null && !lines[i+3].equals("na")){
+			    		savedGamesElt[i].setVisible(true);
+			    		savedGamesElt[i].setText(lines[i+3]);
+			    		ito++;
+			    	}else{
+			    		savedGamesElt[i].setVisible(false);
+			    	}
+			    }
+
+		        savedGamesElt[(Integer.parseInt(lines[2])+12)%13].setSelected(true);
+		        
+
+		        buttons[12].setLocation(1045, 172 + ito*32);
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		    
 			
 		}else{
 
 			titles[12].setVisible(false);
 			titles[11].setVisible(false);
+
+		    for(int i = 0; i<13; i++){
+		        savedGamesElt[i].setVisible(false);}
+			
 			initalNumberofPlayers.setVisible(false);
 			buttons[11].setVisible(false);
+			buttons[12].setVisible(false);
 		    row.setVisible(true);
 		    position.setVisible(true);
 		    money.setVisible(true);
@@ -660,6 +700,8 @@ public class GUI {
 				    	dPropsType[i].setVisible(false);}
 				    buttons[24].setVisible(false);
 				    buttons[25].setVisible(false);
+				    saveName.setVisible(true); buttons[13].setVisible(true);
+
 			
 					MonopolyGame.debugLeft--;
 				}
@@ -668,7 +710,6 @@ public class GUI {
 				    position.setVisible(false);
 				    money.setVisible(false);
 					
-
 					currentPlayer.setIcon(new ImageIcon("img/p"+Integer.toString(cP.id+1)+".png"));
 					titles[2].setText("$"+Integer.toString(cP.money));
 			
@@ -817,6 +858,12 @@ public class GUI {
 			if(i!=11)
 					b[i].setVisible(false);
 		}
+		
+		if(bs.length()>0 && bs.charAt(0)=='1'){saveName.setVisible(true); b[13].setVisible(true);
+			}else{
+				saveName.setVisible(false); b[13].setVisible(false);
+			}
+		
 		removeSpecialConditions();
 	}
 

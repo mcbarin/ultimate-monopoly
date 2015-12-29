@@ -410,7 +410,6 @@ public class Board {
 		initializePlayers(this.totalPlayer);
 		currentPlayer = players.get(0);
 		initializeCards(); // Chance and Community Chest cards are initialized.
-		bank = new Bank(players,squares);
 		
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 56; j++) {
@@ -511,6 +510,10 @@ public class Board {
 
 		((SquareTransit) squares[1][5]).SquareTransitTwin(29,this);
 		((SquareTransit) squares[1][25]).SquareTransitTwin(49,this);
+		
+		
+		
+		bank = new Bank(players,squares);
 		
 		
 		if(!repOk()){
