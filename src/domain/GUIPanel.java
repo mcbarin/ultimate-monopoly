@@ -12,6 +12,7 @@ import javax.swing.*;
 
 
 
+@SuppressWarnings("serial")
 public class GUIPanel extends JPanel {
 	
 	int height = 715;
