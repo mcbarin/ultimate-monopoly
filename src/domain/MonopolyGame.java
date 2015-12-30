@@ -27,7 +27,7 @@ public class MonopolyGame {
 	private JButton buttons[] = new JButton[39];
 	public static boolean specialConditions[] = new boolean[39];
 	private ActionListener guiPublish;
-	//	0-rollOnce	1-rollOnce Die	2-taxiRide	3-specialStatus	4-cabcomp	5-chance8	
+	//	0-rollOnce	1-rollOnce Die	2-taxiRide	3-specialStatus	4-cabcomp	5-chance8	6-stockList
 	private int specialStatus;
 	public static int initialNumberofPlayers;
 	public static int debugPlayerID=0;
@@ -39,6 +39,7 @@ public class MonopolyGame {
 	//buttons = rollDice,	buy,	buyChance,	sell,			4-no,			5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
 	//			10-yes,		start,	load,		save, 			dieOne,			15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
 	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-addPropDebug			25-debugnext
+	//			30-yesStock	31-noStock
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -135,7 +136,7 @@ public class MonopolyGame {
 		      {
 		    	  String result[] = board.getSquareFromBoard(Integer.parseInt(gui.freePropertiesButtonGroup.getSelection().getActionCommand())).sellSquare(cP);
 	
-		    	  play2(Integer.parseInt(result[0]),result);
+		    	  play(Integer.parseInt(result[0]),result);
 		    	  System.out.println("Selected Radio Button: " + gui.freePropertiesButtonGroup.getSelection().getActionCommand());
 		    	 
 		    	  
@@ -149,7 +150,7 @@ public class MonopolyGame {
 		      {
 		    	  String result[] = board.getSquareFromBoard(Integer.parseInt(gui.freePropertiesButtonGroup.getSelection().getActionCommand())).mortgage(cP);
 	
-		    	  play2(Integer.parseInt(result[0]),result);
+		    	  play(Integer.parseInt(result[0]),result);
 		    	  System.out.println("Selected Radio Button: " + gui.freePropertiesButtonGroup.getSelection().getActionCommand());
 		    	 
 		    	  
@@ -163,7 +164,7 @@ public class MonopolyGame {
 		      {
 		    	  String result[] = board.getSquareFromBoard(Integer.parseInt(gui.mortgagedPropertiesButtonGroup.getSelection().getActionCommand())).unmortgage(cP);
 	
-		    	  play2(Integer.parseInt(result[0]),result);
+		    	  play(Integer.parseInt(result[0]),result);
 		    	  System.out.println("Selected Radio Button: " + gui.freePropertiesButtonGroup.getSelection().getActionCommand());
 		    	 
 		    	  
@@ -264,11 +265,30 @@ public class MonopolyGame {
 		    	  gui.refresh();
 		    	  debugLeft = -1;
 		    	  gui.refresh();
-		    	  System.out.println("Selected Radio Button: " + Integer.parseInt(gui.savedGamesGroup.getSelection().getActionCommand()));
+		    	  //System.out.println("Selected Radio Button: " + Integer.parseInt(gui.savedGamesGroup.getSelection().getActionCommand()));
+		    	  String[] a = {"asd","asdasd"};
+		    	  play(50,a);
+		    	  
 		    	  gui.refresh();
+		    	  
+		    	  
 		    	  
 		      }
 		});
+		
+		
+		
+		//stock buy button
+		buttons[30].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  System.out.println("Selected Radio Button: " + gui.eCompsGroup.getSelection().getActionCommand());		    	  
+		    	  String[] result = board.bank.buyStock(gui.eCompsGroup.getSelection().getActionCommand(), cP);
+		    	  play(Integer.parseInt(result[0]),result);
+		      }
+		  });
+		  		
 
 		
 		
@@ -319,7 +339,7 @@ public class MonopolyGame {
 		    		  gui.setGUI(result,"",buttons);
 		    		  specialConditions[5] = true;
 		    	  }else{
-		    		  play2(1,result);
+		    		  play(1,result);
 		    	  }
 		    	 
 		      }
@@ -339,7 +359,7 @@ public class MonopolyGame {
 		    		  gui.setGUI(result,"",buttons);
 		    		  specialConditions[5] = true;
 		    	  }else{
-		    		  play2(1,result);
+		    		  play(1,result);
 		    	  }
 		    	 
 		      }
@@ -355,7 +375,7 @@ public class MonopolyGame {
 		    	  System.out.println(result[0]);
 		    	  if(result[0].equals("5")){
 		    		  result = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
-		    		  play2(Integer.parseInt(result[0]),result);
+		    		  play(Integer.parseInt(result[0]),result);
 		    	  }
 		    	 
 		      }
@@ -369,7 +389,7 @@ public class MonopolyGame {
 		    	  //String result[] = board.peekChance().applyCard21(board.getSquareFromBoard(Integer.parseInt(gui.cabGroup.getSelection().getActionCommand())), cP);
 		    
 		    		 // result = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
-		    		  //play2(Integer.parseInt(result[0]),result);
+		    		  //play(Integer.parseInt(result[0]),result);
 		    	 
 		      }
 		});
@@ -420,7 +440,7 @@ public class MonopolyGame {
 		    	 String result[] = board.peekChanceCard().applyCard14(Integer.parseInt(a.substring(0, a.indexOf("-"))), Integer.parseInt(a.substring(a.indexOf("-")+1, a.length())));
 		    
 		    		 // result = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
-		    		  play2(Integer.parseInt(result[0]),result);
+		    		  play(Integer.parseInt(result[0]),result);
 		    	  System.out.println(a.substring(a.indexOf("-")+1, a.length()));
 		    	 
 		      }
@@ -464,10 +484,9 @@ public class MonopolyGame {
 			
 	}
 	
-	private void play2(int resultStatus, String result[]){
+	private void play(int resultStatus, String result[]){
 		
-		
-		
+	
 
 		switch(resultStatus){
 			case 0:
@@ -512,12 +531,17 @@ public class MonopolyGame {
 			case 31:
 				gui.setGUI(result, "00000001", buttons);
 				break;
+			case 50:
+				gui.setGUI(result, "00000000000000000000000000000011", buttons);
+				specialConditions[6] = true;
+				
+				break;
 				
 			default:
 				gui.setGUI(result[1]+" Next player!", "1", buttons);
 				board.nextPlayer();
 				break;
-		}
+			}
 		}
 	
 	private void play(){
@@ -555,7 +579,7 @@ public class MonopolyGame {
 				specialStatus = Integer.parseInt(result[0]);
 				System.out.println(specialStatus);
 				gui.setGUI(result[1], "01011", buttons);
-	    		play2(specialStatus,result);
+	    		play(specialStatus,result);
 			case 9:
 				gui.setGUI(result, "00000000000000000011", buttons);
 				specialConditions[2] = true;
