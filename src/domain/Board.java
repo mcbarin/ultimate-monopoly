@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
 import exceptions.InvalidBoardException;
 
 public class Board {
-
+	static boolean specialCards=false; // for the cards only in grading criteria,set true
 	public Bank bank;
 	public int pool = 0;
 	public int totalPlayer;
@@ -164,16 +164,32 @@ public class Board {
 	 * @modifies This method modifies the chanceDeck and communityDeck
 	 * @effects chanceDeck and communityDeck are full of cards in random order.
 	 */
-	public void initializeCards(){
-		for(int i=0;i<42;i++){
-			if(i<26){//ChanceCards
+	public void initializeCards(boolean specialCards){
+		if(specialCards){
+			CardChance c1 = new CardChance(0,cardDescriptions[0][0],cardDescriptions[0][1],this);
+			chanceDeck.add(c1);
+			CardChance c2 = new CardChance(14,cardDescriptions[14][0],cardDescriptions[14][1],this);
+			chanceDeck.add(c2);
+			CardChance c3 = new CardChance(35,cardDescriptions[35][0],cardDescriptions[35][1],this);
+			chanceDeck.add(c3);
+
+			CardCommunity c4 = new CardCommunity(42,cardDescriptions[42][0],cardDescriptions[42][1],this);
+			communityDeck.add(c4);
+			CardCommunity c5 = new CardCommunity(43,cardDescriptions[43][0],cardDescriptions[43][1],this);
+			communityDeck.add(c5);				
+			CardCommunity c6 = new CardCommunity(47,cardDescriptions[47][0],cardDescriptions[47][1],this);
+			communityDeck.add(c6);
+		}else{
+		for(int i=0;i<50;i++){
+			if(i<36){//ChanceCards
 				CardChance c = new CardChance(i,cardDescriptions[i][0],cardDescriptions[i][1],this);
 				chanceDeck.add(c);	
 			}else{//CommunityChestCards
 				CardCommunity c = new CardCommunity(i,cardDescriptions[i][0],cardDescriptions[i][1],this);
 				communityDeck.add(c);
 			}
-		}
+		}}
+		
 		Collections.shuffle((List<?>) chanceDeck);
 		Collections.shuffle((List<?>) communityDeck);
 
@@ -427,7 +443,7 @@ public class Board {
 			
 		initializePlayers(this.totalPlayer);
 		currentPlayer = players.get(0);
-		initializeCards(); // Chance and Community Chest cards are initialized.
+		initializeCards(specialCards); // Chance and Community Chest cards are initialized.
 		
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 56; j++) {

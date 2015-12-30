@@ -243,7 +243,7 @@ public class Player {
 		sp.setOwner(this);
 		colorProperties[sp.color]++;
 		numberOfProperties++;
-		valueOfProperties+=sp.price;
+		valueOfProperties+=sp.price/2;
 		//check for majority ownership or monopoly.
 
 		updateRentPrices(sp.color);
@@ -278,7 +278,6 @@ public class Player {
 			sp.setOwner(null);
 			colorProperties[sp.color]--;
 			numberOfProperties--;
-			valueOfProperties-=sp.price;
 			for(int i=0;i<properties.size();i++){
 				if(properties.get(i).id == sp.id){
 					properties.remove(i);
