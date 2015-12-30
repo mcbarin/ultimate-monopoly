@@ -99,6 +99,14 @@ public class GUI {
 	public JTextField dieTwoF = new JTextField();
 	public JTextField dieSpeedF = new JTextField();
 	public JTextField saveName = new JTextField();
+	
+	
+
+	public JTextField[] stockBids = new JTextField[12];
+	public JRadioButton[] eComps = new JRadioButton[6];
+	public ButtonGroup eCompsGroup = new ButtonGroup();
+	public JPanel eCompsPanel = new JPanel(new GridLayout(0,1));
+    public JScrollPane eCompsScrollPane = new JScrollPane(eCompsPanel);
     
     
 
@@ -142,6 +150,7 @@ public class GUI {
 			 playerMoneys[i] = new JLabel();
 			 playerPics[i] = new JLabel();
 			 playerPropertiesNames[i] = new JLabel();
+			 stockBids[i] = new JTextField();
 		}
 			
 			
@@ -209,7 +218,7 @@ public class GUI {
 			
 			
 			
-			
+
 			
 			
 			//Taxi Ride List
@@ -236,6 +245,34 @@ public class GUI {
 			panel.add(scrollPaneTaxiRide);
 			placeButton(b[18],"Take a Cab",735,280, 130, 25,false);
 			placeButton(b[19],"No",875, 280, 130, 25,false);
+			
+			
+			//Stock Companies List
+			///////////////////////////////
+
+			for(int i=0; i<6;i++){
+				Company compa = board.bank.companies.get(i);
+				eComps[i] = new JRadioButton(compa.name);
+				eComps[i].setActionCommand(compa.name);
+				eComps[i].setForeground(Color.WHITE);
+				eComps[i].setVisible(false);
+						
+				if(i%2==0){eComps[i].setBackground(Color.DARK_GRAY);
+				}else{eComps[i].setBackground(Color.GRAY);}
+				
+				eCompsGroup.add(eComps[i]);
+				eCompsPanel.add(eComps[i]);
+			}
+			eCompsScrollPane.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
+			eCompsPanel.setBackground(Color.DARK_GRAY);
+			eComps[0].setSelected(true);
+			eCompsScrollPane.setAutoscrolls(true);
+			eCompsScrollPane.setVisible(false);
+			eCompsScrollPane.setLocation(725, 170);
+			eCompsScrollPane.setSize(290, 100);
+			panel.add(eCompsScrollPane);
+			placeButton(b[30],"Buy",735,280, 130, 25,false);
+			placeButton(b[31],"No",875, 280, 130, 25,false);
 			//////////////////////////////////////////
 			
 			//UNMortgage Pane
@@ -578,8 +615,10 @@ public class GUI {
 			titles[12].setVisible(true);
 			initalNumberofPlayers.setVisible(true);
 			buttons[11].setVisible(true);
-			
-			
+
+			eCompsScrollPane.setVisible(false);
+			buttons[30].setVisible(false);
+			buttons[31].setVisible(false);
 
 			
 			String lines[];
@@ -679,6 +718,30 @@ public class GUI {
 				    row.setVisible(false);
 				    position.setVisible(false);
 				    money.setVisible(false);
+				    
+				    if(MonopolyGame.specialConditions[6]){
+						eCompsScrollPane.setVisible(true);
+						buttons[30].setVisible(true);
+						buttons[31].setVisible(true);
+						for(int i=0;i<6;i++){
+							eComps[5-i].setVisible(true);
+							Company compa = board.bank.companies.get(i);
+							if(compa.share<6){
+								eComps[5-i].isSelected();}
+							else {
+								eComps[i].setEnabled(false);
+								//eComps[i].s
+							}
+						}
+				    }else{
+						eCompsScrollPane.setVisible(false);
+						buttons[30].setVisible(false);
+						buttons[31].setVisible(false);
+						for(int i=0;i<6;i++)
+							eComps[i].setVisible(false);
+				    }
+						
+					
 					
 					currentPlayer.setIcon(new ImageIcon("img/p"+Integer.toString(cP.id+1)+".png"));
 					titles[2].setText("$"+Integer.toString(cP.money));

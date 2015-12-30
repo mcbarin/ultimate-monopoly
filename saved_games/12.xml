@@ -11,13 +11,13 @@
       <name>United Railways</name>
       <id>1</id>
       <parValue>110</parValue>
-      <share>0</share>
+      <share>6</share>
     </company>
     <company>
       <name>National Utilities</name>
       <id>2</id>
       <parValue>120</parValue>
-      <share>0</share>
+      <share>6</share>
     </company>
     <company>
       <name>Acme Motors</name>
