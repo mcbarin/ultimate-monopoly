@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
 import exceptions.InvalidBoardException;
 
 public class Board {
-	static boolean specialCards=false; // for the cards only in grading criteria,set true
+	static boolean specialCards=true; // for the cards only in grading criteria,set true
 	public Bank bank;
 	public int pool = 0;
 	public int totalPlayer;
