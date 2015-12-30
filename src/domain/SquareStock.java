@@ -11,7 +11,7 @@ public class SquareStock extends Square {
 	public String[] landOn(Player player, Board board, int total) {
 		String[] result = new String[14];
 		initializeResult(result);
-		result[0]="30";
+		result[0]="50";
 		result[1]="Dividends paid. Please pick a company.";
 
 		payDividends(board,result);
