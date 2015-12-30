@@ -167,7 +167,14 @@ public class GameLS {
     	    		  p.utilities.add(ut);
     	    		  
     	    	  }
-	    		  System.out.println(board.players.get(0).utilities.get(0).name);
+    	    	  
+    	    	  Element cards = element.getChild("cards");
+    	    	  List<Element> cardlist = cards.getChildren("ID");
+    	    	  for(Element crdid : cardlist){
+    	    		  p.addCardDebug(Integer.parseInt(crdid.getText()));
+    	    		  
+    	    	  }
+	    		  //System.out.println(board.players.get(0).utilities.get(0).name);
 	    		  
 	    		  
 
@@ -175,7 +182,7 @@ public class GameLS {
 	    		  
 	    		  
 
-	    		  System.out.println(board.players.get(0).freeProperties.get(8).id);
+	    		  //System.out.println(board.players.get(0).freeProperties.get(8).id);
     	       
 	    		  //System.out.println("Test: "+element.getChildText("name"));
     	      }

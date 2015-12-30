@@ -242,7 +242,10 @@
       <ID>95</ID>
       <ID>52</ID>
     </mortgagedProperties>
-    <cards />
+    <cards>
+      <ID>4</ID>
+      <ID>5</ID>
+    </cards>
   </player>
   <player>
     <id>1</id>
