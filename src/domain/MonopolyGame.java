@@ -103,7 +103,6 @@ public class MonopolyGame {
 		    		  buttons[15].setText(Integer.toString(dieTwo));
 		    		  buttons[16].setText(Integer.toString((dieOne+dieTwo)));
 		    	  }else if(dieSpeed>4){	
-		    		  cP.monopolyGuyFlag = true;
 		    	  }else{
 		    		  cP.setPosition(dieOne+dieTwo+dieSpeed);
 			    	  play();
@@ -225,21 +224,15 @@ public class MonopolyGame {
 		    	  board = new Board(initialNumberofPlayers);
 		    	  players = board.getPlayers();
 
-			  	
-		  		
-		    	  try {
 		    		gui.initGUI(board);
 					gui.setPlayers(board.getPlayers());
 					
 					
 					board.addressGUI(gui);
-					
-					
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-		    	  
+
+			  	
+		  		
+		    
 		    	  gui.setGUI("Let's play!", "",buttons);
 		    	  System.out.println("cont "+initialNumberofPlayers);
 		      }
