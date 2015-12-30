@@ -195,10 +195,8 @@ public class SquareTransit extends Square {
 
 		if(owner.id != p.id){
 			result[1]="This train station doesn't belong to you!";
-			return result;
 		}else if (isMortgaged){
 			result[1]="This train station is mortgaged already";
-			return result;
 		}else if(trainDepot==1){
 			trainDepot=0;
 			twin.trainDepot=0;
@@ -220,13 +218,10 @@ public class SquareTransit extends Square {
 		result[0]="0";
 		if(owner.id != p.id){
 			result[1]="This train station doesn't belong to you!";
-			return result;
 		}else if (isMortgaged){
 			result[1]="This train station is mortgaged already";
-			return result;
 		}else if(trainDepot==1){
-			result[1]="You should sell Cab Stand first.";
-			return result;
+			result[1]="You should sell Train Depot first.";
 		}else if(trainDepot==0){
 		
 			p.addMoney(price/2);
