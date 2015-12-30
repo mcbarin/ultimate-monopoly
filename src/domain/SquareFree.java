@@ -12,7 +12,7 @@ public class SquareFree extends Square {
 		String[] result = new String[14];
 		initializeResult(result);
 		result[0]="1";
-		result[1]="";
+		result[1]="Free Square.";
 	
 		return result;
 		// TODO Auto-generated method stub

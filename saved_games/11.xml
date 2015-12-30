@@ -40,20 +40,28 @@
   </bank>
   <currentPlayer>0</currentPlayer>
   <numberOfPlayers>2</numberOfPlayers>
+<<<<<<< HEAD
+  <date>30/12/2015 23:13:30</date>
+=======
   <date>30/12/2015 22:55:13</date>
+>>>>>>> 650cd04947118126e2e1d82b39d5c3f64c03fd5f
   <player>
     <id>0</id>
     <name>Ezgi</name>
     <isPlaying>true</isPlaying>
+<<<<<<< HEAD
+    <money>3200</money>
+=======
     <money>3100</money>
+>>>>>>> 650cd04947118126e2e1d82b39d5c3f64c03fd5f
     <countJail>4</countJail>
     <row>1</row>
-    <position>5</position>
+    <position>0</position>
     <reverse>false</reverse>
     <shares>0-0-0-0-0-0</shares>
     <numbers>0-0-0-0-0-0-0</numbers>
     <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
-    <allPropertiesNames>READING RAILROAD, READING RAILROAD</allPropertiesNames>
+    <allPropertiesNames />
     <properties />
     <transits />
     <cabs />

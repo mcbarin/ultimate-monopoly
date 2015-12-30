@@ -26,7 +26,7 @@ public class SquareChance extends Square {
 		}else if(row==2){
 			downRow=-1;downPos=-1;upRow=1;
 			if(position==10){
-				upPos=7;
+				upPos=8;
 			}else if(position==21){
 				upPos=15;
 			}else if(position==30){
