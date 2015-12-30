@@ -234,15 +234,15 @@ public abstract class Square {
 		initializeResult(result);
 		result[0]="1";
 
-		if (!n.equals("FREE PARKING") && ((SquareCabCompany)this).owner!=null && ((SquareCabCompany)this).owner.id==p.id){
+		if (((SquareCabCompany)this).owner!=null && ((SquareCabCompany)this).owner.id==p.id){
 			p.substract(20);
 			p.board.pool +=20;
-			result[1] = p.name + " move to " + ""+name+".";
+			result[1] = p.name + " paid $20 to pool.";
 			result[p.id+2] = "-20";
 		}else{
 			p.substract(50);
 			((SquareCabCompany)this).owner.addMoney(50);
-			result[1] = p.name + " move to " + ""+name+".";
+			result[1] = p.name + " paid $50 to owner.";
 			result[p.id+2] = "-50";
 			result[((SquareCabCompany)this).owner.id+2]= "50";
 		}
