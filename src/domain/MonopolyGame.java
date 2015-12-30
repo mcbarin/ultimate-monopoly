@@ -60,7 +60,7 @@ public class MonopolyGame {
 
 		
 		guiPublish = new ActionListener()
-										{
+										{		@Override
 										      public void actionPerformed(ActionEvent e)
 										      {
 										    	 board.refreshGUI();
@@ -82,6 +82,7 @@ public class MonopolyGame {
 		//RollDice
 		buttons[0].addActionListener(new ActionListener()
 		{
+			@Override
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  gui.removeSpecialConditions();
@@ -104,9 +105,7 @@ public class MonopolyGame {
 		    		  buttons[16].setText(Integer.toString((dieOne+dieTwo)));
 		    	  }else if(dieSpeed>4){	
 		    	  }else{
-		    		  //cP.setPosition(dieOne+dieTwo+dieSpeed);
-		    		  cP.row = 1;
-		    		  cP.position = 13;
+		    		  cP.setPosition(dieOne+dieTwo+dieSpeed);
 			    	  play();
 		    	  }
 		    	  
