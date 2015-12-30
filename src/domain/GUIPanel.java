@@ -38,19 +38,28 @@ public class GUIPanel extends JPanel {
 	private ArrayList<Player> players = null;
 	private Board board;
 	
-	private ArrayList<BufferedImage> playerIcons = new ArrayList();
+	private ArrayList<BufferedImage> playerIcons = new ArrayList<BufferedImage>();
 	
 	private int GUIPositions[][][]=new int[3][56][2];
 	
 	
 	public GUIPanel(Board b, int dice[]) throws Exception{
-		
+		super();
+		dieOne = dice[0];
+		dieTwo = dice[1];
+		dieSpeed = dice[2];
 		//Position 
 		initSquarePositions();
 		
 
 		try {
 			this.backGround = ImageIO.read(new File("img/board.png"));
+			
+			for(int i=0;i<12;i++){
+				this.p = ImageIO.read(new File("img/p"+Integer.toString(i+1)+".png"));
+				playerIcons.add(this.p);
+			}
+
 
 		
 		} catch (IOException ex) {}
@@ -273,16 +282,6 @@ public void initGUIPanel(Board b){
 	board = b;
 	players = board.getPlayers();
 	
-	try {
-		this.backGround = ImageIO.read(new File("img/board.png"));
-		
-		for(int i=0;i<12;i++){
-			this.p = ImageIO.read(new File("img/p"+Integer.toString(i+1)+".png"));
-			playerIcons.add(this.p);
-		}
 
-
-	
-	} catch (IOException ex) {}
 }
 }

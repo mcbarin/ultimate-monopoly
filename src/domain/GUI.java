@@ -14,7 +14,7 @@ public class GUI {
 
 	public boolean start=true;
 	
-	private int dieOne, dieTwo, dieSpeed;
+	private int dieOne=1, dieTwo=1, dieSpeed=1;
 	public static int rollOnceCard, rollOnceDie;
 	
 	//buttons = 
@@ -35,7 +35,7 @@ public class GUI {
 	private JFrame mainFrame = new JFrame("BECB Monopoly");
 	Container contentPane = mainFrame.getContentPane();
 
-	private GUIPanel panel;
+	private GUIPanel panel = new GUIPanel(board,dice);
 
 	private JTextField initalNumberofPlayers;
 	private JTextArea currentMessage = new JTextArea();
@@ -120,39 +120,7 @@ public class GUI {
 	
 	Font font = new Font("Verdana", Font.PLAIN, 12);
 	
-	public GUI(JButton b[], JTextField nump) throws Exception{
-		buttons = b;
-		initalNumberofPlayers = new JTextField();
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.DARK_GRAY);
-		
-		
-		panel.setLayout(null);
-		contentPane.add(panel);
-		
-		initalNumberofPlayers.setSize(300, 40);
-		initalNumberofPlayers.setLocation(450, 60);
-		initalNumberofPlayers.setBackground(Color.GRAY);
-		initalNumberofPlayers.setHorizontalAlignment(JTextField.CENTER);
-		initalNumberofPlayers.setFont(new Font("Verdana", Font.BOLD, 18));
-		initalNumberofPlayers.setText("Enter number of Players...");
-		
 
-		
-		b[11].setText("Start Game");
-		b[11].setLocation(450, 120);
-		b[11].setSize(300, 40);
-		b[11].setVisible(true);
-		panel.add(b[11]);
-        panel.add(initalNumberofPlayers);
-        
-
-        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setVisible(true);  
-	}
-	
 	
 	public GUI(Board board,JButton b[]) throws Exception{
 		buttons = b;
@@ -160,7 +128,7 @@ public class GUI {
 			buttons[i].setVisible(false);
 		}
 		
-		panel = new GUIPanel(board,dice);
+		
 		panel.setBackground(Color.DARK_GRAY);
 		panel.setLayout(null);
 		contentPane.add(panel);
@@ -976,8 +944,8 @@ public class GUI {
 	    	if(sq.type=="Property" || sq.type=="Transit" || sq.type=="Utility" || sq.type=="CabCompany"){
 	    		
 
+		    	dProps[abc] = new JRadioButton(sq.name);
 	    		if(sq.owner==null){
-			    	dProps[abc] = new JRadioButton(sq.name);
 			    	dProps[abc].setActionCommand(Integer.toString(i));
 			    	dProps[abc].setVisible(true);
 			    	dProps[abc].setForeground(Color.WHITE);
@@ -987,11 +955,16 @@ public class GUI {
 	  	  				if(colorCodes[sq.color].getBlue()>128 && colorCodes[sq.color].getGreen()>128 && colorCodes[sq.color].getRed()>128)
 	  	  					dProps[abc].setForeground(Color.BLACK);
 	  	  				}
-			    	dPropsGroup.add(dProps[abc]);
-			    	dPropsPanel.add(dProps[abc]);
-			    	abc++;
+
+
+	    		}else{
+
+			    	dProps[abc].setVisible(false);
 	    		}
-			    	
+
+		    	dPropsGroup.add(dProps[abc]);
+		    	dPropsPanel.add(dProps[abc]);
+		    	abc++;
 	    	}
 	     }
 	    for(int i=0;i<4;i++){

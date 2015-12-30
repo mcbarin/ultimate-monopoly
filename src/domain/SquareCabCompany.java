@@ -2,7 +2,6 @@ package domain;
 
 public class SquareCabCompany extends Square {
 
-	public Player owner=null;
 	int price=300;
 	int rent=30;
 	int originalRent=30;

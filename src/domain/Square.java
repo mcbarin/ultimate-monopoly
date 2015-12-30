@@ -38,7 +38,7 @@ public abstract class Square {
 	public int position;
 	public int row;
 	public int color;
-	Player owner=null;
+	public Player owner = null;
 
 
 	public Square(String type,String name,int id, int position, int row) {
