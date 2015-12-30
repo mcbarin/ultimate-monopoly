@@ -183,7 +183,6 @@ public class SquareTransit extends Square {
 		this.trainDepot = 0;
 		this.trainDepotPrice =100;
 		this.isMortgaged=false;
-		this.twin.initializeAll();
 	}
 	
 	  
