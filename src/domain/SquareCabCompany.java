@@ -120,6 +120,7 @@ public class SquareCabCompany extends Square {
 		rent=rent*2;
 		player.substract(cabStandPrice);
 		player.valueOfProperties+=cabStandPrice/2;
+		player.numberOfCabStand++;
 		result[0]="1"; // Success
 		result[1] = player.name + " built Cab Stand to " + ""+name+".";
 		result[player.id+2] = "-"+ ""+cabStandPrice;
