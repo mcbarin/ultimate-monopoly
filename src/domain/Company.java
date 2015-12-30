@@ -19,8 +19,8 @@ public class Company {
 	2 Shares	$ 40	$ 44	$ 48	$ 52	$ 56	$ 60
 	3 Shares	$ 90	$ 99	$ 108	$ 117	$ 126	$ 135
 	4 Shares	$ 160	$ 176	$ 192	$ 208	$ 224	$ 240
-	5 Shares	$ 250	$ 275	$ 300	$ 325	$ 350	$ 375  */
-	
+	5 Shares	$ 250	$ 275	$ 300	$ 325	$ 350	$ 375  
+	6 Shares 													*/
 	public int getDividend(int share){
 			return (10+id) * share^2;
 			

@@ -13,7 +13,7 @@ public class SquareAuction extends Square {
 		initializeResult(result);
 
 		if(board.bank.thereIsUnownedProperty()){
-			result[0]="32";
+			result[0]="52";
 			result[1]="Please pick an unowned property to auction off";
 		}else{
 			result[0]="5";

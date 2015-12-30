@@ -153,7 +153,7 @@ public class Bank {
 	public ArrayList<String> checkShareOfStocks(){
 		ArrayList<String> options = new ArrayList<String>();
 		for (int i = 0; i < 6; i++) {
-			if(companies.get(i).share < 5 )//all shares haven't sold yet. 
+			if(companies.get(i).share < 6 )//all shares haven't sold yet. 
 				options.add(companies.get(i).name);
 		}
 
@@ -186,7 +186,7 @@ public class Bank {
 			result[1] = p.name + " has bought one share of " + ""+c.name+".";
 			result[p.id+2] = "-"+ ""+c.parValue;
 		}else{
-			result[0]="31"; // Auction
+			result[0]="51"; // Auction
 			result[1] = p.name + " has not enough money. One share of selected company will be auction off.";
 		}
 
