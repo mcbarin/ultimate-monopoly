@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/domain/Card.java=UTF-8
 encoding//src/domain/GUI.java=UTF-8
 encoding//src/domain/MonopolyGame.java=UTF-8
 encoding//src/domain/Player.java=UTF-8
