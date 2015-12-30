@@ -51,6 +51,12 @@ public class MonopolyGame {
 	
 	public MonopolyGame() throws Exception{
 		
+		for(int i=0; i<39; i++){
+			buttons[i] = new JButton();
+			
+					
+			specialConditions[i] = false;}
+		
 
 		
 		guiPublish = new ActionListener()
@@ -62,12 +68,10 @@ public class MonopolyGame {
 		
 		
 		for(int i=0; i<39; i++){
-			buttons[i] = new JButton();
 			
-					
-			specialConditions[i] = false;}
-		
-		
+			if(i!=12)
+				buttons[i].addActionListener(guiPublish);
+					}
 		if(Board.gameStatus==-1){
 			JTextField nump = new JTextField();
 			gui = new GUI(new Board(2),buttons); 
@@ -450,13 +454,9 @@ public class MonopolyGame {
 		buttons[4].addActionListener(nolistener);
 		buttons[19].addActionListener(nolistener);
 		
+
 		
-		
-		for(int i=0; i<39; i++){
-			
-			if(i!=12)
-				buttons[i].addActionListener(guiPublish);
-					}
+
 		
 		while(true){
 			if(board!=null && board.currentPlayer!=null){
