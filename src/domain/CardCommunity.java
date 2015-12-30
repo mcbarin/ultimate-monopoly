@@ -193,6 +193,12 @@ public class CardCommunity extends Card {
 			
 		}  else if(number == 47){
 			//Inherit Stock
+			result[0]="401";
+			result[1]="Player should choose a stock to add his/her portfolio.";
+			
+			// from board, use the getUnpurchasedStocks() method.
+			// ask player and then call the applyCard47 method
+			// with the id of company and player.
 			
 		} else if(number == 48){
 	
@@ -259,6 +265,15 @@ public class CardCommunity extends Card {
 		result[0]="1";
 		result[1]="Properties of the chosen color group are downgraded.";
 		board.pullPushCommunity();
+		return result;
+	}
+	
+	public String[] applyCard47(Player p, int companyId){
+		String[] result= getResultArray();
+		p.shares[companyId]++;
+		board.bank.companies.get(companyId).share++;
+		result[0]="1";
+		result[1]="Player added the share to his/her portfolio.";
 		return result;
 	}
 

@@ -71,6 +71,16 @@ public class Board {
 		
 	}
 	
+	public ArrayList<Integer> getUnpurchasedStocks(){
+		ArrayList<Integer> unpurchasedStocks = null;
+		for(int i=0;i<6;i++){
+			if(bank.companies.get(i).share<6){
+				unpurchasedStocks.add(bank.companies.get(i).id);
+			}
+		}
+		return unpurchasedStocks;
+	}
+	
 	@Override
 	public String toString() {
 		return "Board [bank=" + bank + ", pool=" + pool + ", totalPlayer=" + totalPlayer + ", players=" + players
