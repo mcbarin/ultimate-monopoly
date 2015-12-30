@@ -25,7 +25,7 @@ public class GameLS {
      Board board;
    
    
-    public static void main(String[] args) {GameLS a = new GameLS(); Board b = a.loadGame(11); System.out.println(b.totalPlayer);}
+   // public static void main(String[] args) {GameLS a = new GameLS(); Board b = a.loadGame(11); System.out.println(b.totalPlayer);}
     public GameLS(){}
     public void setBoard(Board b){this.board = b;}
     

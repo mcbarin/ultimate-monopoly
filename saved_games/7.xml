@@ -38,60 +38,27 @@
       <share>0</share>
     </company>
   </bank>
-  <currentPlayer>0</currentPlayer>
+  <currentPlayer>1</currentPlayer>
   <numberOfPlayers>2</numberOfPlayers>
-  <date>29/12/2015 23:03:04</date>
+  <date>30/12/2015 12:57:33</date>
   <player>
     <id>0</id>
     <name>Ezgi</name>
     <isPlaying>true</isPlaying>
-    <money>2850</money>
+    <money>3000</money>
     <countJail>4</countJail>
     <row>1</row>
-    <position>19</position>
+    <position>5</position>
     <reverse>false</reverse>
     <shares>0-0-0-0-0-0</shares>
-    <numbers>3-0-0-0-0-0-0</numbers>
+    <numbers>0-0-0-0-0-0-0</numbers>
     <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
-    <allPropertiesNames>CONNECTICUT AVENUE, SOUTH TEMPLE, PENNSYLVANIA RAILROAD, PENNSYLVANIA RAILROAD, NEW YORK AVENUE</allPropertiesNames>
-    <properties>
-      <property>
-        <ownerID>0</ownerID>
-        <price>120</price>
-        <originalRent>12</originalRent>
-        <rent>12</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>0</house>
-        <hotel>0</hotel>
-        <skyscraper>0</skyscraper>
-        <level>0</level>
-      </property>
-      <property>
-        <ownerID>0</ownerID>
-        <price>330</price>
-        <originalRent>33</originalRent>
-        <rent>33</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>0</house>
-        <hotel>0</hotel>
-        <skyscraper>0</skyscraper>
-        <level>0</level>
-      </property>
-      <property>
-        <ownerID>0</ownerID>
-        <price>200</price>
-        <originalRent>20</originalRent>
-        <rent>20</rent>
-        <isMortgaged>true</isMortgaged>
-        <house>0</house>
-        <hotel>0</hotel>
-        <skyscraper>0</skyscraper>
-        <level>0</level>
-      </property>
-    </properties>
+    <allPropertiesNames>READING RAILROAD, READING RAILROAD</allPropertiesNames>
+    <properties />
     <transits>
       <train>
         <ownerID>0</ownerID>
+        <ID>29</ID>
         <price>200</price>
         <rent>20</rent>
         <originalRent>20</originalRent>
@@ -101,6 +68,7 @@
       </train>
       <train>
         <ownerID>0</ownerID>
+        <ID>71</ID>
         <price>200</price>
         <rent>20</rent>
         <originalRent>20</originalRent>
@@ -112,68 +80,30 @@
     <cabs />
     <utilities />
     <freeProperties>
-      <ID>33</ID>
-      <ID>101</ID>
-      <ID>39</ID>
-      <ID>9</ID>
+      <ID>29</ID>
+      <ID>71</ID>
     </freeProperties>
-    <mortgagedProperties>
-      <ID>43</ID>
-    </mortgagedProperties>
+    <mortgagedProperties />
     <cards />
   </player>
   <player>
     <id>1</id>
     <name>Cagatay</name>
     <isPlaying>true</isPlaying>
-    <money>2730</money>
+    <money>3200</money>
     <countJail>4</countJail>
-    <row>2</row>
-    <position>33</position>
+    <row>1</row>
+    <position>0</position>
     <reverse>false</reverse>
     <shares>0-0-0-0-0-0</shares>
-    <numbers>2-0-0-0-0-0-0</numbers>
+    <numbers>0-0-0-0-0-0-0</numbers>
     <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
-    <allPropertiesNames>MAGAZINE STREET, MICHIGAN AVENUE, INTERNET SERVICE PROVIDER</allPropertiesNames>
-    <properties>
-      <property>
-        <ownerID>1</ownerID>
-        <price>120</price>
-        <originalRent>12</originalRent>
-        <rent>12</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>0</house>
-        <hotel>0</hotel>
-        <skyscraper>0</skyscraper>
-        <level>0</level>
-      </property>
-      <property>
-        <ownerID>1</ownerID>
-        <price>300</price>
-        <originalRent>30</originalRent>
-        <rent>30</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>0</house>
-        <hotel>0</hotel>
-        <skyscraper>0</skyscraper>
-        <level>0</level>
-      </property>
-    </properties>
+    <allPropertiesNames />
+    <properties />
     <transits />
     <cabs />
-    <utilities>
-      <utility>
-        <ownerID>1</ownerID>
-        <price>150</price>
-        <rent>0</rent>
-        <isMortgaged>false</isMortgaged>
-      </utility>
-    </utilities>
-    <freeProperties>
-      <ID>76</ID>
-      <ID>97</ID>
-      <ID>82</ID>
-    </freeProperties>
+    <utilities />
+    <freeProperties />
     <mortgagedProperties />
     <cards />
   </player>

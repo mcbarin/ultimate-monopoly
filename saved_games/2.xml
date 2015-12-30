@@ -1,28 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game>
   <bank>
-    <money>10000000</money>
+    <company>
+      <name>General Radio</name>
+      <id>0</id>
+      <parValue>100</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>United Railways</name>
+      <id>1</id>
+      <parValue>110</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>National Utilities</name>
+      <id>2</id>
+      <parValue>120</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>Acme Motors</name>
+      <id>3</id>
+      <parValue>130</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>Allied Steamships</name>
+      <id>4</id>
+      <parValue>140</parValue>
+      <share>0</share>
+    </company>
+    <company>
+      <name>Motion Pictures</name>
+      <id>5</id>
+      <parValue>150</parValue>
+      <share>0</share>
+    </company>
   </bank>
-  <currentPlayer>0</currentPlayer>
+  <currentPlayer>1</currentPlayer>
   <numberOfPlayers>2</numberOfPlayers>
-  <date>29/12/2015 22:21:29</date>
+  <date>30/12/2015 12:57:33</date>
   <player>
     <id>0</id>
     <name>Ezgi</name>
     <isPlaying>true</isPlaying>
-    <money>3200</money>
+    <money>3000</money>
     <countJail>4</countJail>
     <row>1</row>
-    <position>0</position>
+    <position>5</position>
     <reverse>false</reverse>
+    <shares>0-0-0-0-0-0</shares>
     <numbers>0-0-0-0-0-0-0</numbers>
     <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
-    <allPropertiesNames />
+    <allPropertiesNames>READING RAILROAD, READING RAILROAD</allPropertiesNames>
     <properties />
-    <transits />
+    <transits>
+      <train>
+        <ownerID>0</ownerID>
+        <ID>29</ID>
+        <price>200</price>
+        <rent>20</rent>
+        <originalRent>20</originalRent>
+        <trainDepot>0</trainDepot>
+        <trainDepotPrice>100</trainDepotPrice>
+        <isMortgaged>false</isMortgaged>
+      </train>
+      <train>
+        <ownerID>0</ownerID>
+        <ID>71</ID>
+        <price>200</price>
+        <rent>20</rent>
+        <originalRent>20</originalRent>
+        <trainDepot>0</trainDepot>
+        <trainDepotPrice>100</trainDepotPrice>
+        <isMortgaged>false</isMortgaged>
+      </train>
+    </transits>
     <cabs />
     <utilities />
-    <freeProperties />
+    <freeProperties>
+      <ID>29</ID>
+      <ID>71</ID>
+    </freeProperties>
     <mortgagedProperties />
     <cards />
   </player>
@@ -35,6 +95,7 @@
     <row>1</row>
     <position>0</position>
     <reverse>false</reverse>
+    <shares>0-0-0-0-0-0</shares>
     <numbers>0-0-0-0-0-0-0</numbers>
     <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
     <allPropertiesNames />
