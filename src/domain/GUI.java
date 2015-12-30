@@ -89,7 +89,7 @@ public class GUI {
 	public ButtonGroup dPropsGroup = new ButtonGroup();
 	public JPanel dPropsPanel = new JPanel(new GridLayout(0,1));
     JScrollPane dPropsScrollPane = new JScrollPane(dPropsPanel);
-	public JRadioButton[] dPropsType = new JRadioButton[3];
+	public JRadioButton[] dPropsType = new JRadioButton[5];
 	public ButtonGroup dPropsTypeGroup = new ButtonGroup();
 	public JTextField row = new JTextField();
 	public JTextField position = new JTextField();
@@ -484,10 +484,10 @@ public class GUI {
 		    dPropsScrollPane.setAutoscrolls(true);
 		    dPropsScrollPane.setVisible(false);
 		    
-		    for(int i=0;i<3;i++){
+		    for(int i=0;i<5;i++){
 				dPropsType[i] = new JRadioButton("SkyScraper");
-				dPropsType[i].setLocation(725 + i*150,375);
-				dPropsType[i].setSize(150, 25);
+				dPropsType[i].setLocation(725 + i*120,375);
+				dPropsType[i].setSize(120, 25);
 				dPropsType[i].setVisible(false);
 				dPropsType[i].setBackground(Color.DARK_GRAY);
 				dPropsType[i].setForeground(Color.WHITE);
@@ -496,12 +496,14 @@ public class GUI {
 				dPropsTypeGroup.add(dPropsType[i]);
 		    }
 		    dPropsType[0].setSelected(true);
-		    dPropsType[0].setText("House");
+		    dPropsType[0].setText("None");
 		    dPropsType[0].setActionCommand("0");
-		    dPropsType[1].setText("Hotel");
-		    dPropsType[1].setActionCommand("5");
-		    dPropsType[2].setText("SkyScraper");
-		    dPropsType[2].setActionCommand("6");
+		    dPropsType[1].setText("House");
+		    dPropsType[1].setActionCommand("1");
+		    dPropsType[2].setText("Hotel");
+		    dPropsType[2].setActionCommand("5");
+		    dPropsType[3].setText("SkyScraper");
+		    dPropsType[3].setActionCommand("6");
 			placeButton(b[24],"Add Property",725, 405, 540, 25,false);
 			placeButton(b[25],"Next Player",725, 450, 540, 50,false);
 		    
@@ -696,7 +698,7 @@ public class GUI {
 				    position.setVisible(false);
 				    money.setVisible(false);
 				    
-				    for(int i=0;i<3;i++){
+				    for(int i=0;i<5;i++){
 				    	dPropsType[i].setVisible(false);}
 				    buttons[24].setVisible(false);
 				    buttons[25].setVisible(false);
@@ -992,7 +994,7 @@ public class GUI {
 			    	
 	    	}
 	     }
-	    for(int i=0;i<3;i++){
+	    for(int i=0;i<4;i++){
 	    	dPropsType[i].setVisible(true);}
 	    
 	    
