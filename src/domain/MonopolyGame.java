@@ -60,12 +60,12 @@ public class MonopolyGame {
 
 		
 		guiPublish = new ActionListener()
-										{		@Override
-										      public void actionPerformed(ActionEvent e)
-										      {
-												if(board!=null)
-										    	 board.refreshGUI();
-										      }};
+			{		@Override
+			      public void actionPerformed(ActionEvent e)
+			      {
+					if(board!=null)
+			    	 board.refreshGUI();
+			      }};
 		
 		
 		for(int i=0; i<39; i++){
