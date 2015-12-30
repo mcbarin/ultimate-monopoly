@@ -54,7 +54,14 @@ public class Board {
 	String[] playerNames = {"Ezgi","Cagatay","Bugra","Delta","Epsilon","Zeta","Eta","Theta","Iota","Kappa","Lambda","Pi"};
 
 
-	
+	public int numOfPlayers(){
+		int num=0;
+		for (int i = 0; i < players.size(); i++) {
+			if(players.get(i).isPlaying==true)
+				num++;
+		}
+		return num;
+	}
 	private void initializePlayers(int totalPlayer){
 			
 			for(int i=0;i<this.totalPlayer;i++){

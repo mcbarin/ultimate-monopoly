@@ -10,7 +10,7 @@ public class SquareSqueezePlay extends Square {
 
 	@Override
 	public String[] landOn(Player player, Board board,int total) {
-		int numPlayers = board.players.size(); // Number of active players
+		int numPlayers = board.numOfPlayers(); // Number of active players
 		String[] result = new String[14];
 		initializeResult(result);
 		String msg = "";
