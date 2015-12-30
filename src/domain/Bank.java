@@ -187,7 +187,7 @@ public class Bank {
 			result[p.id+2] = "-"+ ""+c.parValue;
 		}else{
 			result[0]="51"; // Auction
-			result[1] = p.name + " has not enough money. One share of selected company will be auction off.";
+			result[1] = p.name + " has not enough money. One share of "+c.name+" will be auction off.";
 		}
 
 		return result;

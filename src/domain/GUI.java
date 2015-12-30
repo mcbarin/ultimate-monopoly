@@ -102,7 +102,8 @@ public class GUI {
 	
 	
 
-	public JTextField[] stockBids = new JTextField[12];
+	public JTextField[] auctionBids = new JTextField[12];
+    public JLabel auctionNames[] = new JLabel[12];
 	public JRadioButton[] eComps = new JRadioButton[6];
 	public ButtonGroup eCompsGroup = new ButtonGroup();
 	public JPanel eCompsPanel = new JPanel(new GridLayout(0,1));
@@ -150,7 +151,8 @@ public class GUI {
 			 playerMoneys[i] = new JLabel();
 			 playerPics[i] = new JLabel();
 			 playerPropertiesNames[i] = new JLabel();
-			 stockBids[i] = new JTextField();
+			 auctionBids[i] = new JTextField();
+			 auctionNames[i] = new JLabel();
 		}
 			
 			
@@ -273,7 +275,43 @@ public class GUI {
 			panel.add(eCompsScrollPane);
 			placeButton(b[30],"Buy",735,280, 130, 25,false);
 			placeButton(b[31],"No",875, 280, 130, 25,false);
+			
+			
+			
+
+
+			for(int i=0; i<12;i++){
+				auctionNames[i].setText(board.playerNames[i]);
+				auctionNames[i].setSize(128, 24);
+				auctionNames[i].setLocation(725, 180+27*i);
+				auctionNames[i].setFont(new Font("Arial", Font.BOLD, 15));
+				auctionNames[i].setHorizontalAlignment(JLabel.RIGHT);
+				auctionNames[i].setForeground(Color.WHITE);
+				auctionNames[i].setVisible(false);
+				auctionBids[i].setSize(48, 24);
+				auctionBids[i].setHorizontalAlignment(JLabel.CENTER);
+				auctionBids[i].setBorder(null);
+				auctionBids[i].setLocation(858, 180+27*i);
+				auctionBids[i].setText("0");
+				auctionBids[i].setVisible(false);
+				panel.add(auctionNames[i]);
+				panel.add(auctionBids[i]);
+						
+			}
+			
+
+			placeButton(b[32],"Send Bids",875, 280, 130, 25,false);
+			
+			
 			//////////////////////////////////////////
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			//UNMortgage Pane
 		    for(int i = 0; i<MAX_PROPERTIES; i++){
@@ -596,6 +634,13 @@ public class GUI {
 		saveName.setVisible(false);
 		panel.add(saveName);
 		placeButton(b[13],"Save Game",1005, 590, 135, 30,false);
+		placeButton(b[26],"X",1235, 590, 30, 30,false);
+		b[26].setFont(new Font("Arial", Font.BOLD, 18));
+		b[26].setFocusPainted(false);
+		b[26].setBackground(new Color(169,0,0));
+		b[26].setForeground(Color.WHITE);
+		b[26].setBorder(null);
+		b[26].setMargin(new Insets(0,0,0,0));
         
     	
 		
@@ -609,8 +654,19 @@ public class GUI {
     	refresh();
 	}
 	public void refresh(){
-		
 		if(Board.gameStatus==-1){
+
+
+			for(int i=0; i<39; i++){
+				buttons[i].setVisible(false);
+			}
+			
+			for(int i=0;i<13;i++){
+				 titles[i].setVisible(false);
+			}
+			
+
+
 			setGUI("","",buttons);
 			titles[12].setVisible(true);
 			initalNumberofPlayers.setVisible(true);
@@ -620,6 +676,12 @@ public class GUI {
 			buttons[30].setVisible(false);
 			buttons[31].setVisible(false);
 
+
+			currentPlayer.setVisible(false);
+			titles[2].setVisible(false);
+			currentMessage.setVisible(false);
+	
+			scrollPanePlayerStats.setVisible(false);
 			
 			String lines[];
 			BufferedReader rd;
@@ -664,6 +726,7 @@ public class GUI {
 			initalNumberofPlayers.setVisible(false);
 			buttons[11].setVisible(false);
 			buttons[12].setVisible(false);
+			buttons[26].setVisible(true);
 		    row.setVisible(true);
 		    position.setVisible(true);
 		    money.setVisible(true);
@@ -741,6 +804,25 @@ public class GUI {
 							eComps[i].setVisible(false);
 				    }
 						
+				    
+
+				    
+				    if(MonopolyGame.specialConditions[7]){
+						buttons[32].setVisible(true);
+						for(int i=0;i<board.players.size();i++){
+							auctionBids[i].setVisible(true);
+							auctionNames[i].setVisible(true);
+						}
+						
+						buttons[32].setLocation(776, 182+27*board.players.size());
+						
+				    }else{
+						buttons[32].setVisible(false);
+
+						for(int i=0;i<12;i++){
+							auctionBids[i].setVisible(false);
+							auctionNames[i].setVisible(false);}
+				    }
 					
 					
 					currentPlayer.setIcon(new ImageIcon("img/p"+Integer.toString(cP.id+1)+".png"));
@@ -813,6 +895,7 @@ public class GUI {
 		button.setText(title);
 		button.setLocation(x, y);
 		button.setSize(width, height);
+		button.setFocusPainted(false);
 		panel.add(button);
 	}
 	
@@ -876,8 +959,8 @@ public class GUI {
 	public void setGUI(String cm, String bs, JButton b[]){
 		this.currentMessage.setText(cm);
 		int l = bs.length();
-		if(l>26)
-			l = 26;
+		if(l>39)
+			l = 39;
 		for(int i=0; i<l; i++){
 				if(bs.charAt(i)=='1'){
 					b[i].setVisible(true);}
@@ -887,14 +970,15 @@ public class GUI {
 
 		}
 
-		for(int i=l; i<26; i++){
+		for(int i=l; i<39; i++){
 			if(i!=11)
 					b[i].setVisible(false);
 		}
 		
-		if(bs.length()>0 && bs.charAt(0)=='1'){saveName.setVisible(true); b[13].setVisible(true);
-			}else{
-				saveName.setVisible(false); b[13].setVisible(false);
+		if(bs.length()>0 && bs.charAt(0)=='1'){
+			saveName.setVisible(true); b[13].setVisible(true); b[26].setVisible(true);
+		}else{
+				saveName.setVisible(false); b[13].setVisible(false); b[26].setVisible(false);
 			}
 		
 		removeSpecialConditions();

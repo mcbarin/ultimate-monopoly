@@ -8,7 +8,7 @@ public class Player {
 			numberOfHouses=0,numberOfHotels=0,numberOfSkyscrapers=0,numberOfCabStand=0,numberOfTransitStation=0;
 	public boolean isPlaying = true;
 	public boolean monopolyGuyFlag=false;
-	String name = "";
+	public String name = "";
 	public ArrayList<SquareProperty> properties = new ArrayList<SquareProperty>();
 	public ArrayList<SquareTransit> trains = new ArrayList<SquareTransit>();
 	public ArrayList<SquareCabCompany> cabs = new ArrayList<SquareCabCompany>();	

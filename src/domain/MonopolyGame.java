@@ -7,6 +7,7 @@ import javafx.scene.media.MediaPlayer;
 import java.awt.event.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.*;
 
@@ -38,8 +39,8 @@ public class MonopolyGame {
 	private  int totalDice;
 	//buttons = rollDice,	buy,	buyChance,	sell,			4-no,			5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
 	//			10-yes,		start,	load,		save, 			dieOne,			15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
-	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-addPropDebug			25-debugnext
-	//			30-yesStock	31-noStock
+	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-addPropDebug			25-debugnext	26-quit
+	//			30-yesStock	31-noStock			32-sendBids
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -209,7 +210,7 @@ public class MonopolyGame {
 		buttons[15].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){cP.setPosition(dieTwo); gui.setGUI("", "", buttons); play();}});
 		buttons[16].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){cP.setPosition(dieOne+dieTwo); gui.setGUI("", "", buttons); play();}});
 		
-		
+
 		
 		
 		//Start Game
@@ -241,6 +242,22 @@ public class MonopolyGame {
 		      }
 		});
 
+
+		
+		
+		//Quit Game
+		buttons[26].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+
+		    	  
+		    	  
+		    	  Board.gameStatus = -1;
+		    	  gui.refresh();
+		      }
+		});
+
 		
 		
 		
@@ -266,8 +283,8 @@ public class MonopolyGame {
 		    	  debugLeft = -1;
 		    	  gui.refresh();
 		    	  //System.out.println("Selected Radio Button: " + Integer.parseInt(gui.savedGamesGroup.getSelection().getActionCommand()));
-		    	  String[] a = {"asd","asdasd"};
-		    	  play(50,a);
+		    	  //String[] a = {"asd","asdasd"};
+		    	  //play(50,a);
 		    	  
 		    	  gui.refresh();
 		    	  
@@ -276,16 +293,41 @@ public class MonopolyGame {
 		      }
 		});
 		
-		
+
 		
 		//stock buy button
 		buttons[30].addActionListener(new ActionListener()
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
-		    	  System.out.println("Selected Radio Button: " + gui.eCompsGroup.getSelection().getActionCommand());		    	  
+		    	  //System.out.println("Selected Radio Button: " + gui.eCompsGroup.getSelection().getActionCommand());		    	  
 		    	  String[] result = board.bank.buyStock(gui.eCompsGroup.getSelection().getActionCommand(), cP);
 		    	  play(Integer.parseInt(result[0]),result);
+		      }
+		  });
+		
+		//stock no button
+		buttons[31].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  String[] result = {"51","One share of "+gui.eCompsGroup.getSelection().getActionCommand()+" will be auction off."};
+		    	  play(51,result);
+		      }
+		  });
+		
+		//stock bids button
+		buttons[32].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {	
+		    	  int[] bids = new int[12];
+		    	  Arrays.fill(bids, 0);
+		    	  for(int i=0; i<board.players.size(); i++){
+		    		  bids[i] = Integer.parseInt(gui.auctionBids[i].getText());
+		    	  }
+		    	  String[] result = board.bank.auctionStock(gui.eCompsGroup.getSelection().getActionCommand(), bids);
+		    	  play(1,result);
 		      }
 		  });
 		  		
