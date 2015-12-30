@@ -115,6 +115,10 @@ public class Bank {
 	 */
 	public String[] auction(SquareProperty s,int[] bids){
 		Player winner = null;
+		String[] result = new String[14];
+		result = getResultArray();
+		result[0]="1";
+		result[1]="";
 		//find max bid
 		int max=0;
 		for (int i = 0; i < bids.length; i++) {
@@ -122,19 +126,20 @@ public class Bank {
 				max=bids[i];
 				winner= players.get(i);
 			}
+			if(players.get(i).money >= bids[i])
+				result[1]+=players.get(i).name+" offered a bid higher than his money. ";
+				
 		}
 
-		String[] result = new String[14];
-		result = winner.getResultArray();
-		result[0]="1";
+		
 
 		if(max < s.price/2){ // or max==0
-			result[1] = "All bids are below the half of the par value. No one wins";
+			result[1] += "Bids are below the half of the par value. No one wins";
 		}else{
 			s.buyProperty(winner);
 			winner.addMoney(s.price-max); //
 
-			result[1] = winner.name + " has bought " + ""+s.name+".";
+			result[1] += winner.name + " has bought " + ""+s.name+" for $"+max+".";
 			result[winner.id+2] = "-"+ ""+max;
 
 		}
@@ -204,32 +209,37 @@ public class Bank {
 	 * @return String array which includes status and message for GUI
 	 */
 	public String[] auctionStock(String name,int[] bids){
-		Player winner = null;
+		Player winner =null;
+		String[] result = new String[14];
+		result = getResultArray();
+		result[0]="1";
+		result[1]="";
 		//find max bid
 		int max=0;
 		for (int i = 0; i < bids.length; i++) {
-			if(bids[i] > max && players.get(i).money >= bids[i]){ // player has the money that he offered
+			if(bids[i] > max && (players.get(i).money >= bids[i])){ // player has the money that he offered
 				max=bids[i];
 				winner= players.get(i);
 			}
+			if(players.get(i).money >= bids[i])
+				result[1]+=players.get(i).name+" offered a bid higher than his money. ";
+				
 		}
 
-		String[] result = new String[14];
-		result = winner.getResultArray();
-		result[0]="1";
+		
 
 		int id = getIdByStockName(name);
 		Company c = companies.get(id);
 
 		if(max < c.parValue/2){ // or max==0
-			result[1] = "All bids are below the half of the par value. No one wins";
+			result[1] += "Bids are below the half of the par value. No one wins";
 		}else{
 			c.share++;
 			winner.substract(max);
 			winner.shares[id]++;
 			winner.valueOfProperties += c.parValue/2;
 
-			result[1] = winner.name + " has bought one share of " + ""+c.name+".";
+			result[1] += winner.name + " has bought one share of " + ""+c.name+" for $"+max+".";
 			result[winner.id+2] = "-"+ ""+max;
 
 		}
@@ -262,4 +272,11 @@ public class Bank {
 			return true;
 	}
 
+	public String[] getResultArray(){
+		String[] result = new String[14];
+		for(int i=0;i<14;i++){
+			result[i]= "0";
+		}
+		return result;
+	}
 }
