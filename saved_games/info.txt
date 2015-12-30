@@ -1,8 +1,8 @@
 //Bugra Can Sefercik Save/Load
 
-12
-Saved Game - 29/12/2015 21:29:31
-Saved Game - 29/12/2015 22:04:09
+2
+Saved Game - 30/12/2015 12:34:12
+ezgi - 30/12/2015 12:36:21
 Saved Game - 29/12/2015 22:21:29
 Saved Game - 29/12/2015 22:23:16
 Saved Game - 29/12/2015 22:26:03
@@ -13,4 +13,4 @@ Saved Game - 29/12/2015 23:03:04
 Saved Game - 29/12/2015 23:03:04
 Saved Game - 29/12/2015 23:14:46
 deneme - 30/12/2015 9:09:17
-na
+Saved Game - 30/12/2015 12:30:37

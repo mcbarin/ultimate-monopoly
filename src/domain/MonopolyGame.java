@@ -254,8 +254,19 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 
-		    	  debugLeft = -1;
+		    	  debugLeft = 0;
 		    	  Board.gameStatus = 0;
+		    	  board = ls.loadGame(Integer.parseInt(gui.savedGamesGroup.getSelection().getActionCommand()));
+		    	  initialNumberofPlayers = board.players.size();
+		    	  players = board.getPlayers();
+		    	  
+		    	  gui.initGUI(board);
+		    	  gui.setPlayers(board.getPlayers());
+		    	  gui.setGUI("Let's play!", "",buttons);
+		    	  board.addressGUI(gui);
+		    	  gui.refresh();
+		    	  debugLeft = -1;
+		    	  gui.refresh();
 		    	  System.out.println("Selected Radio Button: " + Integer.parseInt(gui.savedGamesGroup.getSelection().getActionCommand()));
 		    	  gui.refresh();
 		    	  
