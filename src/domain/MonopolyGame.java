@@ -63,6 +63,7 @@ public class MonopolyGame {
 										{		@Override
 										      public void actionPerformed(ActionEvent e)
 										      {
+												if(board!=null)
 										    	 board.refreshGUI();
 										      }};
 		
