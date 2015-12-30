@@ -41,8 +41,8 @@ public class PlayerTest {
 	public void testAddPropertyDebug(){
 		Board b = new Board(2);
 		Player p = b.getCurrentPlayer();
-		p.addPropertyDebug(1, 3);
-		assertTrue("property is added successfully",p.repOk() && p.properties.get(0).id == 1 &&  p.properties.get(0).house ==3);
+		p.addPropertyDebug(1, 0);
+		assertTrue("property is added successfully",p.repOk() && p.properties.get(0).id == 1 &&  p.properties.get(0).house ==0);
 	}
 
 	@Test
@@ -70,6 +70,22 @@ public class PlayerTest {
 		Player p = b.getCurrentPlayer();
 		p.setPosition(13);
 		assertTrue("addMoney() works",p.repOk() && p.row==1 && p.position==13);
+	}
+	
+	@Test
+	public void updateRentAccordinglyTest(){
+		Board b = new Board(2);
+		Player p = b.getCurrentPlayer();
+		p.addPropertyDebug(5, 0);
+		p.addPropertyDebug(7, 0);
+		p.addPropertyDebug(8, 0);
+		int rentBefore = p.properties.get(0).originalRent;
+		int color = p.properties.get(0).color;
+		p.updateRentPrices(color);
+		int rentAfter = p.properties.get(0).rent;
+		assertTrue("works",rentBefore*3 == rentAfter);
+		
+
 	}
 	
 	
