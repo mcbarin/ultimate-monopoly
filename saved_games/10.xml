@@ -5,19 +5,19 @@
       <name>General Radio</name>
       <id>0</id>
       <parValue>100</parValue>
-      <share>0</share>
+      <share>1</share>
     </company>
     <company>
       <name>United Railways</name>
       <id>1</id>
       <parValue>110</parValue>
-      <share>0</share>
+      <share>6</share>
     </company>
     <company>
       <name>National Utilities</name>
       <id>2</id>
       <parValue>120</parValue>
-      <share>0</share>
+      <share>6</share>
     </company>
     <company>
       <name>Acme Motors</name>
@@ -38,14 +38,22 @@
       <share>0</share>
     </company>
   </bank>
-  <currentPlayer>1</currentPlayer>
+  <currentPlayer>0</currentPlayer>
   <numberOfPlayers>2</numberOfPlayers>
+<<<<<<< HEAD
+  <date>30/12/2015 22:55:13</date>
+=======
   <date>30/12/2015 21:55:07</date>
+>>>>>>> 6e231ec5fbfc904ea8a315a46bc53599d64bd28b
   <player>
     <id>0</id>
     <name>Ezgi</name>
     <isPlaying>true</isPlaying>
+<<<<<<< HEAD
+    <money>3100</money>
+=======
     <money>1350</money>
+>>>>>>> 6e231ec5fbfc904ea8a315a46bc53599d64bd28b
     <countJail>4</countJail>
     <row>1</row>
     <position>27</position>
@@ -53,6 +61,14 @@
     <shares>0-0-0-0-0-0</shares>
     <numbers>8-0-0-0-0-0-0</numbers>
     <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
+<<<<<<< HEAD
+    <allPropertiesNames>READING RAILROAD, READING RAILROAD</allPropertiesNames>
+    <properties />
+    <transits />
+    <cabs />
+    <utilities />
+    <freeProperties />
+=======
     <allPropertiesNames>ESPLANADE AVENUE, CULLEN BOULEVARD, BROAD STREET, VENTURA BOULEVARD, STATES AVENUE, ATLANTIC AVENUE, PARK PLACE, VENTNOR AVENUE, CHECKER CAB CO., B&amp;O RAILROAD, B&amp;O RAILROAD</allPropertiesNames>
     <properties>
       <property>
@@ -200,6 +216,7 @@
       <ID>99</ID>
       <ID>49</ID>
     </freeProperties>
+>>>>>>> 6e231ec5fbfc904ea8a315a46bc53599d64bd28b
     <mortgagedProperties />
     <cards />
   </player>
@@ -207,13 +224,23 @@
     <id>1</id>
     <name>Cagatay</name>
     <isPlaying>true</isPlaying>
+<<<<<<< HEAD
+    <money>3100</money>
+    <countJail>4</countJail>
+=======
     <money>2790</money>
     <countJail>3</countJail>
+>>>>>>> 6e231ec5fbfc904ea8a315a46bc53599d64bd28b
     <row>1</row>
     <position>19</position>
     <reverse>false</reverse>
+<<<<<<< HEAD
+    <shares>1-0-0-0-0-0</shares>
+    <numbers>0-0-0-0-0-0-0</numbers>
+=======
     <shares>0-0-0-0-0-0</shares>
     <numbers>6-0-0-0-0-0-0</numbers>
+>>>>>>> 6e231ec5fbfc904ea8a315a46bc53599d64bd28b
     <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
     <allPropertiesNames>ST. CHARLES PLACE, ILLINOIS AVENUE, LAKE SHORE DRIVE, MIAMI AVENUE, BOYLSTON STREET, NEW YORK AVENUE, PENNSYLVANIA RAILROAD, PENNSYLVANIA RAILROAD</allPropertiesNames>
     <properties>

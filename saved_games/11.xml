@@ -5,19 +5,19 @@
       <name>General Radio</name>
       <id>0</id>
       <parValue>100</parValue>
-      <share>0</share>
+      <share>1</share>
     </company>
     <company>
       <name>United Railways</name>
       <id>1</id>
       <parValue>110</parValue>
-      <share>0</share>
+      <share>6</share>
     </company>
     <company>
       <name>National Utilities</name>
       <id>2</id>
       <parValue>120</parValue>
-      <share>0</share>
+      <share>6</share>
     </company>
     <company>
       <name>Acme Motors</name>
@@ -40,12 +40,20 @@
   </bank>
   <currentPlayer>0</currentPlayer>
   <numberOfPlayers>2</numberOfPlayers>
+<<<<<<< HEAD
   <date>30/12/2015 23:13:30</date>
+=======
+  <date>30/12/2015 22:55:13</date>
+>>>>>>> 650cd04947118126e2e1d82b39d5c3f64c03fd5f
   <player>
     <id>0</id>
     <name>Ezgi</name>
     <isPlaying>true</isPlaying>
+<<<<<<< HEAD
     <money>3200</money>
+=======
+    <money>3100</money>
+>>>>>>> 650cd04947118126e2e1d82b39d5c3f64c03fd5f
     <countJail>4</countJail>
     <row>1</row>
     <position>0</position>
@@ -66,12 +74,12 @@
     <id>1</id>
     <name>Cagatay</name>
     <isPlaying>true</isPlaying>
-    <money>3200</money>
+    <money>3100</money>
     <countJail>4</countJail>
     <row>1</row>
     <position>0</position>
     <reverse>false</reverse>
-    <shares>0-0-0-0-0-0</shares>
+    <shares>1-0-0-0-0-0</shares>
     <numbers>0-0-0-0-0-0-0</numbers>
     <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
     <allPropertiesNames />
