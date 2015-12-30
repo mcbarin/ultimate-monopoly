@@ -104,7 +104,9 @@ public class MonopolyGame {
 		    		  buttons[16].setText(Integer.toString((dieOne+dieTwo)));
 		    	  }else if(dieSpeed>4){	
 		    	  }else{
-		    		  cP.setPosition(dieOne+dieTwo+dieSpeed);
+		    		  //cP.setPosition(dieOne+dieTwo+dieSpeed);
+		    		  cP.row = 1;
+		    		  cP.position = 13;
 			    	  play();
 		    	  }
 		    	  
