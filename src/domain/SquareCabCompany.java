@@ -79,7 +79,7 @@ public class SquareCabCompany extends Square {
 
 
 		}
-
+		player.setFreeProperties();
 		return result;
 	}
 
@@ -109,6 +109,8 @@ public class SquareCabCompany extends Square {
 			result[0]="9"; // Success
 			result[1] += " Do you want to take a Taxi Ride for $20 ?";
 		}
+
+  	  	p.setFreeProperties();
 		return result;
 	}
 
@@ -127,6 +129,7 @@ public class SquareCabCompany extends Square {
 			result[0]="9"; 
 			result[1] += " Do you want to take a Taxi Ride for $20 ?";
 		}
+		player.setFreeProperties();
 		return result;
 	}
 
@@ -150,7 +153,7 @@ public class SquareCabCompany extends Square {
 		}else if (cabStand==0){
 			result[1]="You don't have any cabStand here";
 		}
-
+		p.setFreeProperties();
 		return result;
 	}
 
@@ -175,6 +178,7 @@ public class SquareCabCompany extends Square {
 			p.cabs.remove(this);
 			initializeAll();
 		}
+		p.setFreeProperties();
 		return result;
 	}
 

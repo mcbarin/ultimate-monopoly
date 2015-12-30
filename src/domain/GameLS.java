@@ -25,7 +25,7 @@ public class GameLS {
      Board board;
    
    
-    public static void main(String[] args) {GameLS a = new GameLS(); Board b = a.loadGame(10); System.out.println(b.totalPlayer);}
+    public static void main(String[] args) {GameLS a = new GameLS(); Board b = a.loadGame(11); System.out.println(b.totalPlayer);}
     public GameLS(){}
     public void setBoard(Board b){this.board = b;}
     
@@ -108,15 +108,76 @@ public class GameLS {
     	    	  Element props = element.getChild("properties");
     	    	  List<Element> proplist = props.getChildren("property");
     	    	  for(Element prp : proplist){
-    	    		 
+    	    		  SquareProperty pr = (SquareProperty)board.getSquareFromBoard(Integer.parseInt(prp.getChildText("ID")));
+    	    		  pr.owner = board.players.get(Integer.parseInt(prp.getChildText("ownerID")));
+    	    		  pr.price = Integer.parseInt(prp.getChildText("price"));
+    	    		  pr.originalRent = Integer.parseInt(prp.getChildText("originalRent"));
+    	    		  pr.rent = Integer.parseInt(prp.getChildText("rent"));
+    	    		  pr.isMortgaged = Boolean.parseBoolean(prp.getChildText("isMortgaged"));
+    	    		  pr.house = Integer.parseInt(prp.getChildText("house"));
+    	    		  pr.hotel = Integer.parseInt(prp.getChildText("hotel"));
+    	    		  pr.skyscraper = Integer.parseInt(prp.getChildText("skyscraper"));
+    	    		  pr.level = Integer.parseInt(prp.getChildText("level"));
     	    		  
-    	    		  System.out.println( prp.getChildText("price"));
+    	    		  p.properties.add(pr);
+    	    		  
+    	    	  }
+    	    	  Element transits = element.getChild("transits");
+    	    	  List<Element> trainlist = transits.getChildren("train");
+    	    	  for(Element trn : trainlist){
+    	    		  SquareTransit tr = (SquareTransit)board.getSquareFromBoard(Integer.parseInt(trn.getChildText("ID")));
+    	    		  tr.owner = board.players.get(Integer.parseInt(trn.getChildText("ownerID")));
+    	    		  tr.price = Integer.parseInt(trn.getChildText("price"));
+    	    		  tr.originalRent = Integer.parseInt(trn.getChildText("originalRent"));
+    	    		  tr.rent = Integer.parseInt(trn.getChildText("rent"));
+    	    		  tr.isMortgaged = Boolean.parseBoolean(trn.getChildText("isMortgaged"));
+    	    		  tr.trainDepot = Integer.parseInt(trn.getChildText("trainDepot"));
+    	    		  tr.trainDepotPrice = Integer.parseInt(trn.getChildText("trainDepotPrice"));
+
+    	    		  p.trains.add(tr);
+    	    		  
     	    	  }
     	    	  
+    	    	  
+    	    	  Element cabs = element.getChild("cabs");
+    	    	  List<Element> cablist = cabs.getChildren("cab");
+    	    	  for(Element cab : cablist){
+    	    		  SquareCabCompany cb = (SquareCabCompany)board.getSquareFromBoard(Integer.parseInt(cab.getChildText("ID")));
+    	    		  cb.owner = board.players.get(Integer.parseInt(cab.getChildText("ownerID")));
+    	    		  cb.price = Integer.parseInt(cab.getChildText("price"));
+    	    		  cb.originalRent = Integer.parseInt(cab.getChildText("originalRent"));
+    	    		  cb.rent = Integer.parseInt(cab.getChildText("rent"));
+    	    		  cb.isMortgaged = Boolean.parseBoolean(cab.getChildText("isMortgaged"));
+    	    		  cb.cabStand = Integer.parseInt(cab.getChildText("cabStand"));
+    	    		  cb.cabStandPrice = Integer.parseInt(cab.getChildText("cabStandPrice"));
+
+    	    		  p.cabs.add(cb);
+    	    		  
+    	    	  }
+    	    	  
+    	    	  Element utilities = element.getChild("utilities");
+    	    	  List<Element> utilitylist = utilities.getChildren("utility");
+    	    	  for(Element uti : utilitylist){
+    	    		  SquareUtility ut = (SquareUtility)board.getSquareFromBoard(Integer.parseInt(uti.getChildText("ID")));
+    	    		  ut.owner = board.players.get(Integer.parseInt(uti.getChildText("ownerID")));
+    	    		  ut.price = Integer.parseInt(uti.getChildText("price"));
+    	    		  ut.rent = Integer.parseInt(uti.getChildText("rent"));
+    	    		  ut.isMortgaged = Boolean.parseBoolean(uti.getChildText("isMortgaged"));
+
+    	    		  p.utilities.add(ut);
+    	    		  
+    	    	  }
+	    		  System.out.println(board.players.get(0).utilities.get(0).name);
+	    		  
+	    		  
+
+    	    	  p.setFreeProperties();
+	    		  
+	    		  
+
+	    		  System.out.println(board.players.get(0).freeProperties.get(8).id);
     	       
-    	       System.out.println("Last Name : "+element.getChildText("name"));
-    	       System.out.println("Email : "+element.getChildText("money"));
-    	       System.out.println("Phone : "+element.getChildText("cabs"));
+	    		  //System.out.println("Test: "+element.getChildText("name"));
     	      }
     	     
     	  } catch (JDOMException e) {
@@ -193,6 +254,7 @@ public class GameLS {
 	     
 	     //playerProcess
 	     for(Player p: board.players){
+	    	 p.setFreeProperties();
 		     Element player = new Element("player");
 		     
 		     Element elt = new Element("id");

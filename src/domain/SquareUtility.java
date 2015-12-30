@@ -70,7 +70,7 @@ public class SquareUtility extends Square {
 				result[1]="Player can't pay the rent and broke.";
 			}
 		}
-
+		player.setFreeProperties();
 		return result;
 		// TODO Auto-generated method stub
 
@@ -87,6 +87,7 @@ public class SquareUtility extends Square {
 		result[0]="1"; // Success
 		result[1] = p.name + " has bought the " + ""+this.name+".";
 		result[p.id+2] = "-"+ ""+this.price;
+		p.setFreeProperties();
 		return result;
 	}
 
@@ -119,6 +120,7 @@ public class SquareUtility extends Square {
 			p.utilities.remove(this);
 			initializeAll();
 		}
+		p.setFreeProperties();
 		return result;
 	}
 

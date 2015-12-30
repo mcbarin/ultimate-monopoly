@@ -98,7 +98,7 @@ public class SquareTransit extends Square {
 
 
 		result[0]=checkEven(player, total);
-
+		player.setFreeProperties();
 		return result;
 
 	}
@@ -152,6 +152,7 @@ public class SquareTransit extends Square {
 		result[player.id+2] = "-"+ ""+price;
 
 		result[0]=checkEven(player, total);
+		player.setFreeProperties();
 		return result;
 	}
 
@@ -170,7 +171,7 @@ public class SquareTransit extends Square {
 		result[player.id+2] = "-"+ ""+trainDepotPrice;
 
 		result[0]=checkEven(player, total);
-
+		player.setFreeProperties();
 		return result;
 	}
 
@@ -210,7 +211,7 @@ public class SquareTransit extends Square {
 		}else if (trainDepot==0){
 			result[1]="You don't have any Train Depot here";
 		}
-
+		p.setFreeProperties();
 		return result;
 	}
 
@@ -236,6 +237,7 @@ public class SquareTransit extends Square {
 			p.trains.remove(this.twin);
 			initializeAll();
 		}
+		p.setFreeProperties();
 		return result;
 	}
 }

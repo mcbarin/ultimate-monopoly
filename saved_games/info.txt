@@ -1,6 +1,6 @@
 //Bugra Can Sefercik Save/Load
 
-11
+12
 Saved Game - 29/12/2015 21:29:31
 Saved Game - 29/12/2015 22:04:09
 Saved Game - 29/12/2015 22:21:29
@@ -12,5 +12,5 @@ Saved Game - 29/12/2015 23:03:04
 Saved Game - 29/12/2015 23:03:04
 Saved Game - 29/12/2015 23:03:04
 Saved Game - 29/12/2015 23:14:46
-na
+deneme - 30/12/2015 9:09:17
 na
