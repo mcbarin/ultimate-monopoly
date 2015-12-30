@@ -971,13 +971,14 @@ public class GUI {
 		int abc = 0;
 	    for(int i = 0; i<120; i++){
 	    	dProps[i] = null;
+	    	dPropsGroup.remove(dProps[i]);
 	    	Square sq = board.getSquareFromBoard(i);
 	    	
 	    	if(sq.type=="Property" || sq.type=="Transit" || sq.type=="Utility" || sq.type=="CabCompany"){
 	    		
 
+		    	dProps[abc] = new JRadioButton(sq.name);
 	    		if(sq.owner==null){
-			    	dProps[abc] = new JRadioButton(sq.name);
 			    	dProps[abc].setActionCommand(Integer.toString(i));
 			    	dProps[abc].setVisible(true);
 			    	dProps[abc].setForeground(Color.WHITE);
@@ -987,11 +988,16 @@ public class GUI {
 	  	  				if(colorCodes[sq.color].getBlue()>128 && colorCodes[sq.color].getGreen()>128 && colorCodes[sq.color].getRed()>128)
 	  	  					dProps[abc].setForeground(Color.BLACK);
 	  	  				}
-			    	dPropsGroup.add(dProps[abc]);
-			    	dPropsPanel.add(dProps[abc]);
-			    	abc++;
+
+
+	    		}else{
+
+			    	dProps[abc].setVisible(false);
 	    		}
-			    	
+
+		    	dPropsGroup.add(dProps[abc]);
+		    	dPropsPanel.add(dProps[abc]);
+		    	abc++;
 	    	}
 	     }
 	    for(int i=0;i<4;i++){

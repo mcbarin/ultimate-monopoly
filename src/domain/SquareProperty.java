@@ -9,9 +9,6 @@ package domain;
 public class SquareProperty extends Square  {
 	
 
-
-
-	public Player owner=null;
 	public int price;
 	public int originalRent;
 	public int rent;
