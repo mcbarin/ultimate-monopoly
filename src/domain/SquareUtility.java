@@ -2,7 +2,6 @@ package domain;
 
 public class SquareUtility extends Square {
 
-	Player owner=null;
 	int price=150;
 	int rent;
 	boolean isMortgaged=false;
