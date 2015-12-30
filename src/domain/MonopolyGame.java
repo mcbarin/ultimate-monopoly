@@ -64,8 +64,6 @@ public class MonopolyGame {
 		for(int i=0; i<39; i++){
 			buttons[i] = new JButton();
 			
-			if(i!=12)
-				buttons[i].addActionListener(guiPublish);
 					
 			specialConditions[i] = false;}
 		
@@ -454,7 +452,11 @@ public class MonopolyGame {
 		
 		
 		
-
+		for(int i=0; i<39; i++){
+			
+			if(i!=12)
+				buttons[i].addActionListener(guiPublish);
+					}
 		
 		while(true){
 			if(board!=null && board.currentPlayer!=null){
