@@ -121,12 +121,12 @@ public class Bank {
 		result[1]="";
 		//find max bid
 		int max=0;
-		for (int i = 0; i < bids.length; i++) {
+		for (int i = 0; i < players.size(); i++) {
 			if(bids[i] > max && players.get(i).money >= bids[i]){ // make sure player has the money that he offered
 				max=bids[i];
 				winner= players.get(i);
 			}
-			if(players.get(i).money >= bids[i])
+			if(players.get(i).money < bids[i])
 				result[1]+=players.get(i).name+" offered a bid higher than his money. ";
 				
 		}
@@ -134,7 +134,7 @@ public class Bank {
 		
 
 		if(max < s.price/2){ // or max==0
-			result[1] += "Bids are below the half of the par value. No one wins";
+			result[1] += "Bids are below the half of the par value. No one wins.";
 		}else{
 			s.buyProperty(winner);
 			winner.addMoney(s.price-max); //
@@ -216,12 +216,12 @@ public class Bank {
 		result[1]="";
 		//find max bid
 		int max=0;
-		for (int i = 0; i < bids.length; i++) {
+		for (int i = 0; i < players.size(); i++) {
 			if(bids[i] > max && (players.get(i).money >= bids[i])){ // player has the money that he offered
 				max=bids[i];
 				winner= players.get(i);
 			}
-			if(players.get(i).money >= bids[i])
+			if(players.get(i).money < bids[i])
 				result[1]+=players.get(i).name+" offered a bid higher than his money. ";
 				
 		}
@@ -232,7 +232,7 @@ public class Bank {
 		Company c = companies.get(id);
 
 		if(max < c.parValue/2){ // or max==0
-			result[1] += "Bids are below the half of the par value. No one wins";
+			result[1] += "Bids are below the half of the par value. No one wins.";
 		}else{
 			c.share++;
 			winner.substract(max);

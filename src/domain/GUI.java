@@ -301,6 +301,7 @@ public class GUI {
 			
 
 			placeButton(b[32],"Send Bids",875, 280, 130, 25,false);
+			placeButton(b[27],"Send Bids",875, 280, 130, 25,false);
 			
 			
 			//////////////////////////////////////////
@@ -803,8 +804,10 @@ public class GUI {
 						for(int i=0;i<6;i++)
 							eComps[i].setVisible(false);
 				    }
-						
 				    
+				    
+				    
+
 
 				    
 				    if(MonopolyGame.specialConditions[7]){
@@ -818,6 +821,24 @@ public class GUI {
 						
 				    }else{
 						buttons[32].setVisible(false);
+
+						for(int i=0;i<12;i++){
+							auctionBids[i].setVisible(false);
+							auctionNames[i].setVisible(false);}
+				    }
+
+				    
+				    if(MonopolyGame.specialConditions[8]){
+						buttons[27].setVisible(true);
+						for(int i=0;i<board.players.size();i++){
+							auctionBids[i].setVisible(true);
+							auctionNames[i].setVisible(true);
+						}
+						
+						buttons[27].setLocation(776, 182+27*board.players.size());
+						
+				    }else{
+						buttons[27].setVisible(false);
 
 						for(int i=0;i<12;i++){
 							auctionBids[i].setVisible(false);

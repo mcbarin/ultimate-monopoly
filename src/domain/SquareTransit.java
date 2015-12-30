@@ -44,7 +44,7 @@ public class SquareTransit extends Square {
 		if(owner == null){
 			if (player.money >= this.price){
 				result[0]="3";
-				result[1] = "Do you want to buy "+this.name+" ?";
+				result[1] = "Do you want to buy "+this.name+" for $"+price+"?";
 				return result;
 			}else{  //if player has not enough money
 

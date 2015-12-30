@@ -24,7 +24,7 @@ public class SquareCabCompany extends Square {
 		if(owner == null){
 			if (player.money >= this.price){ //else if player has not enough money, do nothing
 				result[0]="3";
-				result[1] = "Do you want to buy "+this.name+" ?";
+				result[1] = "Do you want to buy "+this.name+" for $"+price+"?";
 			}
 			
 		}else if (owner.id==player.id){

@@ -28,7 +28,7 @@ public class MonopolyGame {
 	private JButton buttons[] = new JButton[39];
 	public static boolean specialConditions[] = new boolean[39];
 	private ActionListener guiPublish;
-	//	0-rollOnce	1-rollOnce Die	2-taxiRide	3-specialStatus	4-cabcomp	5-chance8	6-stockList
+	//	0-rollOnce	1-rollOnce Die	2-taxiRide	3-specialStatus	4-cabcomp	5-chance8	6-stockList		7-stockauction		8-normalauction
 	private int specialStatus;
 	public static int initialNumberofPlayers;
 	public static int debugPlayerID=0;
@@ -39,7 +39,7 @@ public class MonopolyGame {
 	private  int totalDice;
 	//buttons = rollDice,	buy,	buyChance,	sell,			4-no,			5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
 	//			10-yes,		start,	load,		save, 			dieOne,			15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
-	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-addPropDebug			25-debugnext	26-quit
+	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-addPropDebug			25-debugnext	26-quit		27-sendAuction
 	//			30-yesStock	31-noStock			32-sendBids
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
@@ -333,6 +333,43 @@ public class MonopolyGame {
 		  		
 
 		
+		//property no button
+		buttons[4].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  gui.setGUI("There will be an auction for "+board.getSquareWithRowAndPosition(cP.row, cP.position).name+":", "",buttons);
+
+		    	  specialConditions[8] = true;
+		    	  gui.refresh();
+		      }
+		  });
+		
+		//property auction button
+		buttons[27].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  Square sq = board.getSquareWithRowAndPosition(cP.row, cP.position);
+		    	  if(sq.type.equals("Property")){
+			    	  specialConditions[8] = true;
+			    	  int[] bids = new int[12];
+			    	  Arrays.fill(bids, 0);
+			    	  for(int i=0; i<board.players.size(); i++){
+			    		  bids[i] = Integer.parseInt(gui.auctionBids[i].getText());
+			    	  }
+			    	  
+			    	  String[] result = board.bank.auction((SquareProperty)sq, bids);
+			    	  play(1,result);
+			    	  gui.refresh();
+		    	  }else{
+		    	  
+			    	  board.nextPlayer();
+					  gui.setGUI("Next player!", "1", buttons);
+		    	  }
+		      }
+		  });
+		
 		
 		
 		
@@ -510,7 +547,6 @@ public class MonopolyGame {
 		  		
 		      }
 		};
-		buttons[4].addActionListener(nolistener);
 		buttons[19].addActionListener(nolistener);
 		
 
