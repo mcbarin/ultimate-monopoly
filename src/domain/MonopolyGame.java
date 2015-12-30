@@ -536,6 +536,11 @@ public class MonopolyGame {
 				specialConditions[6] = true;
 				
 				break;
+			case 51:
+				gui.setGUI(result, "000000000000000000000000000000001", buttons);
+				specialConditions[7] = true;
+				
+				break;
 				
 			default:
 				gui.setGUI(result[1]+" Next player!", "1", buttons);

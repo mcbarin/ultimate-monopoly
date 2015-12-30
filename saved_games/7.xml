@@ -5,19 +5,19 @@
       <name>General Radio</name>
       <id>0</id>
       <parValue>100</parValue>
-      <share>0</share>
+      <share>1</share>
     </company>
     <company>
       <name>United Railways</name>
       <id>1</id>
       <parValue>110</parValue>
-      <share>0</share>
+      <share>6</share>
     </company>
     <company>
       <name>National Utilities</name>
       <id>2</id>
       <parValue>120</parValue>
-      <share>0</share>
+      <share>6</share>
     </company>
     <company>
       <name>Acme Motors</name>
@@ -38,14 +38,14 @@
       <share>0</share>
     </company>
   </bank>
-  <currentPlayer>1</currentPlayer>
+  <currentPlayer>0</currentPlayer>
   <numberOfPlayers>2</numberOfPlayers>
-  <date>30/12/2015 12:57:33</date>
+  <date>30/12/2015 20:34:06</date>
   <player>
     <id>0</id>
     <name>Ezgi</name>
     <isPlaying>true</isPlaying>
-    <money>3000</money>
+    <money>3100</money>
     <countJail>4</countJail>
     <row>1</row>
     <position>5</position>
@@ -55,34 +55,10 @@
     <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
     <allPropertiesNames>READING RAILROAD, READING RAILROAD</allPropertiesNames>
     <properties />
-    <transits>
-      <train>
-        <ownerID>0</ownerID>
-        <ID>29</ID>
-        <price>200</price>
-        <rent>20</rent>
-        <originalRent>20</originalRent>
-        <trainDepot>0</trainDepot>
-        <trainDepotPrice>100</trainDepotPrice>
-        <isMortgaged>false</isMortgaged>
-      </train>
-      <train>
-        <ownerID>0</ownerID>
-        <ID>71</ID>
-        <price>200</price>
-        <rent>20</rent>
-        <originalRent>20</originalRent>
-        <trainDepot>0</trainDepot>
-        <trainDepotPrice>100</trainDepotPrice>
-        <isMortgaged>false</isMortgaged>
-      </train>
-    </transits>
+    <transits />
     <cabs />
     <utilities />
-    <freeProperties>
-      <ID>29</ID>
-      <ID>71</ID>
-    </freeProperties>
+    <freeProperties />
     <mortgagedProperties />
     <cards />
   </player>
@@ -90,12 +66,12 @@
     <id>1</id>
     <name>Cagatay</name>
     <isPlaying>true</isPlaying>
-    <money>3200</money>
+    <money>3100</money>
     <countJail>4</countJail>
     <row>1</row>
     <position>0</position>
     <reverse>false</reverse>
-    <shares>0-0-0-0-0-0</shares>
+    <shares>1-0-0-0-0-0</shares>
     <numbers>0-0-0-0-0-0-0</numbers>
     <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
     <allPropertiesNames />
