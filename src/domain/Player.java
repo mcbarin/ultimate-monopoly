@@ -50,13 +50,9 @@ public class Player {
 
 
 	private void initialize() {
-		// TODO Auto-generated method stub
-		for(int i=0;i<20;i++){
-			colorProperties[i]=0;
-		}
-		for (int i = 0; i < 6; i++) {
-			shares[i]=0;
-		}
+		// TODO Auto-generated method stub		
+		Arrays.fill(colorProperties, 0);
+		Arrays.fill(shares, 0);
 	}
 
 	/**
@@ -161,6 +157,7 @@ public class Player {
 		for(int i=0;i<trains.size();i++){
 			trains.get(i).initializeAll();
 		}
+		Arrays.fill(shares, 0);
 		isPlaying = false;
 
 	}

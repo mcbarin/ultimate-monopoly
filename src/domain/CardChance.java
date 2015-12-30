@@ -65,10 +65,48 @@ public class CardChance extends Card {
 		String[] result= getResultArray();
 		
 		if(number==0){
+			p.cards.clear();
+			int start,end;
+			if(p.row==0){
+				start=12;
+				end=18;
+			}else if(p.row==1){
+				if(p.position<34){
+					start=24;
+					end=34;
+				}else if(p.position<54){
+					start=44;
+					end=54;
+				}else{
+					start=54;
+					end=63;
+				}
+			}else {
+				if(p.position<78){
+					start=64;
+					end=78;
+				}else if(p.position<92){
+					start=78;
+					end=92;
+				}else if(p.position<106){
+					start=92;
+					end=106;
+				}else{
+					start=106;
+					end=119;
+				}
+			}
 			
+			// Player must choose squares between start and end ids.
+			result[0]="400";
+			result[1]="Player must choose a square in his/her side and all the cards player has are expired.";
+			result[10]=""+start;
+			result[11]=""+end;
+			
+			// then, applyCard0 method will be called.
 		}
 		else if(number==1){
-			
+
 			
 		}else if(number == 2){ //**
 			// Advance to the nearest utility.
@@ -232,7 +270,22 @@ public class CardChance extends Card {
 			
 			
 		}else if(number==14){
+			// entertainment rocks
+			// Stockholders in Motion Picture and General Radio can 
+			// immediately collect dividends.
+			for(int i=0;i<board.players.size();i++){
+				
+				if(board.players.get(i).shares[0]!=0){
+					p.addMoney(board.bank.companies.get(0).getDividend(board.players.get(i).shares[0]));
+				}
+				
+				if(board.players.get(i).shares[5]!=0){
+					p.addMoney(board.bank.companies.get(5).getDividend(board.players.get(i).shares[5]));
+
+				}
+			}
 			
+			// players who has share collected the dividents.
 			
 		}else if(number==15){
 			
@@ -620,6 +673,16 @@ public class CardChance extends Card {
 			board.pullPushChance();
 		}
 		
+		return result;
+	}
+	
+	public String[] applyCard0(int squareId,Player p){
+		String[] result= getResultArray();
+		Square s = board.getSquareFromBoard(squareId);
+		p.row=s.row;
+		p.position=s.position;
+		result[0]="5";
+		result[1]="Player's position has changed.";
 		return result;
 	}
 

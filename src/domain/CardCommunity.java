@@ -133,7 +133,24 @@ public class CardCommunity extends Card {
 			board.pullPushCommunity();
 			
 		}  else if(number == 42){
+			// vehicle impounded
+			if(p.money>50){
+				board.payToPool(50);
+				p.substract(50);
+			}else if(p.valueOfProperties>50){
+				result[0]="2";
+				result[1]="Player must sell property.";
+			}else{
+				result[0]="-1";
+				result[1]="Player is broke and out of game.";
+			}
 			
+			p.row=1;
+			p.position=10;
+			p.countJail=10;
+			// player lose one turn.
+			result[0]="1";
+			result[1]="Player moved to Just Visiting and will lose one turn.";
 		
 		}  else if(number == 43){//**
 			
@@ -175,7 +192,7 @@ public class CardCommunity extends Card {
 			
 			
 		}  else if(number == 47){
-			
+			//Inherit Stock
 			
 		} else if(number == 48){
 	
