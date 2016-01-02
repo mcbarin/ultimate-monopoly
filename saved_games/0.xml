@@ -39,8 +39,8 @@
     </company>
   </bank>
   <currentPlayer>0</currentPlayer>
-  <numberOfPlayers>3</numberOfPlayers>
-  <date>30/12/2015 23:25:34</date>
+  <numberOfPlayers>2</numberOfPlayers>
+  <date>31/12/2015 9:55:47</date>
   <player>
     <id>0</id>
     <name>Ezgi</name>
@@ -65,27 +65,6 @@
   <player>
     <id>1</id>
     <name>Cagatay</name>
-    <isPlaying>true</isPlaying>
-    <money>3200</money>
-    <countJail>4</countJail>
-    <row>1</row>
-    <position>0</position>
-    <reverse>false</reverse>
-    <shares>0-0-0-0-0-0</shares>
-    <numbers>0-0-0-0-0-0-0</numbers>
-    <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
-    <allPropertiesNames />
-    <properties />
-    <transits />
-    <cabs />
-    <utilities />
-    <freeProperties />
-    <mortgagedProperties />
-    <cards />
-  </player>
-  <player>
-    <id>2</id>
-    <name>Bugra</name>
     <isPlaying>true</isPlaying>
     <money>3200</money>
     <countJail>4</countJail>
