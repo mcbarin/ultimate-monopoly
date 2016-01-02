@@ -113,7 +113,7 @@ public class Bank {
 	 * @effects Selected property has sold to the player who makes the highest bid if max bid is greater than half of the actual price of property and player has the money that he offered, else nothing sold.
 	 * @return String array which includes status and message for GUI
 	 */
-	public String[] auction(SquareProperty s,int[] bids){
+	public String[] auction(Square s,int[] bids){
 		Player winner = null;
 		String[] result = new String[14];
 		result = getResultArray();
@@ -128,20 +128,51 @@ public class Bank {
 			}
 			if(players.get(i).money < bids[i])
 				result[1]+=players.get(i).name+" offered a bid higher than his money. ";
-				
+
 		}
 
-		
 
-		if(max < s.price/2){ // or max==0
-			result[1] += "Bids are below the half of the price. No one wins.";
-		}else{
-			s.buyProperty(winner);
-			winner.addMoney(s.price-max); //
+		if(s.type.equals("Property")){
+			if(max < ((SquareProperty)s).price/2){ // or max==0
+				result[1] += "Bids are below the half of the price. No one wins.";
+			}else{
+				((SquareProperty)s).buyProperty(winner);
+				winner.addMoney(((SquareProperty)s).price-max); //
 
-			result[1] += winner.name + " has bought " + ""+s.name+" for $"+max+".";
-			result[winner.id+2] = "-"+ ""+max;
+				result[1] += winner.name + " has bought " + ""+s.name+" for $"+max+".";
+				result[winner.id+2] = "-"+ ""+max;
 
+			}
+		}else if (s.type.equals("Transit")){
+			if(max < ((SquareTransit)s).price/2){ // or max==0
+				result[1] += "Bids are below the half of the price. No one wins.";
+			}else{
+				winner.substract(max);
+				((SquareTransit)s).owner = winner;
+				((SquareTransit)s).twin.owner = winner;
+				winner.valueOfProperties +=((SquareTransit)s).price/2;
+				winner.trains.add(((SquareTransit)s));
+				winner.trains.add(((SquareTransit)s).twin);
+
+				result[1] += winner.name + " has bought " + ""+s.name+" for $"+max+".";
+				result[winner.id+2] = "-"+ ""+max;
+
+			}
+		}else if(s.type.equals("CabCompany")){
+			if(max < ((SquareCabCompany)s).price/2){ // or max==0
+				result[1] += "Bids are below the half of the price. No one wins.";
+			}else{
+				((SquareCabCompany)s).buyCabCompany(winner);
+				winner.addMoney(((SquareCabCompany)s).price-max); //
+			}
+		}else if (s.type.equals("Utility")){
+			if(max < ((SquareUtility)s).price/2){ // or max==0
+				result[1] += "Bids are below the half of the price. No one wins.";
+			}else{
+				((SquareUtility)s).buyUtility(winner);
+				winner.addMoney(((SquareUtility)s).price-max); //
+			}
+			
 		}
 		return result;
 	}
@@ -223,10 +254,10 @@ public class Bank {
 			}
 			if(players.get(i).money < bids[i])
 				result[1]+=players.get(i).name+" offered a bid higher than his money. ";
-				
+
 		}
 
-		
+
 
 		int id = getIdByStockName(name);
 		Company c = companies.get(id);
@@ -262,9 +293,9 @@ public class Bank {
 		}
 		return 0;
 	}
-	
-	
-	
+
+
+
 	public boolean repOk(){
 		if(this==null || companies==null || players==null || squares == null)
 			return false;
