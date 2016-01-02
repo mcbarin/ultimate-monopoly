@@ -330,6 +330,16 @@ public class MonopolyGame {
 		    	  play(1,result);
 		      }
 		  });
+		
+		//stock sell button
+		buttons[33].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  String[] result = board.bank.sellStock(gui.userStocksButtonGroup.getSelection().getActionCommand(), cP);
+		    	  play(0,result);
+		      }
+		  });
 		  		
 
 		

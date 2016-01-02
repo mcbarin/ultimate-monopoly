@@ -228,6 +228,28 @@ public class Bank {
 
 		return result;
 	}
+	
+
+	public String[] sellStock(String name, Player p){
+		String[] result = new String[14];
+		result = p.getResultArray();
+
+		int id = getIdByStockName(name);
+		Company c = companies.get(id);
+		
+		c.share--;
+		p.addMoney(c.parValue);
+		p.shares[id]--;
+
+		p.valueOfProperties -= c.parValue/2;
+
+		result[0]="0"; // Success
+		result[1] = p.name + " has sold one share of " + ""+c.name+".";
+
+		result[p.id+2] = "+"+c.parValue;
+
+		return result;
+	}
 
 
 	/**
