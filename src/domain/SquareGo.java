@@ -12,7 +12,7 @@ public class SquareGo extends Square {
 	public String[] landOn(Player player, Board board, int total) {
 
 		int amount = 300;
-		String msg = "'"+player.name + "' has won "+ "$"+amount;
+		
 
 		if(this.name.equals("GO")){
 			player.addMoney(amount);
@@ -29,11 +29,12 @@ public class SquareGo extends Square {
 		
 
 		}
+
 		String[] result = new String[14];
 		initializeResult(result);
 
 		result[0]="1";
-		result[1]=msg;
+		result[1]="'"+player.name + "' has won "+ "$"+amount;
 		result[player.id+2] = Integer.toString(amount);
 
 		return result;

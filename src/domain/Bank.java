@@ -134,7 +134,7 @@ public class Bank {
 		
 
 		if(max < s.price/2){ // or max==0
-			result[1] += "Bids are below the half of the par value. No one wins.";
+			result[1] += "Bids are below the half of the price. No one wins.";
 		}else{
 			s.buyProperty(winner);
 			winner.addMoney(s.price-max); //

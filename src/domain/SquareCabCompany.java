@@ -104,11 +104,6 @@ public class SquareCabCompany extends Square {
 		result[1] = p.name + " has bought the " + ""+this.name+".";
 		result[p.id+2] = "-"+ ""+this.price;
 
-		if (p.money >= 20){
-			result[0]="9"; // Success
-			result[1] += " Do you want to take a Taxi Ride for $20 ?";
-		}
-
   	  	p.setFreeProperties();
 		return result;
 	}

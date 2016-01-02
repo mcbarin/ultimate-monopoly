@@ -130,7 +130,7 @@ public class SquareTransit extends Square {
 				player.row=2;
 				player.position=99-64;
 			}
-			//return "5";
+			
 		}
 		return "1";
 	}
@@ -151,6 +151,7 @@ public class SquareTransit extends Square {
 		result[player.id+2] = "-"+ ""+price;
 
 		result[0]=checkEven(player, total);
+		player.board.refreshGUI();
 		player.setFreeProperties();
 		return result;
 	}
