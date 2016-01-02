@@ -40,7 +40,7 @@ public class MonopolyGame {
 	//buttons = rollDice,	buy,	buyChance,	sell,			4-no,			5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
 	//			10-yes,		start,	load,		save, 			dieOne,			15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
 	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-addPropDebug			25-debugnext	26-quit		27-sendAuction
-	//			30-yesStock	31-noStock			32-sendBids
+	//			30-yesStock	31-noStock			32-sendBids		33-sellStock
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		

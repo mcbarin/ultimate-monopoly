@@ -737,5 +737,17 @@ public class Player {
 
 
 	}
+	
+	public boolean hasStock(){
+		boolean r = false;
+		for(int i=0; i<shares.length; i++){
+			if(shares[i]>0){
+				r = true;
+				break;
+			}
+				
+		}
+		return r;
+	}
 
 }

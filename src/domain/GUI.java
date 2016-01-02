@@ -68,6 +68,13 @@ public class GUI {
 
     
 
+	public JRadioButton[] userStocks = new JRadioButton[6];
+	public ButtonGroup userStocksButtonGroup = new ButtonGroup();
+	public JPanel userStockspanel = new JPanel(new GridLayout(0,1));
+    JScrollPane userStocksscrollPane = new JScrollPane(userStockspanel);
+
+    
+
 	public JRadioButton[] taxiRideDestinations = new JRadioButton[9];
 	public ButtonGroup taxiRideGroup = new ButtonGroup();
 	public JPanel taxiRidePanel = new JPanel(new GridLayout(0,1));
@@ -334,6 +341,29 @@ public class GUI {
 			placeButton(b[9],"UNMortgage",105, 95, 240, 25,false);
 			
 			
+			
+			
+			
+			//SellStock Pane
+		    for(int i = 0; i<6; i++){
+		    	userStocks[i] = new JRadioButton("text" + i);
+		    	userStocks[i].setActionCommand(board.bank.names[i]);
+		    	userStocks[i].setVisible(false);
+		    	userStocks[i].setForeground(Color.WHITE);
+		    	userStocksButtonGroup.add(userStocks[i]);
+		    	userStockspanel.add(userStocks[i]);
+		     }
+		    userStocksscrollPane.setSize(240, 100);
+		    userStocks[0].setSelected(true);
+		    userStockspanel.setBackground(Color.DARK_GRAY);
+		    userStocksscrollPane.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
+		    userStocksscrollPane.setAutoscrolls(true);
+		    userStocksscrollPane.setVisible(true);
+			panel.add(userStocksscrollPane);
+		
+			placeButton(b[33],"Sell Share of Stock",105, 95, 240, 25,false);
+			
+			
 	
 			
 			//cabbo
@@ -424,6 +454,8 @@ public class GUI {
 	        panel.add(titles[0]);
 	        //unmortgage
 	        panel.add(titles[1]);
+	        //sellstock
+	        panel.add(titles[3]);
 			
 	
 			placeButton(b[0],"Roll Dice!",735, 180, 270, 40,false);
@@ -1057,48 +1089,80 @@ public class GUI {
 		buttons[3].setVisible(true); buttons[3].setLocation(1025, starty+135);
 		buttons[8].setVisible(true); buttons[8].setLocation(1150, starty+135);
 
-		y = starty+170;
+		y +=170;
 	  }else{buttons[3].setVisible(false); buttons[8].setVisible(false); 
 	  scrollPane.setVisible(false);titles[0].setVisible(false);}
-	  
-	  
-	
-		
-	  if(cpMortgagedProperties.size()>0){	
-		  titles[1].setVisible(true);
-		  placeLabel(titles[1],"Select a propety to UNmortgage:",240,20,1025,y,Color.WHITE,Color.GRAY,font);
-	        
-		  scrollPaneUnmortgage.setVisible(true);
-		  scrollPaneUnmortgage.setLocation(1025,y+25);
-			for(int i = 0; i<cpMortgagedProperties.size();i++){
-				userMortgagedProperties[i].setVisible(true);
-	  				userMortgagedProperties[i].setText(cpMortgagedProperties.get(i).name.toLowerCase());
-	  				
-	
-	  				userMortgagedProperties[i].setForeground(Color.WHITE);
-	  				if(cpMortgagedProperties.get(i).color<20 && cpMortgagedProperties.get(i).color>-1){
-	  					Color sqColor = colorCodes[cpMortgagedProperties.get(i).color];
-	  					userMortgagedProperties[i].setBackground(sqColor);
-	  	  				if(sqColor.getBlue()>128 && sqColor.getGreen()>128 && sqColor.getRed()>128){
-	  	  				userMortgagedProperties[i].setForeground(Color.BLACK);
-	  	  				}
-	  				}else{
-	  					userMortgagedProperties[i].setBackground(Color.DARK_GRAY);
-	  				}
-	  				userMortgagedProperties[i].setActionCommand(Integer.toString(cpMortgagedProperties.get(i).id));
-	  			
-	    		}
-			for(int i=cpMortgagedProperties.size(); i<MAX_PROPERTIES; i++){
-				userMortgagedProperties[i].setVisible(false);
-			}
-			buttons[9].setVisible(true); buttons[9].setLocation(1025, y+135);
-	
-	  }else{buttons[9].setVisible(false); scrollPaneUnmortgage.setVisible(false);titles[1].setVisible(false);}
-	  
-	  
   
+  
+	
+	
+  if(cpMortgagedProperties.size()>0){	
+	  titles[1].setVisible(true);
+	  placeLabel(titles[1],"Select a propety to UNmortgage:",240,20,1025,y,Color.WHITE,Color.GRAY,font);
+        
+	  scrollPaneUnmortgage.setVisible(true);
+	  scrollPaneUnmortgage.setLocation(1025,y+25);
+		for(int i = 0; i<cpMortgagedProperties.size();i++){
+			userMortgagedProperties[i].setVisible(true);
+  				userMortgagedProperties[i].setText(cpMortgagedProperties.get(i).name.toLowerCase());
+  				
+
+  				userMortgagedProperties[i].setForeground(Color.WHITE);
+  				if(cpMortgagedProperties.get(i).color<20 && cpMortgagedProperties.get(i).color>-1){
+  					Color sqColor = colorCodes[cpMortgagedProperties.get(i).color];
+  					userMortgagedProperties[i].setBackground(sqColor);
+  	  				if(sqColor.getBlue()>128 && sqColor.getGreen()>128 && sqColor.getRed()>128){
+  	  				userMortgagedProperties[i].setForeground(Color.BLACK);
+  	  				}
+  				}else{
+  					userMortgagedProperties[i].setBackground(Color.DARK_GRAY);
+  				}
+  				userMortgagedProperties[i].setActionCommand(Integer.toString(cpMortgagedProperties.get(i).id));
+  			
+    		}
+		for(int i=cpMortgagedProperties.size(); i<MAX_PROPERTIES; i++){
+			userMortgagedProperties[i].setVisible(false);
+		}
+		buttons[9].setVisible(true); buttons[9].setLocation(1025, y+135);
+
+		y+=170;
+  }else{buttons[9].setVisible(false); scrollPaneUnmortgage.setVisible(false);titles[1].setVisible(false);}
+  
+  
+	
+	
+  if(cP.hasStock()){	
+	  titles[3].setVisible(true);
+	  placeLabel(titles[3],"Select a Share of Stock:",240,20,1025,y,Color.WHITE,Color.GRAY,font);
+        
+	  userStocksscrollPane.setVisible(true);
+	  userStocksscrollPane.setLocation(1025,y+25);
+	  int abc = 0;
+		for(int i = 0; i<6;i++){
+			
+			if(cP.shares[i]>0){
+				userStocks[abc].setVisible(true);
+
+				userStocks[abc].setText(board.bank.names[i]+" - "+Integer.toString(cP.shares[i])+"/6");
+				userStocks[abc].setActionCommand(board.bank.names[i]);
+				userStocks[abc].setForeground(Color.WHITE);
+				userStocks[abc].setBackground(Color.GRAY);
+				if(abc%2==1)
+					userStocks[abc].setBackground(Color.DARK_GRAY);
+					
+				abc++;
+			}
+  			
+    	}
+		for(int i=abc; i<6; i++){
+			userStocks[i].setVisible(false);
+		}
+		buttons[33].setVisible(true); buttons[33].setLocation(1025, y+135);
+
+  	}else{buttons[33].setVisible(false); userStocksscrollPane.setVisible(false);titles[3].setVisible(false);}
 	  
-	}
+	  
+}
 	
 	
 	
@@ -1177,6 +1241,7 @@ public class GUI {
 		cP = board.getCurrentPlayer();
 		
 		panel.initGUIPanel(this.board);
+		
 	}
 	
 	
