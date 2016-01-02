@@ -248,7 +248,7 @@ public abstract class Square {
 		}
 
 		if(n.equals("FREE PARKING")){
-			p.position=44;
+			p.position=20;
 			p.row=1;
 		}else if (n.equals("PENNSYLVANIA RAILROAD")){
 			p.position=9;

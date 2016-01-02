@@ -164,7 +164,7 @@ public class SquareProperty extends Square  {
 		int ids[] = board.getOtherProperties(this.color); 
 		for (int i = 0; i < ids.length; i++) {
 			ss = (SquareProperty)board.getSquareFromBoard(ids[i]);
-			if(ss.owner.id == player.id && ss.house>this.house){
+			if(ss.owner!=null && ss.owner.id == player.id && ss.house>this.house){
 				return false;
 			}
 		}
