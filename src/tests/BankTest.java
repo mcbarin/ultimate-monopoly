@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import domain.Board;
 import domain.Player;
+import domain.SquareCabCompany;
 import domain.SquareProperty;
 import domain.Bank;
 
@@ -51,6 +52,18 @@ public class BankTest {
 		assertTrue("auction() works",ba.repOk() && meditAve.owner.id == board.players.get(3).id);
 		
 	}
+	@Test
+	public void testAuctionCab() {
+		Board board = new Board(4);
+		Bank ba = board.bank;
+		SquareCabCompany cab = (SquareCabCompany)board.getSquareFromBoard(70);  //price=300
+		int[] bids = {50, 8000, 160, 180};
+		ba.auction(cab, bids); 
+	
+		assertTrue("auction() works",ba.repOk() && cab.owner.id == board.players.get(3).id);
+		
+	}
+	
 	
 	@Test
 	public void testThereIsUnownedProperty(){
