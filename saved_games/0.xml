@@ -5,7 +5,7 @@
       <name>General Radio</name>
       <id>0</id>
       <parValue>100</parValue>
-      <share>0</share>
+      <share>4</share>
     </company>
     <company>
       <name>United Railways</name>
@@ -17,7 +17,7 @@
       <name>National Utilities</name>
       <id>2</id>
       <parValue>120</parValue>
-      <share>0</share>
+      <share>4</share>
     </company>
     <company>
       <name>Acme Motors</name>
