@@ -24,7 +24,7 @@ public class SquareStock extends Square {
 		Player p;
 		int share;
 		int amount=0;
-		for (int i = 0; i < board.players.size(); i++) {
+		for (int i = 0; i < board.numOfPlayers(); i++) {
 			p = board.players.get(i);
 			for (int j = 0; j < 6; j++) {
 				share = p.shares[j];
