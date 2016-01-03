@@ -13,7 +13,7 @@ public class SquareBirthday extends Square {
 		String[] result = new String[14];
 		initializeResult(result);
 		result[0]="29";
-		result[1]="Please pick one of these.";
+		result[1]="It is your birthday! Pick your gift.";
 		
 		return result;
 		

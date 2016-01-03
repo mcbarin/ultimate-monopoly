@@ -416,6 +416,9 @@ public class GUI {
 			//////////////////////////////////
 			
 			
+
+			
+			
 			
 			
 			
@@ -470,9 +473,11 @@ public class GUI {
 			placeButton(b[21],"Yes",735, 188, 130, 25,false);
 			placeButton(b[22],"Go to Company",735, 280, 270, 25,false);
 			placeButton(b[4],"No",875, 188, 130, 25,false);
-			placeButton(b[2],"Buy with Cance Card",735, 188, 270, 25,false);
+			placeButton(b[2],"Buy with Cance Card",735, 188, 270, 25,false);		
+
+			placeButton(b[28],"Take $100",735, 180, 270, 25,false);
+			placeButton(b[29],"Go to the Nearest Cab Company",735, 212, 270, 25,false);
 			
-	
 			placeButton(b[6],"Pull Chance Card",735, 180, 270, 40,false);
 			b[6].setBackground(new Color(208,200,0));
 			placeButton(b[7],"Pull Community Chest Card",735, 180, 270, 40,false);
@@ -693,7 +698,7 @@ public class GUI {
 		panel.add(saveName);
 		placeButton(b[13],"Save Game",1005, 590, 135, 30,false);
 		placeButton(b[26],"X",1235, 590, 30, 30,false);
-		b[26].setFont(new Font("Arial", Font.BOLD, 18));
+		b[26].setFont(new Font("Calibri", Font.BOLD, 18));
 		b[26].setFocusPainted(false);
 		b[26].setBackground(new Color(169,0,0));
 		b[26].setForeground(Color.WHITE);
@@ -916,8 +921,21 @@ public class GUI {
 				    }else{
 						buttons[27].setVisible(false);
 				    }
+
+				    //Birthday Gift
+				    if(MonopolyGame.specialConditions[9]){
+						buttons[28].setVisible(true);
+						buttons[29].setVisible(true);
+						
+				    }else{
+						buttons[28].setVisible(false);
+						buttons[29].setVisible(false);
+				    }
 					
 					
+
+				    
+				    
 					currentPlayer.setIcon(new ImageIcon("img/p"+Integer.toString(cP.id+1)+".png"));
 					titles[2].setText("$"+Integer.toString(cP.money));
 			
@@ -1129,10 +1147,32 @@ public class GUI {
 	  scrollPane.setLocation(1025,starty+25);
 		for(int i = 0; i<cpFreeProperties.size();i++){
   				userFreeProperties[i].setVisible(true);
-  				userFreeProperties[i].setText(cpFreeProperties.get(i).name.toLowerCase());
+  				userFreeProperties[i].setFont(new Font("Segoe UI Symbol", Font.PLAIN, 13));
   				
 
+  				String title = cpFreeProperties.get(i).name.toLowerCase();
+  				if(cpFreeProperties.get(i).type=="Property"){
+	  				int house = ((SquareProperty)cpFreeProperties.get(i)).house;
+	  				if(house==1)
+	  					title+=" ➀";
+	  				else if(house==2)
+	  					title+=" ➁";
+	  				else if(house==3)
+	  					title+=" ➂";
+	  				else if(house==4)
+	  					title+=" ➃";
+	  				
+	  				if(((SquareProperty)cpFreeProperties.get(i)).hotel==1)
+	  					title+=" Ⓗ";
+	  				
+	  				if(((SquareProperty)cpFreeProperties.get(i)).skyscraper==1)
+	  					title+=" Ⓢ";
+  					
+  				
+  				}
+
   				userFreeProperties[i].setForeground(Color.WHITE);
+  				userFreeProperties[i].setText(title);
   				if(cpFreeProperties.get(i).color<20 && cpFreeProperties.get(i).color>-1){
   					Color sqColor = colorCodes[cpFreeProperties.get(i).color];
   	  				userFreeProperties[i].setBackground(sqColor);
@@ -1167,6 +1207,7 @@ public class GUI {
 		for(int i = 0; i<cpMortgagedProperties.size();i++){
 			userMortgagedProperties[i].setVisible(true);
   				userMortgagedProperties[i].setText(cpMortgagedProperties.get(i).name.toLowerCase());
+  				userMortgagedProperties[i].setFont(new Font("Segoe UI Symbol", Font.PLAIN, 13));
   				
 
   				userMortgagedProperties[i].setForeground(Color.WHITE);
@@ -1204,7 +1245,7 @@ public class GUI {
 			
 			if(cP.shares[i]>0){
 				userStocks[abc].setVisible(true);
-
+				userStocks[abc].setFont(new Font("Segoe UI Symbol", Font.PLAIN, 13));
 				userStocks[abc].setText(board.bank.names[i]+" - "+Integer.toString(cP.shares[i])+"/6");
 				userStocks[abc].setActionCommand(board.bank.names[i]);
 				userStocks[abc].setForeground(Color.WHITE);
