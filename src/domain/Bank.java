@@ -174,6 +174,9 @@ public class Bank {
 			}
 			
 		}
+
+		winner.board.refreshGUI();
+		winner.setFreeProperties();
 		return result;
 	}
 

@@ -402,7 +402,7 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  Square sq = board.getSquareWithRowAndPosition(cP.row, cP.position);
-		    	  if(sq.type.equals("Property")){
+
 			    	  specialConditions[8] = true;
 			    	  int[] bids = new int[12];
 			    	  Arrays.fill(bids, 0);
@@ -410,14 +410,10 @@ public class MonopolyGame {
 			    		  bids[i] = Integer.parseInt(gui.auctionBids[i].getText());
 			    	  }
 			    	  
-			    	  String[] result = board.bank.auction((SquareProperty)sq, bids);
+			    	  String[] result = board.bank.auction(sq, bids);
 			    	  play(1,result);
 			    	  gui.refresh();
-		    	  }else{
-		    	  
-			    	  board.nextPlayer();
-					  gui.setGUI("Next player!", "1", buttons);
-		    	  }
+
 		      }
 		  });
 		
