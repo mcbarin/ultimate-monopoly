@@ -74,6 +74,12 @@ public class GUI {
 	public JPanel userStockspanel = new JPanel(new GridLayout(0,1));
     JScrollPane userStocksscrollPane = new JScrollPane(userStockspanel);
     
+
+	public JRadioButton[] gFreeP = new JRadioButton[6];
+	public ButtonGroup gFreePButtonGroup = new ButtonGroup();
+	public JPanel gFreePpanel = new JPanel(new GridLayout(0,1));
+    JScrollPane gFreePscrollPane = new JScrollPane(userStockspanel);
+    
     
 	public JRadioButton[] debugStocks = new JRadioButton[6];
 	public ButtonGroup debugStocksButtonGroup = new ButtonGroup();
@@ -984,6 +990,11 @@ public class GUI {
 						listHurricane();
 					}else{hurScrollPane.setVisible(false);
 					buttons[23].setVisible(false);}
+					
+					
+					if(MonopolyGame.specialConditions[10]){
+						
+					}
 					
 					
 

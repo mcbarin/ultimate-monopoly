@@ -279,9 +279,10 @@ public class SquareProperty extends Square  {
 		}else if(house==0){
 			result[1]="You don't have any building here.";
 			return result;
-		}else if (house<4){
+		}else if (house<=4){ 
 			house-=1;
 			p.numberOfHouses--;
+			
 			result[1]=p.name+" sold house for $"+buildingPrice/2;
 		}
 
@@ -310,6 +311,8 @@ public class SquareProperty extends Square  {
 			result[p.id+2]=Integer.toString(buildingPrice/2);
 			p.deleteProperty(this);
 			initializeAll();
+		}else{
+			result = sellBuilding(p);
 		}
 
 		p.setFreeProperties();
