@@ -28,7 +28,7 @@ public class MonopolyGame {
 	private JButton buttons[] = new JButton[39];
 	public static boolean specialConditions[] = new boolean[39];
 	private ActionListener guiPublish;
-	//	0-rollOnce	1-rollOnce Die	2-taxiRide	3-specialStatus	4-cabcomp	5-chance8	6-stockList		7-stockauction		8-normalauction
+	//	0-rollOnce	1-rollOnce Die	2-taxiRide	3-specialStatus	4-cabcomp	5-chance8	6-stockList		7-stockauction		8-normalauction	9-bday
 	private int specialStatus;
 	public static int initialNumberofPlayers;
 	public static int debugPlayerID=0;
@@ -39,7 +39,7 @@ public class MonopolyGame {
 	private  int totalDice;
 	//buttons = rollDice,	buy,	buyChance,	sell,			4-no,			5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
 	//			10-yes,		start,	load,		save, 			dieOne,			15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
-	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-addPropDebug			25-debugnext	26-quit		27-sendAuction
+	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-addPropDebug			25-debugnext	26-quit		27-sendAuction		28-bd100	29-takeCab
 	//			30-yesStock	31-noStock			32-sendBids		33-sellStock 	34-debugAddStock
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
@@ -123,6 +123,7 @@ public class MonopolyGame {
 		    	  }else{
 		    		  cP.setPosition(dieOne+dieTwo+dieSpeed);
 		    		  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
+		    		  result = play5(result);
 			    	  play(Integer.parseInt(result[0]), result);
 		    	  }
 		    	  
@@ -136,9 +137,10 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).buy(cP, totalDice);
+	    		  result = play5(result);
 		    	  specialConditions[3] = true;
 		    	  specialStatus = Integer.parseInt(result[0]);
-		    	  play();
+		    	  play(Integer.parseInt(result[0]), result);
 		    	 
 		    	  
 		      }
@@ -150,8 +152,9 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.getSquareFromBoard(Integer.parseInt(gui.freePropertiesButtonGroup.getSelection().getActionCommand())).sellSquare(cP);
-	
-		    	  play(Integer.parseInt(result[0]),result);
+	    		  result = play5(result);
+
+	    		  play(Integer.parseInt(result[0]),result);
 		    	  System.out.println("Selected Radio Button: " + gui.freePropertiesButtonGroup.getSelection().getActionCommand());
 		    	 
 		    	  
@@ -164,7 +167,9 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.getSquareFromBoard(Integer.parseInt(gui.freePropertiesButtonGroup.getSelection().getActionCommand())).mortgage(cP);
-	
+
+	    		  result = play5(result);
+	    		  
 		    	  play(Integer.parseInt(result[0]),result);
 		    	  System.out.println("Selected Radio Button: " + gui.freePropertiesButtonGroup.getSelection().getActionCommand());
 		    	 
@@ -178,7 +183,9 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.getSquareFromBoard(Integer.parseInt(gui.mortgagedPropertiesButtonGroup.getSelection().getActionCommand())).unmortgage(cP);
-	
+
+	    		  result = play5(result);
+	    		  
 		    	  play(Integer.parseInt(result[0]),result);
 		    	  System.out.println("Selected Radio Button: " + gui.freePropertiesButtonGroup.getSelection().getActionCommand());
 		    	 
@@ -194,6 +201,7 @@ public class MonopolyGame {
 		      {
 		    	  GUI.rollOnceDie = die.getFace();
 		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).rollOnce(cP, GUI.rollOnceCard,GUI.rollOnceDie);
+	    		  result = play5(result);
 	    		  
 		    	  
 		    	  board.nextPlayer();
@@ -209,6 +217,7 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).build(cP, totalDice);
+	    		  result = play5(result);
 		    	  specialConditions[3] = true;
 		    	  specialStatus = Integer.parseInt(result[0]);
 		    	  play();
@@ -300,8 +309,6 @@ public class MonopolyGame {
 		    	  //String[] a = {"asd","asdasd"};
 		    	  //play(50,a);
 		    	  
-		    	  gui.refresh();
-		    	  
 		    	  
 		    	  
 		      }
@@ -316,6 +323,7 @@ public class MonopolyGame {
 		      {
 		    	  //System.out.println("Selected Radio Button: " + gui.eCompsGroup.getSelection().getActionCommand());		    	  
 		    	  String[] result = board.bank.buyStock(gui.eCompsGroup.getSelection().getActionCommand(), cP);
+	    		  result = play5(result);
 		    	  play(Integer.parseInt(result[0]),result);
 		      }
 		  });
@@ -352,6 +360,7 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String[] result = {"51","One share of "+gui.eCompsGroup.getSelection().getActionCommand()+" will be auction off."};
+	    		  result = play5(result);
 		    	  specialConditions[7]=true;
 		    	  play(51,result);
 		      }
@@ -368,6 +377,7 @@ public class MonopolyGame {
 		    		  bids[i] = Integer.parseInt(gui.auctionBids[i].getText());
 		    	  }
 		    	  String[] result = board.bank.auctionStock(gui.eCompsGroup.getSelection().getActionCommand(), bids);
+	    		  result = play5(result);
 		    	  play(1,result);
 		      }
 		  });
@@ -378,6 +388,7 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String[] result = board.bank.sellStock(gui.userStocksButtonGroup.getSelection().getActionCommand(), cP);
+	    		  result = play5(result);
 		    	  play(0,result);
 		      }
 		  });
@@ -411,6 +422,7 @@ public class MonopolyGame {
 			    	  }
 			    	  
 			    	  String[] result = board.bank.auction(sq, bids);
+		    		  result = play5(result);
 			    	  play(1,result);
 			    	  gui.refresh();
 
@@ -428,7 +440,9 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).taxiRide(cP, gui.taxiRideGroup.getSelection().getActionCommand());
-		    	  
+
+	    		  result = play5(result);
+	    		  
 		    	  specialConditions[3] = true;
 		    	  specialStatus = Integer.parseInt(result[0]);
 		    	  play();
@@ -443,7 +457,9 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).applyCard(board.getSquareWithRowAndPosition(cP.row, cP.position), cP, specialStatus);
-		    	  
+
+	    		  result = play5(result);
+	    		  
 		    	  specialConditions[3] = true;
 		    	  specialStatus = Integer.parseInt(result[0]);
 		    	  play();
@@ -457,6 +473,7 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.peekChanceCard().doAction(cP);
+	    		  result = play5(result);
 		    	  int s = Integer.parseInt(result[0]);
 		    	  if(s==25){
 		    		  gui.setGUI(result,"",buttons);
@@ -477,6 +494,7 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.peekChanceCard().doAction(cP);
+	    		  result = play5(result);
 		    	  int s = Integer.parseInt(result[0]);
 		    	  if(s==25){
 		    		  gui.setGUI(result,"",buttons);
@@ -497,6 +515,7 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).taxiRideAction(cP, specialStatus);
+	    		  result = play5(result);
 		    	  
 		    	  System.out.println(result[0]);
 		    	  if(result[0].equals("5")){
@@ -573,8 +592,9 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String a = gui.hurGroup.getSelection().getActionCommand();
-		    	 String result[] = board.peekChanceCard().applyCard14(Integer.parseInt(a.substring(0, a.indexOf("-"))), Integer.parseInt(a.substring(a.indexOf("-")+1, a.length())));
-		    
+		    	  String result[] = board.peekChanceCard().applyCard14(Integer.parseInt(a.substring(0, a.indexOf("-"))), Integer.parseInt(a.substring(a.indexOf("-")+1, a.length())));
+
+	    		  result = play5(result);
 		    		 // result = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
 		    		  play(Integer.parseInt(result[0]),result);
 		    	  System.out.println(a.substring(a.indexOf("-")+1, a.length()));
@@ -589,6 +609,33 @@ public class MonopolyGame {
 		      {
 		    	  ls.saveGame(board, gui.getSaveName());
 		    	  
+		    	 
+		      }
+		});
+		
+		//BirthDay $100
+		buttons[28].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  
+		    	  String[] result = ((SquareBirthday)board.getSquareWithRowAndPosition(cP.row, cP.position)).birthdayAction(1,cP,board);
+	    		  result = play5(result);
+		    	  play(Integer.parseInt(result[0]),result);
+		    	 
+		      }
+		});
+
+		
+		//BirthDay take cab
+		buttons[29].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  
+		    	  String[] result = ((SquareBirthday)board.getSquareWithRowAndPosition(cP.row, cP.position)).birthdayAction(2,cP,board);
+	    		  result = play5(result);
+		    	  play(Integer.parseInt(result[0]),result);
 		    	 
 		      }
 		});
@@ -619,11 +666,30 @@ public class MonopolyGame {
 			
 	}
 	
-	private void play(int resultStatus, String result[]){
+	private String[] play5(String[] r){
+		String[] result = r;
+		gui.refresh();
+		while(result[0].equals("5")){
+			result = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
+		}
+		gui.refresh();
 		
+		return result;
+		
+	}
 	
+	
+	private void play(int resultStatus, String r[]){
+		String[] result = r;
 
-		switch(resultStatus){
+		while(result[0].equals("5")){
+			result = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
+			System.out.println("asdf");
+		}
+		
+		
+
+		switch(Integer.parseInt(result[0])){
 			case 0:
 				gui.setGUI(result, "1", buttons);
 			break;
@@ -674,6 +740,17 @@ public class MonopolyGame {
 			case 51:
 				gui.setGUI(result, "000000000000000000000000000000001", buttons);
 				specialConditions[7] = true;
+				
+				break;
+			case 29:
+				gui.setGUI(result, "000000000000000000000000000011", buttons);
+				specialConditions[9] = true;
+				
+				break;
+
+			case 52:
+				gui.setGUI(result, "000000000000000000000000000011", buttons);
+				specialConditions[10] = true;
 				
 				break;
 				

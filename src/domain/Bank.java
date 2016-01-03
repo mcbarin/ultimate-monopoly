@@ -120,7 +120,7 @@ public class Bank {
 		result[0]="1";
 		result[1]="";
 		//find max bid
-		int max=0;
+		int max=-1;
 		for (int i = 0; i < players.size(); i++) {
 			if(bids[i] > max && players.get(i).money >= bids[i]){ // make sure player has the money that he offered
 				max=bids[i];

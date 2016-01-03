@@ -5,19 +5,19 @@
       <name>General Radio</name>
       <id>0</id>
       <parValue>100</parValue>
-      <share>1</share>
+      <share>4</share>
     </company>
     <company>
       <name>United Railways</name>
       <id>1</id>
       <parValue>110</parValue>
-      <share>6</share>
+      <share>0</share>
     </company>
     <company>
       <name>National Utilities</name>
       <id>2</id>
       <parValue>120</parValue>
-      <share>6</share>
+      <share>4</share>
     </company>
     <company>
       <name>Acme Motors</name>
@@ -38,22 +38,22 @@
       <share>0</share>
     </company>
   </bank>
-  <currentPlayer>0</currentPlayer>
-  <numberOfPlayers>2</numberOfPlayers>
-  <date>30/12/2015 22:54:06</date>
+  <currentPlayer>2</currentPlayer>
+  <numberOfPlayers>3</numberOfPlayers>
+  <date>03/1/2016 23:06:30</date>
   <player>
     <id>0</id>
     <name>Ezgi</name>
     <isPlaying>true</isPlaying>
-    <money>3100</money>
+    <money>3200</money>
     <countJail>4</countJail>
     <row>1</row>
-    <position>5</position>
+    <position>7</position>
     <reverse>false</reverse>
-    <shares>0-0-0-0-0-0</shares>
+    <shares>0-0-1-0-0-0</shares>
     <numbers>0-0-0-0-0-0-0</numbers>
     <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
-    <allPropertiesNames>READING RAILROAD, READING RAILROAD</allPropertiesNames>
+    <allPropertiesNames />
     <properties />
     <transits />
     <cabs />
@@ -66,21 +66,95 @@
     <id>1</id>
     <name>Cagatay</name>
     <isPlaying>true</isPlaying>
-    <money>3100</money>
+    <money>3200</money>
+    <countJail>4</countJail>
+    <row>0</row>
+    <position>18</position>
+    <reverse>false</reverse>
+    <shares>0-0-0-0-0-0</shares>
+    <numbers>1-0-0-0-0-0-0</numbers>
+    <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
+    <allPropertiesNames>BOYLSTON STREET</allPropertiesNames>
+    <properties>
+      <property>
+        <ID>7</ID>
+        <ownerID>1</ownerID>
+        <price>330</price>
+        <originalRent>33</originalRent>
+        <rent>33</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>0</level>
+      </property>
+    </properties>
+    <transits />
+    <cabs />
+    <utilities />
+    <freeProperties>
+      <ID>7</ID>
+    </freeProperties>
+    <mortgagedProperties />
+    <cards />
+  </player>
+  <player>
+    <id>2</id>
+    <name>Bugra</name>
+    <isPlaying>true</isPlaying>
+    <money>131388</money>
     <countJail>4</countJail>
     <row>1</row>
     <position>0</position>
     <reverse>false</reverse>
-    <shares>1-0-0-0-0-0</shares>
-    <numbers>0-0-0-0-0-0-0</numbers>
-    <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
-    <allPropertiesNames />
-    <properties />
+    <shares>4-0-3-0-0-0</shares>
+    <numbers>2-0-0-0-0-0-0</numbers>
+    <colorProperties>2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2</colorProperties>
+    <allPropertiesNames>THE EMBARCADERO, FISHERMAN'S WHARF, TELEPHONE COMPANY</allPropertiesNames>
+    <properties>
+      <property>
+        <ID>1</ID>
+        <ownerID>2</ownerID>
+        <price>210</price>
+        <originalRent>21</originalRent>
+        <rent>42</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>1</level>
+      </property>
+      <property>
+        <ID>2</ID>
+        <ownerID>2</ownerID>
+        <price>250</price>
+        <originalRent>25</originalRent>
+        <rent>50</rent>
+        <isMortgaged>false</isMortgaged>
+        <house>0</house>
+        <hotel>0</hotel>
+        <skyscraper>0</skyscraper>
+        <level>1</level>
+      </property>
+    </properties>
     <transits />
     <cabs />
-    <utilities />
-    <freeProperties />
-    <mortgagedProperties />
+    <utilities>
+      <utility>
+        <ownerID>2</ownerID>
+        <ID>3</ID>
+        <price>150</price>
+        <rent>0</rent>
+        <isMortgaged>true</isMortgaged>
+      </utility>
+    </utilities>
+    <freeProperties>
+      <ID>1</ID>
+      <ID>2</ID>
+    </freeProperties>
+    <mortgagedProperties>
+      <ID>3</ID>
+    </mortgagedProperties>
     <cards />
   </player>
 </game>

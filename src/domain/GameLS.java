@@ -314,7 +314,7 @@ public class GameLS {
 		     
 		     String cl = Integer.toString(p.colorProperties[0]);
 		     for(int i=1; i<20; i++){
-		    	 cl = cl+"-"+Integer.toString(p.colorProperties[0]);
+		    	 cl = cl+"-"+Integer.toString(p.colorProperties[i]);
 		     }
 
 		     elt = new Element("colorProperties");
