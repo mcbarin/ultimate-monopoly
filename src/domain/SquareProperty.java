@@ -332,6 +332,7 @@ public class SquareProperty extends Square  {
 		}
 
 		p.setFreeProperties();
+		p.board.refreshGUI();
 		return result;
 	}
 		

@@ -172,8 +172,14 @@ public class SquareCabCompany extends Square {
 			result[p.id+2]=Integer.toString(price/2);
 			p.cabs.remove(this);
 			initializeAll();
+		}else{
+			result = sellCabStand(p);
 		}
+		
+		
+
 		p.setFreeProperties();
+		p.board.refreshGUI();
 		return result;
 	}
 

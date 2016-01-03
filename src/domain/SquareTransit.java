@@ -230,8 +230,11 @@ public class SquareTransit extends Square {
 			p.trains.remove(this);
 			p.trains.remove(this.twin);
 			initializeAll();
+		}else{
+			result=sellTrainDepot(p);
 		}
 		p.setFreeProperties();
+		p.board.refreshGUI();
 		return result;
 	}
 }
