@@ -893,6 +893,7 @@ public class GUI {
 				    }else{
 							for(int i=0;i<12;i++){
 								auctionBids[i].setVisible(false);
+								auctionBids[i].setText("0");
 								auctionNames[i].setVisible(false);}
 					    }
 
