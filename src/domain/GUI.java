@@ -885,42 +885,35 @@ public class GUI {
 				    
 				    
 				    
-
-
-				    
-				    if(MonopolyGame.specialConditions[7]){
-						buttons[32].setVisible(true);
+				    if(MonopolyGame.specialConditions[7] || MonopolyGame.specialConditions[8]){
 						for(int i=0;i<board.players.size();i++){
 							auctionBids[i].setVisible(true);
 							auctionNames[i].setVisible(true);
 						}
+				    }else{
+							for(int i=0;i<12;i++){
+								auctionBids[i].setVisible(false);
+								auctionNames[i].setVisible(false);}
+					    }
+
+				    
+				    if(MonopolyGame.specialConditions[7]){
+						buttons[32].setVisible(true);
 						
 						buttons[32].setLocation(776, 182+27*board.players.size());
 						
 				    }else{
 						buttons[32].setVisible(false);
 
-						for(int i=0;i<12;i++){
-							auctionBids[i].setVisible(false);
-							auctionNames[i].setVisible(false);}
 				    }
 
 				    
 				    if(MonopolyGame.specialConditions[8]){
 						buttons[27].setVisible(true);
-						for(int i=0;i<board.players.size();i++){
-							auctionBids[i].setVisible(true);
-							auctionNames[i].setVisible(true);
-						}
-						
 						buttons[27].setLocation(776, 182+27*board.players.size());
 						
 				    }else{
 						buttons[27].setVisible(false);
-
-						for(int i=0;i<12;i++){
-							auctionBids[i].setVisible(false);
-							auctionNames[i].setVisible(false);}
 				    }
 					
 					
