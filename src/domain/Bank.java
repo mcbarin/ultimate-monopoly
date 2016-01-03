@@ -229,6 +229,16 @@ public class Bank {
 		return result;
 	}
 	
+	
+
+	public void addStock(String name, int n, Player p){
+
+		int id = getIdByStockName(name);
+		Company c = companies.get(id);
+			c.share+=n;
+			p.shares[id]+=n;
+	}
+	
 
 	public String[] sellStock(String name, Player p){
 		String[] result = new String[14];

@@ -40,7 +40,7 @@ public class MonopolyGame {
 	//buttons = rollDice,	buy,	buyChance,	sell,			4-no,			5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
 	//			10-yes,		start,	load,		save, 			dieOne,			15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
 	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-addPropDebug			25-debugnext	26-quit		27-sendAuction
-	//			30-yesStock	31-noStock			32-sendBids		33-sellStock
+	//			30-yesStock	31-noStock			32-sendBids		33-sellStock 	34-debugAddStock
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -90,11 +90,24 @@ public class MonopolyGame {
 		      {
 		    	  gui.removeSpecialConditions();
 		    	  
+
+	    		  
+	    		  dieOne = gui.getDieOneF();
+	    		  	gui.dieOneF.setText("0");
+	    		  dieTwo = gui.getDieTwoF();
+	    		  	gui.dieTwoF.setText("0");
+	    		  dieSpeed = gui.getDieSpeedF();
+	    		  	gui.dieSpeedF.setText("0");
+	    		  	
+	    		  if(dieOne>0 && dieTwo>0 && dieSpeed>0)
+	    			  manipulate = true;
+		    	  
 		    	  if(!manipulate){
 			    	  dieOne = die.getFace();
 			    	  dieTwo = die.getFace();
 			    	  dieSpeed = die.getFace();}
 		    	  else{
+		    		  
 		    		 manipulate = false;
 		    	  }
 		    	  totalDice = dieOne+dieTwo;
@@ -292,7 +305,7 @@ public class MonopolyGame {
 		    	  
 		      }
 		});
-		
+
 
 		
 		//stock buy button
@@ -303,6 +316,32 @@ public class MonopolyGame {
 		    	  //System.out.println("Selected Radio Button: " + gui.eCompsGroup.getSelection().getActionCommand());		    	  
 		    	  String[] result = board.bank.buyStock(gui.eCompsGroup.getSelection().getActionCommand(), cP);
 		    	  play(Integer.parseInt(result[0]),result);
+		      }
+		  });
+
+		
+		//stock add debug button
+		buttons[34].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  String nu = gui.debugStocksNum.getText();
+		    	  int n = 0;
+		    	  if(nu.equals("#"))
+		    		  n=1;
+		    	  else if(Integer.parseInt(nu)>(6-board.bank.companies.get(board.bank.getIdByStockName(gui.debugStocksButtonGroup.getSelection().getActionCommand())).share))
+		    		  n=(6-board.bank.companies.get(board.bank.getIdByStockName(gui.debugStocksButtonGroup.getSelection().getActionCommand())).share);
+		    	  else if(Integer.parseInt(nu)<1)
+		    		  n=1;
+		    	  else
+			    	  n = Integer.parseInt(nu);
+		    		  
+		    	  //System.out.println("Selected Radio Button: " + gui.debugStocksButtonGroup.getSelection().getActionCommand() + gui.debugStocksNum.getText());		    	  
+		    	  board.bank.addStock(gui.debugStocksButtonGroup.getSelection().getActionCommand(), n, board.getPlayers().get(initialNumberofPlayers-debugLeft));
+		    	  
+		    	  gui.debugStocksNum.setText("#");
+		    	  gui.debugStocksButtonGroup.clearSelection();
+		    	  gui.refresh();
 		      }
 		  });
 		
@@ -504,19 +543,29 @@ public class MonopolyGame {
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
-		    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).row=gui.getRow();
-		    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).position=gui.getPosition();
-		    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).money=gui.getMoney();
-		    	  if(debugLeft==1){
-		    		  
-		    		  dieOne = gui.getDieOneF();
-		    		  dieTwo = gui.getDieTwoF();
-		    		  dieSpeed = gui.getDieSpeedF();
-		    		  if(dieOne>0 && dieTwo>0 && dieSpeed>0)
-		    			  manipulate = true;
-		    			  
-		    	  }
+		    	  if(gui.getRow().equals("R"))
+		    		  board.getPlayers().get(initialNumberofPlayers-debugLeft).row = 1;
+		    	  else
+		    		  board.getPlayers().get(initialNumberofPlayers-debugLeft).row=Integer.parseInt(gui.getRow());
+		    	  gui.row.setText("R");
+		    	  
+		    	  if(gui.getPosition().equals("S"))
+			    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).position = 0;
+		    	  else
+			    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).position=Integer.parseInt(gui.getPosition());
+		    	  gui.position.setText("S");		    	  
+		    	  
+		    	  if(gui.getMoney().equals("$"))
+			    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).money=3200;
+		    	  else
+		    		  board.getPlayers().get(initialNumberofPlayers-debugLeft).money=Integer.parseInt(gui.getMoney());
+		    	  gui.money.setText("$");
 		    	  debugLeft--;
+		    	  
+		    	  if(debugLeft<0)
+						gui.setGUI("1","",buttons);
+		    	  
+		    	  gui.refresh();
 		      }
 		});
 		

@@ -5,7 +5,7 @@ public class Company {
 	String name;
 	int id;
 	int parValue; 
-	int share = 0; //each company has 5 share. 0 share sold at first.
+	int share = 0; //each company has 6 share. 0 share sold at first.
 	
 	public Company(String name, int id, int parValue) {
 		this.name=name;

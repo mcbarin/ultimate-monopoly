@@ -51,7 +51,6 @@ public class GUI {
 
 	public JRadioButton[] savedGamesElt = new JRadioButton[13];
 	public ButtonGroup savedGamesGroup = new ButtonGroup();
-	private String[] loadGameLines;
 	
 	
 	public final static int MAX_PROPERTIES = 86;
@@ -72,7 +71,12 @@ public class GUI {
 	public ButtonGroup userStocksButtonGroup = new ButtonGroup();
 	public JPanel userStockspanel = new JPanel(new GridLayout(0,1));
     JScrollPane userStocksscrollPane = new JScrollPane(userStockspanel);
-
+    
+    
+	public JRadioButton[] debugStocks = new JRadioButton[6];
+	public ButtonGroup debugStocksButtonGroup = new ButtonGroup();
+	public JPanel debugStockspanel = new JPanel(new GridLayout(0,1));
+	public JTextField debugStocksNum= new JTextField();
     
 
 	public JRadioButton[] taxiRideDestinations = new JRadioButton[9];
@@ -358,7 +362,7 @@ public class GUI {
 		    userStockspanel.setBackground(Color.DARK_GRAY);
 		    userStocksscrollPane.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
 		    userStocksscrollPane.setAutoscrolls(true);
-		    userStocksscrollPane.setVisible(true);
+		    userStocksscrollPane.setVisible(false);
 			panel.add(userStocksscrollPane);
 		
 			placeButton(b[33],"Sell Share of Stock",105, 95, 240, 25,false);
@@ -552,8 +556,8 @@ public class GUI {
 			
 
 			////////////////////////////////
-		    dPropsScrollPane.setLocation(725, 170);
-		    dPropsScrollPane.setSize(540, 200);
+		    dPropsScrollPane.setLocation(725, 44);
+		    dPropsScrollPane.setSize(360, 128);
 		    //dProps[0].setSelected(true);
 		    dPropsPanel.setBackground(Color.DARK_GRAY);
 		    dPropsScrollPane.setBorder(BorderFactory.createMatteBorder(0, 0,0, 0, Color.black));
@@ -562,12 +566,11 @@ public class GUI {
 		    
 		    for(int i=0;i<5;i++){
 				dPropsType[i] = new JRadioButton("SkyScraper");
-				dPropsType[i].setLocation(725 + i*120,375);
-				dPropsType[i].setSize(120, 25);
+				dPropsType[i].setLocation(1095,44 + i*32);
+				dPropsType[i].setSize(120, 32);
 				dPropsType[i].setVisible(false);
 				dPropsType[i].setBackground(Color.DARK_GRAY);
 				dPropsType[i].setForeground(Color.WHITE);
-
 				panel.add(dPropsType[i]);
 				dPropsTypeGroup.add(dPropsType[i]);
 		    }
@@ -580,65 +583,87 @@ public class GUI {
 		    dPropsType[2].setActionCommand("5");
 		    dPropsType[3].setText("SkyScraper");
 		    dPropsType[3].setActionCommand("6");
-			placeButton(b[24],"Add Property",725, 405, 540, 25,false);
-			placeButton(b[25],"Next Player",725, 450, 540, 50,false);
+			placeButton(b[24],"Add Property",725, 182, 540, 24,false);
+			placeButton(b[25],"Next Player",725, 450, 540, 48,false);
 		    
 			panel.add(dPropsScrollPane);
 			
 			
+			
 
-	        placeLabel(titles[6],"asdasdsad",540,50,725,13,new Color(255,255,255),Color.GRAY,new Font("Verdana", Font.BOLD, 18));
+			//DebugStock Pane
+		    for(int i = 0; i<6; i++){
+		    	debugStocks[i] = new JRadioButton("text" + i);
+		    	debugStocks[i].setActionCommand(board.bank.names[i]);
+		    	debugStocks[i].setVisible(true);
+		    	debugStocks[i].setSize(360,26);
+		    	debugStocks[i].setForeground(new Color(199,199,0));
+		        if(i%2==1)
+		        	debugStocks[i].setBackground(new Color(62,62,62));
+		        else
+		        	debugStocks[i].setBackground(new Color(75,75,75));
+		        
+		    	debugStocksButtonGroup.add(debugStocks[i]);
+		    	debugStockspanel.add(debugStocks[i]);
+		     }
+		    debugStockspanel.setSize(360, 156);
+		    debugStockspanel.setLocation(725, 216);
+		    debugStockspanel.setBackground(Color.DARK_GRAY);
+			panel.add(debugStockspanel);
+			
+			debugStocksNum.setSize(90, 40);
+			debugStocksNum.setLocation(1130, 274);
+			debugStocksNum.setBackground(new Color(75,75,75));
+			debugStocksNum.setForeground(Color.WHITE);
+			debugStocksNum.setHorizontalAlignment(JTextField.CENTER);
+			debugStocksNum.setFont(new Font("Verdana", Font.BOLD, 18));
+			debugStocksNum.setVisible(true);
+			debugStocksNum.setText("#");
+			panel.add(debugStocksNum);
+			placeButton(b[34],"Add Shares of Stock",725,382, 540, 24,false);
+			panel.add(b[34]);
+			
+			
+			
+			
+
+	        placeLabel(titles[6],"asdasdsad",100,20,725,10,new Color(255,255,255),Color.GRAY,new Font("Verdana", Font.BOLD, 16));
 	        titles[6].setHorizontalAlignment(JLabel.CENTER);
 	        titles[6].setVisible(false);
 	        panel.add(titles[6]);
-	        
-	        
-
-
-			row.setSize(80, 40);
-			row.setLocation(910, 65);
+			row.setSize(60, 24);
+			row.setLocation(825, 8);
 			row.setBackground(Color.GRAY);
 			row.setHorizontalAlignment(JTextField.CENTER);
-			row.setFont(new Font("Verdana", Font.BOLD, 18));
+			row.setFont(new Font("Verdana", Font.BOLD, 16));
 			row.setVisible(false);
-			row.setText("1");
-
-			position.setSize(80, 40);
-			position.setLocation(1010, 65);
+			row.setText("R");
+			position.setSize(60, 24);
+			position.setLocation(895, 8);
 			position.setBackground(Color.GRAY);
 			position.setHorizontalAlignment(JTextField.CENTER);
-			position.setFont(new Font("Verdana", Font.BOLD, 18));
-			position.setText("0");
+			position.setFont(new Font("Verdana", Font.BOLD, 16));
+			position.setText("S");
 			position.setVisible(false);
-
-			money.setSize(180, 40);
-			money.setLocation(910, 110);
+			money.setSize(120, 24);
+			money.setLocation(965,8);
 			money.setBackground(Color.GRAY);
 			money.setHorizontalAlignment(JTextField.CENTER);
-			money.setFont(new Font("Verdana", Font.BOLD, 18));
-			money.setText("3200");
+			money.setFont(new Font("Verdana", Font.BOLD, 16));
+			money.setText("$");
 			money.setVisible(false);
 
-			dieOneF.setSize(80, 40);
-			dieOneF.setLocation(880, 510);
+			
+			
 			dieOneF.setBackground(Color.GRAY);
 			dieOneF.setHorizontalAlignment(JTextField.CENTER);
-			dieOneF.setFont(new Font("Verdana", Font.BOLD, 18));
-			dieOneF.setText("0");
-
-			dieTwoF.setSize(80, 40);
-			dieTwoF.setLocation(970, 510);
+			dieOneF.setFont(new Font("Verdana", Font.BOLD, 15));
 			dieTwoF.setBackground(Color.GRAY);
 			dieTwoF.setHorizontalAlignment(JTextField.CENTER);
-			dieTwoF.setFont(new Font("Verdana", Font.BOLD, 18));
-			dieTwoF.setText("0");
-
-			dieSpeedF.setSize(80, 40);
-			dieSpeedF.setLocation(1060, 510);
+			dieTwoF.setFont(new Font("Verdana", Font.BOLD, 15));
 			dieSpeedF.setBackground(Color.GRAY);
 			dieSpeedF.setHorizontalAlignment(JTextField.CENTER);
-			dieSpeedF.setFont(new Font("Verdana", Font.BOLD, 18));
-			dieSpeedF.setText("0");
+			dieSpeedF.setFont(new Font("Verdana", Font.BOLD, 15));
 	        dieOneF.setVisible(false);
 	        dieTwoF.setVisible(false);
 	        dieSpeedF.setVisible(false);
@@ -688,8 +713,8 @@ public class GUI {
 	}
 	public void refresh(){
 		if(Board.gameStatus==-1){
-
-
+			
+			
 			for(int i=0; i<39; i++){
 				buttons[i].setVisible(false);
 			}
@@ -697,17 +722,23 @@ public class GUI {
 			for(int i=0;i<13;i++){
 				 titles[i].setVisible(false);
 			}
-			
-
-
+			scrollPane.setVisible(false);
+			scrollPaneUnmortgage.setVisible(false);
+			userStocksscrollPane.setVisible(false);
+			scrollPaneTaxiRide.setVisible(false);
+			cabScrollPane.setVisible(false);
+			hurScrollPane.setVisible(false);
+			debugStockspanel.setVisible(false);
+			dPropsScrollPane.setVisible(false);
+			buttons[34].setVisible(false);
+		    debugStockspanel.setVisible(false);
+		    debugStocksNum.setVisible(false);
 			setGUI("","",buttons);
 			titles[12].setVisible(true);
 			initalNumberofPlayers.setVisible(true);
 			buttons[11].setVisible(true);
 
 			eCompsScrollPane.setVisible(false);
-			buttons[30].setVisible(false);
-			buttons[31].setVisible(false);
 
 
 			currentPlayer.setVisible(false);
@@ -750,6 +781,9 @@ public class GUI {
 			
 		}else{
 
+			buttons[34].setVisible(false);
+		    debugStockspanel.setVisible(false);
+		    debugStocksNum.setVisible(false);	
 			titles[12].setVisible(false);
 			titles[11].setVisible(false);
 
@@ -780,8 +814,11 @@ public class GUI {
 				playerMoneys[i].setVisible(false);
 				playerPropertiesNames[i].setVisible(false);
 				playerPics[i].setVisible(false);}
-					
+	
+			    debugStockspanel.setVisible(true);
+			    
 				if(MonopolyGame.debugLeft==0){
+				    debugStockspanel.setVisible(false);
 			
 				    currentMessage.setVisible(true);
 					currentPlayer.setText(cP.name);
@@ -807,13 +844,16 @@ public class GUI {
 				    buttons[25].setVisible(false);
 				    saveName.setVisible(true); buttons[13].setVisible(true);
 
-			
+
+					setGUI("Everything is ready. Let the game begin!","1",buttons);
 					MonopolyGame.debugLeft--;
 				}
 				else if(MonopolyGame.debugLeft<0){
 				    row.setVisible(false);
 				    position.setVisible(false);
 				    money.setVisible(false);
+				    dPropsScrollPane.setVisible(false);
+				    debugStockspanel.setVisible(false);
 				    
 				    if(MonopolyGame.specialConditions[6]){
 						eCompsScrollPane.setVisible(true);
@@ -908,6 +948,8 @@ public class GUI {
 					buttons[23].setVisible(false);}
 					
 					
+
+					
 					
 			
 				}else{
@@ -918,13 +960,23 @@ public class GUI {
 					debugProps();
 					buttons[24].setVisible(true);
 					buttons[25].setVisible(true);
-				    
+				    /*
 				    if(MonopolyGame.debugLeft==1){
 			
 				        dieOneF.setVisible(true);
 				        dieTwoF.setVisible(true);
 				        dieSpeedF.setVisible(true);
-				    }
+				        
+						dieOneF.setSize(48, 24);
+						dieOneF.setLocation(1095, 8);
+						dieOneF.setText("0");
+						dieTwoF.setSize(48, 24);
+						dieTwoF.setLocation(1153, 8);
+						dieTwoF.setText("0");
+						dieSpeedF.setSize(48, 24);
+						dieSpeedF.setLocation(1211, 8);
+						dieSpeedF.setText("0");
+				    }*/
 					//MonopolyGame.debugLeft--;
 					
 					
@@ -975,17 +1027,14 @@ public class GUI {
 		
 	}	
 
-	public int getRow(){
-		int a = Integer.parseInt(row.getText()); 
-		return a;
+	public String getRow(){
+		return row.getText();
 	}
-	public int getPosition(){
-		int a = Integer.parseInt(position.getText()); 
-		return a;
+	public String getPosition(){
+		return position.getText();
 	}
-	public int getMoney(){
-		int a = Integer.parseInt(money.getText()); 
-		return a;
+	public String getMoney(){
+		return money.getText();
 	}
 	public int getDieOneF(){
 		int a = Integer.parseInt(dieOneF.getText()); 
@@ -1030,8 +1079,21 @@ public class GUI {
 		
 		if(bs.length()>0 && bs.charAt(0)=='1'){
 			saveName.setVisible(true); b[13].setVisible(true); b[26].setVisible(true);
+
+			
+	        dieOneF.setVisible(true); dieTwoF.setVisible(true);  dieSpeedF.setVisible(true);
+			dieOneF.setSize(48, 24);
+			dieOneF.setLocation(788, 230);
+			dieOneF.setText("0");
+			dieTwoF.setSize(48, 24);
+			dieTwoF.setLocation(846, 230);
+			dieTwoF.setText("0");
+			dieSpeedF.setSize(48, 24);
+			dieSpeedF.setLocation(904, 230);
+			dieSpeedF.setText("0");
 		}else{
-				saveName.setVisible(false); b[13].setVisible(false); b[26].setVisible(false);
+			saveName.setVisible(false); b[13].setVisible(false); b[26].setVisible(false);
+			dieOneF.setVisible(false); dieTwoF.setVisible(false);  dieSpeedF.setVisible(false);
 			}
 		
 		removeSpecialConditions();
@@ -1167,15 +1229,13 @@ public class GUI {
 	
 	
 	public void debugProps(){
-
+		dPropsPanel.removeAll();
 		int abc = 0;
 	    for(int i = 0; i<120; i++){
 	    	dProps[i] = null;
 	    	Square sq = board.getSquareFromBoard(i);
 	    	
-	    	if(sq.type=="Property" || sq.type=="Transit" || sq.type=="Utility" || sq.type=="CabCompany"){
-	    		
-
+	    	if(sq.owner==null && ( sq.type=="Property" || sq.type=="Transit" || sq.type=="Utility" || sq.type=="CabCompany")){
 		    	dProps[abc] = new JRadioButton(sq.name);
 	    		if(sq.owner==null){
 			    	dProps[abc].setActionCommand(Integer.toString(i));
@@ -1187,13 +1247,9 @@ public class GUI {
 	  	  				if(colorCodes[sq.color].getBlue()>128 && colorCodes[sq.color].getGreen()>128 && colorCodes[sq.color].getRed()>128)
 	  	  					dProps[abc].setForeground(Color.BLACK);
 	  	  				}
-
-
 	    		}else{
-
 			    	dProps[abc].setVisible(false);
 	    		}
-
 		    	dPropsGroup.add(dProps[abc]);
 		    	dPropsPanel.add(dProps[abc]);
 		    	abc++;
@@ -1201,10 +1257,31 @@ public class GUI {
 	     }
 	    for(int i=0;i<4;i++){
 	    	dPropsType[i].setVisible(true);}
-	    
+	    dPropsScrollPane.setVisible(true);
 	    
 
-	    dPropsScrollPane.setVisible(true);
+		buttons[34].setVisible(true);
+	    debugStockspanel.setVisible(true);
+	    debugStocksNum.setVisible(true);
+	    
+	    for(int i = 0; i<6; i++){
+	    	
+	    	if(board.bank.companies.get(i).share<6){
+	    		debugStocks[i].setText(board.bank.names[i]+" - "+Integer.toString(6-board.bank.companies.get(i).share)+" available");
+	    		debugStocks[i].setEnabled(true);
+	    	}else{
+	    		debugStocks[i].setText(board.bank.names[i]+ " - not available");
+	    		debugStocks[i].setEnabled(false);
+	    	}
+	    	
+	    	debugStocks[i].setActionCommand(board.bank.names[i]);
+	    	
+	    }
+	    
+	    
+	    
+	    
+	    
 	}
 	
 	

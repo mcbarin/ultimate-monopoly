@@ -52,7 +52,7 @@ public class Board {
 	Queue<CardCommunity> communityDeck = new LinkedList<CardCommunity>();
 	Queue<CardChance> chanceDeck = new LinkedList<CardChance>();
 
-	String[] playerNames = {"Ezgi","Cagatay","Bugra","Delta","Epsilon","Zeta","Eta","Theta","Iota","Kappa","Lambda","Pi"};
+	String[] playerNames = {"Ezgi","Cagatay","Bugra","Berika","Epsilon","Zeta","Eta","Theta","Iota","Kappa","Lambda","Pi"};
 
 
 	public int numOfPlayers(){
