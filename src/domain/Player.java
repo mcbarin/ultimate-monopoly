@@ -174,18 +174,28 @@ public class Player {
 		if(s.owner==null){
 			if(s.type.equals("Property")){
 				SquareProperty sp= (SquareProperty)board.getSquareFromBoard(id);
-				if(house==5){
-					sp.hotel=1;
-					this.numberOfHotels++;
-				}else if(house==6){
-					sp.skyscraper=1;
-					this.numberOfSkyscrapers++;
-				}else if(house==1){
-					sp.house=house;
-					this.numberOfHouses++;
-				}//else house==0 
-				sp.updateRentAccordingToHouse(sp);
-				addProperty(sp);
+				if(house>0){				
+					int numberOfHouses = board.getNumberOfSameColor(sp.color);
+					int[] housesSameColor = new int[numberOfHouses];
+					housesSameColor = board.getOtherProperties(sp.color);
+					for(int i=0;i<numberOfHouses;i++){
+						SquareProperty x = (SquareProperty)board.getSquareFromBoard(housesSameColor[i]);
+						if(house==5){
+							x.hotel=1;
+							this.numberOfHotels++;
+						}else if(house==6){
+							x.skyscraper=1;
+							this.numberOfSkyscrapers++;
+						}else if(house==1){
+							x.house=1;
+							this.numberOfHouses=1;
+						}
+						addProperty(x);
+					}
+					}else{
+						addProperty(sp);
+					}
+				
 
 			}else if(s.type.equals("CabCompany")){
 				SquareCabCompany sp= (SquareCabCompany)board.getSquareFromBoard(id);
@@ -245,7 +255,7 @@ public class Player {
 		numberOfProperties++;
 		valueOfProperties+=sp.price/2;
 		//check for majority ownership or monopoly.
-
+		sp.updateRentAccordingToHouse(sp);
 		updateRentPrices(sp.color);
 		setFreeProperties();
 	}
