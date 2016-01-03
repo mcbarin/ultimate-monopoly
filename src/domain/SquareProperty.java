@@ -170,6 +170,19 @@ public class SquareProperty extends Square  {
 		}
 		return true;
 	}
+	
+	public boolean checkEvenlyTwo(Player player, Board board){
+		SquareProperty ss = null;
+		int ids[] = board.getOtherProperties(this.color); 
+		for (int i = 0; i < ids.length; i++) {
+			ss = (SquareProperty)board.getSquareFromBoard(ids[i]);
+			if(ss.owner!=null && ss.owner.id == player.id && this.house<ss.house){
+				return false;
+			}
+		}
+		return true;
+	}
+
 
 	public String[] buyProperty(Player p){
 		String[] result = new String[14];
@@ -279,10 +292,9 @@ public class SquareProperty extends Square  {
 		}else if(house==0){
 			result[1]="You don't have any building here.";
 			return result;
-		}else if (house<=4){ 
+		}else if (house<=4){
 			house-=1;
 			p.numberOfHouses--;
-			
 			result[1]=p.name+" sold house for $"+buildingPrice/2;
 		}
 
@@ -312,7 +324,11 @@ public class SquareProperty extends Square  {
 			p.deleteProperty(this);
 			initializeAll();
 		}else{
+			if(checkEvenlyTwo(p, p.board)){
 			result = sellBuilding(p);
+			}else{
+				result[1] = "You have to sell your buildings evenly!";
+			}
 		}
 
 		p.setFreeProperties();
