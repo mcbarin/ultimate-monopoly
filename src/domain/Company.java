@@ -22,7 +22,7 @@ public class Company {
 	5 Shares	$ 250	$ 275	$ 300	$ 325	$ 350	$ 375  
 	6 Shares 													*/
 	public int getDividend(int share){
-			return (10+id) * share^2;
+			return (10+id) * share*share;
 			
 	}
 	

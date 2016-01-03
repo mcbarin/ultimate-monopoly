@@ -122,7 +122,8 @@ public class MonopolyGame {
 		    	  }else if(dieSpeed>4){	
 		    	  }else{
 		    		  cP.setPosition(dieOne+dieTwo+dieSpeed);
-			    	  play();
+		    		  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
+			    	  play(Integer.parseInt(result[0]), result);
 		    	  }
 		    	  
 		    	  
@@ -351,6 +352,7 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  String[] result = {"51","One share of "+gui.eCompsGroup.getSelection().getActionCommand()+" will be auction off."};
+		    	  specialConditions[7]=true;
 		    	  play(51,result);
 		      }
 		  });

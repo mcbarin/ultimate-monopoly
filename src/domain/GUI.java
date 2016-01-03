@@ -739,7 +739,13 @@ public class GUI {
 			buttons[11].setVisible(true);
 
 			eCompsScrollPane.setVisible(false);
+			
 
+			buttons[32].setVisible(false);
+
+			for(int i=0;i<12;i++){
+				auctionBids[i].setVisible(false);
+				auctionNames[i].setVisible(false);}
 
 			currentPlayer.setVisible(false);
 			titles[2].setVisible(false);
