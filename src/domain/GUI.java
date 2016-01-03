@@ -1,5 +1,7 @@
 package domain;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -110,6 +112,7 @@ public class GUI {
 	public JTextField dieTwoF = new JTextField();
 	public JTextField dieSpeedF = new JTextField();
 	public JTextField saveName = new JTextField();
+	public JTextField houseNum = new JTextField();
 	
 	
 
@@ -576,6 +579,10 @@ public class GUI {
 				dPropsType[i].setVisible(false);
 				dPropsType[i].setBackground(Color.DARK_GRAY);
 				dPropsType[i].setForeground(Color.WHITE);
+				if(i==1)
+					dPropsType[i].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){houseNum.setEnabled(true);}});
+				else
+			    	dPropsType[i].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){houseNum.setEnabled(false);}});
 				panel.add(dPropsType[i]);
 				dPropsTypeGroup.add(dPropsType[i]);
 		    }
@@ -583,6 +590,7 @@ public class GUI {
 		    dPropsType[0].setText("None");
 		    dPropsType[0].setActionCommand("0");
 		    dPropsType[1].setText("House");
+		    dPropsType[1].setSize(61, 32);
 		    dPropsType[1].setActionCommand("1");
 		    dPropsType[2].setText("Hotel");
 		    dPropsType[2].setActionCommand("5");
@@ -591,6 +599,17 @@ public class GUI {
 			placeButton(b[24],"Add Property",725, 182, 540, 24,false);
 			placeButton(b[25],"Next Player",725, 450, 540, 48,false);
 		    
+			houseNum.setSize(40, 26);
+			houseNum.setLocation(1160, 78);
+			houseNum.setBackground(new Color(75,75,75));
+			houseNum.setForeground(Color.WHITE);
+			houseNum.setHorizontalAlignment(JTextField.CENTER);
+			houseNum.setFont(new Font("Verdana", Font.BOLD, 16));
+			houseNum.setVisible(false);
+			houseNum.setEnabled(false);
+			houseNum.setText("#");
+			panel.add(houseNum);
+			
 			panel.add(dPropsScrollPane);
 			
 			
@@ -617,7 +636,7 @@ public class GUI {
 			panel.add(debugStockspanel);
 			
 			debugStocksNum.setSize(90, 40);
-			debugStocksNum.setLocation(1130, 274);
+			debugStocksNum.setLocation(1145, 274);
 			debugStocksNum.setBackground(new Color(75,75,75));
 			debugStocksNum.setForeground(Color.WHITE);
 			debugStocksNum.setHorizontalAlignment(JTextField.CENTER);
@@ -865,7 +884,8 @@ public class GUI {
 				    money.setVisible(false);
 				    dPropsScrollPane.setVisible(false);
 				    debugStockspanel.setVisible(false);
-				    
+
+					houseNum.setVisible(false);
 				    if(MonopolyGame.specialConditions[6]){
 						eCompsScrollPane.setVisible(true);
 						buttons[30].setVisible(true);
@@ -1304,8 +1324,15 @@ public class GUI {
 		buttons[34].setVisible(true);
 	    debugStockspanel.setVisible(true);
 	    debugStocksNum.setVisible(true);
+    	houseNum.setVisible(true);
+    	
+
+    	
 	    
-	    for(int i = 0; i<6; i++){
+
+		
+		
+		for(int i = 0; i<6; i++){
 	    	
 	    	if(board.bank.companies.get(i).share<6){
 	    		debugStocks[i].setText(board.bank.names[i]+" - "+Integer.toString(6-board.bank.companies.get(i).share)+" available");

@@ -544,10 +544,12 @@ public class MonopolyGame {
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
-
+		    	  int n = Integer.parseInt(gui.dPropsGroup.getSelection().getActionCommand());
+		    	  if(n==1 && !gui.houseNum.getText().equals("#"))
+		    		  n=Integer.parseInt(gui.houseNum.getText());
 		    	  //MP3Player.play("bip.mp3");
 		    	  
-		    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).addPropertyDebug(Integer.parseInt(gui.dPropsGroup.getSelection().getActionCommand()), Integer.parseInt(gui.dPropsTypeGroup.getSelection().getActionCommand()));
+		    	  board.getPlayers().get(initialNumberofPlayers-debugLeft).addPropertyDebug(n, Integer.parseInt(gui.dPropsTypeGroup.getSelection().getActionCommand()));
 		    	  gui.debugProps();
 		    	  gui.refresh();
 		    	  // System.out.println("debo: " + gui.dPropsGroup.getSelection().getActionCommand()+" "+gui.dPropsTypeGroup.getSelection().getActionCommand());
