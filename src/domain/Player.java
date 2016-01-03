@@ -186,9 +186,9 @@ public class Player {
 						}else if(house==6){
 							x.skyscraper=1;
 							this.numberOfSkyscrapers++;
-						}else if(house==1){
-							x.house=1;
-							this.numberOfHouses=1;
+						}else{
+							x.house=house;
+							this.numberOfHouses=house;
 						}
 						addProperty(x);
 					}
