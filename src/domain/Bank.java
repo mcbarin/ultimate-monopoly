@@ -164,6 +164,9 @@ public class Bank {
 			}else{
 				((SquareCabCompany)s).buyCabCompany(winner);
 				winner.addMoney(((SquareCabCompany)s).price-max); //
+				
+				result[1] += winner.name + " has bought " + ""+s.name+" for $"+max+".";
+				result[winner.id+2] = "-"+ ""+max;
 			}
 		}else if (s.type.equals("Utility")){
 			if(max < ((SquareUtility)s).price/2){ // or max==0
@@ -171,6 +174,9 @@ public class Bank {
 			}else{
 				((SquareUtility)s).buyUtility(winner);
 				winner.addMoney(((SquareUtility)s).price-max); //
+				
+				result[1] += winner.name + " has bought " + ""+s.name+" for $"+max+".";
+				result[winner.id+2] = "-"+ ""+max;
 			}
 			
 		}
