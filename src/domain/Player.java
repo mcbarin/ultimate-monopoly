@@ -196,10 +196,10 @@ public class Player {
 						}
 						addProperty(x);
 					}
-					}else{
-						addProperty(sp);
-					}
-				
+				}else{
+					addProperty(sp);
+				}
+
 
 			}else if(s.type.equals("CabCompany")){
 				SquareCabCompany sp= (SquareCabCompany)board.getSquareFromBoard(id);
@@ -365,9 +365,10 @@ public class Player {
 
 				for(int i=0;i<housesSameColor;i++){
 					SquareProperty sp = (SquareProperty)board.getSquareFromBoard(houses[i]);
-					if(sp.getOwner() != null && sp.getOwner().equals(this) && sp.house==0){
+					if(sp.getOwner() != null && sp.getOwner().equals(this)){
 						System.out.println(i);
-						sp.TripleRent();
+						if(sp.house==0)
+							sp.TripleRent();
 						sp.level=2;
 						upgradedColors.add(sp.color);
 					}
@@ -526,20 +527,20 @@ public class Player {
 		int initialPosId = posId;		
 		Square s = board.getSquareFromBoard(posId);
 		SquareProperty firstPayed = null; // eger her yer alınıksa buraya gidecek.
-		
+
 		boolean useTransit = (MonopolyGame.dieOne + MonopolyGame.dieTwo)%2 == 0;
 		boolean firstOwnedProperty = false;
 		boolean isFound = false;
-		
+
 		while(true){
 			s = board.nextSquare(posId, useTransit);
 			posId = s.id;
-			
+
 			if(posId == initialPosId){
 				// geldigim yere geri dondum.
 				break;
 			}
-			
+
 			if(s.type.equals("Property")){
 				SquareProperty temp = (SquareProperty)s;
 				if(temp.owner==null){
@@ -552,7 +553,7 @@ public class Player {
 				}
 			}
 		}
-		
+
 		if(isFound){
 			this.row=s.row;
 			this.position=s.position;
@@ -560,7 +561,7 @@ public class Player {
 			this.row = firstPayed.row;
 			this.position = firstPayed.position;
 		}
-	
+
 		MonopolyGame.monopolyGuyFlag = false;
 		setFreeProperties();
 		board.refreshGUI();
@@ -679,9 +680,9 @@ public class Player {
 		for(int i=0; i<mortgagedProperties.size(); i++){
 			allPropertiesNames = allPropertiesNames+", "+mortgagedProperties.get(i).name;
 		}
-		
-		
-		
+
+
+
 		int abc = 0;
 		for(int i=0;i<6;i++){
 			if(shares[i]>0){
@@ -691,7 +692,7 @@ public class Player {
 				abc++;
 			}	
 		}
-		
+
 		for(int i=0; i<cards.size();i++){
 			allCardsNames+=board.cardDescriptions[cards.get(i).number][0];
 			if(i!=0)
@@ -724,7 +725,7 @@ public class Player {
 
 
 	}
-	
+
 	public boolean hasStock(){
 		boolean r = false;
 		for(int i=0; i<shares.length; i++){
@@ -732,7 +733,7 @@ public class Player {
 				r = true;
 				break;
 			}
-				
+
 		}
 		return r;
 	}

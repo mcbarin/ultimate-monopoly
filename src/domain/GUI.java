@@ -900,10 +900,11 @@ public class GUI {
 				playerPropertiesNames[i].setText(players.get(i).allPropertiesNames.toLowerCase());
 				playerStocksNames[i].setText(players.get(i).allStocksNames.toLowerCase());
 				playerCardsNames[i].setText(players.get(i).allCardsNames.toLowerCase());
+				playerPics[i].setVisible(true);
 				
 				
 				
-				for(int j=0; j<statTitle[i].length;j++){
+				for(int j=0; j<3;j++){
 					statTitle[i][j].setVisible(true);
 				}
 			}for(int i=players.size(); i<12; i++){
@@ -914,7 +915,7 @@ public class GUI {
 				playerCardsNames[i].setVisible(false);
 				playerPics[i].setVisible(false);
 				
-				for(int j=0; j<statTitle[i].length;j++){
+				for(int j=0; j<3;j++){
 					statTitle[i][j].setVisible(false);
 				}
 				

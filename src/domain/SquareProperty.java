@@ -107,7 +107,7 @@ public class SquareProperty extends Square  {
 			}else if(level == 2){ 
 				if(checkEvenly(player, board)){
 					result[0]="4";
-					if(house<4 && player.money>buildingPrice){
+					if(house<4 && player.money>buildingPrice && hotel!=1){
 						result[1] = "Do you want to build house to "+this.name+" ?";
 					}else if(house==4 && player.money>buildingPrice){
 						result[1] = "Do you want to build hotel to "+this.name+" ?";
