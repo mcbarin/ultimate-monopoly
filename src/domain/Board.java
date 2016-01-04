@@ -353,7 +353,7 @@ public class Board {
 	 * @effects Square which is next to the given square id is given to the user.
 	 * @return Square object which is next to the given id of Square in the same row.
 	 */
-	public Square nextSquare(int id){
+	public Square nextSquareForSetPosition(int id){
 		int x = id;
 		if(id==23){
 			x=0;
@@ -363,6 +363,28 @@ public class Board {
 			x=64;
 		}else{
 			x++;
+		}		
+		return getSquareFromBoard(x);
+	}
+	
+	public Square nextSquare(int id,boolean useTransit){
+		int x = id;
+		Square cs = getSquareFromBoard(id);
+		
+		if(id==23){
+			x=0;
+		}else if(id==63){
+			x=24;
+		}else if(id==119){
+			x=64;
+		}else{
+			if(useTransit && cs.type.equals("Transit")){			
+					SquareTransit ck = (SquareTransit)getSquareFromBoard(id);
+					x = ck.twin.id+1;
+				
+			}else{
+				x++;
+			}
 		}
 		return getSquareFromBoard(x);
 	}

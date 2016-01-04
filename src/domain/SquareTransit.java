@@ -7,7 +7,7 @@ public class SquareTransit extends Square {
 	int originalRent=20;
 	int trainDepot = 0;
 	int trainDepotPrice =100;
-	SquareTransit twin; //when selling you must initialize twin too.
+	public SquareTransit twin; //when selling you must initialize twin too.
 	boolean isMortgaged=false;
 
 	public SquareTransit(String type,String name, int id, int position, int row) {
