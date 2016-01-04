@@ -284,6 +284,8 @@ public class CardChance extends Card {
 
 				}
 			}
+			result[0]="1";
+			result[1]="Stackholders in Motion Picture and General Radio collected dividends.";
 			
 			// players who has share collected the dividents.
 			
