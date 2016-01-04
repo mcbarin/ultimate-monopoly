@@ -140,9 +140,12 @@ public class CardCommunity extends Card {
 			}else if(p.valueOfProperties>50){
 				result[0]="2";
 				result[1]="Player must sell property.";
+				return result;
 			}else{
 				result[0]="-1";
 				result[1]="Player is broke and out of game.";
+				board.pullPushCommunity();
+				return result;
 			}
 			
 			p.row=1;
@@ -151,6 +154,8 @@ public class CardCommunity extends Card {
 			// player lose one turn.
 			result[0]="1";
 			result[1]="Player moved to Just Visiting and will lose one turn.";
+			board.pullPushCommunity();
+
 		
 		}  else if(number == 43){//**
 			
@@ -274,6 +279,7 @@ public class CardCommunity extends Card {
 		board.bank.companies.get(companyId).share++;
 		result[0]="1";
 		result[1]="Player added the share to his/her portfolio.";
+		board.pullPushCommunity();
 		return result;
 	}
 

@@ -629,9 +629,9 @@ public class CardChance extends Card {
 			p.hurricane(p.owner);
 			result[0]="1";
 			result[1]="Player's one of the property is downgraded.";
-			board.pullPushChance();
 		}
-		
+		board.pullPushChance();
+
 		return result;
 	}
 
@@ -683,6 +683,7 @@ public class CardChance extends Card {
 		p.position=s.position;
 		result[0]="5";
 		result[1]="Player's position has changed.";
+		board.pullPushChance();
 		return result;
 	}
 
