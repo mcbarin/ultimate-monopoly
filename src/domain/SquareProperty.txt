@@ -77,18 +77,7 @@ public class SquareProperty extends Square  {
 			}
 
 			int props = board.getNumberOfSameColor(this.color); 
-			if (props <= 2){
-				result[1]="This color group has just two properties, building not available.";
-				return result;
-			}
-			
-			if (skyscraper==1){ 
-				result[1]="You have skyscraper !";
-				return result;
-			}
-			
-			if (level == 0){ 
-				result[1]="Majority ownership is needed to build.";
+			if (props <= 2 || skyscraper==1 || level == 0){ 
 				return result;
 			}
 
