@@ -30,11 +30,13 @@ public class MonopolyGame {
 	public static boolean specialConditions[] = new boolean[39];
 	private ActionListener guiPublish;
 	//	0-rollOnce	1-rollOnce Die	2-taxiRide	3-specialStatus	4-cabcomp	5-chance8	6-stockList		7-stockauction		8-normalauction	9-bday
+	//				12-card47		13-card0
 	private int specialStatus;
 	public static int initialNumberofPlayers;
 	public static int debugPlayerID=0;
 	public static int debugLeft;
-	private int someNumber;
+	public static int someNumber=0;
+	public static int anotherNumber=0;
 	private Dice die = new Dice();
 	
 	private  int totalDice;
@@ -42,6 +44,7 @@ public class MonopolyGame {
 	//			10-yes,		start,	load,		save, 			dieOne,			15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
 	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-addPropDebug			25-debugnext	26-quit		27-sendAuction		28-bd100	29-takeCab
 	//			30-yesStock	31-noStock			32-sendBids		33-sellStock 	34-debugAddStock		35-goAuction	36-AuctionBids	37-MonopolyGuy	38-build	39-no
+	//			40-card47	41-card0
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -114,8 +117,8 @@ public class MonopolyGame {
 		    	  
 		    	  
 		    	  totalDice = dieOne+dieTwo;
-		  			if(dieSpeed<4) totalDice+=dieSpeed;	
-		    	  gui.setDice(dieOne, dieTwo, dieSpeed);
+		  			if(dieSpeed<=4) totalDice+=dieSpeed;	
+		  		  gui.setDice(dieOne, dieTwo, dieSpeed);
 		    	  
 		    	  if(dieSpeed == 4){
 		    		  gui.setGUI("You have got 'Bus'! Choose one of the numbers in order to move:", "00000000000000111", buttons);
@@ -129,8 +132,7 @@ public class MonopolyGame {
 		    		  String result[] = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
 		    		  
 		    		  if(!result[0].equals("1")){
-		    			 play(Integer.parseInt(result[0]),result);
-		    			  
+		    			 play(Integer.parseInt(result[0]),result);		    			  
 		    		  }
 		    		  
 		    		  
@@ -522,7 +524,7 @@ public class MonopolyGame {
 		{
 		      public void actionPerformed(ActionEvent e)
 		      {
-		    	  String result[] = board.peekChanceCard().doAction(cP);
+		    	  String result[] = board.peekCommunityCard().doAction(cP);
 	    		  result = play5(result);
 		    	  int s = Integer.parseInt(result[0]);
 		    	  if(s==25){
@@ -532,7 +534,7 @@ public class MonopolyGame {
 		    		  gui.setGUI(result,"",buttons);
 		    		  specialConditions[5] = true;
 		    	  }else{
-		    		  play(1,result);
+		    		  play(Integer.parseInt(result[0]),result);
 		    	  }
 		    	 
 		      }
@@ -679,6 +681,36 @@ public class MonopolyGame {
 		      {
 		    	  
 		    	  String[] result = ((SquareBirthday)board.getSquareWithRowAndPosition(cP.row, cP.position)).birthdayAction(2,cP,board);
+	    		  result = play5(result);
+		    	  play(Integer.parseInt(result[0]),result);
+		    	 
+		      }
+		});
+
+
+		
+		//card 47
+		buttons[40].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  
+		    	  String[] result = board.peekCommunityCard().applyCard47(cP, board.bank.getIdByStockName(gui.eCompsGroup.getSelection().getActionCommand()));
+	    		  result = play5(result);
+		    	  play(Integer.parseInt(result[0]),result);
+		    	 
+		      }
+		});
+
+
+		
+		//card 0
+		buttons[41].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  
+		    	  String[] result = board.peekChanceCard().applyCard0(Integer.parseInt(gui.ePrpGroup.getSelection().getActionCommand()),cP);
 	    		  result = play5(result);
 		    	  play(Integer.parseInt(result[0]),result);
 		    	 
@@ -848,6 +880,20 @@ public class MonopolyGame {
 			case 52:
 				gui.setGUI(result, "000000000000000000000000000000000001", buttons);
 				specialConditions[10] = true;
+				
+				break;
+
+			case 401:
+				gui.setGUI(result, "00000000000000000000000000000000000000001", buttons);
+				specialConditions[12] = true;
+				
+				break;
+
+			case 400:
+				gui.setGUI(result, "000000000000000000000000000000000000000001", buttons);
+				specialConditions[13] = true;
+				someNumber = Integer.parseInt(result[10]);
+				anotherNumber = Integer.parseInt(result[11]);
 				
 				break;
 				

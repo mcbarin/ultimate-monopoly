@@ -605,6 +605,8 @@ public class CardChance extends Card {
 		result[0]="1";
 		result[1]="Hurricane makes a landfall!!";
 		board.pullPushChance();
+
+		p.setFreeProperties();
 		return result;
 	}
 
@@ -631,6 +633,7 @@ public class CardChance extends Card {
 			result[1]="Player's one of the property is downgraded.";
 		}
 		board.pullPushChance();
+		board.currentPlayer.setFreeProperties();
 
 		return result;
 	}
@@ -672,6 +675,7 @@ public class CardChance extends Card {
 			result[1]="Player took the Cab Company from its owner.";
 			board.pullPushChance();
 		}
+		p.setFreeProperties();
 		
 		return result;
 	}
@@ -684,6 +688,7 @@ public class CardChance extends Card {
 		result[0]="5";
 		result[1]="Player's position has changed.";
 		board.pullPushChance();
+		p.setFreeProperties();
 		return result;
 	}
 

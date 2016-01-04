@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
 import exceptions.InvalidBoardException;
 
 public class Board {
-	static boolean specialCards=false; // for the cards only in grading criteria,set true
+	static boolean specialCards=true; // for the cards only in grading criteria,set true
 	public Bank bank;
 	public int pool = 0;
 	public int totalPlayer;
@@ -168,7 +168,7 @@ public class Board {
 		if(specialCards){
 			CardChance c1 = new CardChance(0,cardDescriptions[0][0],cardDescriptions[0][1],this);
 			chanceDeck.add(c1);
-			CardChance c2 = new CardChance(14,cardDescriptions[14][0],cardDescriptions[14][1],this);
+		/*	CardChance c2 = new CardChance(14,cardDescriptions[14][0],cardDescriptions[14][1],this);
 			chanceDeck.add(c2);
 			CardChance c3 = new CardChance(35,cardDescriptions[35][0],cardDescriptions[35][1],this);
 			chanceDeck.add(c3);
@@ -178,7 +178,7 @@ public class Board {
 			CardCommunity c5 = new CardCommunity(43,cardDescriptions[43][0],cardDescriptions[43][1],this);
 			communityDeck.add(c5);				
 			CardCommunity c6 = new CardCommunity(47,cardDescriptions[47][0],cardDescriptions[47][1],this);
-			communityDeck.add(c6);
+			communityDeck.add(c6);*/
 		}else{
 		for(int i=0;i<50;i++){
 			if(i==1 || i==5 || i==8 || i==12 || i==13||i==15||i==18 || i ==25|| i==28 || i==30 ||i==31 || i==38 || i==46 || i==48 || i==41)

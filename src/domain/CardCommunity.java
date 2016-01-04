@@ -215,6 +215,7 @@ public class CardCommunity extends Card {
 			// applyCard40 should be called with color code (0-19)
 			
 		}  
+		p.setFreeProperties();
 		return result;
 	}
 	
@@ -243,6 +244,7 @@ public class CardCommunity extends Card {
 			result[1]="Player went directly to jail.";
 		}
 		board.pullPushCommunity();
+		p.setFreeProperties();
 		return result;
 	}
 	
@@ -270,6 +272,7 @@ public class CardCommunity extends Card {
 		result[0]="1";
 		result[1]="Properties of the chosen color group are downgraded.";
 		board.pullPushCommunity();
+		p.setFreeProperties();
 		return result;
 	}
 	
@@ -280,6 +283,7 @@ public class CardCommunity extends Card {
 		result[0]="1";
 		result[1]="Player added the share to his/her portfolio.";
 		board.pullPushCommunity();
+		p.setFreeProperties();
 		return result;
 	}
 

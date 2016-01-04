@@ -127,6 +127,14 @@ public class GUI {
     
     
 
+	public JRadioButton[] ePrp = new JRadioButton[15];
+	public ButtonGroup ePrpGroup = new ButtonGroup();
+	public JPanel ePrpPanel = new JPanel(new GridLayout(0,1));
+    public JScrollPane ePrpScrollPane = new JScrollPane(ePrpPanel);
+    
+    
+    
+
 	public JPanel playerStatsPanel = new JPanel();
     JScrollPane scrollPanePlayerStats = new JScrollPane(playerStatsPanel);
     JLabel playerPics[] = new JLabel[12];
@@ -306,6 +314,27 @@ public class GUI {
 			
 			
 			
+			//COMMUNITY 0
+
+			for(int i=0; i<15;i++){
+				ePrp[i] = new JRadioButton("");
+				ePrp[i].setVisible(false);
+						
+				
+				ePrpGroup.add(ePrp[i]);
+				ePrpPanel.add(ePrp[i]);
+			}
+			ePrpScrollPane.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
+			ePrpPanel.setBackground(Color.DARK_GRAY);
+			ePrp[0].setSelected(true);
+			ePrpScrollPane.setAutoscrolls(true);
+			ePrpScrollPane.setVisible(false);
+			ePrpScrollPane.setLocation(725, 170);
+			ePrpScrollPane.setSize(290, 100);
+			panel.add(ePrpScrollPane);
+			placeButton(b[41],"Go to Selected Square",735,280, 270, 25,false);
+			
+			
 			
 			
 			//Stock Companies List
@@ -334,6 +363,7 @@ public class GUI {
 			panel.add(eCompsScrollPane);
 			placeButton(b[30],"Buy",735,280, 130, 25,false);
 			placeButton(b[31],"No",875, 280, 130, 25,false);
+			placeButton(b[40],"Add to Your Portfolio",735,280, 270, 25,false);
 			
 			
 
@@ -973,7 +1003,7 @@ public class GUI {
 							eComps[5-i].setVisible(true);
 							Company compa = board.bank.companies.get(i);
 							if(compa.share<6){
-								eComps[5-i].isSelected();}
+								eComps[5-i].setSelected(true);}
 							else {
 								eComps[i].setEnabled(false);
 								//eComps[i].s
@@ -983,6 +1013,27 @@ public class GUI {
 						eCompsScrollPane.setVisible(false);
 						buttons[30].setVisible(false);
 						buttons[31].setVisible(false);
+						for(int i=0;i<6;i++)
+							eComps[i].setVisible(false);
+				    }
+				    
+				    //card47
+				    if(MonopolyGame.specialConditions[12]){
+						eCompsScrollPane.setVisible(true);
+						buttons[40].setVisible(true);
+						for(int i=0;i<6;i++){
+							eComps[5-i].setVisible(true);
+							Company compa = board.bank.companies.get(i);
+							if(compa.share<6){
+								eComps[5-i].setSelected(true);}
+							else {
+								eComps[i].setEnabled(false);
+								//eComps[i].s
+							}
+						}
+				    }else{
+						eCompsScrollPane.setVisible(false);
+						buttons[40].setVisible(false);
 						for(int i=0;i<6;i++)
 							eComps[i].setVisible(false);
 				    }
@@ -1091,6 +1142,36 @@ public class GUI {
 					    dPropsScrollPane.setVisible(false);
 					    buttons[35].setVisible(false);
 					}
+					
+					
+					
+					//card0
+					if(MonopolyGame.specialConditions[13]){
+						
+						for(int i = MonopolyGame.someNumber; i<=MonopolyGame.anotherNumber; i++){
+
+							Square sq = board.getSquareFromBoard(MonopolyGame.anotherNumber+MonopolyGame.someNumber-i);
+							ePrp[i-MonopolyGame.someNumber].setText(sq.name);
+							ePrp[i-MonopolyGame.someNumber].setActionCommand(Integer.toString(MonopolyGame.anotherNumber+MonopolyGame.someNumber-i));
+							ePrp[i-MonopolyGame.someNumber].setVisible(true);
+							ePrp[i-MonopolyGame.someNumber].setForeground(Color.WHITE);
+							ePrp[i-MonopolyGame.someNumber].setBackground(Color.DARK_GRAY);
+					    	if(sq.color<20 && sq.color>-1){
+					    		ePrp[i-MonopolyGame.someNumber].setBackground(colorCodes[sq.color]);
+			  	  				if(colorCodes[sq.color].getBlue()>128 && colorCodes[sq.color].getGreen()>128 && colorCodes[sq.color].getRed()>128)
+			  	  				ePrp[i-MonopolyGame.someNumber].setForeground(Color.BLACK);
+			  	  				}
+						}
+						ePrpScrollPane.setVisible(true);
+						buttons[41].setVisible(true);
+					}else{
+						
+
+						for(int i = 0; i<15; i++){
+							ePrp[i].setVisible(false);
+						}
+						ePrpScrollPane.setVisible(false);
+						buttons[41].setVisible(false);}
 					
 					
 
