@@ -71,10 +71,10 @@ public class CardChance extends Card {
 				start=12;
 				end=18;
 			}else if(p.row==1){
-				if(p.position<34){
+				if(p.position+24<34){
 					start=24;
 					end=34;
-				}else if(p.position<54){
+				}else if(p.position+24<54){
 					start=44;
 					end=54;
 				}else{
@@ -82,13 +82,13 @@ public class CardChance extends Card {
 					end=63;
 				}
 			}else {
-				if(p.position<78){
+				if(p.position+64<78){
 					start=64;
 					end=78;
-				}else if(p.position<92){
+				}else if(p.position+64<92){
 					start=78;
 					end=92;
-				}else if(p.position<106){
+				}else if(p.position+64<106){
 					start=92;
 					end=106;
 				}else{
