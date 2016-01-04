@@ -614,6 +614,14 @@ public class MonopolyGame {
 		    	  else
 		    		  board.getPlayers().get(initialNumberofPlayers-debugLeft).money=Integer.parseInt(gui.getMoney());
 		    	  gui.money.setText("$");
+		    	  
+		    	  if(!gui.debugCards.getText().equals("Enter card ID numbers...") && !gui.debugCards.getText().equals("")){
+		    		  String[] cards = gui.debugCards.getText().split(",");
+		    		  for(int i=0;i<cards.length;i++){
+		    			  board.getPlayers().get(initialNumberofPlayers-debugLeft).addCardDebug(Integer.parseInt(cards[i]));
+		    		  }
+		    	  }
+		    	  
 		    	  debugLeft--;
 		    	  
 		    	  if(debugLeft<0)

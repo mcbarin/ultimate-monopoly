@@ -114,6 +114,7 @@ public class GUI {
 	public JTextField dieSpeedF = new JTextField();
 	public JTextField saveName = new JTextField();
 	public JTextField houseNum = new JTextField();
+	public JTextField debugCards = new JTextField();
 	
 	
 
@@ -590,7 +591,7 @@ public class GUI {
 		    dPropsType[3].setText("SkyScraper");
 		    dPropsType[3].setActionCommand("6");
 			placeButton(b[24],"Add Property",725, 182, 540, 24,false);
-			placeButton(b[25],"Next Player",725, 450, 540, 48,false);
+			placeButton(b[25],"Next Player",725, 500, 540, 48,false);
 		    
 			houseNum.setSize(40, 26);
 			houseNum.setLocation(1160, 78);
@@ -602,10 +603,18 @@ public class GUI {
 			houseNum.setEnabled(false);
 			houseNum.setText("#");
 			panel.add(houseNum);
-			
 			panel.add(dPropsScrollPane);
 			
-			
+
+			debugCards.setSize(500, 32);
+			debugCards.setLocation(745, 426);
+			debugCards.setBackground(new Color(75,75,75));
+			debugCards.setForeground(Color.WHITE);
+			debugCards.setHorizontalAlignment(JTextField.CENTER);
+			debugCards.setFont(new Font("Verdana", Font.BOLD, 16));
+			debugCards.setVisible(false);
+			debugCards.setText("Enter card ID numbers...");
+			panel.add(debugCards);
 			
 
 			//DebugStock Pane
@@ -756,6 +765,7 @@ public class GUI {
 			initalNumberofPlayers.setVisible(true);
 			buttons[11].setVisible(true);
 
+			debugCards.setVisible(false);
 			eCompsScrollPane.setVisible(false);
 			
 
@@ -811,6 +821,7 @@ public class GUI {
 			titles[12].setVisible(false);
 			titles[11].setVisible(false);
 
+			debugCards.setVisible(true);
 		    for(int i = 0; i<13; i++){
 		        savedGamesElt[i].setVisible(false);}
 			
@@ -874,6 +885,8 @@ public class GUI {
 					MonopolyGame.debugLeft--;
 				}
 				else if(MonopolyGame.debugLeft<0){
+
+					debugCards.setVisible(false);
 				    row.setVisible(false);
 				    position.setVisible(false);
 				    money.setVisible(false);
