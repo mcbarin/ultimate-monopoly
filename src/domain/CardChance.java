@@ -557,7 +557,7 @@ public class CardChance extends Card {
 			}
 			board.pullPushChance();
 		} 
-		
+		p.setFreeProperties();
 		return result;
 	}
 	

@@ -41,7 +41,7 @@ public class MonopolyGame {
 	//buttons = rollDice,	buy,	buyChance,	sell,			4-no,			5-rollOnce,	pullChance,	pullCommunity,	mortgage,		unMortgage,
 	//			10-yes,		start,	load,		save, 			dieOne,			15-dieTwo, 	dieTotal,	build,			18-taxiRide,	19-no
 	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-addPropDebug			25-debugnext	26-quit		27-sendAuction		28-bd100	29-takeCab
-	//			30-yesStock	31-noStock			32-sendBids		33-sellStock 	34-debugAddStock		35-goAuction	36-AuctionBids	37-MonopolyGuy
+	//			30-yesStock	31-noStock			32-sendBids		33-sellStock 	34-debugAddStock		35-goAuction	36-AuctionBids	37-MonopolyGuy	38-build	39-no
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -699,6 +699,20 @@ public class MonopolyGame {
 		    	 
 		      }
 		});
+
+		
+		//go auction
+		buttons[38].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  
+		    	  String[] result = board.getSquareWithRowAndPosition(cP.row, cP.position).build(cP, totalDice);
+		    	  play(Integer.parseInt(result[0]),result);
+
+		    	 
+		      }
+		});
 		
 		
 		//property auction button
@@ -735,6 +749,7 @@ public class MonopolyGame {
 		      }
 		};
 		buttons[19].addActionListener(nolistener);
+		buttons[39].addActionListener(nolistener);
 		
 
 		
@@ -785,10 +800,8 @@ public class MonopolyGame {
 				gui.setGUI(result[1], "01011", buttons);
 			break;
 			case 4:
-				gui.setGUI(result[1], "01011", buttons);
+				gui.setGUI(result[1], "0000000000000000000000000000000000000011", buttons);
 				break;
-			case 5:
-				System.out.println(specialStatus);
 			case 9:
 				gui.setGUI(result, "00000000000000000011", buttons);
 				specialConditions[2] = true;
@@ -877,7 +890,7 @@ public class MonopolyGame {
 				gui.setGUI(result[1], "01011", buttons);
 			break;
 			case 4:
-				gui.setGUI(result[1], "01011", buttons);
+				gui.setGUI(result[1], "0000000000000000000000000000000000000011", buttons);
 				break;
 			case 5:
 				result = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);

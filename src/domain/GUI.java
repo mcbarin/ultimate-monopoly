@@ -133,6 +133,9 @@ public class GUI {
     JLabel playerNames[] = new JLabel[12];
     JLabel playerMoneys[] = new JLabel[12];
     JLabel playerPropertiesNames[] = new JLabel[12];
+    JLabel playerStocksNames[] = new JLabel[12];
+    JLabel playerCardsNames[] = new JLabel[12];
+    JLabel statTitle[][] = new JLabel[12][3];
 
 	int c[] = new int[20];
     
@@ -167,8 +170,14 @@ public class GUI {
 			 playerMoneys[i] = new JLabel();
 			 playerPics[i] = new JLabel();
 			 playerPropertiesNames[i] = new JLabel();
+			 playerStocksNames[i] = new JLabel();
+			 playerCardsNames[i] = new JLabel();
 			 auctionBids[i] = new JTextField();
 			 auctionNames[i] = new JLabel();
+			 
+			 for(int j=0;j<statTitle[i].length;j++){
+				 statTitle[i][j] = new JLabel();
+			 }
 		}
 			
 			
@@ -202,30 +211,59 @@ public class GUI {
 
 				//playerNames[i] = new JLabel(players.get(i).name.toUpperCase());
 				playerNames[i] = new JLabel("");
-				playerNames[i].setSize(100, 40);
 				playerNames[i].setLocation(50,i*75+5);
-				playerNames[i].setFont(new Font("Verdana", Font.BOLD, 20));
+				playerNames[i].setFont(new Font("Calibri", Font.BOLD, 20));
+				playerNames[i].setBorder(BorderFactory.createMatteBorder(0, 0, 2,0, Color.black));
 				playerStatsPanel.add(playerNames[i]);
+				
+
 
 				//playerMoneys[i] = new JLabel("$"+Integer.toString(players.get(i).money).toUpperCase());
 				playerMoneys[i] = new JLabel("$");
-				playerMoneys[i].setSize(200, 40);
 				playerMoneys[i].setLocation(150,i*75+2);
-				playerMoneys[i].setFont(new Font("Lucida Calligraphy", Font.BOLD, 24));
+				playerMoneys[i].setFont(new Font("Calibri", Font.BOLD, 18));
+				playerMoneys[i].setForeground(new Color(45,128,0));
 				playerStatsPanel.add(playerMoneys[i]);
+				
+				statTitle[i][0].setText("Properties:");
+				statTitle[i][0].setFont(new Font("Calibri", Font.BOLD, 18));
+				statTitle[i][0].setForeground(new Color(160,0,67));
+				playerStatsPanel.add(statTitle[i][0]);
 
 				//playerPropertiesNames[i] = new JLabel(players.get(i).allPropertiesNames.toLowerCase());
 				//playerPropertiesNames[i].setToolTipText(players.get(i).allPropertiesNames);
 				playerPropertiesNames[i] = new JLabel("");
 				playerPropertiesNames[i].setToolTipText("");
-				playerPropertiesNames[i].setSize(540, 40);
 				playerPropertiesNames[i].setLocation(0,i*75+35);
-				playerPropertiesNames[i].setFont(new Font("Arial", Font.PLAIN, 16));
-				playerPropertiesNames[i].setBorder(BorderFactory.createMatteBorder(0, 0, 2,0, Color.black));
+				playerPropertiesNames[i].setFont(new Font("Calibri", Font.PLAIN, 18));
 				playerStatsPanel.add(playerPropertiesNames[i]);
+				
+				statTitle[i][1].setText("Stocks:");
+				statTitle[i][1].setFont(new Font("Calibri", Font.BOLD, 18));
+				statTitle[i][1].setForeground(new Color(160,0,67));
+				playerStatsPanel.add(statTitle[i][1]);
+				
+				
+				playerStocksNames[i] = new JLabel("");
+				playerStocksNames[i].setToolTipText("");
+				playerStocksNames[i].setLocation(0,i*75+35);
+				playerStocksNames[i].setFont(new Font("Calibri", Font.PLAIN, 18));
+				playerStatsPanel.add(playerStocksNames[i]);
+				
+				statTitle[i][2].setText("Cards:");
+				statTitle[i][2].setFont(new Font("Calibri", Font.BOLD, 18));
+				statTitle[i][2].setForeground(new Color(160,0,67));
+				playerStatsPanel.add(statTitle[i][2]);
+				
+				
+				playerCardsNames[i] = new JLabel("");
+				playerCardsNames[i].setToolTipText("");
+				playerCardsNames[i].setLocation(0,i*75+35);
+				playerCardsNames[i].setFont(new Font("Calibri", Font.PLAIN, 18));
+				playerStatsPanel.add(playerCardsNames[i]);
 			}
 			
-			playerStatsPanel.setSize(5700,800);
+			playerStatsPanel.setSize(6500,74);
 			scrollPanePlayerStats.setSize(540, 74);
 			scrollPanePlayerStats.setLocation(725, 630);
 			scrollPanePlayerStats.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 1, Color.black));
@@ -263,6 +301,11 @@ public class GUI {
 			panel.add(scrollPaneTaxiRide);
 			placeButton(b[18],"Take a Cab",735,280, 130, 25,false);
 			placeButton(b[19],"No",875, 280, 130, 25,false);
+			
+			
+			
+			
+			
 			
 			
 			//Stock Companies List
@@ -487,6 +530,10 @@ public class GUI {
 			placeButton(b[16],"",925, 188, 80, 25,false);
 			
 			
+			
+
+			placeButton(b[38],"Build",735,180, 130, 25,false);
+			placeButton(b[39],"No",875, 180, 130, 25,false);
 
 			//////////////////////////////////////////////////////
 			//////////////////////////////////////////////////////
@@ -839,16 +886,39 @@ public class GUI {
 			players = board.getPlayers();
 			cP = board.getCurrentPlayer();
 			scrollPanePlayerStats.setVisible(true);
-	
+
+			
+
+			
+
+			
+			
+			
 			for(int i=0; i<players.size(); i++){
 				playerNames[i].setText(players.get(i).name.toUpperCase());
 				playerMoneys[i].setText("$"+Integer.toString(players.get(i).money).toUpperCase());
 				playerPropertiesNames[i].setText(players.get(i).allPropertiesNames.toLowerCase());
+				playerStocksNames[i].setText(players.get(i).allStocksNames.toLowerCase());
+				playerCardsNames[i].setText(players.get(i).allCardsNames.toLowerCase());
+				
+				
+				
+				for(int j=0; j<statTitle[i].length;j++){
+					statTitle[i][j].setVisible(true);
+				}
 			}for(int i=players.size(); i<12; i++){
 				playerNames[i].setVisible(false);
 				playerMoneys[i].setVisible(false);
 				playerPropertiesNames[i].setVisible(false);
-				playerPics[i].setVisible(false);}
+				playerStocksNames[i].setVisible(false);
+				playerCardsNames[i].setVisible(false);
+				playerPics[i].setVisible(false);
+				
+				for(int j=0; j<statTitle[i].length;j++){
+					statTitle[i][j].setVisible(false);
+				}
+				
+			}
 	
 			    debugStockspanel.setVisible(true);
 			    

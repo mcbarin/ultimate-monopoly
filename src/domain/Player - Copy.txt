@@ -17,8 +17,6 @@ public class Player {
 	public ArrayList<Square> mortgagedProperties = new ArrayList<Square>();
 	public ArrayList<Card> cards = new ArrayList<Card>();
 	public String allPropertiesNames = "";
-	public String allCardsNames = "";
-	public String allStocksNames = "";
 	public int colorProperties[] = new int[20];
 	public Board board;
 	public int countJail=4; //not in jail
@@ -117,7 +115,6 @@ public class Player {
 			CardCommunity c = new CardCommunity(id,board.cardDescriptions[id][0],board.cardDescriptions[id][1],board);
 			cards.add(c);
 		}
-		setFreeProperties();
 	}
 
 	/**
@@ -135,7 +132,6 @@ public class Player {
 				break;
 			}
 		}
-		setFreeProperties();
 
 	}
 
@@ -488,7 +484,7 @@ public class Player {
 						posId = ((SquareTransit)s).twin.id+1;
 						s = board.getSquareFromBoard(posId);
 					}else{
-						s = board.nextSquareForSetPosition(posId);
+						s = board.nextSquare(posId);
 						posId = s.id;
 					}
 				}
@@ -505,7 +501,6 @@ public class Player {
 
 
 		checkPosition(dice,old);
-
 	}
 
 	/**
@@ -516,51 +511,100 @@ public class Player {
 	 */
 	public void monopolyGuy(){
 		int posId = position;
+		int border = 24;
 		if(row==1){
 			posId+=24;
-		}
+			border=40;}
 		else if(row==2){
 			posId+=64;
+			border=56;
 		}
-		// posId, bulundugu square'in id'si
-		int initialPosId = posId;		
+
 		Square s = board.getSquareFromBoard(posId);
-		SquareProperty firstPayed = null; // eger her yer alınıksa buraya gidecek.
-		
-		boolean useTransit = (MonopolyGame.dieOne + MonopolyGame.dieTwo)%2 == 0;
+		Square firstOwned = board.getSquareFromBoard(posId);
+
+		boolean transitUsed = false;
 		boolean firstOwnedProperty = false;
 		boolean isFound = false;
-		
-		while(true){
-			s = board.nextSquare(posId, useTransit);
-			posId = s.id;
-			
-			if(posId == initialPosId){
-				// geldigim yere geri dondum.
-				break;
-			}
-			
-			if(s.type.equals("Property")){
-				SquareProperty temp = (SquareProperty)s;
-				if(temp.owner==null){
-					isFound = true;
+
+		for(int i=0;i<border;i++){
+			s = board.getSquareFromBoard(posId);
+
+			if(s.type.equals("Transit")){
+				if((MonopolyGame.dieOne + MonopolyGame.dieTwo)%2 == 0){
+					posId = ((SquareTransit)s).twin.id+1;
+					s = board.getSquareFromBoard(posId);
+					transitUsed=true;
 					break;
-					// s'in pozisyonuna gidecek.
-				}else if(temp.owner.id != this.id && !firstOwnedProperty){
-					firstOwnedProperty = true;
-					firstPayed = temp;
+				}else{
+					s = board.nextSquare(posId);
+					posId = s.id;
 				}
 			}
+			else {
+
+				if(s.type.equals("Property")){
+					if(((SquareProperty)s).owner == null){
+						// Property Square found. break
+						this.position = s.position;
+						this.row = s.row;
+						isFound=true;
+						break;
+					}else if(!firstOwnedProperty && ((SquareProperty)s).owner.id != this.id){
+						firstOwned = s;
+						firstOwnedProperty = true;
+						// If all properties are owned, this will be the next position.
+					}
+				}else{
+					s = board.nextSquare(posId);
+					posId = s.id;
+				}
+
+
+			}
+		}
+
+		if(transitUsed){
+			if(s.row == 0){
+				border = 24;
+			}else if(s.row==1){
+				border = 40;
+			}else if(s.row == 2){
+				border = 56;
+			}
+			firstOwnedProperty = false;
+
+			for(int i=0;i<border;i++){
+
+				s = board.nextSquare(posId);
+				posId = s.id;
+				if(s.type.equals("Property")){
+					if(((SquareProperty)s).owner == null){
+						// Property Square found. break
+						this.position = s.position;
+						this.row = s.row;
+						isFound = true;
+						break;
+					}else if(!firstOwnedProperty && ((SquareProperty)s).owner.id != this.id){
+						firstOwned = s;
+						firstOwnedProperty =true;
+						// If all properties are owned, this will be the next position.
+					}
+				}else{
+					s = board.nextSquare(posId);
+					posId = s.id;
+				}
+
+			}
+
+
+		}
+
+		if(!isFound){
+			this.position = firstOwned.position;
+			this.row = firstOwned.row;
 		}
 		
-		if(isFound){
-			this.row=s.row;
-			this.position=s.position;
-		}else if(firstOwnedProperty){
-			this.row = firstPayed.row;
-			this.position = firstPayed.position;
-		}
-	
 		MonopolyGame.monopolyGuyFlag = false;
 		setFreeProperties();
 		board.refreshGUI();
@@ -678,24 +722,6 @@ public class Player {
 		}
 		for(int i=0; i<mortgagedProperties.size(); i++){
 			allPropertiesNames = allPropertiesNames+", "+mortgagedProperties.get(i).name;
-		}
-		
-		
-		
-		int abc = 0;
-		for(int i=0;i<6;i++){
-			if(shares[i]>0){
-				allStocksNames += board.bank.names[i]+" ("+shares[i]+"/6) ";
-				if(abc!=0)
-					allStocksNames += ", ";
-				abc++;
-			}	
-		}
-		
-		for(int i=0; i<cards.size();i++){
-			allCardsNames+=board.cardDescriptions[cards.get(i).number][0];
-			if(i!=0)
-				allCardsNames+=", ";
 		}
 
 	}

@@ -22,6 +22,7 @@ package domain;
 public class Card {
 	private String type = "";
 	public int number;
+	public String title;
 
 	// For chance card, "Chance"; for community chest card, "Community".
 

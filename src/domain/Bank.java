@@ -234,7 +234,7 @@ public class Bank {
 			result[0]="51"; // Auction
 			result[1] = p.name + " has not enough money. One share of "+c.name+" will be auction off.";
 		}
-
+		p.setFreeProperties();
 		return result;
 	}
 	
@@ -246,6 +246,7 @@ public class Bank {
 		Company c = companies.get(id);
 			c.share+=n;
 			p.shares[id]+=n;
+			p.setFreeProperties();
 	}
 	
 
@@ -267,6 +268,7 @@ public class Bank {
 
 		result[p.id+2] = "+"+c.parValue;
 
+		p.setFreeProperties();
 		return result;
 	}
 
@@ -315,6 +317,7 @@ public class Bank {
 			result[winner.id+2] = "-"+ ""+max;
 
 		}
+		winner.setFreeProperties();
 		return result;
 	}
 
