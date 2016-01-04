@@ -615,7 +615,7 @@ public class Board {
 		if(MonopolyGame.dieOne!=MonopolyGame.dieTwo){
 			while(np.isPlaying==false || np.countJail==10){
 				if(np.countJail==10)
-					gui.currentMessage.setText("Vehicle impounded\n\n"+gui.currentMessage.getText());
+					gui.currentMessage.setText("Vehicle impounded: Previous lost one turn.\n\n"+gui.currentMessage.getText());
 				np.countJail=4;
 				npID = (npID+1)%totalPlayer;
 				np = players.get(npID);
