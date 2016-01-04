@@ -47,7 +47,6 @@ public class MonopolyGame {
 	//			40-card47	41-card0
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		
 		new MonopolyGame();
 		
 		
@@ -476,7 +475,7 @@ public class MonopolyGame {
 	    		  
 		    	  specialConditions[3] = true;
 		    	  specialStatus = Integer.parseInt(result[0]);
-		    	  play();
+		    	  play(Integer.parseInt(result[0]),result);
 		    	 
 		    	  System.out.println("Taxi Ride: " + gui.taxiRideGroup.getSelection().getActionCommand());
 		      }
@@ -553,7 +552,9 @@ public class MonopolyGame {
 		    		  result = board.getSquareWithRowAndPosition(cP.row, cP.position).landOn(cP, board, totalDice);
 		    		  play(Integer.parseInt(result[0]),result);
 		    	  }
-		    	 
+		    	  
+		    	  result = ((Square)board.getSquareWithRowAndPosition(cP.row, cP.position)).buy(cP, 1);
+		    	  play(Integer.parseInt(result[0]),result);
 		      }
 		});
 		
@@ -781,7 +782,26 @@ public class MonopolyGame {
 		      }
 		};
 		buttons[19].addActionListener(nolistener);
-		buttons[39].addActionListener(nolistener);
+		
+		
+
+		
+		//go auction
+		buttons[39].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  if(board.getSquareWithRowAndPosition(cP.row, cP.position).type!="CabCompany"){
+
+					board.nextPlayer();
+					gui.setGUI("Next player!", "1", buttons);
+		      }else{
+		    	  String [] result = {"9","Do you want to take a taxi ride?"};
+		    	  play(Integer.parseInt(result[0]),result);
+		      
+		      }
+		      }
+		});
 		
 
 		
