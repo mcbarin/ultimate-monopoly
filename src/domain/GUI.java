@@ -74,11 +74,6 @@ public class GUI {
 	public JPanel userStockspanel = new JPanel(new GridLayout(0,1));
     JScrollPane userStocksscrollPane = new JScrollPane(userStockspanel);
     
-
-	public JRadioButton[] gFreeP = new JRadioButton[6];
-	public ButtonGroup gFreePButtonGroup = new ButtonGroup();
-	public JPanel gFreePpanel = new JPanel(new GridLayout(0,1));
-    JScrollPane gFreePscrollPane = new JScrollPane(userStockspanel);
     
     
 	public JRadioButton[] debugStocks = new JRadioButton[6];
@@ -153,7 +148,7 @@ public class GUI {
 	
 	public GUI(Board board,JButton b[]) throws Exception{
 		buttons = b;
-		for(int i=0; i<39; i++){
+		for(int i=0; i<52; i++){
 			buttons[i].setVisible(false);
 		}
 		
@@ -297,7 +292,6 @@ public class GUI {
 			placeButton(b[31],"No",875, 280, 130, 25,false);
 			
 			
-			
 
 
 			for(int i=0; i<12;i++){
@@ -321,7 +315,11 @@ public class GUI {
 			
 
 			placeButton(b[32],"Send Bids",875, 280, 130, 25,false);
+			
+			
+
 			placeButton(b[27],"Send Bids",875, 280, 130, 25,false);
+			placeButton(b[36],"Send Bids",875, 280, 130, 25,false);
 			
 			
 			//////////////////////////////////////////
@@ -423,20 +421,7 @@ public class GUI {
 			panel.add(hurScrollPane);
 		
 			//////////////////////////////////
-			
-			
 
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		   
-			
 		    currentMessage.setLineWrap( true );
 		    currentMessage.setWrapStyleWord( true );
 		    currentMessage.setMargin(new Insets(10,10,10,10));
@@ -475,6 +460,10 @@ public class GUI {
 			
 	
 			placeButton(b[0],"Roll Dice!",735, 180, 270, 40,false);
+			
+
+			placeButton(b[37],"Play Monopoly Guy",735, 180, 270, 24,false);
+			
 			placeButton(b[5],"Roll Once",735, 180, 270, 40,false);
 			placeButton(b[1],"Buy",735, 188, 130, 25,false);
 			placeButton(b[10],"Yes",735, 188, 130, 25,false);
@@ -485,7 +474,7 @@ public class GUI {
 			placeButton(b[2],"Buy with Cance Card",735, 188, 270, 25,false);		
 
 			placeButton(b[28],"Take $100",735, 180, 270, 25,false);
-			placeButton(b[29],"Go to the Nearest Cab Company",735, 212, 270, 25,false);
+			placeButton(b[29],"Go to the Nearest Cab Company",735, 211, 270, 25,false);
 			
 			placeButton(b[6],"Pull Chance Card",735, 180, 270, 40,false);
 			b[6].setBackground(new Color(208,200,0));
@@ -570,8 +559,6 @@ public class GUI {
 			
 
 			////////////////////////////////
-		    dPropsScrollPane.setLocation(725, 44);
-		    dPropsScrollPane.setSize(360, 128);
 		    //dProps[0].setSelected(true);
 		    dPropsPanel.setBackground(Color.DARK_GRAY);
 		    dPropsScrollPane.setBorder(BorderFactory.createMatteBorder(0, 0,0, 0, Color.black));
@@ -683,7 +670,8 @@ public class GUI {
 			money.setText("$");
 			money.setVisible(false);
 
-			
+
+			placeButton(b[35],"Go Auction",735, 275, 270, 25,false);
 			
 			dieOneF.setBackground(Color.GRAY);
 			dieOneF.setHorizontalAlignment(JTextField.CENTER);
@@ -745,7 +733,7 @@ public class GUI {
 		if(Board.gameStatus==-1){
 			
 			
-			for(int i=0; i<39; i++){
+			for(int i=0; i<52; i++){
 				buttons[i].setVisible(false);
 			}
 			
@@ -863,6 +851,7 @@ public class GUI {
 					titles[2].setText("$"+Integer.toString(cP.money));
 					titles[2].setVisible(true);
 			        buttons[0].setVisible(true);
+			        buttons[37].setVisible(true);
 			
 			        dieOneF.setVisible(false);
 			        dieTwoF.setVisible(false);
@@ -916,7 +905,7 @@ public class GUI {
 				    
 				    
 				    
-				    if(MonopolyGame.specialConditions[7] || MonopolyGame.specialConditions[8]){
+				    if(MonopolyGame.specialConditions[7] || MonopolyGame.specialConditions[8] || MonopolyGame.specialConditions[11]){
 						for(int i=0;i<board.players.size();i++){
 							auctionBids[i].setVisible(true);
 							auctionNames[i].setVisible(true);
@@ -943,9 +932,16 @@ public class GUI {
 				    if(MonopolyGame.specialConditions[8]){
 						buttons[27].setVisible(true);
 						buttons[27].setLocation(776, 182+27*board.players.size());
-						
 				    }else{
 						buttons[27].setVisible(false);
+				    }
+
+				    
+				    if(MonopolyGame.specialConditions[11]){
+						buttons[36].setVisible(true);
+						buttons[36].setLocation(776, 182+27*board.players.size());
+				    }else{
+						buttons[36].setVisible(false);
 				    }
 
 				    //Birthday Gift
@@ -993,7 +989,23 @@ public class GUI {
 					
 					
 					if(MonopolyGame.specialConditions[10]){
-						
+						debugProps();
+					    dPropsScrollPane.setLocation(725, 170);
+					    dPropsScrollPane.setSize(290, 100);
+					    houseNum.setVisible(false);
+					    dPropsScrollPane.setVisible(true);
+						buttons[34].setVisible(false);
+					    debugStockspanel.setVisible(false);
+					    debugStocksNum.setVisible(false);
+				    	houseNum.setVisible(false);
+					    for(int i=0;i<5;i++){
+					    	dPropsType[i].setVisible(false);}
+					    
+					    buttons[35].setVisible(true);
+				    	
+					}else{
+					    dPropsScrollPane.setVisible(false);
+					    buttons[35].setVisible(false);
 					}
 					
 					
@@ -1007,6 +1019,8 @@ public class GUI {
 			        titles[6].setVisible(true);
 			        titles[6].setText(board.players.get(MonopolyGame.initialNumberofPlayers-MonopolyGame.debugLeft).name);
 					debugProps();
+				    dPropsScrollPane.setLocation(725, 44);
+				    dPropsScrollPane.setSize(360, 128);
 					buttons[24].setVisible(true);
 					buttons[25].setVisible(true);
 				    /*
@@ -1110,8 +1124,8 @@ public class GUI {
 	public void setGUI(String cm, String bs, JButton b[]){
 		this.currentMessage.setText(cm);
 		int l = bs.length();
-		if(l>39)
-			l = 39;
+		if(l>52)
+			l = 52;
 		for(int i=0; i<l; i++){
 				if(bs.charAt(i)=='1'){
 					b[i].setVisible(true);}
@@ -1121,12 +1135,12 @@ public class GUI {
 
 		}
 
-		for(int i=l; i<39; i++){
+		for(int i=l; i<52; i++){
 			if(i!=11)
 					b[i].setVisible(false);
 		}
 		
-		if(bs.length()>0 && bs.charAt(0)=='1'){
+		if(bs.length()>0 && bs.charAt(0)=='1' && !MonopolyGame.specialConditions[1]){
 			saveName.setVisible(true); b[13].setVisible(true); b[26].setVisible(true);
 
 			
@@ -1307,7 +1321,7 @@ public class GUI {
 	    	dProps[i] = null;
 	    	Square sq = board.getSquareFromBoard(i);
 	    	
-	    	if(sq.owner==null && ( sq.type=="Property" || sq.type=="Transit" || sq.type=="Utility" || sq.type=="CabCompany")){
+	    	if((MonopolyGame.specialConditions[10] && sq.owner==null && sq.type=="Property") || (!MonopolyGame.specialConditions[10] &&sq.owner==null && ( sq.type=="Property" || sq.type=="Transit" || sq.type=="Utility" || sq.type=="CabCompany"))){
 		    	dProps[abc] = new JRadioButton(sq.name);
 	    		if(sq.owner==null){
 			    	dProps[abc].setActionCommand(Integer.toString(i));

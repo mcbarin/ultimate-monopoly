@@ -73,7 +73,7 @@ public class Board {
 	}
 	
 	public ArrayList<Integer> getUnpurchasedStocks(){
-		ArrayList<Integer> unpurchasedStocks = null;
+		ArrayList<Integer> unpurchasedStocks = new ArrayList<Integer>();
 		for(int i=0;i<6;i++){
 			if(bank.companies.get(i).share<6){
 				unpurchasedStocks.add(bank.companies.get(i).id);
@@ -589,14 +589,16 @@ public class Board {
 		int npID = (this.currentPlayer.id+1)%totalPlayer;
 		Player np = players.get(npID);
 		if(MonopolyGame.dieOne!=MonopolyGame.dieTwo){
-			while(np.isPlaying==false){
+			while(np.isPlaying==false || np.countJail==10){
+				np.countJail=4;
 				npID = (npID+1)%totalPlayer;
 				np = players.get(npID);
 			}
 		}
 		
-		this.currentPlayer = np;
-		GUI.playerChange = true;
+		if(!MonopolyGame.monopolyGuyFlag){
+			this.currentPlayer = np;
+			GUI.playerChange = true;}
 		
 		return np;
 	}

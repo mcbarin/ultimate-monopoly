@@ -14,7 +14,7 @@ public class SquareAuction extends Square {
 
 		if(board.bank.thereIsUnownedProperty()){
 			result[0]="52";
-			result[1]="Please pick an unowned property to auction off";
+			result[1]="Please pick an unowned property to auction off.";
 		}else{
 			result[0]="5";
 			result[1]="There is no unowned properties. Go to highest rent property.";

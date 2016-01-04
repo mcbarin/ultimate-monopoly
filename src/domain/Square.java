@@ -29,7 +29,7 @@ package domain;
 //status=51 display msg and collect bids[]from all users and then call auctionStock(name, bids[])   !!!bids array size'ı player sayısı kadar olmalı, 12 değil.
 
 //status=52 ask user msg with options returned by bank.getUnownedProperties(). user picks one SquareProperty
-		//then call display "Auction! Make a bid.". collect bids[] from all users and call bank.auction(SquareProperty,bids[])
+	//then call display "Auction! Make a bid.". collect bids[] from all users and call bank.auction(SquareProperty,bids[])
 		
 
 public abstract class Square {

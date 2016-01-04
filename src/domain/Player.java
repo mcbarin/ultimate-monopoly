@@ -604,7 +604,10 @@ public class Player {
 			this.position = firstOwned.position;
 			this.row = firstOwned.row;
 		}
+		
+		MonopolyGame.monopolyGuyFlag = false;
 		setFreeProperties();
+		board.refreshGUI();
 
 	}
 
