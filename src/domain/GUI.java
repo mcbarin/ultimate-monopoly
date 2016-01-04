@@ -40,7 +40,7 @@ public class GUI {
 	private GUIPanel panel = new GUIPanel(board,dice);
 
 	private JTextField initalNumberofPlayers;
-	private JTextArea currentMessage = new JTextArea();
+	public JTextArea currentMessage = new JTextArea();
 	private JLabel currentPlayer = new JLabel();
 	
 	private JLabel titles[] = new JLabel[13];
