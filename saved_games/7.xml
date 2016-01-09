@@ -40,15 +40,15 @@
   </bank>
   <currentPlayer>0</currentPlayer>
   <numberOfPlayers>2</numberOfPlayers>
-  <date>04/1/2016 1:10:26</date>
+  <date>10/1/2016 0:10:27</date>
   <player>
     <id>0</id>
     <name>Ezgi</name>
     <isPlaying>true</isPlaying>
     <money>3200</money>
     <countJail>4</countJail>
-    <row>2</row>
-    <position>11</position>
+    <row>0</row>
+    <position>9</position>
     <reverse>false</reverse>
     <shares>0-0-0-0-0-0</shares>
     <numbers>0-0-0-0-0-0-0</numbers>

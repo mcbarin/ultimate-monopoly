@@ -725,6 +725,13 @@ public class Player {
 
 
 	}
+	
+	public boolean inJail(){
+		if(row==1 && position==10)
+			return true;
+		else
+			return false;
+	}
 
 	public boolean hasStock(){
 		boolean r = false;

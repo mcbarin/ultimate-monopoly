@@ -797,12 +797,19 @@ public class GUI {
 		panel.add(saveName);
 		placeButton(b[13],"Save Game",1005, 590, 135, 30,false);
 		placeButton(b[26],"X",1235, 590, 30, 30,false);
+		placeButton(b[50],"🔊 ",1195, 590, 30, 30,true);
 		b[26].setFont(new Font("Calibri", Font.BOLD, 18));
 		b[26].setFocusPainted(false);
 		b[26].setBackground(new Color(169,0,0));
 		b[26].setForeground(Color.WHITE);
 		b[26].setBorder(null);
-		b[26].setMargin(new Insets(0,0,0,0));
+		b[50].setMargin(new Insets(0,0,0,0));
+		b[50].setFont(new Font("Segoe UI Symbol", Font.PLAIN, 16));
+		b[50].setFocusPainted(false);
+		b[50].setBackground(new Color(169,0,0));
+		b[50].setForeground(Color.WHITE);
+		b[50].setBorder(null);
+		b[50].setMargin(new Insets(0,0,0,0));
         
     	
 		
@@ -893,7 +900,18 @@ public class GUI {
 		}else{
 
 			buttons[34].setVisible(false);
-		    debugStockspanel.setVisible(false);
+			
+			buttons[50].setVisible(true);
+		    if(MonopolyGame.sound){
+				buttons[50].setText("🔊");
+				buttons[50].setBackground(new Color(0,169,0));
+		    }else{
+		    	buttons[50].setText("🔈");
+
+				buttons[50].setBackground(new Color(169,0,0));
+		    }			
+			
+			debugStockspanel.setVisible(false);
 		    debugStocksNum.setVisible(false);	
 			titles[12].setVisible(false);
 			titles[11].setVisible(false);
@@ -1009,7 +1027,9 @@ public class GUI {
 				    debugStockspanel.setVisible(false);
 
 					houseNum.setVisible(false);
-				    if(MonopolyGame.specialConditions[6]){
+					
+
+				    if(MonopolyGame.specialConditions[6] || MonopolyGame.specialConditions[12]){
 						eCompsScrollPane.setVisible(true);
 						buttons[30].setVisible(true);
 						buttons[31].setVisible(true);
@@ -1025,31 +1045,26 @@ public class GUI {
 						}
 				    }else{
 						eCompsScrollPane.setVisible(false);
-						buttons[30].setVisible(false);
-						buttons[31].setVisible(false);
 						for(int i=0;i<6;i++)
 							eComps[i].setVisible(false);
+						}
+					
+					
+					
+				    if(MonopolyGame.specialConditions[6]){
+						buttons[30].setVisible(true);
+						buttons[31].setVisible(true);
+						
+				    }else{
+						buttons[30].setVisible(false);
+						buttons[31].setVisible(false);
 				    }
 				    
 				    //card47
 				    if(MonopolyGame.specialConditions[12]){
-						eCompsScrollPane.setVisible(true);
 						buttons[40].setVisible(true);
-						for(int i=0;i<6;i++){
-							eComps[5-i].setVisible(true);
-							Company compa = board.bank.companies.get(i);
-							if(compa.share<6){
-								eComps[5-i].setSelected(true);}
-							else {
-								eComps[i].setEnabled(false);
-								//eComps[i].s
-							}
-						}
 				    }else{
-						eCompsScrollPane.setVisible(false);
 						buttons[40].setVisible(false);
-						for(int i=0;i<6;i++)
-							eComps[i].setVisible(false);
 				    }
 				    
 				    
@@ -1059,6 +1074,9 @@ public class GUI {
 							auctionBids[i].setVisible(true);
 							auctionNames[i].setVisible(true);
 						}
+						
+
+				    	 
 				    }else{
 							for(int i=0;i<12;i++){
 								auctionBids[i].setVisible(false);
@@ -1600,6 +1618,15 @@ public class GUI {
 		
 		panel.initGUIPanel(this.board);
 		
+	}
+	
+	public void moveE(){
+		try {
+			panel.movePlayerTimer(cP);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

@@ -11,13 +11,13 @@
       <name>United Railways</name>
       <id>1</id>
       <parValue>110</parValue>
-      <share>4</share>
+      <share>0</share>
     </company>
     <company>
       <name>National Utilities</name>
       <id>2</id>
       <parValue>120</parValue>
-      <share>6</share>
+      <share>0</share>
     </company>
     <company>
       <name>Acme Motors</name>
@@ -29,7 +29,7 @@
       <name>Allied Steamships</name>
       <id>4</id>
       <parValue>140</parValue>
-      <share>3</share>
+      <share>0</share>
     </company>
     <company>
       <name>Motion Pictures</name>
@@ -39,67 +39,26 @@
     </company>
   </bank>
   <currentPlayer>0</currentPlayer>
-  <numberOfPlayers>4</numberOfPlayers>
-  <date>04/1/2016 12:24:48</date>
+  <numberOfPlayers>2</numberOfPlayers>
+  <date>10/1/2016 0:49:57</date>
   <player>
     <id>0</id>
     <name>Ezgi</name>
     <isPlaying>true</isPlaying>
     <money>3200</money>
     <countJail>4</countJail>
-    <row>1</row>
-    <position>0</position>
+    <row>0</row>
+    <position>9</position>
     <reverse>false</reverse>
-    <shares>0-1-0-0-0-0</shares>
-    <numbers>3-0-0-3-0-0-0</numbers>
-    <colorProperties>0-3-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
-    <allPropertiesNames>BEACON STREET, BOYLSTON STREET, NEWBURY STREET</allPropertiesNames>
-    <properties>
-      <property>
-        <ID>5</ID>
-        <ownerID>0</ownerID>
-        <price>330</price>
-        <originalRent>33</originalRent>
-        <rent>99</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>0</house>
-        <hotel>1</hotel>
-        <skyscraper>0</skyscraper>
-        <level>2</level>
-      </property>
-      <property>
-        <ID>7</ID>
-        <ownerID>0</ownerID>
-        <price>330</price>
-        <originalRent>33</originalRent>
-        <rent>99</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>0</house>
-        <hotel>1</hotel>
-        <skyscraper>0</skyscraper>
-        <level>2</level>
-      </property>
-      <property>
-        <ID>8</ID>
-        <ownerID>0</ownerID>
-        <price>380</price>
-        <originalRent>38</originalRent>
-        <rent>114</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>0</house>
-        <hotel>1</hotel>
-        <skyscraper>0</skyscraper>
-        <level>2</level>
-      </property>
-    </properties>
+    <shares>0-0-0-0-0-0</shares>
+    <numbers>0-0-0-0-0-0-0</numbers>
+    <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
+    <allPropertiesNames />
+    <properties />
     <transits />
     <cabs />
     <utilities />
-    <freeProperties>
-      <ID>5</ID>
-      <ID>7</ID>
-      <ID>8</ID>
-    </freeProperties>
+    <freeProperties />
     <mortgagedProperties />
     <cards />
   </player>
@@ -113,202 +72,14 @@
     <position>0</position>
     <reverse>false</reverse>
     <shares>0-0-0-0-0-0</shares>
-    <numbers>1-0-0-0-0-0-0</numbers>
-    <colorProperties>1-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
-    <allPropertiesNames>FISHERMAN'S WHARF, PENNSYLVANIA RAILROAD, PENNSYLVANIA RAILROAD</allPropertiesNames>
-    <properties>
-      <property>
-        <ID>2</ID>
-        <ownerID>1</ownerID>
-        <price>250</price>
-        <originalRent>25</originalRent>
-        <rent>25</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>0</house>
-        <hotel>0</hotel>
-        <skyscraper>0</skyscraper>
-        <level>0</level>
-      </property>
-    </properties>
-    <transits>
-      <train>
-        <ownerID>1</ownerID>
-        <ID>9</ID>
-        <price>200</price>
-        <rent>20</rent>
-        <originalRent>20</originalRent>
-        <trainDepot>0</trainDepot>
-        <trainDepotPrice>100</trainDepotPrice>
-        <isMortgaged>false</isMortgaged>
-      </train>
-      <train>
-        <ownerID>1</ownerID>
-        <ID>39</ID>
-        <price>200</price>
-        <rent>20</rent>
-        <originalRent>20</originalRent>
-        <trainDepot>0</trainDepot>
-        <trainDepotPrice>100</trainDepotPrice>
-        <isMortgaged>false</isMortgaged>
-      </train>
-    </transits>
-    <cabs />
-    <utilities />
-    <freeProperties>
-      <ID>2</ID>
-      <ID>9</ID>
-      <ID>39</ID>
-    </freeProperties>
-    <mortgagedProperties />
-    <cards />
-  </player>
-  <player>
-    <id>2</id>
-    <name>Bugra</name>
-    <isPlaying>true</isPlaying>
-    <money>131300</money>
-    <countJail>4</countJail>
-    <row>1</row>
-    <position>0</position>
-    <reverse>false</reverse>
-    <shares>0-0-6-0-3-0</shares>
-    <numbers>6-0-4-0-3-0-0</numbers>
-    <colorProperties>0-0-3-3-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
-    <allPropertiesNames>FIFTH AVENUE, MADISON AVENUE, WALL STREET, FLORIDA AVENUE, MIAMI AVENUE, BISCAYNE AVENUE</allPropertiesNames>
-    <properties>
-      <property>
-        <ID>10</ID>
-        <ownerID>2</ownerID>
-        <price>430</price>
-        <originalRent>43</originalRent>
-        <rent>129</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>0</house>
-        <hotel>0</hotel>
-        <skyscraper>1</skyscraper>
-        <level>2</level>
-      </property>
-      <property>
-        <ID>11</ID>
-        <ownerID>2</ownerID>
-        <price>430</price>
-        <originalRent>43</originalRent>
-        <rent>129</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>0</house>
-        <hotel>0</hotel>
-        <skyscraper>1</skyscraper>
-        <level>2</level>
-      </property>
-      <property>
-        <ID>13</ID>
-        <ownerID>2</ownerID>
-        <price>500</price>
-        <originalRent>50</originalRent>
-        <rent>150</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>0</house>
-        <hotel>0</hotel>
-        <skyscraper>1</skyscraper>
-        <level>2</level>
-      </property>
-      <property>
-        <ID>17</ID>
-        <ownerID>2</ownerID>
-        <price>130</price>
-        <originalRent>13</originalRent>
-        <rent>26</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>4</house>
-        <hotel>0</hotel>
-        <skyscraper>0</skyscraper>
-        <level>1</level>
-      </property>
-      <property>
-        <ID>19</ID>
-        <ownerID>2</ownerID>
-        <price>130</price>
-        <originalRent>13</originalRent>
-        <rent>26</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>4</house>
-        <hotel>0</hotel>
-        <skyscraper>0</skyscraper>
-        <level>1</level>
-      </property>
-      <property>
-        <ID>20</ID>
-        <ownerID>2</ownerID>
-        <price>150</price>
-        <originalRent>15</originalRent>
-        <rent>600</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>4</house>
-        <hotel>0</hotel>
-        <skyscraper>0</skyscraper>
-        <level>0</level>
-      </property>
-    </properties>
+    <numbers>0-0-0-0-0-0-0</numbers>
+    <colorProperties>0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
+    <allPropertiesNames />
+    <properties />
     <transits />
     <cabs />
     <utilities />
-    <freeProperties>
-      <ID>10</ID>
-      <ID>11</ID>
-      <ID>13</ID>
-      <ID>17</ID>
-      <ID>19</ID>
-      <ID>20</ID>
-    </freeProperties>
-    <mortgagedProperties />
-    <cards />
-  </player>
-  <player>
-    <id>3</id>
-    <name>Berika</name>
-    <isPlaying>true</isPlaying>
-    <money>3200</money>
-    <countJail>4</countJail>
-    <row>1</row>
-    <position>0</position>
-    <reverse>false</reverse>
-    <shares>0-3-0-0-0-0</shares>
-    <numbers>2-0-0-2-0-0-0</numbers>
-    <colorProperties>0-0-0-0-2-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0</colorProperties>
-    <allPropertiesNames>MEDITERRANEAN AVENUE, BALTIC AVENUE</allPropertiesNames>
-    <properties>
-      <property>
-        <ID>25</ID>
-        <ownerID>3</ownerID>
-        <price>60</price>
-        <originalRent>6</originalRent>
-        <rent>18</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>0</house>
-        <hotel>1</hotel>
-        <skyscraper>0</skyscraper>
-        <level>2</level>
-      </property>
-      <property>
-        <ID>27</ID>
-        <ownerID>3</ownerID>
-        <price>60</price>
-        <originalRent>6</originalRent>
-        <rent>18</rent>
-        <isMortgaged>false</isMortgaged>
-        <house>0</house>
-        <hotel>1</hotel>
-        <skyscraper>0</skyscraper>
-        <level>2</level>
-      </property>
-    </properties>
-    <transits />
-    <cabs />
-    <utilities />
-    <freeProperties>
-      <ID>25</ID>
-      <ID>27</ID>
-    </freeProperties>
+    <freeProperties />
     <mortgagedProperties />
     <cards />
   </player>

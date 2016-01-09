@@ -39,8 +39,9 @@ public class GUIPanel extends JPanel {
 	private Board board;
 	
 	private ArrayList<BufferedImage> playerIcons = new ArrayList<BufferedImage>();
-	
+
 	private int GUIPositions[][][]=new int[3][56][2];
+	public int PPO[][]=new int[12][2];
 	
 	
 	public GUIPanel(Board b, int dice[]) throws Exception{
@@ -51,6 +52,12 @@ public class GUIPanel extends JPanel {
 		//Position 
 		initSquarePositions();
 		
+		
+		for(int  i=0; i<12;i++){
+			PPO[i][0] = 0;
+			PPO[i][1] = 0;
+			
+		}
 
 		try {
 			this.backGround = ImageIO.read(new File("img/board.png"));
@@ -78,6 +85,7 @@ public class GUIPanel extends JPanel {
 			for(Player p : players){
 				if(p.isPlaying)
 					g.drawImage(playerIcons.get(p.id), GUIPositions[p.row][p.position][0], GUIPositions[p.row][p.position][1], 40, 40, null);
+					//g.drawImage(playerIcons.get(p.id), PPO[p.id][0], GUIPositions[p.row][p.position][1], 40, 40, null);
 				}
 		}
 		
@@ -254,20 +262,26 @@ public class GUIPanel extends JPanel {
 
 
 
-public void movePlayerTimer() throws Exception{
+public void movePlayerTimer(Player p) throws Exception{
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //...Perform a task...
-
-            	GUIPositions[2][44][0]=0;
-            	GUIPositions[2][44][1]=0;
+            	PPO[p.id][0]=0;
+            	if(PPO[p.id][0]<GUIPositions[p.row][p.position][0])
+            	{
+            		PPO[p.id][0] = GUIPositions[p.row][p.position][0]-PPO[p.id][0]+65;
+            	}
+            	
+				
+				if(board!=null)
+					board.refreshGUI();
             }
         };
-        Timer timer = new Timer(1000 ,taskPerformer);
+        Timer timer = new Timer(100 ,taskPerformer);
         timer.setRepeats(false);
         timer.start();
 
-        Thread.sleep(500);
+        Thread.sleep(1050);
     }
 
 public void setDice(int i, int j, int k){

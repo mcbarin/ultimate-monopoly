@@ -17,6 +17,7 @@ public class MonopolyGame {
 	private GUI gui;
 	private Board board;
 	private GameLS ls = new GameLS();
+	public static boolean sound = true;
 	
 	public static int dieOne=0, dieTwo=0, dieSpeed=0;
 	
@@ -45,6 +46,7 @@ public class MonopolyGame {
 	//			20-yes		21-yestaxiact		22-chance21		23-hurricane	24-addPropDebug			25-debugnext	26-quit		27-sendAuction		28-bd100	29-takeCab
 	//			30-yesStock	31-noStock			32-sendBids		33-sellStock 	34-debugAddStock		35-goAuction	36-AuctionBids	37-MonopolyGuy	38-build	39-no
 	//			40-card47	41-card0
+	//			50-mute
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		new MonopolyGame();
@@ -144,6 +146,9 @@ public class MonopolyGame {
 			    	  play(Integer.parseInt(result[0]), result);
 		    	  }
 		    	  
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/unlock.mp3");
+		    	  
 		    	  
 		      }
 		});
@@ -158,6 +163,10 @@ public class MonopolyGame {
 		    	  specialConditions[3] = true;
 		    	  specialStatus = Integer.parseInt(result[0]);
 		    	  play(Integer.parseInt(result[0]), result);
+		    	  
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/buy.mp3");
 		    	 
 		    	  
 		      }
@@ -173,6 +182,9 @@ public class MonopolyGame {
 
 
 	    		  play(Integer.parseInt(result[0]),result);
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/mguy.mp3");
 		    	 
 		    	  
 		      }
@@ -187,8 +199,10 @@ public class MonopolyGame {
 	    		  result = play5(result);
 
 	    		  play(Integer.parseInt(result[0]),result);
-		    	  System.out.println("Selected Radio Button: " + gui.freePropertiesButtonGroup.getSelection().getActionCommand());
-		    	 
+		    	  //System.out.println("Selected Radio Button: " + gui.freePropertiesButtonGroup.getSelection().getActionCommand());
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/coin.mp3");
 		    	  
 		      }
 		});
@@ -203,7 +217,10 @@ public class MonopolyGame {
 	    		  result = play5(result);
 	    		  
 		    	  play(Integer.parseInt(result[0]),result);
-		    	  System.out.println("Selected Radio Button: " + gui.freePropertiesButtonGroup.getSelection().getActionCommand());
+		    	  //System.out.println("Selected Radio Button: " + gui.freePropertiesButtonGroup.getSelection().getActionCommand());
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/mortgage.mp3");
 		    	 
 		    	  
 		      }
@@ -219,7 +236,9 @@ public class MonopolyGame {
 	    		  result = play5(result);
 	    		  
 		    	  play(Integer.parseInt(result[0]),result);
-		    	  System.out.println("Selected Radio Button: " + gui.freePropertiesButtonGroup.getSelection().getActionCommand());
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/buy.mp3");
 		    	 
 		    	  
 		      }
@@ -240,6 +259,9 @@ public class MonopolyGame {
 	    		  gui.setGUI(result[1]+" Next player!","1",buttons);
 		    	  specialConditions[0]=true;
 		    	  specialConditions[1]=true;
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/rollonce.mp3");
 		      }
 		});
 
@@ -254,16 +276,26 @@ public class MonopolyGame {
 		    	  specialStatus = Integer.parseInt(result[0]);
 		    	  play();
 		    	 
-		    	  
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/buy.mp3");
+		    	 
 		      }
 		});
 		
 		
 		
 		//dieOne
-		buttons[14].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){cP.setPosition(dieOne); gui.setGUI("", "", buttons); play();}});
-		buttons[15].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){cP.setPosition(dieTwo); gui.setGUI("", "", buttons); play();}});
-		buttons[16].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){cP.setPosition(dieOne+dieTwo); gui.setGUI("", "", buttons); play();}});
+		buttons[14].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){cP.setPosition(dieOne); gui.setGUI("", "", buttons); play(); 
+	  	  if(sound)
+			  mp3.MP3Player.play("./audio/kick.mp3");
+  	  }});
+		buttons[15].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){cP.setPosition(dieTwo); gui.setGUI("", "", buttons); play(); 
+	  	  if(sound)
+			  mp3.MP3Player.play("./audio/kick.mp3");}});
+		buttons[16].addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){cP.setPosition(dieOne+dieTwo); gui.setGUI("", "", buttons); play(); 
+	  	  if(sound)
+			  mp3.MP3Player.play("./audio/kick.mp3");}});
 		
 
 		
@@ -293,7 +325,10 @@ public class MonopolyGame {
 		  		
 		    
 		    	  gui.setGUI("Let's play!", "",buttons);
-		    	  System.out.println("cont "+initialNumberofPlayers);
+		    	  //System.out.println("cont "+initialNumberofPlayers);
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/jbl_begin.mp3");
 		      }
 		});
 
@@ -310,6 +345,10 @@ public class MonopolyGame {
 		    	  
 		    	  Board.gameStatus = -1;
 		    	  gui.refresh();
+		    	  
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/whit.mp3");
 		      }
 		});
 
@@ -340,7 +379,9 @@ public class MonopolyGame {
 		    	  //System.out.println("Selected Radio Button: " + Integer.parseInt(gui.savedGamesGroup.getSelection().getActionCommand()));
 		    	  //String[] a = {"asd","asdasd"};
 		    	  //play(50,a);
-		    	  
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/temple.mp3");
 		    	  
 		    	  
 		      }
@@ -357,6 +398,10 @@ public class MonopolyGame {
 		    	  String[] result = board.bank.buyStock(gui.eCompsGroup.getSelection().getActionCommand(), cP);
 	    		  result = play5(result);
 		    	  play(Integer.parseInt(result[0]),result);
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/buy.mp3");
+		    	 
 		      }
 		  });
 
@@ -383,6 +428,11 @@ public class MonopolyGame {
 		    	  gui.debugStocksNum.setText("#");
 		    	  gui.debugStocksButtonGroup.clearSelection();
 		    	  gui.refresh();
+		    	  
+
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/addprop.mp3");
 		      }
 		  });
 		
@@ -395,6 +445,8 @@ public class MonopolyGame {
 	    		  result = play5(result);
 		    	  specialConditions[7]=true;
 		    	  play(51,result);
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/goauc.mp3");
 		      }
 		  });
 		
@@ -411,6 +463,11 @@ public class MonopolyGame {
 		    	  String[] result = board.bank.auctionStock(gui.eCompsGroup.getSelection().getActionCommand(), bids);
 	    		  result = play5(result);
 		    	  play(1,result);
+		    	  
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/sendbids.mp3");
+		    	 
 		      }
 		  });
 		
@@ -422,6 +479,9 @@ public class MonopolyGame {
 		    	  String[] result = board.bank.sellStock(gui.userStocksButtonGroup.getSelection().getActionCommand(), cP);
 	    		  result = play5(result);
 		    	  play(0,result);
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/coin.mp3");
 		      }
 		  });
 		  		
@@ -436,6 +496,9 @@ public class MonopolyGame {
 
 		    	  specialConditions[8] = true;
 		    	  gui.refresh();
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/goauc.mp3");
 		      }
 		  });
 		
@@ -457,6 +520,10 @@ public class MonopolyGame {
 		    		  result = play5(result);
 			    	  play(1,result);
 			    	  gui.refresh();
+			    	  
+
+			    	  if(sound)
+			    		  mp3.MP3Player.play("./audio/sendbids.mp3");
 
 		      }
 		  });
@@ -479,7 +546,10 @@ public class MonopolyGame {
 		    	  specialStatus = Integer.parseInt(result[0]);
 		    	  play(Integer.parseInt(result[0]),result);
 		    	 
-		    	  System.out.println("Taxi Ride: " + gui.taxiRideGroup.getSelection().getActionCommand());
+		    	  //System.out.println("Taxi Ride: " + gui.taxiRideGroup.getSelection().getActionCommand());
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/horn.mp3");
 		      }
 		});
 		
@@ -495,6 +565,7 @@ public class MonopolyGame {
 		    	  specialConditions[3] = true;
 		    	  specialStatus = Integer.parseInt(result[0]);
 		    	  play();
+
 		    	 
 		      }
 		});
@@ -516,6 +587,9 @@ public class MonopolyGame {
 		    	  }else{
 		    		  play(1,result);
 		    	  }
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/card.mp3");
 		    	 
 		      }
 		});
@@ -537,6 +611,10 @@ public class MonopolyGame {
 		    	  }else{
 		    		  play(Integer.parseInt(result[0]),result);
 		    	  }
+		    	  
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/card.mp3");
 		    	 
 		      }
 		});
@@ -557,6 +635,7 @@ public class MonopolyGame {
 		    	  
 		    	  result = ((Square)board.getSquareWithRowAndPosition(cP.row, cP.position)).buy(cP, 1);
 		    	  play(Integer.parseInt(result[0]),result);
+		    	  
 		      }
 		});
 		
@@ -592,6 +671,9 @@ public class MonopolyGame {
 		    	  gui.houseNum.setText("#");
 		    	  gui.houseNum.setEnabled(false);
 		    	  gui.refresh();
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/addprop.mp3");
 		    	  // System.out.println("debo: " + gui.dPropsGroup.getSelection().getActionCommand()+" "+gui.dPropsTypeGroup.getSelection().getActionCommand());
 		    	 
 		      }
@@ -633,6 +715,9 @@ public class MonopolyGame {
 						gui.setGUI("1","",buttons);
 		    	  
 		    	  gui.refresh();
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/nextplayer.mp3");
 		      }
 		});
 		
@@ -658,7 +743,9 @@ public class MonopolyGame {
 		      public void actionPerformed(ActionEvent e)
 		      {
 		    	  ls.saveGame(board, gui.getSaveName());
-		    	  
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/temple.mp3");
 		    	 
 		      }
 		});
@@ -686,6 +773,9 @@ public class MonopolyGame {
 		    	  String[] result = ((SquareBirthday)board.getSquareWithRowAndPosition(cP.row, cP.position)).birthdayAction(2,cP,board);
 	    		  result = play5(result);
 		    	  play(Integer.parseInt(result[0]),result);
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/horn.mp3");
 		    	 
 		      }
 		});
@@ -716,6 +806,9 @@ public class MonopolyGame {
 		    	  String[] result = board.peekChanceCard().applyCard0(Integer.parseInt(gui.ePrpGroup.getSelection().getActionCommand()),cP);
 	    		  result = play5(result);
 		    	  play(Integer.parseInt(result[0]),result);
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/horn.mp3");
 		    	 
 		      }
 		});
@@ -769,6 +862,9 @@ public class MonopolyGame {
 			    	  play(1,result);
 			    	  gui.refresh();
 
+			    	  if(sound)
+			    		  mp3.MP3Player.play("./audio/sendbids.mp3");
+			    	 
 		      }
 		  });
 		
@@ -780,6 +876,8 @@ public class MonopolyGame {
 		    	
 				board.nextPlayer();
 				gui.setGUI("Next player!", "1", buttons);
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/no.mp3");
 		  		
 		      }
 		};
@@ -803,6 +901,18 @@ public class MonopolyGame {
 		      
 		      }
 		      }
+		});
+		
+		//sound
+		buttons[50].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  sound = !sound;
+		    	  gui.refresh();
+		      
+		      }
+		      
 		});
 		
 
