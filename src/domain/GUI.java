@@ -925,17 +925,31 @@ public class GUI {
 			
 			
 			for(int i=0; i<players.size(); i++){
-				playerNames[i].setText(players.get(i).name.toUpperCase());
-				playerMoneys[i].setText("$"+Integer.toString(players.get(i).money).toUpperCase());
-				playerPropertiesNames[i].setText(players.get(i).allPropertiesNames.toLowerCase());
-				playerStocksNames[i].setText(players.get(i).allStocksNames.toLowerCase());
-				playerCardsNames[i].setText(players.get(i).allCardsNames.toLowerCase());
-				playerPics[i].setVisible(true);
-				
-				
-				
-				for(int j=0; j<3;j++){
-					statTitle[i][j].setVisible(true);
+				if(players.get(i).isPlaying){
+					playerNames[i].setText(players.get(i).name.toUpperCase());
+					playerMoneys[i].setText("$"+Integer.toString(players.get(i).money).toUpperCase());
+					playerPropertiesNames[i].setText(players.get(i).allPropertiesNames.toLowerCase());
+					playerStocksNames[i].setText(players.get(i).allStocksNames.toLowerCase());
+					playerCardsNames[i].setText(players.get(i).allCardsNames.toLowerCase());
+					playerPics[i].setVisible(true);
+									
+					for(int j=0; j<3;j++){
+						statTitle[i][j].setVisible(true);
+					}
+				}else{
+					playerNames[i].setVisible(true);
+					playerNames[i].setText(players.get(i).name+" (broke)");
+					playerNames[i].setForeground(new Color(236,0,0));
+					playerMoneys[i].setVisible(false);
+					playerPropertiesNames[i].setVisible(false);
+					playerStocksNames[i].setVisible(false);
+					playerCardsNames[i].setVisible(false);
+					playerPics[i].setVisible(true);
+					
+					for(int j=0; j<3;j++){
+						statTitle[i][j].setVisible(false);
+					}
+					
 				}
 			}for(int i=players.size(); i<12; i++){
 				playerNames[i].setVisible(false);
@@ -1364,23 +1378,32 @@ public class GUI {
   				if(cpFreeProperties.get(i).type=="Property"){
 	  				int house = ((SquareProperty)cpFreeProperties.get(i)).house;
 	  				if(house==1)
-	  					title+=" ➀";
+	  					title+=" 🏠";
 	  				else if(house==2)
-	  					title+=" ➁";
+	  					title+=" 🏠🏠";
 	  				else if(house==3)
-	  					title+=" ➂";
+	  					title+=" 🏠🏠🏠";
 	  				else if(house==4)
-	  					title+=" ➃";
+	  					title+=" 🏠🏠🏠🏠";
 	  				
 	  				if(((SquareProperty)cpFreeProperties.get(i)).hotel==1)
-	  					title+=" Ⓗ";
+	  					title+=" 🏨";
 	  				
 	  				if(((SquareProperty)cpFreeProperties.get(i)).skyscraper==1)
-	  					title+=" Ⓢ";
-  					
-  				
+	  					title+=" 🏢";  				
   				}
-
+  				if(cpFreeProperties.get(i).type=="CabCompany"){
+  					int cb = ((SquareCabCompany)cpFreeProperties.get(i)).cabStand;
+	  				if(cb==1)
+	  					title+=" 🚓";
+  				}
+  				if(cpFreeProperties.get(i).type=="Transit"){
+  					int cb = ((SquareTransit)cpFreeProperties.get(i)).trainDepot;
+	  				if(cb==1)
+	  					title+=" 🚃";
+  				}
+  				
+  				
   				userFreeProperties[i].setForeground(Color.WHITE);
   				userFreeProperties[i].setText(title);
   				if(cpFreeProperties.get(i).color<20 && cpFreeProperties.get(i).color>-1){

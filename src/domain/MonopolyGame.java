@@ -68,8 +68,10 @@ public class MonopolyGame {
 			{		@Override
 			      public void actionPerformed(ActionEvent e)
 			      {
-					if(board!=null)
+					if(board!=null){
 			    	 board.refreshGUI();
+					}
+					
 			      }};
 		
 		
@@ -811,6 +813,8 @@ public class MonopolyGame {
 			if(board!=null && board.currentPlayer!=null){
 				cP = board.currentPlayer;
 				players = board.players;
+				if(cP.isPlaying && board.numOfPlayers()==1){
+					gui.setGUI("GAME IS OVER!\n\n"+cP.name+" has won the game!", "", buttons);}
 			}
 		}
 			
@@ -929,7 +933,6 @@ public class MonopolyGame {
 				break;
 			}
 		
-		
 			
 		}
 	
@@ -996,13 +999,7 @@ public class MonopolyGame {
 				gui.setGUI(result, "00000001", buttons);
 				break;
 			default:
-				if(!monopolyGuyFlag){
-					gui.setGUI(result[1]+" Next player!", "1", buttons);
-					board.nextPlayer();
-				}else{
-
-					gui.setGUI(result[1]+" Now play Monopoly Guy!", "000000000000000000000000000000000000001", buttons);
-				}
+				play(Integer.parseInt(result[0]),result);
 				break;
 				
 		}

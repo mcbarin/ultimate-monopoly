@@ -58,7 +58,7 @@ public class Board {
 	public int numOfPlayers(){
 		int num=0;
 		for (int i = 0; i < players.size(); i++) {
-			if(players.get(i).isPlaying==true)
+			if(players.get(i).isPlaying)
 				num++;
 		}
 		return num;
@@ -610,8 +610,24 @@ public class Board {
 	 * @return player which will play next.
 	 */
 	public Player nextPlayer(){
-		int npID = (this.currentPlayer.id+1)%totalPlayer;
+		int npID = (this.currentPlayer.id+1)%players.size();
+		int ppID = (this.currentPlayer.id-1+players.size())%players.size();
+
 		Player np = players.get(npID);
+		Player pp = players.get(ppID);
+		
+
+		
+		if(pp.money<=0){
+			pp.destroy();
+			gui.refresh();}
+
+		if(currentPlayer.money<=0){
+			currentPlayer.destroy();
+			gui.refresh();}
+		
+		
+		
 		if(MonopolyGame.dieOne!=MonopolyGame.dieTwo){
 			while(np.isPlaying==false || np.countJail==10){
 				if(np.countJail==10)

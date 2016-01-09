@@ -76,7 +76,8 @@ public class GUIPanel extends JPanel {
 		g.drawImage(backGround, 0, 0, height, height, null);
 		if(players!=null){
 			for(Player p : players){
-				g.drawImage(playerIcons.get(p.id), GUIPositions[p.row][p.position][0], GUIPositions[p.row][p.position][1], 40, 40, null);
+				if(p.isPlaying)
+					g.drawImage(playerIcons.get(p.id), GUIPositions[p.row][p.position][0], GUIPositions[p.row][p.position][1], 40, 40, null);
 				}
 		}
 		

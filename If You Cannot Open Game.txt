@@ -1,0 +1,5 @@
+This game does not work on 64 bit versions of Eclipse somehow. 
+Please use a 32 bit version of eclipse.
+You can download a corresponding version of Eclipse from the link given below:
+
+http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/luna/SR2/eclipse-java-luna-SR2-win32.zip
