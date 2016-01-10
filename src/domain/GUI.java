@@ -1071,8 +1071,9 @@ public class GUI {
 				    
 				    if(MonopolyGame.specialConditions[7] || MonopolyGame.specialConditions[8] || MonopolyGame.specialConditions[11]){
 						for(int i=0;i<board.players.size();i++){
-							auctionBids[i].setVisible(true);
-							auctionNames[i].setVisible(true);
+							if(board.players.get(i).isPlaying){
+								auctionBids[i].setVisible(true);
+								auctionNames[i].setVisible(true);}
 						}
 						
 
