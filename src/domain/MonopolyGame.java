@@ -172,6 +172,29 @@ public class MonopolyGame {
 		      }
 		});
 
+		//BuywtihChanceButton
+		buttons[2].addActionListener(new ActionListener()
+		{
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  String result[] = board.getResultArray();
+		    	  result[0] = "1";
+		    	  result[1] = "Player bought property with chance card and paid nothing.";
+		    	  
+		    	  cP.addProperty((SquareProperty) board.getSquareWithRowAndPosition(cP.row, cP.position));
+		    	  
+		    	  cP.deleteCard(1);
+		    	  
+		    	  play(Integer.parseInt(result[0]), result);
+		    	  
+
+		    	  if(sound)
+		    		  mp3.MP3Player.play("./audio/indigo.mp3");
+		    	 
+		    	  
+		      }
+		});
+
 		//MonopolyGuy
 		buttons[37].addActionListener(new ActionListener()
 		{
@@ -707,12 +730,16 @@ public class MonopolyGame {
 		    		  for(int i=0;i<cards.length;i++){
 		    			  board.getPlayers().get(initialNumberofPlayers-debugLeft).addCardDebug(Integer.parseInt(cards[i]));
 		    		  }
+		    		  
+		    		  gui.debugCards.setText("Enter card ID numbers...");
 		    	  }
 		    	  
 		    	  debugLeft--;
 		    	  
 		    	  if(debugLeft<0)
 						gui.setGUI("1","",buttons);
+		    	  
+		    	  
 		    	  
 		    	  gui.refresh();
 

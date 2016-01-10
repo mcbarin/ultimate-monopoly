@@ -144,6 +144,7 @@ public class CardCommunity extends Card {
 			}else{
 				result[0]="-1";
 				result[1]="Player is broke and out of game.";
+				p.destroy();
 				board.pullPushCommunity();
 				return result;
 			}

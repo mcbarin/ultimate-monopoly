@@ -61,9 +61,13 @@ public class GUIPanel extends JPanel {
 
 		try {
 			this.backGround = ImageIO.read(new File("img/board.png"));
-			
+
 			for(int i=0;i<12;i++){
 				this.p = ImageIO.read(new File("img/p"+Integer.toString(i+1)+".png"));
+				playerIcons.add(this.p);
+			}
+			for(int i=0;i<4;i++){
+				this.p = ImageIO.read(new File("img/p"+Integer.toString(i+1)+"glow.png"));
 				playerIcons.add(this.p);
 			}
 
@@ -84,7 +88,10 @@ public class GUIPanel extends JPanel {
 		if(players!=null){
 			for(Player p : players){
 				if(p.isPlaying)
-					g.drawImage(playerIcons.get(p.id), GUIPositions[p.row][p.position][0], GUIPositions[p.row][p.position][1], 40, 40, null);
+					if(p.equals(board.currentPlayer) && p.id<=3)
+						g.drawImage(playerIcons.get(p.id+12), GUIPositions[p.row][p.position][0]-11, GUIPositions[p.row][p.position][1]-11, 62, 62, null);
+					else
+						g.drawImage(playerIcons.get(p.id), GUIPositions[p.row][p.position][0], GUIPositions[p.row][p.position][1], 40, 40, null);
 					//g.drawImage(playerIcons.get(p.id), PPO[p.id][0], GUIPositions[p.row][p.position][1], 40, 40, null);
 				}
 		}

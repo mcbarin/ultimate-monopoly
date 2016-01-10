@@ -545,7 +545,7 @@ public class GUI {
 			placeButton(b[21],"Yes",735, 188, 130, 25,false);
 			placeButton(b[22],"Go to Company",735, 280, 270, 25,false);
 			placeButton(b[4],"No",875, 188, 130, 25,false);
-			placeButton(b[2],"Buy with Cance Card",735, 188, 270, 25,false);		
+			placeButton(b[2],"Buy with Cance Card",735, 223, 270, 25,false);		
 
 			placeButton(b[28],"Take $100",735, 180, 270, 25,false);
 			placeButton(b[29],"Go to the Nearest Cab Company",735, 211, 270, 25,false);
@@ -1277,7 +1277,7 @@ public class GUI {
 	public int getInitialNumberofPlayers(){
 		int a = 2;
 		if (initalNumberofPlayers.getText().contains("[a-zA-Z]+") == false && initalNumberofPlayers.getText().length() > 2) {
-		    a = 2; 
+		    a = 4; 
 		}else{
 			a = Integer.parseInt(initalNumberofPlayers.getText()); 
 		
@@ -1335,6 +1335,10 @@ public class GUI {
 		for(int i=l; i<52; i++){
 			if(i!=11)
 					b[i].setVisible(false);
+		}
+		
+		if(bs.length()>1 && bs.charAt(1)=='1' && cP.hasCardWithId(1)){
+			b[2].setVisible(true);
 		}
 		
 		if(bs.length()>0 && bs.charAt(0)=='1' && !MonopolyGame.specialConditions[1]){

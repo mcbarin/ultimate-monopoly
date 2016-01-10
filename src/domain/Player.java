@@ -130,9 +130,8 @@ public class Player {
 	public void deleteCard(int number){
 
 		for(int i=0;i<cards.size();i++){
-			if(cards.get(i).getNumber() == number){
+			if(cards.get(i).number == number){
 				cards.remove(i);
-				break;
 			}
 		}
 		setFreeProperties();
@@ -670,7 +669,7 @@ public class Player {
 			if(utilities.get(i).isMortgaged)
 				mortgagedProperties.add(utilities.get(i));
 		}
-
+		allPropertiesNames = "";
 		for(int i=0; i<freeProperties.size(); i++){
 			if(i==0){
 				allPropertiesNames = freeProperties.get(i).name;
@@ -682,7 +681,7 @@ public class Player {
 		}
 
 
-
+		allStocksNames = "";
 		int abc = 0;
 		for(int i=0;i<6;i++){
 			if(shares[i]>0){
@@ -692,7 +691,8 @@ public class Player {
 				abc++;
 			}	
 		}
-
+		
+		allCardsNames = "";
 		for(int i=0; i<cards.size();i++){
 			allCardsNames+=board.cardDescriptions[cards.get(i).number][0];
 			if(i!=0)

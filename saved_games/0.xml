@@ -334,7 +334,9 @@
       <ID>75</ID>
     </freeProperties>
     <mortgagedProperties />
-    <cards />
+    <cards>
+      <ID>1</ID>
+    </cards>
   </player>
   <player>
     <id>3</id>
